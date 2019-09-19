@@ -4,3 +4,8 @@ target/
 *.iml
 *.iws
 log/
+
+#Eclipse
+.classpath
+.project
+.settings/
