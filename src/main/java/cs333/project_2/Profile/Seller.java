@@ -1,6 +1,6 @@
 package cs333.project_2.Profile;
 
-import java.util.ArrayList
+import java.util.ArrayList;
 
 public class Seller implements Profile {
 
@@ -55,7 +55,7 @@ public class Seller implements Profile {
 		}
 		// Else, iterate through the orders and add the given ID in numeric order
 		for(int i = 0; i < this.orders.size(); i++) {
-			if(orderID.compareToIgnoreCase(this.orders.get(i)) > 0 && orderID.compareToIgnoreCase(this.order.get(i + 1)) < 0)
+			if(orderID.compareToIgnoreCase(this.orders.get(i)) > 0 && orderID.compareToIgnoreCase(this.orders.get(i + 1)) < 0)
 				orders.add(i, orderID);
 			if(orderID == this.orders.get(i)) {
 				System.err.println("This seller already has an order with ID: " + orderID);

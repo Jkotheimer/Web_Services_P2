@@ -1,5 +1,7 @@
 package cs333.project_2.Profile;
 
+import java.util.ArrayList;
+
 /**
  * The profile interface for user profiles
  *
@@ -11,7 +13,7 @@ public interface Profile
 	 * ________________________________________________________________
 	 */
 
-	public String[] getOrders();
+	public ArrayList<String> getOrders();
 	public String getUsername();
 	public String getID();
 	// public Address getAddress();
