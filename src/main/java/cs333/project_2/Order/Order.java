@@ -1,9 +1,5 @@
 package cs333.project_2.Order;
 
-/**
- * Hello world!
- *
- */
 public class Order
 {
     String ID;
@@ -12,23 +8,23 @@ public class Order
     String Producer;
     String Customer;
 
-    public Order creatOrder(String[] ProductID, String cust){
+    public Order creatOrder(String[] ProductID, String customer){
         Order newOrder = new Order();
         newOrder.UpdateStatus("Order Placed");
-        newOrder.setCustomer(cust);
+        newOrder.setCustomer(customer);
         return newOrder;
     };
 
-    public void setID(String ident){
-        this.ID = ident;
+    public void setID(String id){
+        this.ID = id;
     }
 
-    public boolean UpdateStatus(String stat){
-        this.Status = stat;
+    public boolean UpdateStatus(String status){
+        this.Status = status;
         return true;
     }
 
-    public void setCustomer(String cust){
-        this.Customer = cust;
+    public void setCustomer(String customer){
+        this.Customer = customer;
     }
 }
