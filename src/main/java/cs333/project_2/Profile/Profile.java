@@ -4,7 +4,7 @@ package cs333.project_2.Profile;
  * The profile interface for user profiles
  *
  */
-public interface Profile 
+public interface Profile
 {
 	/**
 	 * GETTERS
@@ -12,7 +12,7 @@ public interface Profile
 	 */
 
 	public String[] getOrders();
-	public String getUserName();
+	public String getUsername();
 	public String getID();
 	// public Address getAddress();
 
@@ -21,10 +21,10 @@ public interface Profile
 	 * _________________________________________________________________
 	 */
 
-	public boolean setUserName();
-	public boolean setPassword();
-	public boolean setAddress();
-	public boolean addOrder();
+	public boolean setUsername(String username);
+	public boolean setPassword(String password);
+	public boolean setAddress(Address address);
+	public boolean addOrder(String orderID);
 
 	/**
 	 * GENERIC METHODS
