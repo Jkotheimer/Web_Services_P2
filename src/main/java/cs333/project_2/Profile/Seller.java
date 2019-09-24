@@ -1,5 +1,5 @@
 package cs333.project_2.Profile;
-
+import cs333.project_2.Product.Product;
 import java.util.ArrayList;
 
 public class Seller implements Profile {
@@ -9,13 +9,18 @@ public class Seller implements Profile {
 	private String ID;
 	private ArrayList<String> orders;
 	private Address address;
+	private int rating;
+	private Product[] products;
+	private String urlAddress;
 
-	public Seller(String username, String password, String ID, Address address) {
+	public Seller(String username, String password, String ID, Address address, String urladdress) {
 		this.username = username;
 		this.password = password;
 		this.ID = ID;
 		this.address = address;
 		this.orders = new ArrayList<>();
+		this.urlAddress = urladdress;
+		this.rating = -1; //negative 1 represents no ratings yet
 	}
 
 	/**
@@ -27,6 +32,9 @@ public class Seller implements Profile {
 	public String getID()					{ return this.ID;		}
 	public ArrayList<String> getOrders()	{ return this.orders;	}
 	public Address getAddress()				{ return this.address;	}
+	public String geturlAdress()			{ return this.urlAddress;}
+	public int getRating()					{ return this.rating;}
+	public Product[] getProducts()			{ return this.products;}
 
 	/**
 	 * SETTERS
@@ -74,6 +82,21 @@ public class Seller implements Profile {
 			}
 		}
 		return false;
+	}
+	public boolean seturlAdress(String url)
+	{
+		this.urlAddress = url;
+		return true;
+	}
+	public boolean setRating(int ratingnum)
+	{
+		this.rating = ratingnum;
+		return true;
+	}
+	public boolean setProducts(Product[] productsnew)
+	{
+		this.products = productsnew;
+		return true;
 	}
 
 	/**
