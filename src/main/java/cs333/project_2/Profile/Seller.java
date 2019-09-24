@@ -1,4 +1,5 @@
 package cs333.project_2.Profile;
+
 import cs333.project_2.Product.Product;
 import java.util.ArrayList;
 
@@ -10,7 +11,8 @@ public class Seller implements Profile {
 	private ArrayList<String> orders;
 	private Address address;
 	private int rating;
-	private Product[] products;
+	private int numRatings;
+	private ArrayList<Product> products;
 	private String urlAddress;
 
 	public Seller(String username, String password, String ID, Address address, String urladdress) {
@@ -32,9 +34,13 @@ public class Seller implements Profile {
 	public String getID()					{ return this.ID;		}
 	public ArrayList<String> getOrders()	{ return this.orders;	}
 	public Address getAddress()				{ return this.address;	}
-	public String geturlAdress()			{ return this.urlAddress;}
-	public int getRating()					{ return this.rating;}
-	public Product[] getProducts()			{ return this.products;}
+	public String geturlAddress()			{ return this.urlAddress;}
+	public int getRating()					{ return this.rating;	}
+	public ArrayList<Product> getProducts()	{ return this.products;	}
+	public Product getProduct(String ID)	{
+		for(Product p : products) if(p.getID() == ID) return p;
+		return null;
+	}
 
 	/**
 	 * SETTERS
@@ -83,19 +89,17 @@ public class Seller implements Profile {
 		}
 		return false;
 	}
-	public boolean seturlAdress(String url)
-	{
+	public boolean seturlAddress(String url) {
 		this.urlAddress = url;
 		return true;
 	}
-	public boolean setRating(int ratingnum)
-	{
-		this.rating = ratingnum;
+	public boolean addRating(int ratingnum) {
+		if(ratingnum < 0 || ratingnum > 10) return false;
+		this.rating = ((numRatings * this.rating) + ratingnum) / ++numRatings;
 		return true;
 	}
-	public boolean setProducts(Product[] productsnew)
-	{
-		this.products = productsnew;
+	public boolean addProduct(Product product) {
+		this.products.add(product);
 		return true;
 	}
 

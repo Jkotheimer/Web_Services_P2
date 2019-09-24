@@ -14,12 +14,13 @@ public class TestProfile {
 
 	@Test
 	public void test_Seller_Getters_N_Setters() {
-		fixture = new Seller("testSeller", "S0M3R@ND0M3H@$3DP@$SW0RD", "1234567890", new Address("123 Main St.", "Chicago", "IL", 66666));
+		fixture = new Seller("testSeller", "S0M3R@ND0M3H@$3DP@$SW0RD", "1234567890", new Address("123 Main St.", "Chicago", "IL", 66666), "testCompany.com");
 
 		// Quick test for initial values
 		assertEquals("testSeller", fixture.getUsername());
 		assertEquals("1234567890", fixture.getID());
-		assertSame("123 Main St.", fixture.getAddress().getStreet());
+		assertEquals("123 Main St.", fixture.getAddress().getStreet());
+		assertEquals("testCompany.com", fixture.geturlAddress());
 		assertTrue(fixture.AuthenticateCred("testSeller", "S0M3R@ND0M3H@$3DP@$SW0RD"));
 
 		// Make some changes with the setters and retest
@@ -27,14 +28,16 @@ public class TestProfile {
 		assertFalse(fixture.setPassword("S0M3R@ND0M3H@$3DP@$SW0RD"));
 		assertTrue(fixture.setPassword("@N0743RR@ND0M3H@$3DP@$SW0RD"));
 		assertTrue(fixture.setAddress(new Address("456 Second Ave.", "Seattle", "WA", 22222)));
+		assertTrue(fixture.seturlAddress("differentWebsite.com"));
 		assertEquals("anotherUsername", fixture.getUsername());
 		assertEquals("456 Second Ave.", fixture.getAddress().getStreet());
+		assertEquals("differentWebsite.com", fixture.geturlAddress());
 		assertTrue(fixture.AuthenticateCred("anotherUsername", "@N0743RR@ND0M3H@$3DP@$SW0RD"));
 	}
 
 	@Test
 	public void test_Seller_Order_Operations() {
-		fixture = new Seller("testSeller", "S0M3R@ND0M3H@$3DP@$SW0RD", "1234567890", new Address("123 Main St.", "Chicago", "IL", 66666));
+		fixture = new Seller("testSeller", "S0M3R@ND0M3H@$3DP@$SW0RD", "1234567890", new Address("123 Main St.", "Chicago", "IL", 66666), "testCompamy.com");
 
 		// Add a few orders and test order test_Seller_Order_Operations
 		assertTrue(fixture.addOrder("AO37F834D"));
