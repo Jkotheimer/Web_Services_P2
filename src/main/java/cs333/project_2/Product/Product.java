@@ -8,6 +8,15 @@ public class Product
     int Rating;
     String ItemDescrip;
 
+    public Product(String id, int price,String sellerid,int rating,String itemdescrip)
+    {
+        this.ID = id;
+        this.Price = price;
+        this.SellerID = sellerid;
+        this.Rating = rating;
+        this.ItemDescrip = itemdescrip;
+    }
+
     public boolean setID(String id) {
 		this.ID = id;
 		return true;
