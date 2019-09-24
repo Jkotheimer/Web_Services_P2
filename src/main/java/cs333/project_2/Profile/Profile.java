@@ -16,7 +16,7 @@ public interface Profile
 	public ArrayList<String> getOrders();
 	public String getUsername();
 	public String getID();
-	// public Address getAddress();
+	public Address getAddress();
 
 	/**
 	 * SETTERS

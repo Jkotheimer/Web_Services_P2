@@ -1,5 +1,7 @@
 cs333/project_2/Profile/Profile.class
 cs333/project_2/App.class
+cs333/project_2/General/Utility.class
 cs333/project_2/Profile/Seller.class
+cs333/project_2/Product/Product.class
 cs333/project_2/Profile/Address.class
 cs333/project_2/Order/Order.class

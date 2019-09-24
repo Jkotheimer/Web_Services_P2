@@ -15,6 +15,7 @@ public class Seller implements Profile {
 		this.password = password;
 		this.ID = ID;
 		this.address = address;
+		this.orders = new ArrayList<>();
 	}
 
 	/**
@@ -38,7 +39,10 @@ public class Seller implements Profile {
 		return true;
 	}
 	public boolean setPassword(String password) {
-		// TODO - possibly do a check to see if the password is secure enough or if the password has been used before
+		// TODO - possibly do a check to see if the password is secure enough and add another hashing algorithm for safety
+
+		// If the password has been used before, inform the user and have them change it to something else
+		if(this.password == password) return false;
 		this.password = password;
 		return true;
 	}
@@ -52,17 +56,24 @@ public class Seller implements Profile {
 		if(this.orders.size() == 0) {
 			this.orders.add(orderID);
 			return true;
+		} else if(this.orders.size() == 1) {
+			if(orderID.compareToIgnoreCase(this.orders.get(0)) > 0) this.orders.add(orderID);
+			else this.orders.add(0, orderID);
+			return true;
 		}
 		// Else, iterate through the orders and add the given ID in numeric order
-		for(int i = 0; i < this.orders.size(); i++) {
-			if(orderID.compareToIgnoreCase(this.orders.get(i)) > 0 && orderID.compareToIgnoreCase(this.orders.get(i + 1)) < 0)
-				orders.add(i, orderID);
+		for(int i = 0; i < this.orders.size() - 1; i++) {
 			if(orderID == this.orders.get(i)) {
 				System.err.println("This seller already has an order with ID: " + orderID);
 				return false;
 			}
+			if(orderID.compareToIgnoreCase(this.orders.get(i)) > 0 && orderID.compareToIgnoreCase(this.orders.get(i + 1)) < 0) {
+				if(i == this.orders.size()) this.orders.add(orderID);
+				else this.orders.add(i, orderID);
+				return true;
+			}
 		}
-		return true;
+		return false;
 	}
 
 	/**
@@ -71,6 +82,7 @@ public class Seller implements Profile {
 	 */
 
 	public boolean AuthenticateCred(String username, String password) {
+		// TODO possibly add another hash algorithm here for safety
 		if(this.username == username && this.password == password) return true;
 		else return false;
 	}
