@@ -1,7 +1,5 @@
 package cs333.project_2;
 
-
-
 /**
  * Hello world!
  *
