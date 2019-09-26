@@ -1,7 +1,9 @@
-/home/jkotheimer/Documents/Fall_19/COMP_333/Web_Services_P2/src/main/java/cs333/project_2/Profile/Profile.java
-/home/jkotheimer/Documents/Fall_19/COMP_333/Web_Services_P2/src/main/java/cs333/project_2/Order/Order.java
-/home/jkotheimer/Documents/Fall_19/COMP_333/Web_Services_P2/src/main/java/cs333/project_2/App.java
-/home/jkotheimer/Documents/Fall_19/COMP_333/Web_Services_P2/src/main/java/cs333/project_2/Profile/Address.java
-/home/jkotheimer/Documents/Fall_19/COMP_333/Web_Services_P2/src/main/java/cs333/project_2/General/Utility.java
-/home/jkotheimer/Documents/Fall_19/COMP_333/Web_Services_P2/src/main/java/cs333/project_2/Profile/Seller.java
-/home/jkotheimer/Documents/Fall_19/COMP_333/Web_Services_P2/src/main/java/cs333/project_2/Product/Product.java
+/home/jkotheimer/Documents/Fall_19/COMP_333/project_2/src/main/java/cs333/project_2/Profile/Seller.java
+/home/jkotheimer/Documents/Fall_19/COMP_333/project_2/src/main/java/cs333/project_2/App.java
+/home/jkotheimer/Documents/Fall_19/COMP_333/project_2/src/main/java/cs333/project_2/Profile/Profile.java
+/home/jkotheimer/Documents/Fall_19/COMP_333/project_2/src/main/java/cs333/project_2/Order/Order.java
+/home/jkotheimer/Documents/Fall_19/COMP_333/project_2/src/main/java/cs333/project_2/Profile/Buyer.java
+/home/jkotheimer/Documents/Fall_19/COMP_333/project_2/src/main/java/cs333/project_2/Profile/Address.java
+/home/jkotheimer/Documents/Fall_19/COMP_333/project_2/src/main/java/cs333/project_2/General/Utility.java
+/home/jkotheimer/Documents/Fall_19/COMP_333/project_2/src/main/java/cs333/project_2/Product/Product.java
+/home/jkotheimer/Documents/Fall_19/COMP_333/project_2/src/main/java/cs333/project_2/Payment/PaymentInfo.java
