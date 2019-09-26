@@ -1,4 +1,4 @@
-package cs333.project_2.Payment;
+package cs333.project_2.Profile;
 import cs333.project_2.Profile.Address;
 
 public class PaymentInfo

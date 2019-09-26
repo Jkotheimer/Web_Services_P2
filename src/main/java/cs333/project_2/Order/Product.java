@@ -1,4 +1,4 @@
-package cs333.project_2.Product;
+package cs333.project_2.Order;
 
 public class Product
 {

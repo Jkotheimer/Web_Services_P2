@@ -1,7 +1,6 @@
 package cs333.project_2.Profile;
 
 import java.util.ArrayList;
-import cs333.project_2.Product.Product;
 
 /**
  * The profile interface for user profiles
