@@ -49,7 +49,6 @@ public class TestSeller {
 
 	@Test
 	public void test_Order_Operations() {
-
 		// Add a few orders and test order functions
 		String[] orders = {"LoXCvQdh","D9GTuE1a","QnVHEA8X","fGo0eUv4","jIzYXe4r","j503M82u","MTOByHhO","Qr05vUwJ"};
 		
@@ -60,6 +59,21 @@ public class TestSeller {
 		ArrayList<String> fixture_orders = fixture.getOrders();
 		for(int i = 0; i < fixture_orders.size() - 1; i++) 
 			if(fixture_orders.get(i).compareTo(fixture_orders.get(i + 1)) > 0) 
+				fail();
+	}
+	
+	@Test
+	public void test_Product_Operations() {
+		// Add a few orders and test order functions
+		String[] products = {"j503M82u","MTOByHhO","LoXCvQdh","D9GTuE1a","Qr05vUwJ","QnVHEA8X","fGo0eUv4","jIzYXe4r"};
+		
+		for(String p: products) assertTrue(fixture.addProduct(p));
+		for(String p: products) assertFalse(fixture.addProduct(p));
+		
+		// make sure the list is sorted
+		ArrayList<String> fixture_products = fixture.getProducts();
+		for(int i = 0; i < fixture_products.size() - 1; i++) 
+			if(fixture_products.get(i).compareTo(fixture_products.get(i + 1)) > 0) 
 				fail();
 	}
 }

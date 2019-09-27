@@ -24,6 +24,7 @@ public class Seller {
 		this.ID = ID;
 		this.address = address;
 		this.orders = new ArrayList<>();
+		this.products = new ArrayList<>();
 		this.urlAddress = urladdress;
 		this.rating = -1; //negative 1 represents no ratings yet
 	}
@@ -79,7 +80,7 @@ public class Seller {
 			this.products.add(productID);
 			return true;
 		} else if(this.products.size() == 1) {
-			if(productID.compareTo(this.products.get(0)) > 0) this.products.add(productsID);
+			if(productID.compareTo(this.products.get(0)) > 0) this.products.add(productID);
 			else this.products.add(0, productID);
 			return true;
 		} else if(productID.compareTo(this.products.get(0)) < 0) {
@@ -87,14 +88,14 @@ public class Seller {
 			return true;
 		}
 		// If we've passed the first two elements, it's time to start iterating
-		for(String o : this.products) if(productID.equals(o)) return false;
+		for(String p : this.products) if(productID.equals(p)) return false;
 		for(int i = 0; i < this.products.size() - 1; i++) {
 			if(productID.compareTo(this.products.get(i)) > 0 && productID.compareTo(this.products.get(i + 1)) < 0) {
 				this.products.add(i + 1, productID);
 				return true;
 			}
 		}
-		this.products.add(orderID);
+		this.products.add(productID);
 		return true;
 	}
 	public boolean addOrder(String orderID) {
