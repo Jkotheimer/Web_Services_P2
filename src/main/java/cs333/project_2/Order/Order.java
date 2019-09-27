@@ -10,8 +10,10 @@ public class Order
     String Customer;
     // TODO payment info
 
-    public Order(String[] ProductID, String customer){
+    public Order(String[] ProductID, String customer, String producer){
         this.UpdateStatus("Order Placed");
+        this.setItemsOrdered(ProductID);
+        this.setProducer(producer);
         this.setCustomer(customer);
     };
 
@@ -29,6 +31,14 @@ public class Order
         this.Customer = customer;
     }
 
+    public void setItemsOrdered(String[] orderedprod){
+        this.OrderedProd = orderedprod;
+    }
+
+    public void setProducer(String producer){
+        this.Producer = producer;
+    }
+
     // getters
     public String getID(){
         return this.ID;
@@ -41,5 +51,14 @@ public class Order
     public String getCustomer(){
         return this.Customer;
     }
+
+    public String[] getItemsOrdered(){
+        return this.OrderedProd;
+    }
+
+    public String getProducer(){
+        return this.Producer;
+    }
+
 
 }

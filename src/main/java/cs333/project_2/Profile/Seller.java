@@ -1,6 +1,5 @@
 package cs333.project_2.Profile;
 
-import cs333.project_2.Order.Product;
 import java.util.ArrayList;
 
 public class Seller implements Profile {
