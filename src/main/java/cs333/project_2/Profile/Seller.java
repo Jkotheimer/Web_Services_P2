@@ -3,17 +3,20 @@ package cs333.project_2.Profile;
 import cs333.project_2.Order.*;
 import java.util.ArrayList;
 
-public class Seller implements Profile {
+public class Seller extends Profile {
 
 	private String username;
 	private String password;
 	private String ID;
-	private ArrayList<String> orders;
-	private Address address;
-	private int rating;
-	private int numRatings;
-	private ArrayList<Product> products;
 	private String urlAddress;
+
+	private ArrayList<Product> products;
+	private ArrayList<String> orders;
+
+	private Address address;
+
+	private float rating;
+	private int numRatings;
 
 	public Seller(String username, String password, String ID, Address address, String urladdress) {
 		this.username = username;
@@ -32,12 +35,13 @@ public class Seller implements Profile {
 
 	public String getUsername()				{ return this.username;	}
 	public String getID()					{ return this.ID;		}
-	public ArrayList<String> getOrders()	{ return this.orders;	}
-	public Address getAddress()				{ return this.address;	}
 	public String geturlAddress()			{ return this.urlAddress;}
-	public int getRating()					{ return this.rating;	}
+	public Address getAddress()				{ return this.address;	}
+	public float getRating()				{ return this.rating;	}
+	public ArrayList<String> getOrders()	{ return this.orders;	}
 	public ArrayList<Product> getProducts()	{ return this.products;	}
 	public Product getProduct(String ID)	{
+		// TODO : perform a binary search since the IDs are sorted
 		for(Product p : products) if(p.getID() == ID) return p;
 		return null;
 	}
@@ -60,6 +64,10 @@ public class Seller implements Profile {
 		this.password = password;
 		return true;
 	}
+	public boolean seturlAddress(String url) {
+		this.urlAddress = url;
+		return true;
+	}
 	public boolean setAddress(Address address) {
 		// TODO - possibly do some sort of regex check or Google maps check on the Address to see if it's valid
 		this.address = address;
@@ -71,29 +79,25 @@ public class Seller implements Profile {
 			this.orders.add(orderID);
 			return true;
 		} else if(this.orders.size() == 1) {
-			if(orderID.compareToIgnoreCase(this.orders.get(0)) > 0) this.orders.add(orderID);
+			if(orderID.compareTo(this.orders.get(0)) > 0) this.orders.add(orderID);
 			else this.orders.add(0, orderID);
+			return true;
+		} else if(orderID.compareTo(this.orders.get(0)) < 0) {
+			this.orders.add(0, orderID);
 			return true;
 		}
 		// Else, iterate through the orders and add the given ID in numeric order
+		for(String o : this.orders) if(orderID.equals(o)) return false;
 		for(int i = 0; i < this.orders.size() - 1; i++) {
-			if(orderID == this.orders.get(i)) {
-				System.err.println("This seller already has an order with ID: " + orderID);
-				return false;
-			}
-			if(orderID.compareToIgnoreCase(this.orders.get(i)) > 0 && orderID.compareToIgnoreCase(this.orders.get(i + 1)) < 0) {
-				if(i == this.orders.size()) this.orders.add(orderID);
-				else this.orders.add(i, orderID);
+			if(orderID.compareTo(this.orders.get(i)) > 0 && orderID.compareTo(this.orders.get(i + 1)) < 0) {
+				this.orders.add(i + 1, orderID);
 				return true;
 			}
 		}
-		return false;
-	}
-	public boolean seturlAddress(String url) {
-		this.urlAddress = url;
+		this.orders.add(orderID);
 		return true;
 	}
-	public boolean addRating(int ratingnum) {
+	public boolean addRating(float ratingnum) {
 		if(ratingnum < 0 || ratingnum > 10) return false;
 		this.rating = ((numRatings * this.rating) + ratingnum) / ++numRatings;
 		return true;
