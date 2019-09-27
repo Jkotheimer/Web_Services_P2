@@ -6,11 +6,13 @@ import org.junit.Test;
 import static org.junit.Assert.*;
 
 /**
- * Unit tests for the Seller and Buyer classes under the Profile interface
+ * Unit tests for the Seller class
  */
-public class TestProfile {
+public class TestSeller {
 
-	private Profile fixture;
+	private Seller fixture = new Seller("testSeller", "S0M3R@ND0M3H@$3DP@$SW0RD", "1234567890", 
+										new Address("123 Main St.", "Chicago", "IL", 66666), "testCompamy.com"
+										);
 
 	/**
 	 * Coverage:
@@ -18,10 +20,7 @@ public class TestProfile {
 	 * - Seller Setters
 	 */
 	@Test
-	public void test_Seller_Getters_N_Setters() {
-		fixture = new Seller("testSeller", "S0M3R@ND0M3H@$3DP@$SW0RD", "1234567890", 
-							 new Address("123 Main St.", "Chicago", "IL", 66666), "testCompany.com"
-							);
+	public void test_Getters_N_Setters() {
 
 		// Quick test for initial values
 		assertEquals("testSeller", fixture.getUsername());
@@ -43,16 +42,13 @@ public class TestProfile {
 		assertTrue(fixture.addRating(10f));
 		assertFalse(fixture.addRating(11f));
 		assertTrue(fixture.addRating(4f));
-		assertEquals(7f, fixture.getRating());
+		assertEquals(7f, fixture.getRating(), 0);
 		assertTrue(fixture.addRating(6f));
-		assertEquals(6.75f, fixture.getRating());
+		assertEquals(6.75f, fixture.getRating(), 0);
 	}
 
 	@Test
-	public void test_Seller_Order_Operations() {
-		fixture = new Seller("testSeller", "S0M3R@ND0M3H@$3DP@$SW0RD", "1234567890", 
-							 new Address("123 Main St.", "Chicago", "IL", 66666), "testCompamy.com"
-							);
+	public void test_Order_Operations() {
 
 		// Add a few orders and test order functions
 		String[] orders = {"LoXCvQdh","D9GTuE1a","QnVHEA8X","fGo0eUv4","jIzYXe4r","j503M82u","MTOByHhO","Qr05vUwJ"};

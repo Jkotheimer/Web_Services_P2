@@ -3,14 +3,14 @@ package cs333.project_2.Profile;
 import cs333.project_2.Order.*;
 import java.util.ArrayList;
 
-public class Seller extends Profile {
+public class Seller {
 
 	private String username;
 	private String password;
 	private String ID;
 	private String urlAddress;
 
-	private ArrayList<Product> products;
+	private ArrayList<String> products;
 	private ArrayList<String> orders;
 
 	private Address address;
@@ -39,12 +39,7 @@ public class Seller extends Profile {
 	public Address getAddress()				{ return this.address;	}
 	public float getRating()				{ return this.rating;	}
 	public ArrayList<String> getOrders()	{ return this.orders;	}
-	public ArrayList<Product> getProducts()	{ return this.products;	}
-	public Product getProduct(String ID)	{
-		// TODO : perform a binary search since the IDs are sorted
-		for(Product p : products) if(p.getID() == ID) return p;
-		return null;
-	}
+	public ArrayList<String> getProducts()	{ return this.products;	}
 
 	/**
 	 * SETTERS
@@ -73,8 +68,37 @@ public class Seller extends Profile {
 		this.address = address;
 		return true;
 	}
+	public boolean addRating(float ratingnum) {
+		if(ratingnum < 0 || ratingnum > 10) return false;
+		this.rating = ((numRatings * this.rating) + ratingnum) / ++numRatings;
+		return true;
+	}
+	public boolean addProduct(String productID) {
+		// Add the new product ID in the correct alphabetical position
+		if(this.products.size() == 0) {
+			this.products.add(productID);
+			return true;
+		} else if(this.products.size() == 1) {
+			if(productID.compareTo(this.products.get(0)) > 0) this.products.add(productsID);
+			else this.products.add(0, productID);
+			return true;
+		} else if(productID.compareTo(this.products.get(0)) < 0) {
+			this.products.add(0, productID);
+			return true;
+		}
+		// If we've passed the first two elements, it's time to start iterating
+		for(String o : this.products) if(productID.equals(o)) return false;
+		for(int i = 0; i < this.products.size() - 1; i++) {
+			if(productID.compareTo(this.products.get(i)) > 0 && productID.compareTo(this.products.get(i + 1)) < 0) {
+				this.products.add(i + 1, productID);
+				return true;
+			}
+		}
+		this.products.add(orderID);
+		return true;
+	}
 	public boolean addOrder(String orderID) {
-		// If there are no orders in the list, just add the given ID
+		// Add the new order ID in the correct alphabetical position
 		if(this.orders.size() == 0) {
 			this.orders.add(orderID);
 			return true;
@@ -86,7 +110,7 @@ public class Seller extends Profile {
 			this.orders.add(0, orderID);
 			return true;
 		}
-		// Else, iterate through the orders and add the given ID in numeric order
+		// If we've passed the first two elements, it's time to start iterating
 		for(String o : this.orders) if(orderID.equals(o)) return false;
 		for(int i = 0; i < this.orders.size() - 1; i++) {
 			if(orderID.compareTo(this.orders.get(i)) > 0 && orderID.compareTo(this.orders.get(i + 1)) < 0) {
@@ -95,15 +119,6 @@ public class Seller extends Profile {
 			}
 		}
 		this.orders.add(orderID);
-		return true;
-	}
-	public boolean addRating(float ratingnum) {
-		if(ratingnum < 0 || ratingnum > 10) return false;
-		this.rating = ((numRatings * this.rating) + ratingnum) / ++numRatings;
-		return true;
-	}
-	public boolean addProduct(Product product) {
-		this.products.add(product);
 		return true;
 	}
 
