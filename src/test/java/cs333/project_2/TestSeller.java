@@ -11,13 +11,18 @@ import static org.junit.Assert.*;
 public class TestSeller {
 
 	private Seller fixture = new Seller("testSeller", "S0M3R@ND0M3H@$3DP@$SW0RD", "1234567890", 
-										new Address("123 Main St.", "Chicago", "IL", 66666), "testCompamy.com"
+										new Address("123 Main St.", "Chicago", "IL", 66666), "testCompany.com"
 										);
 
 	/**
 	 * Coverage:
-	 * - Seller getters
-	 * - Seller Setters
+	 * - username
+	 * - password
+	 * 		+ Authentication
+	 * - ID
+	 * - address
+	 * - urlAddress
+	 * - rating average
 	 */
 	@Test
 	public void test_Getters_N_Setters() {
@@ -26,15 +31,19 @@ public class TestSeller {
 		assertEquals("testSeller", fixture.getUsername());
 		assertEquals("1234567890", fixture.getID());
 		assertEquals("123 Main St.", fixture.getAddress().getStreet());
+		assertEquals("testCompany.com", fixture.geturlAddress());
 		assertTrue(fixture.AuthenticateCred("testSeller", "S0M3R@ND0M3H@$3DP@$SW0RD"));
 
 		// Make some changes with the setters and retest
 		assertTrue(fixture.setUsername("anotherUsername"));
 		assertFalse(fixture.setPassword("S0M3R@ND0M3H@$3DP@$SW0RD"));
 		assertTrue(fixture.setPassword("@N0743RR@ND0M3H@$3DP@$SW0RD"));
+		assertTrue(fixture.seturlAddress("differentWebsite.com"));
 		assertTrue(fixture.setAddress(new Address("456 Second Ave.", "Seattle", "WA", 22222)));
+		
 		assertEquals("anotherUsername", fixture.getUsername());
 		assertEquals("456 Second Ave.", fixture.getAddress().getStreet());
+		assertEquals("differentWebsite.com", fixture.geturlAddress());
 		assertTrue(fixture.AuthenticateCred("anotherUsername", "@N0743RR@ND0M3H@$3DP@$SW0RD"));
 		
 		// Test the rating system to make sure it averages out all of the ratings
@@ -47,6 +56,12 @@ public class TestSeller {
 		assertEquals(6.75f, fixture.getRating(), 0);
 	}
 
+	/**
+	 * Coverage
+	 * - addOrder/getOrders
+	 * 		+ properly sorted
+	 * 		+ does not allow duplicates
+	 */
 	@Test
 	public void test_Order_Operations() {
 		// Add a few orders and test order functions
@@ -62,6 +77,12 @@ public class TestSeller {
 				fail();
 	}
 	
+	/**
+	 * Coverage
+	 * - addProduct/getProduct
+	 * 		+ properly sorted
+	 * 		+ does not allow duplicates
+	 */
 	@Test
 	public void test_Product_Operations() {
 		// Add a few orders and test order functions

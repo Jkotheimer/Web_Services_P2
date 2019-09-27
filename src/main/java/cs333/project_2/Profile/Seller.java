@@ -23,10 +23,11 @@ public class Seller {
 		this.password = password;
 		this.ID = ID;
 		this.address = address;
-		this.orders = new ArrayList<>();
-		this.products = new ArrayList<>();
 		this.urlAddress = urladdress;
 		this.rating = -1; //negative 1 represents no ratings yet
+		this.numRatings = 0;
+		this.orders = new ArrayList<>();
+		this.products = new ArrayList<>();
 	}
 
 	/**
