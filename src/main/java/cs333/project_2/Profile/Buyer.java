@@ -1,6 +1,6 @@
 package cs333.project_2.Profile;
 
-import cs333.project_2.Profile.PaymentInfo;
+import cs333.project_2.Order.*;
 import java.util.ArrayList;
 
 public class Buyer implements Profile{
