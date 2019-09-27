@@ -10,11 +10,10 @@ public class Order
     String Customer;
     // TODO payment info
 
-    public Order createOrder(String[] ProductID, String customer){
-        Order newOrder = new Order();
-        newOrder.UpdateStatus("Order Placed");
-        newOrder.setCustomer(customer);
-        return newOrder;
+    public Order(String[] ProductID, String customer){
+		this.OrderedProd = ProductID;
+        this.Status = "Order Placed";
+		this.Customer = customer;
     };
 
     //setters
