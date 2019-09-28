@@ -17,22 +17,19 @@ public class TestProduct {
 
         // Test Initialization
         assertEquals("1089",fixture.getID());
-        assertEquals("Yokos",fixture.getsellerID()); 
-        assertEquals(12,fixture.getPrice());
-        assertEquals(0,fixture.getRating());
+        assertEquals("Yokos",fixture.getSellerID()); 
+        assertEquals(12,fixture.getPrice(), 0);
+        assertEquals(0,fixture.getRating(), 0);
         assertEquals("A great product from Yokos",fixture.getItemDescrip());
 
         //Test Updating Values
-        fixture.setID("1087");
-        fixture.setsellerID("Bokos");
         fixture.setPrice(120);
-        fixture.setRating(5);
+        fixture.addRating(5);
+		fixture.addRating(9);
         fixture.setItemDescrip("An even greater product from Bokos");
     
-        assertEquals("1087",fixture.getID());
-        assertEquals("Bokos",fixture.getsellerID()); 
-        assertEquals(120,fixture.getPrice());
-        assertEquals(5,fixture.getRating());
+        assertEquals(120,fixture.getPrice(), 0);
+        assertEquals(7,fixture.getRating(), 0);
         assertEquals("An even greater product from Bokos",fixture.getItemDescrip());
     }
 }

@@ -1,56 +1,58 @@
 package cs333.project_2.Order;
 
-public class Product
-{
-    String ID;
-    int Price;
-    String SellerID;
-    int Rating;
-    String ItemDescrip;
+import cs333.project_2.General.Utility;
+import cs333.project_2.Profile.*;
+import cs333.project_2.Order.*;
 
-    public Product(String id, int price,String sellerid,int rating,String itemdescrip)
-    {
-        this.ID = id;
-        this.Price = price;
-        this.SellerID = sellerid;
-        this.Rating = rating;
-        this.ItemDescrip = itemdescrip;
-    }
+public class Product {
 
-    public boolean setID(String id) {
-		this.ID = id;
-		return true;
-	}
-	public boolean setsellerID(String sellerid) {
-        this.SellerID = sellerid;
-		return true;
-	}
-	public boolean setPrice(int price) {
-        this.Price = price;
-		return true;
-    }
-    public boolean setRating(int rating) {
-        this.Rating = rating;
-		return true;
-    }
-    public boolean setItemDescrip(String itemdescrip) {
-        this.ItemDescrip = itemdescrip;
-		return true;
-    }
+	private final String ID;
+	private final String SellerID;
+	private String ItemDescrip;
+	private float Rating;
+	private int NumRatings;
+	private float Price;
+	
+	private static final Utility database = new Utility();
 
-    public String getID() {
-        return this.ID;
+	public Product(String ID, float price, String sellerID, float rating, String itemDescrip) {
+		this.ID = ID;
+		this.Price = price;
+		this.SellerID = sellerID;
+		this.Rating = rating;
+		this.ItemDescrip = itemDescrip;
+		this.NumRatings = 0;
 	}
-	public String getsellerID() {
-        return this.SellerID;
+
+	/**
+	 * SETTERS
+	 * ________________________________________________________________________
+	 */
+
+	public boolean setPrice(float price) {
+		this.Price = price;
+		return true;
 	}
-	public int getPrice() {
-        return this.Price;
-    }
-    public int getRating() {
-        return this.Rating;
-    }
-    public String getItemDescrip() {
-        return this.ItemDescrip;
-    }
+	public boolean addRating(int rating) {
+		if(rating < 0 || rating > 10) return false;
+		// Update the current average rating of the product
+		this.Rating = ((NumRatings * this.Rating) + rating) / ++NumRatings;
+		return true;
+	}
+	public boolean setItemDescrip(String itemdescrip) {
+		this.ItemDescrip = itemdescrip;
+		return true;
+	}
+	
+	/**
+	 * GETTERS
+	 * ________________________________________________________________________
+	 */
+
+	public String getID()			{ return this.ID; }
+	public String getSellerID()		{ return this.SellerID; }
+	public float getPrice()			{ return this.Price; }
+	public float getRating()		{ return this.Rating; }
+	public String getItemDescrip()	{ return this.ItemDescrip; }
+	public Seller getSeller()		{ return database.getSeller(this.SellerID); }
 }
