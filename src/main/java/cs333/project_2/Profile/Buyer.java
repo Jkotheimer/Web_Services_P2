@@ -25,7 +25,6 @@ public class Buyer {
 	 * ________________________________________________________________________
 	 */
 
-    public String[] getStatus()             { return new String[] {"all good","not delivered"};}
 	public String getUsername()				{ return this.username;	}
 	public String getID()					{ return this.ID;		}
 	public ArrayList<String> getOrders()	{ return this.orders;	}
@@ -61,28 +60,28 @@ public class Buyer {
 		return true;
 	}
 	public boolean addOrder(String orderID) {
-		// If there are no orders in the list, just add the given ID
+		// Add the new order ID in the correct alphabetical position
 		if(this.orders.size() == 0) {
 			this.orders.add(orderID);
 			return true;
 		} else if(this.orders.size() == 1) {
-			if(orderID.compareToIgnoreCase(this.orders.get(0)) > 0) this.orders.add(orderID);
+			if(orderID.compareTo(this.orders.get(0)) > 0) this.orders.add(orderID);
 			else this.orders.add(0, orderID);
 			return true;
+		} else if(orderID.compareTo(this.orders.get(0)) < 0) {
+			this.orders.add(0, orderID);
+			return true;
 		}
-		// Else, iterate through the orders and add the given ID in numeric order
+		// If we've passed the first two elements, it's time to start iterating
+		for(String o : this.orders) if(orderID.equals(o)) return false;
 		for(int i = 0; i < this.orders.size() - 1; i++) {
-			if(orderID == this.orders.get(i)) {
-				System.err.println("This buyer already has an order with ID: " + orderID);
-				return false;
-			}
-			if(orderID.compareToIgnoreCase(this.orders.get(i)) > 0 && orderID.compareToIgnoreCase(this.orders.get(i + 1)) < 0) {
-				if(i == this.orders.size()) this.orders.add(orderID);
-				else this.orders.add(i, orderID);
+			if(orderID.compareTo(this.orders.get(i)) > 0 && orderID.compareTo(this.orders.get(i + 1)) < 0) {
+				this.orders.add(i + 1, orderID);
 				return true;
 			}
 		}
-		return false;
+		this.orders.add(orderID);
+		return true;
 	}
 
 	/**
