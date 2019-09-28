@@ -12,7 +12,7 @@ public class Seller implements Profile {
 	private Address address;
 	private int rating;
 	private int numRatings;
-	private ArrayList<Product> products;
+	private ArrayList<String> products;
 	private String urlAddress;
 
 	public Seller(String username, String password, String ID, Address address, String urladdress) {
@@ -36,9 +36,9 @@ public class Seller implements Profile {
 	public Address getAddress()				{ return this.address;	}
 	public String geturlAddress()			{ return this.urlAddress;}
 	public int getRating()					{ return this.rating;	}
-	public ArrayList<Product> getProducts()	{ return this.products;	}
-	public Product getProduct(String ID)	{
-		for(Product p : products) if(p.getID() == ID) return p;
+	public ArrayList<String> getProducts()	{ return this.products;	}
+	public String getProduct(String ID)	{
+		for(String p : products) if(p == ID) return p;
 		return null;
 	}
 
@@ -98,7 +98,7 @@ public class Seller implements Profile {
 		this.rating = ((numRatings * this.rating) + ratingnum) / ++numRatings;
 		return true;
 	}
-	public boolean addProduct(Product product) {
+	public boolean addProduct(String product) {
 		this.products.add(product);
 		return true;
 	}
