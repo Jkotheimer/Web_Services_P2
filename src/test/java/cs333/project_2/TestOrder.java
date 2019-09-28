@@ -14,10 +14,10 @@ public class TestOrder {
 	@Test
 	public void test_Order_Getters_N_Setters() {
         // Test Object Initialization
-        fixture = fixture.createOrder(new String[] {"1023","3029"},"helfman_09");
+        fixture = new Order(new String[] {"1023","3029"},"helfman_09");
         fixture.setID("test_01");
 
-        assertEquals("",fixture.getID());
+        assertEquals("test_01",fixture.getID());
         assertEquals("Order Placed",fixture.getStatus());
         assertEquals("helfman_09",fixture.getCustomer());
 
@@ -25,7 +25,7 @@ public class TestOrder {
         fixture.UpdateStatus("OrderCANCELLLED");
         fixture.setCustomer("newman_02");
 
-        assertEquals("OrderCANCELLED",fixture.getStatus());
+        assertEquals("OrderCANCELLLED",fixture.getStatus());
         assertEquals("newman_02",fixture.getCustomer());
 
     }
