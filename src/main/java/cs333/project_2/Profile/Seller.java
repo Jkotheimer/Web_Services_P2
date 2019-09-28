@@ -128,6 +128,14 @@ public class Seller {
 	 * GENERAL METHODS
 	 * ________________________________________________________________________
 	 */
+	
+	public boolean cancelOrder(String ID) {
+		return this.orders.remove(ID);
+	}
+	
+	public boolean removeProduct(String ID) {
+		return this.products.remove(ID);
+	}
 
 	public boolean AuthenticateCred(String username, String password) {
 		// TODO possibly add another hash algorithm here for safety

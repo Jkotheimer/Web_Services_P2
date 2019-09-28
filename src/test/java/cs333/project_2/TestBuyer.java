@@ -68,5 +68,16 @@ public class TestBuyer {
 		for(int i = 0; i < fixture_orders.size() - 1; i++) 
 			if(fixture_orders.get(i).compareTo(fixture_orders.get(i + 1)) > 0) 
 				fail();
+		
+		// Cancel a few orders and retest
+		fixture.cancelOrder("j503M82u");
+		fixture.cancelOrder("QnVHEA8X");
+		fixture_orders = fixture.getOrderIDs();
+		assertEquals(fixture_orders.size(), 6);
+		assertFalse(fixture_orders.contains("j503M82u"));
+		assertFalse(fixture_orders.contains("QnVHEA8X"));
+		for(int i = 0; i < fixture_orders.size() - 1; i++) 
+			if(fixture_orders.get(i).compareTo(fixture_orders.get(i + 1)) > 0) 
+				fail();
 	}
 }

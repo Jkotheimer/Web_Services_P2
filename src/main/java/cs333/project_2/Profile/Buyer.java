@@ -6,14 +6,12 @@ import java.util.ArrayList;
 
 public class Buyer {
    
-    private String username;
+	private String username;
 	private String password;
 	private final String ID;
 	private ArrayList<String> orderIDs;
 	private Address address;
 	private ArrayList<PaymentInfo> payinfo; // Allow buyers to have multiple payment options
-	
-	private static final Utility database = new Utility();
 
 	public Buyer(String username, String password, String ID, Address address) {
 		this.username = username;
@@ -34,13 +32,6 @@ public class Buyer {
 	public ArrayList<String> getOrderIDs()		{ return this.orderIDs;	}
     public Address getAddress()					{ return this.address;	}
     public ArrayList<PaymentInfo> getPayInfos()	{ return this.payinfo;  }
-    
-    // Special getter to retrieve the actual order objects from the database
-    public ArrayList<Order> getOrders()			{
-		ArrayList<Order> orders = new ArrayList<>();
-		for(String o : this.orderIDs) orders.add(database.getOrder(o));
-		return orders;
-	}
 
 	/**
 	 * SETTERS
@@ -100,13 +91,8 @@ public class Buyer {
 	 * ________________________________________________________________________
 	 */
 
-    public boolean placeOrder(){
-		
-        return true;
-    }
-
-    public boolean cancelOrder(){
-        return true;
+    public boolean cancelOrder(String ID) {
+        return this.orderIDs.remove(ID);
     }
 
 	public boolean AuthenticateCred(String username, String password) {

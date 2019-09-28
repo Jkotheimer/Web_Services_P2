@@ -20,8 +20,6 @@ public class Order
     private final String[] OrderedProductIDs;
     private final String CustomerID;
     private String Status;
-	
-	private static final Utility database = new Utility();
 
     public Order(String ID, String[] productIDs, String customerID) {
 		this.ID = ID;
@@ -49,20 +47,5 @@ public class Order
 	public String getStatus()		{ return this.Status; }
 	public String getBuyerID()		{ return this.CustomerID; }
 	public String[] getProductIDs()	{ return this.OrderedProductIDs; }
-	
-	// Special getters that call the persistence layer to grab the actual objects corresponding with each ID
-	public Buyer getBuyer()			{ return database.getBuyer(CustomerID); }
-	public Product[] getProducts()	{
-		Product[] products = new Product[this.OrderedProductIDs.length];
-		for(int i = 0; i < this.OrderedProductIDs.length; i++) 
-			products[i] = database.getProduct(this.OrderedProductIDs[i]);
-		return products;
-	}
-	public Seller[] getSellers()	{
-		Seller[] sellers = new Seller[this.OrderedProductIDs.length];
-		for(int i = 0; i < this.OrderedProductIDs.length; i++)
-			sellers[i] = database.getSeller(this.getProducts()[i].getSellerID());
-		return sellers;
-	}
 
 }

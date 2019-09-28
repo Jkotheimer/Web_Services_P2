@@ -28,6 +28,11 @@ public class Utility
         return true;
     }
     
+    /**
+	 * All of these goodies are going to be for the Data access layer
+	 * Requests will be sent via URI and that layer will ask this layer to do stuff for it - REST
+	 */
+    
     public Buyer getBuyer(String ID) {
 		// TODO grab the corresponding buyer object from the database
 		return new Buyer("testCustomer", "S0M3R@ND0M3H@$3DP@$SW0RD", "1234567890", 
@@ -47,5 +52,48 @@ public class Utility
 	public Order getOrder(String ID) {
 		// TODO grab the corresponding order object from the database
 		return new Order("aivchiauld", null, "8xcpovyeu");
+	}
+	
+	/**
+	 * Since these requests are coming from the service layer, we don't want to pass objects, but pass the
+	 * parameters and create the objects here to then interact with the persistence layer.
+	 * The service layer also does not know how to generate ID's, so they must be generated here.
+	 */
+	public void addBuyer(String username, String password, Address address) {
+		// TODO Interact with the database to generate a unique ID
+		String ID = "temp";
+		Buyer b = new Buyer(username, password, ID, address);
+		// TODO add the buyer to the database
+	}
+	public void addSeller(String username, String password, Address address, String urladdress) {
+		// TODO Interact with the database to generate a unique ID
+		String ID = "temp";
+		Seller s = new Seller(username, password, ID, address, urladdress);
+		// TODO add the seller to the database
+	}
+	public void addProduct(float price, String sellerID, float rating, String itemDescrip) {
+		// TODO Interact with the database to generate a unique ID
+		String ID = "temp";
+		Product p = new Product(ID, price, sellerID, rating, itemDescrip);
+		// TODO add the product to the database
+	}
+	public void addOrder(String[] productIDs, String customerID) {
+		// TODO Interact with the database to generate a unique ID
+		String ID = "temp";
+		Order o = new Order(ID, productIDs, customerID);
+		// TODO add the order to the database
+	}
+	
+	public void deleteBuyer(String ID) {
+		// TODO delete the given buyer
+	}
+	public void deleteSeller(String ID) {
+		// TODO delete the given seller
+	}
+	public void deleteProduct(String ID) {
+		// TODO delete the given product
+	}
+	public void deleteOrder(String ID) {
+		// TODO delete the given order
 	}
 }
