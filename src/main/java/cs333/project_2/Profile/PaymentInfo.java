@@ -43,7 +43,7 @@ public class PaymentInfo
 
     //setters
 
-    public void setCreditCardNum(String creditcardnum){
+    public void setCreditCardNum(int creditcardnum){
         this.CreditCardNum = creditcardnum;
     }
 

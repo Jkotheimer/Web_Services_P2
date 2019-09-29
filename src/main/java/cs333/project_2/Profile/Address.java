@@ -8,16 +8,20 @@ public class Address
     int Zipcode;
 
     //constructor
-
+    public Address() {
+    	
+    }
+    
+     
     public Address(String street,String city,String state,int zipcode){
         this.Street = street;
         this.City = city;
         this.State = state;
         this.Zipcode = zipcode;
     }
-
-    //getters
-
+      
+   
+	//getters
     public String getStreet(){
         return this.Street;
     }
@@ -50,6 +54,11 @@ public class Address
 
     public void setZipcode(int zipcode){
         this.Zipcode = zipcode;
+    }
+
+    public String ConvertAddresstoString() {		
+    	String stringaddress= this.Street+ this.City+ this.State + this.Zipcode;
+    	return stringaddress;
     }
 
 }

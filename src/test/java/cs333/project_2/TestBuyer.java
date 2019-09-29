@@ -10,7 +10,7 @@ import static org.junit.Assert.*;
  */
 public class TestBuyer {
 
-	private Buyer fixture = new Buyer("testCustomer", "S0M3R@ND0M3H@$3DP@$SW0RD", "1234567890", 
+	private Buyer fixture = new Buyer("testCustomer", "S0M3R@ND0M3H@$3DP@$SW0RD", 123456789, 
 										new Address("123 Main St.", "Chicago", "IL", 66666)                              
 										);
 
@@ -28,7 +28,7 @@ public class TestBuyer {
 
 		// Quick test for initial values
 		assertEquals("testCustomer", fixture.getUsername());
-		assertEquals("1234567890", fixture.getID());
+		assertEquals(123456789, fixture.getID());
 		assertEquals("123 Main St.", fixture.getAddress().getStreet());
 		assertTrue(fixture.AuthenticateCred("testCustomer", "S0M3R@ND0M3H@$3DP@$SW0RD"));
 		assertTrue(fixture.addPayInfo(new PaymentInfo("9988776655443322","MasterCard","05/24",123, fixture.getAddress())));
@@ -47,6 +47,11 @@ public class TestBuyer {
 		assertEquals(123, fixture.getPayInfos().get(0).getCCV());
 		assertEquals(1, fixture.getPayInfos().size());
 		assertTrue(fixture.AuthenticateCred("anotherUsername", "@N0743RR@ND0M3H@$3DP@$SW0RD"));
+	}
+	
+	@Test
+	public void test_DBOperations() {
+		
 	}
 
 	/**
