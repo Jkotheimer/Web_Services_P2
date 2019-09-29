@@ -8,16 +8,14 @@ import cs333.project_2.Profile.Address;
 import cs333.project_2.Profile.Seller;
 
 public class SellerDAL {
-public static void main(String[] args) {
+	public static void main(String[] args) {
 		
 		//create a Session Factory
-		
 		SessionFactory sessionFactory = new Configuration().
 				configure("hibernate.cfg.xml").
 				addAnnotatedClass(Seller.class).
 				buildSessionFactory();
-		
-		
+
 		//create a Session for Insertion into database, and read data
 		Session session = sessionFactory.getCurrentSession();
 		try{
