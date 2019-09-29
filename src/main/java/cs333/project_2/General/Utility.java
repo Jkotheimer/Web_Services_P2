@@ -47,7 +47,7 @@ public class Utility {
 	}
 	public Product getProduct(int ID) {
 		// TODO grab the corresponding product object from the database
-		return new Product(987654321, 44.98f, 12345678, "a new product");
+		return new Product(987654321, 44.98f, 12345678, "a new product", 15);
 	}
 	public Order getOrder(int ID) {
 		// TODO grab the corresponding order object from the database
@@ -69,9 +69,9 @@ public class Utility {
 		Seller s = new Seller(username, password, ID, address, urladdress);
 		// TODO add the seller to the database
 	}
-	public void addProduct(float price, int sellerID, String itemDescrip) {
+	public void addProduct(float price, int sellerID, String itemDescrip, int stock) {
 		int ID = generateID();
-		Product p = new Product(ID, price, sellerID, itemDescrip);
+		Product p = new Product(ID, price, sellerID, itemDescrip, stock);
 		// TODO add the product to the database
 	}
 	public void addOrder(int[] productIDs, int customerID, String date) {

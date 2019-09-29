@@ -46,9 +46,7 @@ public class Buyer {
 		return this.address.ConvertAddresstoString();
 	}
 	
-	public Address getAddress()					{
-		return this.address;
-	}
+	public Address getAddress()					{ return this.address;	}
 	public ArrayList<String> getOrderIDs()		{ return this.orderIDs;	}
 	public ArrayList<PaymentInfo> getPayInfos()	{ return this.payinfo;  }
 

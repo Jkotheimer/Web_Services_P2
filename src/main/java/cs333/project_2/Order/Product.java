@@ -12,16 +12,18 @@ public class Product {
 	private float Rating;
 	private int NumRatings;
 	private float Price;
+	private int Stock;
 	
 	private static final Utility database = new Utility();
 
-	public Product(int ID, float price, int sellerID, String itemDescrip) {
+	public Product(int ID, float price, int sellerID, String itemDescrip, int Stock) {
 		this.ID = ID;
 		this.Price = price;
 		this.SellerID = sellerID;
 		this.ItemDescrip = itemDescrip;
-		this.Rating = -1; // -1 indicates no ratings yet
+		this.Rating = -1f; // -1 indicates no ratings yet
 		this.NumRatings = 0;
+		this.Stock = Stock;
 	}
 
 	/**
@@ -33,15 +35,24 @@ public class Product {
 		this.Price = price;
 		return true;
 	}
-	public boolean addRating(int rating) {
-		if(rating < 0 || rating > 10) return false;
+	public float addRating(float rating) {
+		if(rating < 0 || rating > 10) return -1f;
 		// Update the current average rating of the product
 		this.Rating = ((NumRatings * this.Rating) + rating) / ++NumRatings;
-		return true;
+		return this.Rating;
 	}
 	public boolean setItemDescrip(String itemdescrip) {
 		this.ItemDescrip = itemdescrip;
 		return true;
+	}
+	public int increaseStock(int numProduct) {
+		this.Stock += numProduct;
+		return this.Stock;
+	}
+	public int purchase(int numProduct) {
+		if(this.Stock - numProduct < 0) return -1;
+		else this.Stock -= numProduct;
+		return this.Stock;
 	}
 	
 	/**
@@ -49,9 +60,10 @@ public class Product {
 	 * ________________________________________________________________________
 	 */
 
-	public int getID()				{ return this.ID; }
-	public int getSellerID()		{ return this.SellerID; }
-	public float getPrice()			{ return this.Price; }
-	public float getRating()		{ return this.Rating; }
-	public String getItemDescrip()	{ return this.ItemDescrip; }
+	public int getID()				{ return this.ID;			}
+	public int getSellerID()		{ return this.SellerID;		}
+	public float getPrice()			{ return this.Price;		}
+	public float getRating()		{ return this.Rating;		}
+	public int getStock()			{ return this.Stock;		}
+	public String getItemDescrip()	{ return this.ItemDescrip;	}
 }
