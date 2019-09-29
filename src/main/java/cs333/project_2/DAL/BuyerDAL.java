@@ -24,7 +24,7 @@ public class BuyerDAL {
 			System.out.println("Creating a new Buyer object...");
 			
 			//create the Buyer object
-			Buyer buyer = new Buyer("rayyanshaji", "loyola", 1339, new Address("123CampbellAve","Chicago","IL", 60645));
+			Buyer buyer = new Buyer("rayyanshaji", "loyola", 1239, new Address("123CampbellAve","Chicago","IL", 60645));
 			
 			//start a transaction
 			session.beginTransaction();
@@ -80,8 +80,10 @@ public class BuyerDAL {
 			session.getTransaction().commit();	
 			
 		}finally{
-			
+			session.flush();
+			session.close();
 			sessionFactory.close();
+			
 		}
 	}
 
