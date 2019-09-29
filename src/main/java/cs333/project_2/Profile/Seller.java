@@ -19,7 +19,7 @@ public class Seller {
 
 	private String username;
 	private String password;
-	private int ID;
+	private final int ID;
 	private String urlAddress;
 
 	private ArrayList<String> products;
@@ -29,18 +29,14 @@ public class Seller {
 
 	private float rating;
 	private int numRatings;
-	
-	public Seller() {
-		
-	}
-	
-	public Seller(String username, String password, int ID, Address address, String urladdress, float rating) {
+
+	public Seller(String username, String password, int ID, Address address, String urladdress) {
 		this.username = username;
 		this.password = password;
 		this.ID = ID;
 		this.address = address;
 		this.urlAddress = urladdress;
-		this.rating = rating; //negative 1 represents no ratings yet
+		this.rating = -1; //negative 1 represents no ratings yet
 		this.numRatings = 0;
 		this.orders = new ArrayList<>();
 		this.products = new ArrayList<>();
@@ -50,42 +46,31 @@ public class Seller {
 	 * GETTERS
 	 * ________________________________________________________________________
 	 */
-@Column(name="sellerusername")
+
+	@Column(name="sellerusername")
 	public String getUsername()				{ return this.username;	}
-@Id
-@Column(name="sellerID")
+	
+	@Id
+	@Column(name="sellerID")
 	public int getID()						{ return this.ID;		}
 
-@Column(name="sellerurladdress")
-
+	@Column(name="sellerurladdress")
 	public String geturlAddress()			{ return this.urlAddress;}
+
 	@Column(name="selleraddress")
 	public String getAddress()				{ return this.address.ConvertAddresstoString();	}
+
 	@Column(name="rating")
 	public float getRating()				{ return this.rating;	}
 
-
-	public void setUrlAddress(String urlAddress) {
-		this.urlAddress = urlAddress;
-	}
-@Column(name="numofratings")
+	@Column(name="numofratings")
 	public int getNumRatings() {
 		return numRatings;
 	}
 
-	public void setNumRatings(int numRatings) {
-		this.numRatings = numRatings;
-	}
-	@Transient
-	public String getPassword() {
-		return password;
-	}
-
-	public void setProducts(ArrayList<String> products) {
-		this.products = products;
-	}
 	@Transient
 	public ArrayList<String> getOrders()	{ return this.orders;	}
+
 	@Transient
 	public ArrayList<String> getProducts()	{ return this.products;	}
 
@@ -99,13 +84,7 @@ public class Seller {
 		this.username = username;
 		return true;
 	}
-	public int setID(int ID) {
-		this.ID= ID;
-		return ID;
-	}
 	public boolean setPassword(String password) {
-		// TODO - possibly do a check to see if the password is secure enough and add another hashing algorithm for safety
-
 		// If the password has been used before, inform the user and have them change it to something else
 		if(this.password == password) return false;
 		this.password = password;
@@ -123,11 +102,9 @@ public class Seller {
 	public void setRating(float rating) {
 		this.rating = rating;
 	}
-
 	public void setOrders(ArrayList<String> orders) {
 		this.orders = orders;
 	}
-
 	public boolean addRating(float ratingnum) {
 		if(ratingnum < 0 || ratingnum > 10) return false;
 		this.rating = ((numRatings * this.rating) + ratingnum) / ++numRatings;
@@ -190,11 +167,9 @@ public class Seller {
 	public boolean cancelOrder(String ID) {
 		return this.orders.remove(ID);
 	}
-	
 	public boolean removeProduct(String ID) {
 		return this.products.remove(ID);
 	}
-
 	public boolean AuthenticateCred(String username, String password) {
 		// TODO possibly add another hash algorithm here for safety
 		if(this.username == username && this.password == password) return true;

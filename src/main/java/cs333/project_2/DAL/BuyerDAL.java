@@ -10,12 +10,10 @@ public class BuyerDAL {
 	public static void main(String[] args) {
 		
 		//create a Session Factory
-		
 		SessionFactory sessionFactory = new Configuration().
 				configure("hibernate.cfg.xml").
 				addAnnotatedClass(Buyer.class).
 				buildSessionFactory();
-		
 		
 		//create a Session for Insertion into database, and read data
 		Session session = sessionFactory.getCurrentSession();
@@ -24,7 +22,7 @@ public class BuyerDAL {
 			System.out.println("Creating a new Buyer object...");
 			
 			//create the Buyer object
-			Buyer buyer = new Buyer("rayyanshaji", "loyola", 1239, new Address("123CampbellAve","Chicago","IL", 60645));
+			Buyer buyer = new Buyer("rayyanshaji", "loyola", 1239, new Address("123CampbellAve", "Chicago", "IL", 60645));
 			
 			//start a transaction
 			session.beginTransaction();
@@ -49,8 +47,7 @@ public class BuyerDAL {
 			//commit the transaction
 			session.getTransaction().commit();
 			
-		}finally{
-			
+		} finally {
 			sessionFactory.close();
 		}
 		

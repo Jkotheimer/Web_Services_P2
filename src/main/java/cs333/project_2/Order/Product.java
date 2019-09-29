@@ -6,8 +6,8 @@ import cs333.project_2.Order.*;
 
 public class Product {
 
-	private final String ID;
-	private final String SellerID;
+	private final int ID;
+	private final int SellerID;
 	private String ItemDescrip;
 	private float Rating;
 	private int NumRatings;
@@ -15,12 +15,12 @@ public class Product {
 	
 	private static final Utility database = new Utility();
 
-	public Product(String ID, float price, String sellerID, float rating, String itemDescrip) {
+	public Product(int ID, float price, int sellerID, String itemDescrip) {
 		this.ID = ID;
 		this.Price = price;
 		this.SellerID = sellerID;
-		this.Rating = rating;
 		this.ItemDescrip = itemDescrip;
+		this.Rating = -1; // -1 indicates no ratings yet
 		this.NumRatings = 0;
 	}
 
@@ -49,10 +49,9 @@ public class Product {
 	 * ________________________________________________________________________
 	 */
 
-	public String getID()			{ return this.ID; }
-	public String getSellerID()		{ return this.SellerID; }
+	public int getID()				{ return this.ID; }
+	public int getSellerID()		{ return this.SellerID; }
 	public float getPrice()			{ return this.Price; }
 	public float getRating()		{ return this.Rating; }
 	public String getItemDescrip()	{ return this.ItemDescrip; }
-	public Seller getSeller()		{ return database.getSeller(this.SellerID); }
 }

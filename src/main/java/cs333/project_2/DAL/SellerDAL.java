@@ -25,7 +25,7 @@ public static void main(String[] args) {
 			System.out.println("Creating a new Seller object...");
 			
 			//create the Seller object
-			Seller seller = new Seller("rayyanshaji", "loyola",2349, new Address("123CampbellAve","Chicago","IL", 60645),"loyola.com", (float) 3.85);
+			Seller seller = new Seller("rayyanshaji", "loyola",2349, new Address("123CampbellAve","Chicago","IL", 60645),"loyola.com");
 			
 			//start a transaction
 			session.beginTransaction();

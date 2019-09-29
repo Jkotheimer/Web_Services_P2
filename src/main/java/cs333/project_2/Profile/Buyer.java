@@ -12,21 +12,14 @@ import javax.persistence.Table;
 @Entity
 @Table(name="buyer")
 public class Buyer {
-	
-   
-    private String username;
+
+	private String username;
 	private String password;
-	private int ID;
-	//private ArrayList<String> orderIDs;
+	private final int ID;
 	private Address address;
+	//private ArrayList<String> orderIDs;
 	//private ArrayList<PaymentInfo> payinfo; // Allow buyers to have multiple payment options
-	
-	private static final Utility database = new Utility();
-	
-	public Buyer() {	
-	}
-	
-	
+
 	public Buyer(String username, String password, int ID, Address address) {
 		this.username = username;
 		this.password = password;
@@ -35,8 +28,7 @@ public class Buyer {
 		//this.orderIDs = new ArrayList<>();
 		//this.payinfo = new ArrayList<>();
 	}
-	
-	
+
 	/**
 	 * GETTERS
 	 * ________________________________________________________________________
@@ -44,23 +36,17 @@ public class Buyer {
 	
     @Column(name = "buyerusername")
 	public String getUsername()					{ return this.username;	}
-    @Id
-    @Column(name = "buyerID")
+
+	@Id
+	@Column(name = "buyerID")
 	public int getID()						    {  return this.ID;		}
-	
-    @Column(name= "buyeraddress")
-    public String getAddress()					{
-    	return this.address.ConvertAddresstoString();
-    }
+
+	@Column(name= "buyeraddress")
+	public String getAddress()					{
+		return this.address.ConvertAddresstoString();
+	}
 	//public ArrayList<String> getOrderIDs()		{ return this.orderIDs;	}
-    //public ArrayList<PaymentInfo> getPayInfos()	{ return this.payinfo;  }
-    
-    // Special getter to retrieve the actual order objects from the database
-//    public ArrayList<Order> getOrders()			{
-//		ArrayList<Order> orders = new ArrayList<>();
-//		for(String o : this.orderIDs) orders.add(database.getOrder(o));
-//		return orders;
-//	}
+	//public ArrayList<PaymentInfo> getPayInfos()	{ return this.payinfo;  }
 
 	/**
 	 * SETTERS
@@ -84,10 +70,6 @@ public class Buyer {
 		// If the password has been used before, inform the user and have them change it to something else
 		if(this.password == password) return false;
 		this.password = password;
-		return true;
-	}
-	public boolean setID(int ID) {
-		this.ID = ID;
 		return true;
 	}
 //	public void setOrderIDs(ArrayList<String> orderIDs) {
@@ -132,14 +114,9 @@ public class Buyer {
 	 * ________________________________________________________________________
 	 */
 
-    public boolean placeOrder(){
-		
-        return true;
-    }
-
-    public boolean cancelOrder(){
-        return true;
-    }
+//     public boolean cancelOrder(String ID) {
+//         return this.orderIDs.remove(ID);
+//     }
 
 	public boolean AuthenticateCred(String username, String password) {
 		// TODO possibly add another hash algorithm here for safety

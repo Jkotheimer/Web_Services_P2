@@ -16,14 +16,12 @@ import cs333.project_2.Order.*;
  */
 public class Order
 {
-    private final String ID;
-    private final String[] OrderedProductIDs;
-    private final String CustomerID;
+    private final int ID;
+    private final int[] OrderedProductIDs;
+    private final int CustomerID;
     private String Status;
-	
-	private static final Utility database = new Utility();
 
-    public Order(String ID, String[] productIDs, String customerID) {
+    public Order(int ID, int[] productIDs, int customerID) {
 		this.ID = ID;
 		this.OrderedProductIDs = productIDs;
 		this.CustomerID = customerID;
@@ -45,24 +43,9 @@ public class Order
 	 * ________________________________________________________________________
 	 */
 
-	public String getID() 			{ return this.ID; }
+	public int getID() 				{ return this.ID; }
 	public String getStatus()		{ return this.Status; }
-	public String getBuyerID()		{ return this.CustomerID; }
-	public String[] getProductIDs()	{ return this.OrderedProductIDs; }
-	
-	// Special getters that call the persistence layer to grab the actual objects corresponding with each ID
-	public Buyer getBuyer()			{ return database.getBuyer(CustomerID); }
-	public Product[] getProducts()	{
-		Product[] products = new Product[this.OrderedProductIDs.length];
-		for(int i = 0; i < this.OrderedProductIDs.length; i++) 
-			products[i] = database.getProduct(this.OrderedProductIDs[i]);
-		return products;
-	}
-	public Seller[] getSellers()	{
-		Seller[] sellers = new Seller[this.OrderedProductIDs.length];
-		for(int i = 0; i < this.OrderedProductIDs.length; i++)
-			sellers[i] = database.getSeller(this.getProducts()[i].getSellerID());
-		return sellers;
-	}
+	public int getBuyerID()			{ return this.CustomerID; }
+	public int[] getProductIDs()	{ return this.OrderedProductIDs; }
 
 }
