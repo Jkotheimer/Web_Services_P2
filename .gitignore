@@ -9,3 +9,6 @@ log/
 .classpath
 .project
 .settings/
+
+# We don't want to be posting the password to our mySQL server on GitHub
+src/main/resources/
