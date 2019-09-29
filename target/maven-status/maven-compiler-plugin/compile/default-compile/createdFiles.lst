@@ -4,5 +4,6 @@ cs333/project_2/General/Utility.class
 cs333/project_2/Profile/Seller.class
 cs333/project_2/Order/Product.class
 cs333/project_2/Profile/Buyer.class
+cs333/project_2/DAL/BuyerDAL.class
 cs333/project_2/Profile/Address.class
 cs333/project_2/Order/Order.class

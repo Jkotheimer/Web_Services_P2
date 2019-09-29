@@ -58,7 +58,9 @@ public class Seller {
 	public String geturlAddress()			{ return this.urlAddress;}
 
 	@Column(name="selleraddress")
-	public String getAddress()				{ return this.address.ConvertAddresstoString();	}
+	public String getAddressString()		{ return this.address.ConvertAddresstoString();	}
+	
+	public Address getAddress()				{ return this.address; }
 
 	@Column(name="rating")
 	public float getRating()				{ return this.rating;	}

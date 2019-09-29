@@ -36,7 +36,7 @@ public class Address {
 	public void setZipcode(int zipcode)		{ this.Zipcode = zipcode;	}
 
 	public String ConvertAddresstoString() {
-    	String stringaddress= this.Street+ this.City+ this.State + this.Zipcode;
+    	String stringaddress= this.Street + ", " + this.City + ", " + this.State + " " + this.Zipcode;
     	return stringaddress;
 	}
 }

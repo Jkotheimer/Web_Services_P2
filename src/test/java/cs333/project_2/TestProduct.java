@@ -13,13 +13,13 @@ public class TestProduct {
 
 	@Test
 	public void test_Product_Getters_N_Setters() {
-        fixture = new Product("1089",12,"Yokos",0,"A great product from Yokos");
+        fixture = new Product(1089, 12, 6354, "A great product from Yokos");
 
         // Test Initialization
-        assertEquals("1089",fixture.getID());
-        assertEquals("Yokos",fixture.getSellerID()); 
-        assertEquals(12,fixture.getPrice(), 0);
-        assertEquals(0,fixture.getRating(), 0);
+        assertEquals(1089, fixture.getID());
+        assertEquals(6354, fixture.getSellerID()); 
+        assertEquals(12, fixture.getPrice(), 0);
+        assertEquals(-1, fixture.getRating(), 0);
         assertEquals("A great product from Yokos",fixture.getItemDescrip());
 
         //Test Updating Values

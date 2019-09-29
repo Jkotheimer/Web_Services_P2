@@ -14,11 +14,11 @@ public class TestOrder {
 	@Test
 	public void test_Order_Getters_N_Setters() {
         // Test Object Initialization
-        fixture = new Order("test_01", new String[]{"1023","3029"},"helfman_09");
+        fixture = new Order(1987324, new int[]{61435,614315},1346134);
 
-        assertEquals("test_01",fixture.getID());
+        assertEquals(1987324,fixture.getID());
         assertEquals("Order Placed",fixture.getStatus());
-        assertEquals("helfman_09",fixture.getBuyerID());
+        assertEquals(1346134,fixture.getBuyerID());
 
         // Test updating
         fixture.updateStatus("OrderCANCELLED");

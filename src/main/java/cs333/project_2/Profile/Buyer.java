@@ -42,8 +42,12 @@ public class Buyer {
 	public int getID()						    {  return this.ID;		}
 
 	@Column(name= "buyeraddress")
-	public String getAddress()					{
+	public String getAddressString()			{
 		return this.address.ConvertAddresstoString();
+	}
+	
+	public Address getAddress()					{
+		return this.address;
 	}
 	//public ArrayList<String> getOrderIDs()		{ return this.orderIDs;	}
 	//public ArrayList<PaymentInfo> getPayInfos()	{ return this.payinfo;  }
@@ -66,16 +70,14 @@ public class Buyer {
 		this.username = username;
 		return true;
 	}
+
 	public boolean setPassword(String password) {
 		// If the password has been used before, inform the user and have them change it to something else
 		if(this.password == password) return false;
 		this.password = password;
 		return true;
 	}
-//	public void setOrderIDs(ArrayList<String> orderIDs) {
-//		this.orderIDs = orderIDs;
-//	}
-	
+
 	public boolean setAddress(Address address) {
 		this.address = address;
 		return true;
