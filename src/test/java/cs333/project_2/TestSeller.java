@@ -66,12 +66,23 @@ public class TestSeller {
 	public void test_Order_Operations() {
 		// Add a few orders and test order functions
 		String[] orders = {"LoXCvQdh","D9GTuE1a","QnVHEA8X","fGo0eUv4","jIzYXe4r","j503M82u","MTOByHhO","Qr05vUwJ"};
-		
+
 		for(String o: orders) assertTrue(fixture.addOrder(o));
 		for(String o: orders) assertFalse(fixture.addOrder(o));
-		
+
 		// make sure the list is sorted
 		ArrayList<String> fixture_orders = fixture.getOrders();
+		for(int i = 0; i < fixture_orders.size() - 1; i++) 
+			if(fixture_orders.get(i).compareTo(fixture_orders.get(i + 1)) > 0) 
+				fail();
+
+		// Cancel a few orders and retest
+		fixture.cancelOrder("j503M82u");
+		fixture.cancelOrder("QnVHEA8X");
+		fixture_orders = fixture.getOrders();
+		assertEquals(fixture_orders.size(), 6);
+		assertFalse(fixture_orders.contains("j503M82u"));
+		assertFalse(fixture_orders.contains("QnVHEA8X"));
 		for(int i = 0; i < fixture_orders.size() - 1; i++) 
 			if(fixture_orders.get(i).compareTo(fixture_orders.get(i + 1)) > 0) 
 				fail();
@@ -93,6 +104,17 @@ public class TestSeller {
 		
 		// make sure the list is sorted
 		ArrayList<String> fixture_products = fixture.getProducts();
+		for(int i = 0; i < fixture_products.size() - 1; i++) 
+			if(fixture_products.get(i).compareTo(fixture_products.get(i + 1)) > 0) 
+				fail();
+			
+		// Remove a few products and retest
+		fixture.removeProduct("j503M82u");
+		fixture.removeProduct("QnVHEA8X");
+		fixture_products = fixture.getProducts();
+		assertEquals(fixture_products.size(), 6);
+		assertFalse(fixture_products.contains("j503M82u"));
+		assertFalse(fixture_products.contains("QnVHEA8X"));
 		for(int i = 0; i < fixture_products.size() - 1; i++) 
 			if(fixture_products.get(i).compareTo(fixture_products.get(i + 1)) > 0) 
 				fail();

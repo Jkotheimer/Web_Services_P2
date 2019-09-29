@@ -60,26 +60,22 @@ public class Utility
 	 * The service layer also does not know how to generate ID's, so they must be generated here.
 	 */
 	public void addBuyer(String username, String password, Address address) {
-		// TODO Interact with the database to generate a unique ID
-		String ID = "temp";
+		String ID = generateID();
 		Buyer b = new Buyer(username, password, ID, address);
 		// TODO add the buyer to the database
 	}
 	public void addSeller(String username, String password, Address address, String urladdress) {
-		// TODO Interact with the database to generate a unique ID
-		String ID = "temp";
+		String ID = generateID();
 		Seller s = new Seller(username, password, ID, address, urladdress);
 		// TODO add the seller to the database
 	}
 	public void addProduct(float price, String sellerID, float rating, String itemDescrip) {
-		// TODO Interact with the database to generate a unique ID
-		String ID = "temp";
+		String ID = generateID();
 		Product p = new Product(ID, price, sellerID, rating, itemDescrip);
 		// TODO add the product to the database
 	}
 	public void addOrder(String[] productIDs, String customerID) {
-		// TODO Interact with the database to generate a unique ID
-		String ID = "temp";
+		String ID = generateID();
 		Order o = new Order(ID, productIDs, customerID);
 		// TODO add the order to the database
 	}
@@ -96,4 +92,13 @@ public class Utility
 	public void deleteOrder(String ID) {
 		// TODO delete the given order
 	}
+	
+	// TODO figure out how to handle put requests to update each object
+	// My guess to eliminate the number of methods we make here is to pass a string that specifies the method 
+	// that we want to invoke to set element of type T - we would of course have to do a check to ensure that 
+	// type T is the correct type to pass to the method
+	public <T> void updateBuyer(String ID, String method, T element) {}
+	public <T> void updateSeller(String ID, String method, T element) {}
+	public <T> void updateProduct(String ID, String method, T element) {}
+	public <T> void updateOrder(String ID, String method, T element) {}
 }
