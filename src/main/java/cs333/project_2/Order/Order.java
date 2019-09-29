@@ -19,12 +19,14 @@ public class Order
     private final int ID;
     private final int[] OrderedProductIDs;
     private final int CustomerID;
+    private final String date;
     private String Status;
 
-    public Order(int ID, int[] productIDs, int customerID) {
+    public Order(int ID, int[] productIDs, int customerID, String date) {
 		this.ID = ID;
 		this.OrderedProductIDs = productIDs;
 		this.CustomerID = customerID;
+		this.date = date;
 		this.Status = "Order Placed";
 	}
 
@@ -43,9 +45,10 @@ public class Order
 	 * ________________________________________________________________________
 	 */
 
-	public int getID() 				{ return this.ID; }
-	public String getStatus()		{ return this.Status; }
-	public int getBuyerID()			{ return this.CustomerID; }
-	public int[] getProductIDs()	{ return this.OrderedProductIDs; }
+	public int getID() 				{ return this.ID; 				}
+	public String getStatus()		{ return this.Status; 			}
+	public int getBuyerID()			{ return this.CustomerID; 		}
+	public String getDate()			{ return this.date;				}
+	public int[] getProductIDs()	{ return this.OrderedProductIDs;}
 
 }

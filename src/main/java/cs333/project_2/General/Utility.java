@@ -51,7 +51,7 @@ public class Utility {
 	}
 	public Order getOrder(int ID) {
 		// TODO grab the corresponding order object from the database
-		return new Order(513437658, null, 98765878);
+		return new Order(513437658, null, 98765878, "09/29/2019 12:00PM");
 	}
 	
 	/**
@@ -74,9 +74,9 @@ public class Utility {
 		Product p = new Product(ID, price, sellerID, itemDescrip);
 		// TODO add the product to the database
 	}
-	public void addOrder(int[] productIDs, int customerID) {
+	public void addOrder(int[] productIDs, int customerID, String date) {
 		int ID = generateID();
-		Order o = new Order(ID, productIDs, customerID);
+		Order o = new Order(ID, productIDs, customerID, date);
 		// TODO add the order to the database
 	}
 	
