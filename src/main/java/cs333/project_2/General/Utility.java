@@ -13,17 +13,17 @@ public class Utility {
 
 	public Utility() {}
 
-	public static int generateID(){
+	public static int generateID() {
 		//TODO make this generate random? string
 		return 124632;
 	}
 
-	public static String searchProduct(String productname){
+	public static String searchProduct(String productname) {
 		//TODO search database for product with same name
 		return "found";
 	}
 
-	public static boolean checkAvailability(String productname){
+	public static boolean checkAvailability(String productname) {
 		//TODO check that a product is available in database
 		return true;
 	}

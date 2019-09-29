@@ -5,7 +5,7 @@ import org.junit.Test;
 import static org.junit.Assert.*;
 
 /**
- * Unit tests for the Seller and Buyer classes under the Profile interface
+ * Unit tests for the Product Class
  */
 public class TestProduct {
 

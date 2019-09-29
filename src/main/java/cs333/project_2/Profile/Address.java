@@ -25,6 +25,10 @@ public class Address {
 	public String getState()	{ return this.State;	}
 	public int getZipcode()		{ return this.Zipcode;	}
 
+	public String ConvertAddresstoString() {
+    	return this.Street + ", " + this.City + ", " + this.State + " " + this.Zipcode;
+	}
+
 	/**
 	 * SETTERS
 	 * ________________________________________________________________________
@@ -34,9 +38,4 @@ public class Address {
 	public void setCity(String city)		{ this.City = city;			}
 	public void setState(String state)		{ this.State = state;		}
 	public void setZipcode(int zipcode)		{ this.Zipcode = zipcode;	}
-
-	public String ConvertAddresstoString() {
-    	String stringaddress= this.Street + ", " + this.City + ", " + this.State + " " + this.Zipcode;
-    	return stringaddress;
-	}
 }
