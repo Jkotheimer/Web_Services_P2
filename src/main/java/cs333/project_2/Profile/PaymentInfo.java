@@ -1,43 +1,55 @@
 package cs333.project_2.Profile;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+@Entity
+@Table(name="paymentinfo")
 public class PaymentInfo
 {    
 
-    String CreditCardNum;
-    String CreditCardHolder;
-    String ExpDate;
+    private int CreditCardNum;
+    private String CreditCardHolder;
+    private String ExpDate;
     int CCV;
-    Address BillingAddress;
+    private String BillingAddress;
 
     //constructor
 
-    public PaymentInfo(String creditcardnum,String creditcardholder,String expdate,int ccv, Address billingaddress){
+    public PaymentInfo(int creditcardnum,String creditcardholder,String expdate,int ccv, String billingaddress){
         this.CreditCardNum = creditcardnum;
         this.CreditCardHolder = creditcardholder;
         this.ExpDate = expdate;
         this.CCV = ccv;
         this.BillingAddress = billingaddress;
     }
-
-    //getters
-
-    public String getCreditCardNum(){
-        return this.CreditCardNum;
+    
+    public PaymentInfo() {
+    	
     }
 
+    //getters
+    @Id
+    @Column(name="creditcardno")
+    public int getCreditCardNum(){
+        return this.CreditCardNum;
+    }
+    @Column(name="cardholder")
     public String getCreditCardHolder(){
         return this.CreditCardHolder;
     }
-
+    @Column(name="expirydate")
     public String getExpDate(){
         return this.ExpDate;
     }
-
+    @Column(name="cvv")
     public int getCCV(){
         return this.CCV;
     }
-
-    public Address getBillingAddress(){
+    @Column(name="billingaddress")
+    public String getBillingAddress(){
         return this.BillingAddress;
     }
 
@@ -59,7 +71,7 @@ public class PaymentInfo
         this.CCV = ccv;
     }
 
-    public void setBillingAddress(Address billingaddress){
+    public void setBillingAddress(String billingaddress){
         this.BillingAddress = billingaddress;
     }
 

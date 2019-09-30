@@ -30,13 +30,13 @@ public class Utility
     
     public Buyer getBuyer(String ID) {
 		// TODO grab the corresponding buyer object from the database
-		return new Buyer("testCustomer", "S0M3R@ND0M3H@$3DP@$SW0RD", "1234567890", 
+		return new Buyer("testCustomer", "S0M3R@ND0M3H@$3DP@$SW0RD", 1234567890, 
 							new Address("123 Main St.", "Chicago", "IL", 66666)                              
 						);
 	}
 	public Seller getSeller(String ID) {
 		// TODO grab the corresponding seller object from the database
-		return new Seller("testCustomer", "S0M3R@ND0M3H@$3DP@$SW0RD", "1234567890", 
+		return new Seller("testCustomer", "S0M3R@ND0M3H@$3DP@$SW0RD", 1234567890, 
 							new Address("123 Main St.", "Chicago", "IL", 66666), "website.com"                         
 						);
 	}

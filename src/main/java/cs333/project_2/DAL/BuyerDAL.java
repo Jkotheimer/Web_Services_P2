@@ -23,13 +23,13 @@ public class BuyerDAL {
 			
 			System.out.println("Creating a new Buyer object...");
 			
-			//create the Buyer object
+			//creating the Buyer object
 			Buyer buyer = new Buyer("rayyanshaji", "loyola", 1239, new Address("123CampbellAve","Chicago","IL", 60645));
 			
-			//start a transaction
+			//starting a transaction
 			session.beginTransaction();
 			
-			//Save the Buyer object to the database
+			//Saving the Buyer object to the database
 			session.save(buyer);
 			
 			System.out.println("Buyer created in Database!");
@@ -39,14 +39,14 @@ public class BuyerDAL {
 			session = sessionFactory.getCurrentSession();
 			session.beginTransaction();
 			
-			//Read the student
+			//Read the buyer
 			System.out.println("Getting the buyer based on id: " + buyer.getID());
 			
-			Buyer readBuyer = session.get(Buyer.class, buyer.getID());   //specify PRIMARY KEY of the student
+			Buyer readBuyer = session.get(Buyer.class, buyer.getID());   //specify PRIMARY KEY of the buyer
 			
 			System.out.println("Retrieved buyer details : " + buyer);
 			
-			//commit the transaction
+			//Commit the transaction
 			session.getTransaction().commit();
 			
 		}finally{
@@ -83,6 +83,7 @@ public class BuyerDAL {
 			session.flush();
 			session.close();
 			sessionFactory.close();
+			//Closing the session.
 			
 		}
 	}
