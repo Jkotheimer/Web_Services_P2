@@ -1,5 +1,3 @@
-![Untitled Diagram-1](https://user-images.githubusercontent.com/26625500/65849453-37672800-e310-11e9-98b2-f0fc75645549.jpg)
-
 Project 2 Documentation
 Jack Kothemier
 Mohammed Rayyan Shaji
@@ -31,5 +29,7 @@ We’ve created a package of DataAccessLayer named ‘DAL’ which has all class
 We’re using Id annotation to mark the entry in the table as a primary key, and Column annotation which has the same name contained of the column in the database. 
 
 In our data access layer class, we are initiating a connection to the database using the SessionFactory class of Hibernate. We then create a new object of the type of the class and specify the values of it and make a commit to the current transaction which is how the values are inserted into the database.
+
+![Untitled Diagram-1](https://user-images.githubusercontent.com/26625500/65849453-37672800-e310-11e9-98b2-f0fc75645549.jpg)
 
 
