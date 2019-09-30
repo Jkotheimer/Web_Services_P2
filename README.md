@@ -1,56 +1,8 @@
-# Web_Services_P2
+![Untitled Diagram-1](https://user-images.githubusercontent.com/26625500/65849453-37672800-e310-11e9-98b2-f0fc75645549.jpg)
 
-## Compiling, Testing, and Running
-
-- mvn clean compile
-- mvn test
-- mvn exec:java
-
-## the Structure
-
-1) The Buying experience
-
-	- Search Product
-	- Check availability
-	- Buy process
-	
-		> Payment
-		> Create order
-		> Fulfill order
-		> Ship order
-		> Status (tracking)
-		
-			* Cancellation option
-			* refund
-
-2) Customer registration/ management
-
-	- Add Customer
-	
-		> Update Customer profile
-		> Add billing info
-		
-	- Delete Customer
-	- Provide Status
-
-3) Partner Management
-
-	- Add partner
-	
-		> Accept new products
-		> Notify sales
-		> Settle account (accept payment from buyer and pay seller)
-		> Generate report
-		
-	- Delete partner
-
-4) Communication among customers
-
-	- Add reviews
-	
-Project 2 
-Mohammed Rayyan Shaji
+Project 2 Documentation
 Jack Kothemier
+Mohammed Rayyan Shaji
 Jack Broncato
 
 Main Classes:
