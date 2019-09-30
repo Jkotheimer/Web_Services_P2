@@ -1,47 +1,74 @@
 package cs333.project_2.Order;
 
-public class Order
-{
-    String ID;
-    String Status;
-    String[] OrderedProd;
-    // TODO Producer and Consumer as actual objects
-    String Producer;
-    String Customer;
-    // TODO payment info
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+import javax.persistence.Transient;
 
-    public Order createOrder(String[] ProductID, String customer){
-        Order newOrder = new Order();
-        newOrder.UpdateStatus("Order Placed");
-        newOrder.setCustomer(customer);
-        return newOrder;
-    };
+import cs333.project_2.General.Utility;
+import cs333.project_2.Profile.*;
+import cs333.project_2.Order.*;
 
-    //setters
-    public void setID(String id){
-        this.ID = id;
-    }
 
-    public boolean UpdateStatus(String status){
-        this.Status = status;
-        return true;
-    }
+/**
+ * Order class
+ * 
+ * An order has the following:
+ * - A unique ID
+ * - A status
+ * - A list of products
+ * 		+ Each product is linked to a seller, so if we wish to access the seller, we find their ID through the product
+ * - A customer who bought them
+ */
 
-    public void setCustomer(String customer){
-        this.Customer = customer;
-    }
+@Entity
+@Table(name="`order`")
+public class Order {
 
-    // getters
-    public String getID(){
-        return this.ID;
-    }
+	private final int ID;
+	private final int[] OrderedProductIDs;
+	private final int CustomerID;
+	private String Status;
 
-    public String getStatus(){
-        return this.Status;
-    }
+	public Order(int ID, int[] productIDs, int customerID) {
+		this.ID = ID;
+		this.OrderedProductIDs = productIDs;
+		this.CustomerID = customerID;
+		this.Status = "Order initiated";
+	}
 
-    public String getCustomer(){
-        return this.Customer;
-    }
+	@Id
+	@Column(name="orderID")
+	public int getID() {
+		return this.ID;
+	}
 
+	@Column(name="productID")
+	public int[] getProductID() {
+		return this.OrderedProductIDs;
+	}
+
+	@Column(name="customerID")
+	public int getCustomerID() {
+		return this.CustomerID;
+	}
+
+	@Column(name="orderstatus")
+	public String getStatus() {
+		return this.Status;
+	}
+
+	
+
+	/**
+	 * SETTERS
+	 * ________________________________________________________________________
+	 */
+
+@Transient
+	public boolean updateStatus(String status) {
+		this.Status = status;
+		return true;
+	}
 }

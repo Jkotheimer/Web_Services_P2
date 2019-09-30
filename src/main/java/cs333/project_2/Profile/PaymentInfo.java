@@ -1,18 +1,21 @@
 package cs333.project_2.Profile;
-import cs333.project_2.Profile.Address;
 
-public class PaymentInfo
-{    
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
 
-    String CreditCardNum;
-    String CreditCardHolder;
-    String ExpDate;
-    int CCV;
-    Address BillingAddress;
+@Entity
+@Table(name="paymentinfo")
+public class PaymentInfo {    
 
-    //constructor
+    private String CreditCardNum;
+    private String CreditCardHolder;
+    private String ExpDate;
+    private int CCV;
+    private Address BillingAddress;
 
-    public PaymentInfo(String creditcardnum,String creditcardholder,String expdate,int ccv, Address billingaddress){
+    public PaymentInfo(String creditcardnum, String creditcardholder, String expdate, int ccv,  Address billingaddress) {
         this.CreditCardNum = creditcardnum;
         this.CreditCardHolder = creditcardholder;
         this.ExpDate = expdate;
@@ -20,48 +23,55 @@ public class PaymentInfo
         this.BillingAddress = billingaddress;
     }
 
-    //getters
+	/**
+	 * GETTERS
+	 * ________________________________________________________________________
+	 */
 
-    public String getCreditCardNum(){
+    @Id
+    @Column(name="creditcardno")
+    public String getCreditCardNum() {
         return this.CreditCardNum;
     }
-
-    public String getCreditCardHolder(){
+    @Column(name="cardholder")
+    public String getCreditCardHolder() {
         return this.CreditCardHolder;
     }
-
-    public String getExpDate(){
+    @Column(name="expirydate")
+    public String getExpDate() {
         return this.ExpDate;
     }
-
-    public int getCCV(){
+    @Column(name="cvv")
+    public int getCCV() {
         return this.CCV;
     }
-
-    public Address getBillingAddress(){
+    @Column(name="billingaddress")
+    public Address getBillingAddress() {
         return this.BillingAddress;
     }
 
-    //setters
+	/**
+	 * SETTERS
+	 * ________________________________________________________________________
+	 */
 
-    public void setCreditCardNum(String creditcardnum){
+    public void setCreditCardNum(String creditcardnum) {
         this.CreditCardNum = creditcardnum;
     }
 
-    public void setCreditCardHolder(String creditcardholder){
+    public void setCreditCardHolder(String creditcardholder) {
         this.CreditCardHolder = creditcardholder;
     }
 
-    public void setExpDate(String expdate){
+    public void setExpDate(String expdate) {
         this.ExpDate = expdate;
     }
 
-    public void setCCV(int ccv){
+    public void setCCV(int ccv) {
         this.CCV = ccv;
     }
 
-    public void setBillingAddress(Address billingaddress){
+    public void setBillingAddress(Address billingaddress) {
         this.BillingAddress = billingaddress;
     }
-
 }

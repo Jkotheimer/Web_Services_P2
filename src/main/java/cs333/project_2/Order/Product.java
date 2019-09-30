@@ -1,56 +1,91 @@
 package cs333.project_2.Order;
 
-public class Product
-{
-    String ID;
-    int Price;
-    String SellerID;
-    int Rating;
-    String ItemDescrip;
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
+import javax.persistence.Table;
+import javax.persistence.Transient;
 
-    public Product(String id, int price,String sellerid,int rating,String itemdescrip)
-    {
-        this.ID = id;
-        this.Price = price;
-        this.SellerID = sellerid;
-        this.Rating = rating;
-        this.ItemDescrip = itemdescrip;
-    }
+import cs333.project_2.General.Utility;
+import cs333.project_2.Profile.*;
 
-    public boolean setID(String id) {
-		this.ID = id;
-		return true;
-	}
-	public boolean setsellerID(String sellerid) {
-        this.SellerID = sellerid;
-		return true;
-	}
-	public boolean setPrice(int price) {
-        this.Price = price;
-		return true;
-    }
-    public boolean setRating(int rating) {
-        this.Rating = rating;
-		return true;
-    }
-    public boolean setItemDescrip(String itemdescrip) {
-        this.ItemDescrip = itemdescrip;
-		return true;
-    }
+@Entity
+@Table(name = "product")
+public class Product {
 
-    public String getID() {
-        return this.ID;
+	private final int ID;
+	private double Price;
+	private final int SellerID;
+	private String ItemDescrip;
+
+	private float Rating;
+	private int NumRatings;
+
+	public Product(int ID, int sellerID, float price, String itemDescrip) {
+		this.ID = ID;
+		this.Price = price;
+		this.SellerID = sellerID;
+		this.ItemDescrip = itemDescrip;
+
+		this.Rating = -1; // -1 indicates no ratings yet
+		this.NumRatings = 0;
 	}
-	public String getsellerID() {
-        return this.SellerID;
+
+	/**
+	 * SETTERS
+	 * ________________________________________________________________________
+	 */
+
+	public void setPrice(double price) {
+		Price = price;
 	}
-	public int getPrice() {
-        return this.Price;
-    }
-    public int getRating() {
-        return this.Rating;
-    }
-    public String getItemDescrip() {
-        return this.ItemDescrip;
-    }
+	public void setItemDescrip(String itemdescrip) {
+		this.ItemDescrip = itemdescrip;
+	}
+
+	public boolean addRating(int rating) {
+		if (rating < 0 || rating > 10) return false;
+		// Update the current average rating of the product
+		this.Rating = ((NumRatings * this.Rating) + rating) / ++NumRatings;
+		return true;
+	}
+
+	/**
+	 * GETTERS
+	 * ________________________________________________________________________
+	 */
+
+	@Id
+	@Column(name="productid")
+	public int getID() {
+		return this.ID;
+	}
+
+	@Column(name = "sellerID")
+	public int getSellerID() {
+		return this.SellerID;
+	}
+
+	@Column(name = "price")
+	public double getPrice() {
+		return this.Price;
+	}
+
+	@Column(name = "rating")
+	public float getRating() {
+		return this.Rating;
+	}
+
+	@Column(name = "description")
+	public String getItemDescrip() {
+		return this.ItemDescrip;
+	}
 }

@@ -5,7 +5,7 @@ import org.junit.Test;
 import static org.junit.Assert.*;
 
 /**
- * Unit tests for the Seller and Buyer classes under the Profile interface
+ * Unit tests for the Order Class
  */
 public class TestOrder {
 
@@ -13,20 +13,16 @@ public class TestOrder {
 
 	@Test
 	public void test_Order_Getters_N_Setters() {
-        // Test Object Initialization
-        fixture = fixture.createOrder(new String[] {"1023","3029"},"helfman_09");
-        fixture.setID("test_01");
+		// Test Object Initialization
+		fixture = new Order(1987324, new int[]{61435,614315},1346134);
 
-        assertEquals("",fixture.getID());
-        assertEquals("Order Placed",fixture.getStatus());
-        assertEquals("helfman_09",fixture.getCustomer());
+		assertEquals(1987324,fixture.getID());
+		assertEquals("Order initiated",fixture.getStatus());
+		assertEquals(1346134,fixture.getCustomerID());
 
-        // Test updating
-        fixture.UpdateStatus("OrderCANCELLLED");
-        fixture.setCustomer("newman_02");
+		// Test updating
+		fixture.updateStatus("OrderCANCELLED");
 
-        assertEquals("OrderCANCELLED",fixture.getStatus());
-        assertEquals("newman_02",fixture.getCustomer());
-
-    }
+		assertEquals("OrderCANCELLED",fixture.getStatus());
+	}
 }
