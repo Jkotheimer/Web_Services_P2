@@ -6,44 +6,51 @@ import org.hibernate.cfg.Configuration;
 
 import cs333.project_2.Profile.Address;
 import cs333.project_2.Profile.Seller;
+import cs333.project_2.Order.Product;
 
-public class SellerDAL {
-	public static void main(String[] args) {
+public class ProductDAL {
+public static void main(String[] args) {
 		
 		//create a Session Factory
+		
 		SessionFactory sessionFactory = new Configuration().
 				configure("hibernate.cfg.xml").
-				addAnnotatedClass(Seller.class).
+				addAnnotatedClass(Product.class).
 				buildSessionFactory();
-
+		
+		
 		//create a Session for Insertion into database, and read data
 		Session session = sessionFactory.getCurrentSession();
 		try{
 			
-			System.out.println("Creating a new Seller object...");
+			System.out.println("Creating a new Product object...");
 			
-			//create the Seller object
-			Seller seller = new Seller("rayyanshaji", "loyola",2349, new Address("123CampbellAve","Chicago","IL", 60645),"loyola.com");
+			//create the Product object
+			Product product = new Product(1234,3241,450,4.5f,"iPhone");
+		
 			
+					
 			//start a transaction
 			session.beginTransaction();
 			
-			//Save the Seller object to the database
-			session.save(seller);
+			//Save the Product object to the database
 			
-			System.out.println("Seller created in Database!");
+			session.save(product);
+		
+			
+			System.out.println("Product created in Database!");
 			//commit the transaction
 			session.getTransaction().commit();
 			
 			session = sessionFactory.getCurrentSession();
 			session.beginTransaction();
 			
-			//Read the SELLER
-			System.out.println("Getting the Seller based on id: " + seller.getID());
+			//Read the product
+			System.out.println("Getting the Product based on id: " + product.getProductID());
 			
-			Seller readSeller = session.get(Seller.class, seller.getID());   //specify PRIMARY KEY of the student
+			Product readProduct = session.get(Product.class, product.getProductID());   //specify PRIMARY KEY of the product
 			
-			System.out.println("Retrieved Seller details : " + seller);
+			System.out.println("Retrieved Product details : " + product);
 			
 			//commit the transaction
 			session.getTransaction().commit();
@@ -57,22 +64,22 @@ public class SellerDAL {
 		// delete a row in the database
 		try{
 			int ID = 1;
-			//Deleting a single Seller
+			//Deleting a single Product
 			//Get a new session and begin transaction
 			session = sessionFactory.getCurrentSession();
 			session.beginTransaction();
 			
-			System.out.println("Retrieving Seller with id : " + ID);
+			System.out.println("Retrieving Product with id : " + ID);
 			
-			Seller readSeller = session.get(Seller.class, ID);   //specify PRIMARY KEY of the Seller
-			System.out.println("Deleting Seller...");
+			Product readProduct = session.get(Product.class, ID);   //specify PRIMARY KEY of the Product
+			System.out.println("Deleting Product...");
 			
-			session.delete(readSeller);
+			session.delete(readProduct);
 			
 			/*
-			//delete Seller id=3001
-			System.out.println("Deleting Seller where id=3001");
-			session.createQuery("delete from Seller where id=3001").executeUpdate();
+			//delete Product id=3001
+			System.out.println("Deleting Product where id=3001");
+			session.createQuery("delete from Product where id=3001").executeUpdate();
 			*/
 			
 			//commit the transaction
@@ -86,5 +93,4 @@ public class SellerDAL {
 	}
 
 }
-
 

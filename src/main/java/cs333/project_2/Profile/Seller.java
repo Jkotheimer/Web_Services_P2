@@ -4,11 +4,15 @@ import cs333.project_2.Order.*;
 import java.util.ArrayList;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Transient;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 
@@ -49,9 +53,15 @@ public class Seller {
 
 	@Column(name="sellerusername")
 	public String getUsername()				{ return this.username;	}
+<<<<<<< HEAD
 	
 	@Id
 	@Column(name="sellerID")
+=======
+@Id
+@Column(name="sellerID")
+
+>>>>>>> 5702834c98956e625b6dc1671306b5afd4b8d612
 	public int getID()						{ return this.ID;		}
 
 	@Column(name="sellerurladdress")
