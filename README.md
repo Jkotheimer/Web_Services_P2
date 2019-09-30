@@ -12,7 +12,7 @@
   - Represents an Order for a Product, contains Products ordered and a reference to the Buyer who made the Order.
 
 - Product
-  -Simply represents an item, Sellers have one to multiple Products attached to them, indicating they are the one selling them.
+  - Simply represents an item, Sellers have one to multiple Products attached to them, indicating they are the one selling them.
 
 - Buyer
   - Represents a Customer, can create orders for products and contain basic info on themselves to aid in fulfilling orders.
