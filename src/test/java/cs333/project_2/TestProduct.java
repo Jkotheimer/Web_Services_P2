@@ -13,7 +13,7 @@ public class TestProduct {
 
 	@Test
 	public void test_Product_Getters_N_Setters() {
-        fixture = new Product(1089, 12, 6354, "A great product from Yokos");
+		fixture = new Product(1089, 6354, 12, "A great product from Yokos");
 
         // Test Initialization
         assertEquals(1089, fixture.getID());

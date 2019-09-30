@@ -24,75 +24,39 @@ import cs333.project_2.Order.*;
 
 @Entity
 @Table(name="`order`")
-public class Order
-{
-<<<<<<< HEAD
-    private final int ID;
-    private final int[] OrderedProductIDs;
-    private final int CustomerID;
-    private String Status;
+public class Order {
 
-    public Order(int ID, int[] productIDs, int customerID) {
-=======
-    private int ID;
-    private String productID;
-   
-    private String OrderedProduct; 
-    private String CustomerID;
-    private String status;
-    private String[] OrderedProductIDs;
-	
-	private static final Utility database = new Utility();
+	private final int ID;
+	private final int[] OrderedProductIDs;
+	private final int CustomerID;
+	private String Status;
 
-    public Order(int ID, String productID, String OrderedProduct, String customerID, String status) {
->>>>>>> 5702834c98956e625b6dc1671306b5afd4b8d612
+	public Order(int ID, int[] productIDs, int customerID) {
 		this.ID = ID;
-		this.OrderedProduct = OrderedProduct;
-		this.productID = productID;
+		this.OrderedProductIDs = productIDs;
 		this.CustomerID = customerID;
-		this.status = status;
+		this.Status = "Order initiated";
 	}
 
 	@Id
 	@Column(name="orderID")
 	public int getID() {
-		return ID;
-	}
-	public void setID(int ID) {
-		this.ID = ID;
+		return this.ID;
 	}
 
 	@Column(name="productID")
-	public String getProductID() {
-		return productID;
-	}
-	
-	public void setProductID(String productID) {
-		this.productID = productID;
-	}
-	@Column(name="OrderedProduct")
-	public String getOrderedProduct() {
-		return OrderedProduct;
+	public int[] getProductID() {
+		return this.OrderedProductIDs;
 	}
 
-	public void setOrderedProduct(String orderedProduct) {
-		OrderedProduct = orderedProduct;
-	}
 	@Column(name="customerID")
-	public String getCustomerID() {
-		return CustomerID;
+	public int getCustomerID() {
+		return this.CustomerID;
 	}
 
-	public void setCustomerID(String customerID) {
-		CustomerID = customerID;
-	}
 	@Column(name="orderstatus")
 	public String getStatus() {
-		return status;
-	}
-
-	public void setStatus(String status) {
-		this.status = status;
+		return this.Status;
 	}
 
 	
@@ -101,41 +65,10 @@ public class Order
 	 * SETTERS
 	 * ________________________________________________________________________
 	 */
+
 @Transient
 	public boolean updateStatus(String status) {
-		this.status = status;
+		this.Status = status;
 		return true;
 	}
-
-	/**
-	 * GETTERS
-	 * ________________________________________________________________________
-	 */
-
-<<<<<<< HEAD
-	public int getID() 				{ return this.ID; }
-	public String getStatus()		{ return this.Status; }
-	public int getBuyerID()			{ return this.CustomerID; }
-	public int[] getProductIDs()	{ return this.OrderedProductIDs; }
-=======
-
-
-	
-	// Special getters that call the persistence layer to grab the actual objects corresponding with each ID
-	
-	public Buyer getBuyer()			{ return database.getBuyer(CustomerID); }
-	public Product[] getProducts()	{
-		Product[] products = new Product[this.OrderedProductIDs.length];
-		for(int i = 0; i < this.OrderedProductIDs.length; i++) 
-			products[i] = database.getProduct(this.OrderedProductIDs[i]);
-		return products;
-	}
-	public Seller[] getSellers()	{
-		Seller[] sellers = new Seller[this.OrderedProductIDs.length];
-		for(int i = 0; i < this.OrderedProductIDs.length; i++)
-			sellers[i] = database.getSeller(this.getProducts()[i].getsellerID()); //TODO Fix this error.
-		return sellers;
-	}
->>>>>>> 5702834c98956e625b6dc1671306b5afd4b8d612
-
 }

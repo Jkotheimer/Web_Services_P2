@@ -61,7 +61,7 @@ public class TestSeller {
 	 * - addOrder/getOrders
 	 * 		+ properly sorted
 	 * 		+ does not allow duplicates
-	 *
+	 */
 	@Test
 	public void test_Order_Operations() {
 		// Add a few orders and test order functions
@@ -86,14 +86,14 @@ public class TestSeller {
 		for(int i = 0; i < fixture_orders.size() - 1; i++) 
 			if(fixture_orders.get(i).compareTo(fixture_orders.get(i + 1)) > 0) 
 				fail();
-	}*/
+	}
 	
 	/**
 	 * Coverage
 	 * - addProduct/getProduct
 	 * 		+ properly sorted
 	 * 		+ does not allow duplicates
-	 *
+	 */
 	@Test
 	public void test_Product_Operations() {
 		// Add a few orders and test order functions
@@ -119,5 +119,4 @@ public class TestSeller {
 			if(fixture_products.get(i).compareTo(fixture_products.get(i + 1)) > 0) 
 				fail();
 	}
-	*/
 }

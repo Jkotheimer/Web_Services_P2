@@ -82,7 +82,7 @@ public class Buyer {
 		this.address = address;
 		return true;
 	}
-	
+
 //	public boolean addOrder(String orderID) {
 //		// Add the new order ID in the correct alphabetical position
 //		if(this.orderIDs.size() == 0) {

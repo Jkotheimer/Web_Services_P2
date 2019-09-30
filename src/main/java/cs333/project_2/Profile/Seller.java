@@ -53,15 +53,9 @@ public class Seller {
 
 	@Column(name="sellerusername")
 	public String getUsername()				{ return this.username;	}
-<<<<<<< HEAD
-	
+
 	@Id
 	@Column(name="sellerID")
-=======
-@Id
-@Column(name="sellerID")
-
->>>>>>> 5702834c98956e625b6dc1671306b5afd4b8d612
 	public int getID()						{ return this.ID;		}
 
 	@Column(name="sellerurladdress")
@@ -74,11 +68,6 @@ public class Seller {
 
 	@Column(name="rating")
 	public float getRating()				{ return this.rating;	}
-
-	@Column(name="numofratings")
-	public int getNumRatings() {
-		return numRatings;
-	}
 
 	@Transient
 	public ArrayList<String> getOrders()	{ return this.orders;	}
@@ -110,12 +99,6 @@ public class Seller {
 		// TODO - possibly do some sort of regex check or Google maps check on the Address to see if it's valid
 		this.address = address;
 		return true;
-	}
-	public void setRating(float rating) {
-		this.rating = rating;
-	}
-	public void setOrders(ArrayList<String> orders) {
-		this.orders = orders;
 	}
 	public boolean addRating(float ratingnum) {
 		if(ratingnum < 0 || ratingnum > 10) return false;
