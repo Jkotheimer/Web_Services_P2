@@ -1,5 +1,5 @@
 package cs333.project_2.DOM.Buyer;
-
+import cs333.project_2.DOM.General.Address;
 import java.util.ArrayList;
 
 import javax.persistence.Column;

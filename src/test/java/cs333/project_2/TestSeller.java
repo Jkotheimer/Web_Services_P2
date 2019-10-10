@@ -1,7 +1,7 @@
 package cs333.project_2;
+import cs333.project_2.DOM.General.Address;
 
 import java.util.ArrayList;
-import cs333.project_2.DOM.Profile.*;
 import cs333.project_2.DOM.Seller.Seller;
 import org.junit.Test;
 import static org.junit.Assert.*;

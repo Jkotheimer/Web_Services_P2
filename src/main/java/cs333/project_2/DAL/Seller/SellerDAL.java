@@ -1,4 +1,5 @@
 package cs333.project_2.DAL.Seller;
+import cs333.project_2.DOM.General.Address;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
