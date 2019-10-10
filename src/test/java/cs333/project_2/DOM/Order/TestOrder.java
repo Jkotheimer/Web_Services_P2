@@ -1,6 +1,5 @@
-package cs333.project_2;
+package cs333.project_2.DOM.Order;
 
-import cs333.project_2.DOM.Order.Order;
 import org.junit.Test;
 import static org.junit.Assert.*;
 

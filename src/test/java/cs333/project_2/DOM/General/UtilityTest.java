@@ -1,7 +1,6 @@
-package cs333.project_2;
+package cs333.project_2.DOM.General;
 
 import static org.junit.Assert.assertTrue;
-
 import org.junit.Test;
 
 /**

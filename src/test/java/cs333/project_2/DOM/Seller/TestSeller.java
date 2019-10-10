@@ -1,8 +1,8 @@
-package cs333.project_2;
+package cs333.project_2.DOM.Seller;
+
 import cs333.project_2.DOM.General.Address;
 
 import java.util.ArrayList;
-import cs333.project_2.DOM.Seller.Seller;
 import org.junit.Test;
 import static org.junit.Assert.*;
 

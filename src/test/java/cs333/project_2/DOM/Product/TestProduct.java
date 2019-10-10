@@ -1,6 +1,5 @@
-package cs333.project_2;
+package cs333.project_2.DOM.Product;
 
-import cs333.project_2.DOM.Product.Product;
 import org.junit.Test;
 import static org.junit.Assert.*;
 
