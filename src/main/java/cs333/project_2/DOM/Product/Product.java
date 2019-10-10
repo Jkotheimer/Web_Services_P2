@@ -1,4 +1,4 @@
-package cs333.project_2.Order;
+package cs333.project_2.DOM.Product;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -13,9 +13,6 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Transient;
-
-import cs333.project_2.General.Utility;
-import cs333.project_2.Profile.*;
 
 @Entity
 @Table(name = "product")

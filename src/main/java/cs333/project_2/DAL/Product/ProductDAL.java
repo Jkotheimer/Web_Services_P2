@@ -1,12 +1,10 @@
-package cs333.project_2.DAL;
+package cs333.project_2.DAL.Product;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 
-import cs333.project_2.Profile.Address;
-import cs333.project_2.Profile.Seller;
-import cs333.project_2.Order.Product;
+import cs333.project_2.DOM.Product.Product;
 
 public class ProductDAL {
 	public static void main(String[] args) {

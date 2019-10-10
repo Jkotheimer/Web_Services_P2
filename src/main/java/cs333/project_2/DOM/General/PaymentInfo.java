@@ -1,4 +1,4 @@
-package cs333.project_2.Profile;
+package cs333.project_2.DOM.General;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;

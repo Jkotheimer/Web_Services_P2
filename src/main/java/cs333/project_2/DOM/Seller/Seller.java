@@ -1,9 +1,7 @@
-package cs333.project_2.Profile;
+package cs333.project_2.DOM.Seller;
 
-import cs333.project_2.Order.*;
 import java.util.ArrayList;
 
-import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;

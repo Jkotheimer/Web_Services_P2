@@ -1,10 +1,10 @@
-package cs333.project_2.DAL;
+package cs333.project_2.DAL.Order;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 
-import cs333.project_2.Order.Order;
+import cs333.project_2.DOM.Order.Order;
 
 public class OrderDAL {
 	public static void main(String[] args) {

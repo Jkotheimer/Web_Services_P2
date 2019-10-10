@@ -1,11 +1,10 @@
-package cs333.project_2.DAL;
+package cs333.project_2.DAL.Seller;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 
-import cs333.project_2.Profile.Address;
-import cs333.project_2.Profile.Seller;
+import cs333.project_2.DOM.Seller.Seller;
 
 public class SellerDAL {
 	public static void main(String[] args) {

@@ -1,7 +1,10 @@
-package cs333.project_2.General;
+package cs333.project_2.DOM.General;
 
-import cs333.project_2.Profile.*;
-import cs333.project_2.Order.*;
+import cs333.project_2.DOM.Buyer.Buyer;
+import cs333.project_2.DOM.Product.Product;
+import cs333.project_2.DOM.Profile.*;
+import cs333.project_2.DOM.Order.*;
+import cs333.project_2.DOM.Seller.Seller;
 
 /**
  * The Utility class will act as our persistence layer - all other classes will call their essential getters and setters

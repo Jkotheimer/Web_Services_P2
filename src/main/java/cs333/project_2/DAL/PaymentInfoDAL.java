@@ -1,10 +1,9 @@
 package cs333.project_2.DAL;
 
+import cs333.project_2.DOM.General.PaymentInfo;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
-
-import cs333.project_2.Profile.*;
 
 public class PaymentInfoDAL {
 	public static void main(String[] args) {

@@ -1,7 +1,5 @@
-package cs333.project_2.Profile;
+package cs333.project_2.DOM.Buyer;
 
-import cs333.project_2.General.Utility;
-import cs333.project_2.Order.*;
 import java.util.ArrayList;
 
 import javax.persistence.Column;

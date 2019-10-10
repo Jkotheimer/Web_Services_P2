@@ -1,7 +1,9 @@
 package cs333.project_2;
 
 import java.util.ArrayList;
-import cs333.project_2.Profile.*;
+
+import cs333.project_2.DOM.Buyer.Buyer;
+import cs333.project_2.DOM.Profile.*;
 import org.junit.Test;
 import static org.junit.Assert.*;
 
@@ -10,7 +12,7 @@ import static org.junit.Assert.*;
  */
 public class TestBuyer {
 
-	private Buyer fixture = new Buyer("testCustomer", "S0M3R@ND0M3H@$3DP@$SW0RD", 123456789, 
+	private Buyer fixture = new Buyer("testCustomer", "S0M3R@ND0M3H@$3DP@$SW0RD", 123456789,
 										new Address("123 Main St.", "Chicago", "IL", 66666)                              
 										);
 

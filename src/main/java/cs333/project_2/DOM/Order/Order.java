@@ -1,14 +1,10 @@
-package cs333.project_2.Order;
+package cs333.project_2.DOM.Order;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.persistence.Transient;
-
-import cs333.project_2.General.Utility;
-import cs333.project_2.Profile.*;
-import cs333.project_2.Order.*;
 
 
 /**
