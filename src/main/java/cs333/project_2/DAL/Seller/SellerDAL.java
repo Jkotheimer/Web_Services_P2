@@ -4,6 +4,7 @@ import cs333.project_2.DOM.General.Address;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
+import org.hibernate.cfg.AnnotationConfiguration;
 
 import cs333.project_2.DOM.Seller.Seller;
 
@@ -11,10 +12,10 @@ public class SellerDAL {
 	public static void main(String[] args) {
 
 		//create a Session Factory
-		SessionFactory sessionFactory = new Configuration().
-				configure("hibernate.cfg.xml").
-				addAnnotatedClass(Seller.class).
-				buildSessionFactory();
+		SessionFactory sessionFactory = new AnnotationConfiguration().
+		addAnnotatedClass(Seller.class).
+		configure("hibernate.cfg.xml").
+		buildSessionFactory();
 
 		//create a Session for Insertion into database, and read data
 		Session session = sessionFactory.getCurrentSession();
@@ -41,7 +42,7 @@ public class SellerDAL {
 			//Read the SELLER
 			System.out.println("Getting the Seller based on id: " + seller.getID());
 
-			Seller readSeller = session.get(Seller.class, seller.getID());   //specify PRIMARY KEY of the student
+			Seller readSeller = (Seller)session.get(Seller.class, seller.getID());   //specify PRIMARY KEY of the student
 
 			System.out.println("Retrieved Seller details : " + seller);
 
@@ -62,7 +63,7 @@ public class SellerDAL {
 
 			System.out.println("Retrieving Seller with id : " + ID);
 
-			Seller readSeller = session.get(Seller.class, ID);   //specify PRIMARY KEY of the Seller
+			Seller readSeller = (Seller)session.get(Seller.class, ID);   //specify PRIMARY KEY of the Seller
 			System.out.println("Deleting Seller...");
 
 			session.delete(readSeller);

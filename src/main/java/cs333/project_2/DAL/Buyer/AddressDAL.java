@@ -1,17 +1,20 @@
 package cs333.project_2.DAL.Buyer;
 
-import cs333.project_2.DOM.General.Address;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
+import org.hibernate.cfg.AnnotationConfiguration;
+
+import cs333.project_2.DOM.General.Address;
 
 public class AddressDAL {
+	
 	public static void main(String[] args) {
 		
 		//create a Session Factory
-		SessionFactory sessionFactory = new Configuration().
-		configure("hibernate.cfg.xml").
+		SessionFactory sessionFactory = new AnnotationConfiguration().
 		addAnnotatedClass(Address.class).
+		configure("hibernate.cfg.xml").
 		buildSessionFactory();
 		
 		//create a Session for Insertion into database, and read data
@@ -39,7 +42,7 @@ public class AddressDAL {
 			//Read the address
 			System.out.println("Getting the address based on id: " + address.getID());
 			
-			Address readAddress = session.get(Address.class, address.getID());   //specify PRIMARY KEY of the address
+			Address readAddress = (Address)session.get(Address.class, address.getID());   //specify PRIMARY KEY of the address
 			
 			System.out.println("Retrieved PaymentInfo details : " + readAddress);
 			
@@ -49,6 +52,11 @@ public class AddressDAL {
 		} finally {
 			sessionFactory.close();
 		}
+	
+		sessionFactory = new AnnotationConfiguration().
+		addAnnotatedClass(Address.class).
+		configure("hibernate.cfg.xml").
+		buildSessionFactory();
 		
 		// delete a row in the database
 		try {
@@ -60,7 +68,7 @@ public class AddressDAL {
 			
 			System.out.println("Retrieving PaymentInfo with id : " + ID);
 			
-			Address readAddress = session.get(Address.class, ID);   //specify PRIMARY KEY of the PaymentInfo
+			Address readAddress = (Address)session.get(Address.class, ID);   //specify PRIMARY KEY of the PaymentInfo
 			System.out.println("Deleting PaymentInfo...");
 			
 			session.delete(readAddress);

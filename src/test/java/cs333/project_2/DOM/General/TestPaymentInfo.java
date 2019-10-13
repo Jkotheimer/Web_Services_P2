@@ -13,15 +13,14 @@ public class TestPaymentInfo {
 	@Test
 	public void test_Payinfo_Getters_N_Setters() {
 		// Test Object Initialization
-		fixture = new PaymentInfo("5463225300483912", "MasterCard", "04/23", 123, 
-								new Address("123 Main St", "Chicago", "IL", 60660)
-		);
+		fixture = new PaymentInfo("5463225300483912", "MasterCard", "04/23", 123, 2048);
 
 		assertEquals("5463225300483912", fixture.getCreditCardNum());
 		assertEquals("MasterCard", fixture.getCreditCardHolder());
 		assertEquals("04/23", fixture.getExpDate());
 		assertEquals(123, fixture.getCCV());
-		assertEquals("123 Main St, Chicago, IL 60660", fixture.getBillingAddress().ConvertAddresstoString());
+		assertEquals(2048, fixture.getBillingAddressID());
+		
 
 		// Test Updating Values
 
@@ -29,12 +28,12 @@ public class TestPaymentInfo {
 		fixture.setCreditCardHolder("Visa");
 		fixture.setExpDate("11/24");
 		fixture.setCCV(543);
-		fixture.setBillingAddress(new Address("321 Second St", "Seattle", "WA", 55555));
+		fixture.setBillingAddress(4096);
 		
 		assertEquals("344523484649042", fixture.getCreditCardNum());
 		assertEquals("Visa", fixture.getCreditCardHolder());
 		assertEquals("11/24", fixture.getExpDate());
 		assertEquals(543, fixture.getCCV());
-		assertEquals("321 Second St, Seattle, WA 55555", fixture.getBillingAddress().ConvertAddresstoString());
+		assertEquals(4096, fixture.getBillingAddressID());
     }
 }

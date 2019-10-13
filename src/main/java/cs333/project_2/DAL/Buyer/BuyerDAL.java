@@ -1,18 +1,20 @@
-package cs333.project_2;
+package cs333.project_2.DAL.Buyer;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
+import org.hibernate.cfg.AnnotationConfiguration;
 
 import cs333.project_2.DOM.Buyer.Buyer;
 
-public class App {
+public class BuyerDAL {
+	
 	public static void main(String[] args) {
 		
 		//create a Session Factory
-		SessionFactory sessionFactory = new Configuration().
-		configure("hibernate.cfg.xml").
+		SessionFactory sessionFactory = new AnnotationConfiguration().
 		addAnnotatedClass(Buyer.class).
+		configure("hibernate.cfg.xml").
 		buildSessionFactory();
 		
 		//create a Session for Insertion into database, and read data
@@ -40,9 +42,8 @@ public class App {
 			
 			//Read the buyer
 			System.out.println("Getting the buyer based on id: " + buyer.getID());
-			
-			Buyer readBuyer = session.get(Buyer.class, buyer.getID());   //specify PRIMARY KEY of the buyer
-			
+			Buyer readBuyer = (Buyer)session.get(Buyer.class, buyer.getID());   //specify PRIMARY KEY of the buyer
+
 			System.out.println("Retrieved buyer details : " + buyer);
 			
 			//Commit the transaction
@@ -52,9 +53,9 @@ public class App {
 			sessionFactory.close();
 		}
 		
-		sessionFactory = new Configuration().
-		configure("hibernate.cfg.xml").
+		sessionFactory = new AnnotationConfiguration().
 		addAnnotatedClass(Buyer.class).
+		configure("hibernate.cfg.xml").
 		buildSessionFactory();
 		
 		// delete a row in the database
@@ -67,7 +68,7 @@ public class App {
 			
 			System.out.println("Retrieving Buyer with id : " + ID);
 			
-			Buyer readBuyer = session.get(Buyer.class, ID);   //specify PRIMARY KEY of the Buyer
+			Buyer readBuyer = (Buyer)session.get(Buyer.class, ID);   //specify PRIMARY KEY of the Buyer
 			System.out.println("Deleting Buyer...");
 			
 			session.delete(readBuyer);
@@ -79,9 +80,9 @@ public class App {
 			 */
 			
 			//commit the transaction
-			session.getTransaction().commit();	
+			session.getTransaction().commit();
 			
-		}finally{
+		} finally {
 			//session.flush();
 			session.close();
 			sessionFactory.close();

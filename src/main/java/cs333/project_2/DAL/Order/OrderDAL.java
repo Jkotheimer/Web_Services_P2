@@ -12,7 +12,6 @@ public class OrderDAL {
 		//create a Session Factory
 		SessionFactory sessionFactory = new Configuration().
 				configure("hibernate.cfg.xml").
-				addAnnotatedClass(Order.class).
 				buildSessionFactory();
 
 		//create a Session for Insertion into database, and read data
@@ -40,7 +39,7 @@ public class OrderDAL {
 			//Read the order
 			System.out.println("Getting the Order based on id: " + order.getID());
 
-			Order readorder = session.get(Order.class, order.getID());   //specify PRIMARY KEY of the order
+			Order readorder = (Order)session.get(Order.class, order.getID());   //specify PRIMARY KEY of the order
 
 			System.out.println("Retrieved Order details : " + order);
 
@@ -61,7 +60,7 @@ public class OrderDAL {
 
 			System.out.println("Retrieving Order with id : " + ID);
 
-			Order readOrder = session.get(Order.class, ID);   //specify PRIMARY KEY of the Order
+			Order readOrder = (Order)session.get(Order.class, ID);   //specify PRIMARY KEY of the Order
 			System.out.println("Deleting Order...");
 
 			session.delete(readOrder);

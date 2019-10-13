@@ -9,14 +9,8 @@ import javax.persistence.Table;
 @Table(name="buyer")
 public class Buyer {
 	
-	@Column(name = "buyerusername")
 	private String username;
-	
-	@Column(name = "buyerpassword")
 	private String password;
-	
-	@Id
-	@Column(name = "buyerID", updatable = false,  nullable = false)
 	private int ID;
 	
 	public Buyer() {}
@@ -32,10 +26,14 @@ public class Buyer {
 	 * ________________________________________________________________________
 	 */
 	
+	@Column(name = "buyerusername")
 	public String getUsername()					{ return this.username;	}
 	
+	@Column(name = "buyerpassword")
 	public String getPassword() 				{ return this.password;	}
-
+	
+	@Id
+	@Column(name = "buyerID", updatable = false,  nullable = false)
 	public int getID()						    { return this.ID;		}
 	
 
