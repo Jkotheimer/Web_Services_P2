@@ -22,9 +22,7 @@ public class PaymentInfoDAL {
 			System.out.println("Creating a new PaymentInfo object...");
 
 			//create the PaymentInfo object
-			PaymentInfo paymentInfo = new PaymentInfo("5463225300483912","MOHAMMED SHAJI","23APRIL2019",000,
-													  new Address("321 Second St", "Seattle", "WA", 55555)
-			);
+			PaymentInfo paymentInfo = new PaymentInfo("5463225300483912","MOHAMMED SHAJI","23APRIL2019",000,9753);
 
 			//start a transaction
 			session.beginTransaction();

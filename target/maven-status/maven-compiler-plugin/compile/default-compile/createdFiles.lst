@@ -5,6 +5,7 @@ cs333/project_2/DAL/Buyer/BuyerDAL.class
 cs333/project_2/DOM/Buyer/Buyer.class
 cs333/project_2/DAL/PaymentInfoDAL.class
 cs333/project_2/App.class
+cs333/project_2/DAL/Buyer/AddressDAL.class
 cs333/project_2/DAL/Product/ProductDAL.class
 cs333/project_2/DAL/Order/OrderDAL.class
 cs333/project_2/DOM/General/Address.class

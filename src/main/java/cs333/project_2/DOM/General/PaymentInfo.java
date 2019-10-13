@@ -13,14 +13,14 @@ public class PaymentInfo {
     private String CreditCardHolder;
     private String ExpDate;
     private int CCV;
-    private Address BillingAddress;
+    private int billingAddressID;
 
-    public PaymentInfo(String creditcardnum, String creditcardholder, String expdate, int ccv,  Address billingaddress) {
+    public PaymentInfo(String creditcardnum, String creditcardholder, String expdate, int ccv, int billingAddressID) {
         this.CreditCardNum = creditcardnum;
         this.CreditCardHolder = creditcardholder;
         this.ExpDate = expdate;
         this.CCV = ccv;
-        this.BillingAddress = billingaddress;
+        this.billingAddressID = billingAddressID;
     }
 
 	/**
@@ -46,8 +46,8 @@ public class PaymentInfo {
         return this.CCV;
     }
     @Column(name="billingaddress")
-    public Address getBillingAddress() {
-        return this.BillingAddress;
+    public int getBillingAddressID() {
+        return this.billingAddressID;
     }
 
 	/**
@@ -71,7 +71,7 @@ public class PaymentInfo {
         this.CCV = ccv;
     }
 
-    public void setBillingAddress(Address billingaddress) {
-        this.BillingAddress = billingaddress;
+    public void setBillingAddress(int billingaddress) {
+        this.billingAddressID = billingaddress;
     }
 }

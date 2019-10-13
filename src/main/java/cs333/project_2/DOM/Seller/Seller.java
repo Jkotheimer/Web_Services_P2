@@ -23,20 +23,16 @@ public class Seller {
 	private String password;
 	private final int ID;
 	private String urlAddress;
-
+	
 	private ArrayList<String> products;
 	private ArrayList<String> orders;
-
-	private Address address;
-
 	private float rating;
 	private int numRatings;
 
-	public Seller(String username, String password, int ID, Address address, String urladdress) {
+	public Seller(String username, String password, int ID, String urladdress) {
 		this.username = username;
 		this.password = password;
 		this.ID = ID;
-		this.address = address;
 		this.urlAddress = urladdress;
 		this.rating = -1; //negative 1 represents no ratings yet
 		this.numRatings = 0;
@@ -58,11 +54,6 @@ public class Seller {
 
 	@Column(name="sellerurladdress")
 	public String geturlAddress()			{ return this.urlAddress;}
-
-	@Column(name="selleraddress")
-	public String getAddressString()		{ return this.address.ConvertAddresstoString();	}
-	
-	public Address getAddress()				{ return this.address; }
 
 	@Column(name="rating")
 	public float getRating()				{ return this.rating;	}
@@ -91,11 +82,6 @@ public class Seller {
 	}
 	public boolean seturlAddress(String url) {
 		this.urlAddress = url;
-		return true;
-	}
-	public boolean setAddress(Address address) {
-		// TODO - possibly do some sort of regex check or Google maps check on the Address to see if it's valid
-		this.address = address;
 		return true;
 	}
 	public boolean addRating(float ratingnum) {
