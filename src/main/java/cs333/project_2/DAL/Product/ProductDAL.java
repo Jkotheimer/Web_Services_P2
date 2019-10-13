@@ -2,6 +2,7 @@ package cs333.project_2.DAL.Product;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.cfg.AnnotationConfiguration;
 import org.hibernate.cfg.Configuration;
 
 import cs333.project_2.DOM.Product.Product;
@@ -10,9 +11,8 @@ public class ProductDAL {
 	public static void main(String[] args) {
 
 		//create a Session Factory
-		SessionFactory sessionFactory = new Configuration().
+		SessionFactory sessionFactory = new AnnotationConfiguration().addAnnotatedClass(Product.class).
 				configure("hibernate.cfg.xml").
-				addAnnotatedClass(Product.class).
 				buildSessionFactory();
 
 		//create a Session for Insertion into database, and read data
@@ -41,7 +41,7 @@ public class ProductDAL {
 			//Read the product
 			System.out.println("Getting the Product based on id: " + product.getID());
 
-			Product readProduct = session.get(Product.class, product.getID());   //specify PRIMARY KEY of the product
+			Product readProduct = (Product)session.get(Product.class, product.getID());   //specify PRIMARY KEY of the product
 
 			System.out.println("Retrieved Product details : " + product);
 
@@ -54,7 +54,7 @@ public class ProductDAL {
 
 		// delete a row in the database
 		try {
-			int ID = 1;
+			int ID = 1234;
 			//Deleting a single Product
 			//Get a new session and begin transaction
 			session = sessionFactory.getCurrentSession();
@@ -62,7 +62,7 @@ public class ProductDAL {
 
 			System.out.println("Retrieving Product with id : " + ID);
 
-			Product readProduct = session.get(Product.class, ID);   //specify PRIMARY KEY of the Product
+			Product readProduct = (Product)session.get(Product.class, ID);   //specify PRIMARY KEY of the Product
 			System.out.println("Deleting Product...");
 
 			session.delete(readProduct);
@@ -78,7 +78,6 @@ public class ProductDAL {
 
 		} finally {
 			//session.flush();
-			session.close();
 			sessionFactory.close();
 		}
 	}

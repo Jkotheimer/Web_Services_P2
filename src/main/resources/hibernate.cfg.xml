@@ -10,7 +10,7 @@
         <property name="connection.driver_class">com.mysql.jdbc.Driver</property>
         <property name="connection.url">jdbc:mysql://localhost:3306/project2?useSSL=false</property>
         <property name="connection.username">root</property>
-        <property name="connection.password">YourPasswordHere</property>
+        <property name="connection.password">root</property>
 
         <!-- JDBC connection pool settings ... using built-in test pool -->
         <property name="connection.pool_size">111</property>
@@ -23,6 +23,9 @@
 
 		<!-- Set the current session context -->
 		<property name="current_session_context_class">thread</property>
+
+        <!-- Drop and re-create the database schema on startup -->
+        <property name="hbm2ddl.auto">create</property>
  
     </session-factory>
 

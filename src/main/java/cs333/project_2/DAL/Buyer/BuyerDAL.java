@@ -12,7 +12,6 @@ public class BuyerDAL {
 		//create a Session Factory
 		SessionFactory sessionFactory = new Configuration().
 				configure("hibernate.cfg.xml").
-				addAnnotatedClass(Buyer.class).
 				buildSessionFactory();
 
 		//create a Session for Insertion into database, and read data
@@ -41,7 +40,7 @@ public class BuyerDAL {
 			//Read the buyer
 			System.out.println("Getting the buyer based on id: " + buyer.getID());
 
-			Buyer readBuyer = session.get(Buyer.class, buyer.getID());   //specify PRIMARY KEY of the buyer
+			Buyer readBuyer = (Buyer)session.get(Buyer.class, buyer.getID());   //specify PRIMARY KEY of the buyer
 
 			System.out.println("Retrieved buyer details : " + buyer);
 
@@ -62,7 +61,7 @@ public class BuyerDAL {
 
 			System.out.println("Retrieving Buyer with id : " + ID);
 
-			Buyer readBuyer = session.get(Buyer.class, ID);   //specify PRIMARY KEY of the Buyer
+			Buyer readBuyer = (Buyer)session.get(Buyer.class, ID);   //specify PRIMARY KEY of the Buyer
 			System.out.println("Deleting Buyer...");
 
 			session.delete(readBuyer);

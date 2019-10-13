@@ -13,7 +13,6 @@ public class SellerDAL {
 		//create a Session Factory
 		SessionFactory sessionFactory = new Configuration().
 				configure("hibernate.cfg.xml").
-				addAnnotatedClass(Seller.class).
 				buildSessionFactory();
 
 		//create a Session for Insertion into database, and read data
@@ -41,7 +40,7 @@ public class SellerDAL {
 			//Read the SELLER
 			System.out.println("Getting the Seller based on id: " + seller.getID());
 
-			Seller readSeller = session.get(Seller.class, seller.getID());   //specify PRIMARY KEY of the student
+			Seller readSeller = (Seller)session.get(Seller.class, seller.getID());   //specify PRIMARY KEY of the student
 
 			System.out.println("Retrieved Seller details : " + seller);
 
@@ -62,7 +61,7 @@ public class SellerDAL {
 
 			System.out.println("Retrieving Seller with id : " + ID);
 
-			Seller readSeller = session.get(Seller.class, ID);   //specify PRIMARY KEY of the Seller
+			Seller readSeller = (Seller)session.get(Seller.class, ID);   //specify PRIMARY KEY of the Seller
 			System.out.println("Deleting Seller...");
 
 			session.delete(readSeller);

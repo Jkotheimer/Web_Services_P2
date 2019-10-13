@@ -1,4 +1,4 @@
-package cs333.project_2.DAL;
+package cs333.project_2.DAL.Buyer;
 
 import cs333.project_2.DOM.General.Address;
 import cs333.project_2.DOM.General.PaymentInfo;
@@ -12,7 +12,6 @@ public class PaymentInfoDAL {
 		//create a Session Factory
 		SessionFactory sessionFactory = new Configuration().
 				configure("hibernate.cfg.xml").
-				addAnnotatedClass(PaymentInfo.class).
 				buildSessionFactory();
 
 		//create a Session for Insertion into database, and read data
@@ -42,7 +41,7 @@ public class PaymentInfoDAL {
 			//Read the paymentInfo
 			System.out.println("Getting the PaymentInfo based on id: " + paymentInfo.getCreditCardNum());
 
-			PaymentInfo readpaymentInfo = session.get(PaymentInfo.class, paymentInfo.getCreditCardNum());   //specify PRIMARY KEY of the paymentInfo
+			PaymentInfo readpaymentInfo = (PaymentInfo)session.get(PaymentInfo.class, paymentInfo.getCreditCardNum());   //specify PRIMARY KEY of the paymentInfo
 
 			System.out.println("Retrieved PaymentInfo details : " + paymentInfo);
 
@@ -63,7 +62,7 @@ public class PaymentInfoDAL {
 
 			System.out.println("Retrieving PaymentInfo with id : " + ID);
 
-			PaymentInfo readPaymentInfo = session.get(PaymentInfo.class, ID);   //specify PRIMARY KEY of the PaymentInfo
+			PaymentInfo readPaymentInfo = (PaymentInfo)session.get(PaymentInfo.class, ID);   //specify PRIMARY KEY of the PaymentInfo
 			System.out.println("Deleting PaymentInfo...");
 
 			session.delete(readPaymentInfo);
