@@ -14,6 +14,8 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
+import cs333.project_2.DAL.Product.ProductDAL;
+
 @Entity
 @Table(name = "product")
 public class Product {
