@@ -1,4 +1,5 @@
 package cs333.project_2.DOM.Buyer;
+
 import cs333.project_2.DOM.General.Address;
 import cs333.project_2.DOM.General.PaymentInfo;
 import cs333.project_2.DOM.Order.Order;
@@ -27,6 +28,7 @@ import javax.persistence.Transient;
 
 @Entity
 @Table(name="buyer")
+
 public class Buyer implements Serializable  {
 
 	private int serialId;
@@ -54,10 +56,7 @@ public class Buyer implements Serializable  {
 //		this.orderIDs = order;
 //		//this.payinfo = new ArrayList<>();
 //	}
-	
-	public Buyer() {
-		
-	}
+
 
 	/**
 	 * GETTERS
@@ -69,7 +68,7 @@ public class Buyer implements Serializable  {
 	public int getSerialId() {
 		return serialId;
 	}
-	
+
 //	@OneToOne( mappedBy="buyer", targetEntity=Order.class)
     @Column(name = "buyerusername")
 	public String getUsername()					{ return this.username;	}
@@ -96,10 +95,12 @@ public class Buyer implements Serializable  {
 		}
 	//public ArrayList<PaymentInfo> getPayInfos()	{ return this.payinfo;  }
 
+
 	/**
 	 * SETTERS
 	 * ________________________________________________________________________
 	 */
+
 
 //    public boolean addPayInfo(PaymentInfo newPayInfo) {
 //		// If this method of payment already exists, return false
@@ -114,6 +115,7 @@ public class Buyer implements Serializable  {
 		this.serialId = serialId;
 	}
 	
+
 	public boolean setUsername(String username) {
 		// TODO - possibly add a database check for other profiles with the given username
 		this.username = username;
@@ -137,6 +139,7 @@ public class Buyer implements Serializable  {
 		return true;
 	}
 	
+
 	public void setAddressString(String address)			{
 		this.address = address;
 	}
@@ -174,18 +177,19 @@ public class Buyer implements Serializable  {
 //	
 
 
+	public boolean setID(int ID) {
+		// I don't think it would be smart to have dynamic IDs
+		return false;
+	}
+
 
 	/**
 	 * GENERAL METHODS
 	 * ________________________________________________________________________
 	 */
 
-//     public boolean cancelOrder(String ID) {
-//         return this.orderIDs.remove(ID);
-//     }
-
 	public boolean AuthenticateCred(String username, String password) {
-		// TODO possibly add another hash algorithm here for safety
+		// TODO possibly add another hash algorithm here for safetyaaaaa
 		if(this.username == username && this.password == password) return true;
 		else return false;
 	}
@@ -195,3 +199,4 @@ public class Buyer implements Serializable  {
 		return password;
 	}
 }
+	

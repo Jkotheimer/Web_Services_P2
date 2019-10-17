@@ -13,12 +13,14 @@ public class TestAddress {
 	@Test
 	public void test_Address_Getters_N_Setters() {
 		// Test Object Initialization
-		fixture = new Address("1703 mamken ave","Beaton","Washington",90876);
+		fixture = new Address("1703 mamken ave","Beaton","Washington",90876, 9042, 2048);
 
 		assertEquals("1703 mamken ave",fixture.getStreet());
 		assertEquals("Beaton",fixture.getCity());
 		assertEquals("Washington",fixture.getState());
 		assertEquals(90876,fixture.getZipcode());
+		assertEquals(9042, fixture.getProfileID());
+		assertEquals(2048, fixture.getID());
 
 		// Test Updating Values
 
@@ -31,7 +33,5 @@ public class TestAddress {
 		assertEquals("Yokon",fixture.getCity());
 		assertEquals("Yorulia",fixture.getState());
 		assertEquals(90456,fixture.getZipcode());
-
-		assertEquals("100 Yokos ave, Yokon, Yorulia 90456", fixture.ConvertAddresstoString());
     }
 }

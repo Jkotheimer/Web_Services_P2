@@ -14,18 +14,24 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
+import cs333.project_2.DAL.Product.ProductDAL;
+
 @Entity
 @Table(name = "product")
 public class Product {
 
-	private final int ID;
+	private int ID;
 	private double Price;
-	private final int SellerID;
+	private int SellerID;
 	private String ItemDescrip;
 
 	private float Rating;
 	private int NumRatings;
 
+	public Product() {
+	
+	}
+	
 	public Product(int ID, int sellerID, float price, String itemDescrip) {
 		this.ID = ID;
 		this.Price = price;
@@ -40,6 +46,13 @@ public class Product {
 	 * SETTERS
 	 * ________________________________________________________________________
 	 */
+	public void setID(int Id) {
+		this.ID = Id;
+	}
+	
+	public void setSellerID(int Id) {
+		this.SellerID = Id;
+	}
 
 	public void setPrice(double price) {
 		Price = price;
@@ -48,6 +61,10 @@ public class Product {
 		this.ItemDescrip = itemdescrip;
 	}
 
+	public void setRating(float rat) {
+		this.Rating = rat;
+	}
+	
 	public boolean addRating(int rating) {
 		if (rating < 0 || rating > 10) return false;
 		// Update the current average rating of the product

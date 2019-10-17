@@ -38,15 +38,11 @@ public class Utility {
     
     public Buyer getBuyer(int ID) {
 		// TODO grab the corresponding buyer object from the database
-		return new Buyer("testCustomer", "S0M3R@ND0M3H@$3DP@$SW0RD", 1234567890, 
-							new Address("123 Main St.", "Chicago", "IL", 66666)                              
-						);
+		return new Buyer("testCustomer", "S0M3R@ND0M3H@$3DP@$SW0RD", 1234567890);
 	}
 	public Seller getSeller(int ID) {
 		// TODO grab the corresponding seller object from the database
-		return new Seller("testCustomer", "S0M3R@ND0M3H@$3DP@$SW0RD", 1234567890, 
-							new Address("123 Main St.", "Chicago", "IL", 66666), "website.com"                         
-						);
+		return new Seller("testCustomer", "S0M3R@ND0M3H@$3DP@$SW0RD", 1234567890, "website.com");
 	}
 	public Product getProduct(int ID) {
 		// TODO grab the corresponding product object from the database
@@ -62,14 +58,14 @@ public class Utility {
 	 * parameters and create the objects here to then interact with the persistence layer.
 	 * The service layer also does not know how to generate ID's, so they must be generated here.
 	 */
-	public void addBuyer(String username, String password, Address address) {
+	public void addBuyer(String username, String password) {
 		int ID = generateID();
-		Buyer b = new Buyer(username, password, ID, address);
+		Buyer b = new Buyer(username, password, ID);
 		// TODO add the buyer to the database
 	}
-	public void addSeller(String username, String password, Address address, String urladdress) {
+	public void addSeller(String username, String password, String urladdress) {
 		int ID = generateID();
-		Seller s = new Seller(username, password, ID, address, urladdress);
+		Seller s = new Seller(username, password, ID, urladdress);
 		// TODO add the seller to the database
 	}
 	public void addProduct(int sellerID, float price, String itemDescrip) {

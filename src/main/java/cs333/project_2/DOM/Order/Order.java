@@ -49,12 +49,10 @@ public class Order {
 //		this.Status = "Order initiated";
 //	}
 //	
-	
 	public Order() {
 		
 	}
 
-	
 //	public int getID() {
 //		return this.orderID;
 //	}
@@ -84,15 +82,6 @@ public class Order {
 	public Buyer getBuyer() {
 		return this.buyer;
 	}
-
-
-
-	
-
-
-
-	
-
 
 	/**
 	 * SETTERS

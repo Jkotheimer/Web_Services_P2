@@ -11,9 +11,7 @@ import static org.junit.Assert.*;
  */
 public class TestSeller {
 
-	private Seller fixture = new Seller("testSeller", "S0M3R@ND0M3H@$3DP@$SW0RD", 12432,
-										new Address("123 Main St.", "Chicago", "IL", 66666), "testCompany.com"
-										);
+	private Seller fixture = new Seller("testSeller", "S0M3R@ND0M3H@$3DP@$SW0RD", 12432, "testCompany.com");
 
 	/**
 	 * Coverage:
@@ -31,7 +29,6 @@ public class TestSeller {
 		// Quick test for initial values
 		assertEquals("testSeller", fixture.getUsername());
 		assertEquals(12432, fixture.getID());
-		assertEquals("123 Main St.", fixture.getAddress().getStreet());
 		assertEquals("testCompany.com", fixture.geturlAddress());
 		assertTrue(fixture.AuthenticateCred("testSeller", "S0M3R@ND0M3H@$3DP@$SW0RD"));
 
@@ -40,10 +37,8 @@ public class TestSeller {
 		assertFalse(fixture.setPassword("S0M3R@ND0M3H@$3DP@$SW0RD"));
 		assertTrue(fixture.setPassword("@N0743RR@ND0M3H@$3DP@$SW0RD"));
 		assertTrue(fixture.seturlAddress("differentWebsite.com"));
-		assertTrue(fixture.setAddress(new Address("456 Second Ave.", "Seattle", "WA", 22222)));
 		
 		assertEquals("anotherUsername", fixture.getUsername());
-		assertEquals("456 Second Ave.", fixture.getAddress().getStreet());
 		assertEquals("differentWebsite.com", fixture.geturlAddress());
 		assertTrue(fixture.AuthenticateCred("anotherUsername", "@N0743RR@ND0M3H@$3DP@$SW0RD"));
 		
