@@ -1,13 +1,29 @@
 package cs333.project_2.DOM.General;
 
+import javax.persistence.Column;
+import javax.persistence.Embeddable;
+import javax.persistence.Entity;
+import javax.persistence.Table;
+
+
+
+//@Entity
+//@Table(name="address")
+@Embeddable
 public class Address {
+	@Column(name="Address_id")
+	private int Id;
+	@Column(name = "street")
+	private String Street;
+	@Column(name = "city")
+    private	String City;
+	@Column(name = "state")
+	private String State;
+	@Column(name = "zipcode")
+	private int Zipcode;
 
-	String Street;
-	String City;
-	String State;
-	int Zipcode;
-
-	//constructor     
+	//constructor 
+	
 	public Address(String street, String city, String state, int zipcode) {
 		this.Street = street;
 		this.City = city;
