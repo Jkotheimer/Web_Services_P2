@@ -40,7 +40,6 @@ public class BuyerDAL {
 			
 			//create the Buyer object
 			
-			//Order instantiated with generating an OrderID
 			Buyer buyer = new Buyer();
 			buyer.setSerialId(1);
 			buyer.setbuyerID(101);
@@ -52,11 +51,12 @@ public class BuyerDAL {
 			//Creating Order Object
 			Order order = new Order();
 			order.setSerialID(101);
-			//Order ID should come from the generated Buyer class
+			
 			order.setOrderID(425);
 			order.setOrderedProductIDs(1182);
 			order.setBuyer(buyer);
 			
+			//Add buyer columns to order table
 			buyer.getOrderIDs().add(order);
 //			List<Order> orderlist = new ArrayList<Order>();
 //			buyer.setOrderIDs(orderlist);
