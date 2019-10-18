@@ -2,82 +2,122 @@ package cs333.project_2.DAL.Order;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.cfg.AnnotationConfiguration;
 import org.hibernate.cfg.Configuration;
 
+import cs333.project_2.DOM.Buyer.Buyer;
+import cs333.project_2.DOM.Order.Order;
 import cs333.project_2.DOM.Order.Order;
 
 public class OrderDAL {
-	public static void main(String[] args) {
+	
 
-		//create a Session Factory
-		SessionFactory sessionFactory = new Configuration().
+	public static void main(String[] args) {
+		insert(888,176);
+		//read(28);
+	}
+	public static void insert(int ID, int prod) {
+
+		 SessionFactory sessionFactory = new AnnotationConfiguration().
+				addAnnotatedClass(Order.class).
 				configure("hibernate.cfg.xml").
 				buildSessionFactory();
 
 		//create a Session for Insertion into database, and read data
 		Session session = sessionFactory.getCurrentSession();
-		try {
-
+		Buyer buyer = new Buyer();
+//		buyer.setbuyerID(103);
+//		buyer.setUsername("Wayyanshaji");
+//		buyer.setAddress("47 xyz st");
 			System.out.println("Creating a new Order object...");
-
 			//create the Order object
+			//Creating Order Object as soon as Order buys a product. Something like an order receipt
 			Order order = new Order();
+			
+			order.setOrderID(ID);
+			order.setOrderedProductIDs(prod);
+			
+			order.setBuyer(buyer);
+			
+			buyer.getOrderIDs().add(order);
 
-			//start a transaction
 			session.beginTransaction();
 
-			//Save the Order object to the database
 			session.save(order);
-
+			//session.save(buyer);
 			System.out.println("Order created in Database!");
-			//commit the transaction
+			
 			session.getTransaction().commit();
-
-			session = sessionFactory.getCurrentSession();
-			session.beginTransaction();
-
-			//Read the order
-			System.out.println("Getting the Order based on id: " + 101);
-
-			Order readorder = (Order)session.get(Order.class, 101);   //specify PRIMARY KEY of the order
-
-			System.out.println("Retrieved Order details : " + order);
-
-			//commit the transaction
-			session.getTransaction().commit();
-
-		} finally {
-			sessionFactory.close();
 		}
 
-		// delete a row in the database
-		try {
-			int ID = 1;
-			//Deleting a single Order
-			//Get a new session and begin transaction
-			session = sessionFactory.getCurrentSession();
-			session.beginTransaction();
 
-			System.out.println("Retrieving Order with id : " + ID);
+			public static void read(int ID) {
 
-			Order readOrder = (Order)session.get(Order.class, ID);   //specify PRIMARY KEY of the Order
-			System.out.println("Deleting Order...");
+				Order order = new Order();
+				SessionFactory sessionFactory = new AnnotationConfiguration().
+						addAnnotatedClass(Order.class).
+						configure("hibernate.cfg.xml").
+						buildSessionFactory();
 
-			session.delete(readOrder);
+				Session session = sessionFactory.getCurrentSession();
 
-			/*
-			//delete Order id=3001
-			System.out.println("Deleting Order where id=3001");
-			session.createQuery("delete from Order where id=3001").executeUpdate();
-			*/
+				session.beginTransaction();
 
-			//commit the transaction
-			session.getTransaction().commit();	
 
-		} finally {
-			//session.flush();
-			session.close();
-			sessionFactory.close();
-		}
-	}
+				//Read the Order
+				System.out.println("Getting the Order based on id: ");
+
+				order = (Order)session.get(Order.class,ID);
+
+				session.getTransaction().commit();
+
+				System.out.println("ORDER ID : "+order.getOrderID() +"\n ORDERED PRODUCT ID "+order.getOrderedProductIDs()
+				+"\n CUSTOMER ID " +order.getBuyer().getBuyerID() +"\n CUSTOMER USERNAME : " +order.getBuyer().getUsername());
+
+			}
+
+			public static void update(int serialID,int newOrderID, int producID) {
+				//SerialID is the primary key here which you enter as a parameter for the row you wish to change
+
+				Order order = new Order();
+				SessionFactory sessionFactory = new AnnotationConfiguration().
+						addAnnotatedClass(Order.class).
+						configure("hibernate.cfg.xml").
+						buildSessionFactory();
+
+				Session session = sessionFactory.getCurrentSession();
+
+				session.beginTransaction();
+
+				order = (Order)session.get(Order.class,serialID);
+
+				order.setOrderID(newOrderID);
+				order.setOrderedProductIDs(producID);
+				
+				session.saveOrUpdate(order);
+
+				session.getTransaction().commit();
+			}
+
+
+			public static void deleteOrder(int ID) {
+				SessionFactory sessionFactory = new AnnotationConfiguration().addAnnotatedClass(Order.class).
+						configure("hibernate.cfg.xml").
+						buildSessionFactory();
+
+
+					Session session = sessionFactory.getCurrentSession();
+					session.beginTransaction();
+
+					System.out.println("DELETING Order with id : " + ID);
+
+					Order deleteOrder = (Order)session.get(Order.class, ID);   //specify PRIMARY KEY of the Product
+
+					session.delete(deleteOrder);
+
+					session.getTransaction().commit();
+
+				}
 }
+
+		

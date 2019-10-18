@@ -1,6 +1,7 @@
 package cs333.project_2.DOM.General;
 
 import cs333.project_2.DAL.Buyer.BuyerDAL;
+import cs333.project_2.DAL.Order.OrderDAL;
 import cs333.project_2.DOM.Buyer.Buyer;
 
 import cs333.project_2.DOM.Product.Product;
@@ -50,9 +51,10 @@ public class Utility {
 		// TODO grab the corresponding product object from the database
 		return new Product(987654321, 12345678, 44.98f, "a new product");
 	}
-	public Order getOrder(int ID) {
+	public void getOrder(int ID) {
 		// TODO grab the corresponding order object from the database
-		return null;
+		OrderDAL orderdal = new OrderDAL();
+		orderdal.read(ID);
 	}
 	
 	/**
@@ -75,8 +77,9 @@ public class Utility {
 		Product p = new Product(ID, sellerID, price, itemDescrip);
 		// TODO add the product to the database
 	}
-	public void addOrder(int[] productIDs, int customerID) {
-		int ID = generateID();
+	public void addOrder(int ID, int prod) {
+		OrderDAL orderdal = new OrderDAL();
+		orderdal.insert(ID, prod);
 		// TODO add the order to the database
 	}
 	
@@ -106,5 +109,8 @@ public class Utility {
 	
 	public <T> void updateSeller(int ID, String method, T element) {}
 	public <T> void updateProduct(int ID, String method, T element) {}
-	public <T> void updateOrder(int ID, String method, T element) {}
+	public void updateOrder(int serialID,int newOrderID, int productID) {
+		OrderDAL orderdal = new OrderDAL();
+		orderdal.update(serialID,newOrderID, productID);
+	}
 }

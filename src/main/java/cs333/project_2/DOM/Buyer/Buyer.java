@@ -88,7 +88,7 @@ public class Buyer implements Serializable  {
 //		return this.addresslist;
 //	}
 	
-	@OneToMany(cascade=CascadeType.PERSIST, mappedBy="buyer", targetEntity=Order.class)
+	@OneToMany(cascade=CascadeType.ALL, mappedBy="buyer", targetEntity=Order.class)
 	//@JoinColumn(name="buyerID", insertable = false,updatable = false)
 	public List<Order> getOrderIDs()		{ 		
 		return this.orders;	

@@ -107,45 +107,6 @@ public class BuyerDAL {
 				session.getTransaction().commit();
 			}
 
-			public static void deleteCustomer(int ID) {
-				SessionFactory sessionFactory = new AnnotationConfiguration().addAnnotatedClass(Buyer.class).
-						configure("hibernate.cfg.xml").
-						buildSessionFactory();
-
-
-					Session session = sessionFactory.getCurrentSession();
-					session.beginTransaction();
-
-					System.out.println("DELETING BUYER with id : " + ID);
-
-					Buyer deleteBuyer = (Buyer)session.get(Buyer.class, ID);   //specify PRIMARY KEY of the Product
-
-					session.delete(deleteBuyer);
-
-					session.getTransaction().commit();
-
-				}
-
-}
-
-
-
-
-
-				Session session = sessionFactory.getCurrentSession();
-
-				session.beginTransaction();
-
-				buyer = (Buyer)session.get(Buyer.class,serialID);
-
-				buyer.setUsername(newusername);
-				buyer.setbuyerID(newBuyerID);
-				buyer.setAddress(newaddress);
-
-				session.saveOrUpdate(buyer);
-
-				session.getTransaction().commit();
-			}
 
 			public static void deleteCustomer(int ID) {
 				SessionFactory sessionFactory = new AnnotationConfiguration().addAnnotatedClass(Buyer.class).
