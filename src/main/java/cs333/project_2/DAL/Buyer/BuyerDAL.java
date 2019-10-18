@@ -1,21 +1,8 @@
 package cs333.project_2.DAL.Buyer;
 
-import cs333.project_2.DOM.General.Address;
 import cs333.project_2.DOM.Order.Order;
-
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
-
-import javax.persistence.Query;
-import javax.persistence.criteria.CriteriaBuilder;
-
-import org.hibernate.SQLQuery;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
-import org.hibernate.Transaction;
-import org.hibernate.cfg.Configuration;
-import org.hibernate.criterion.CriteriaQuery;
 import org.hibernate.cfg.AnnotationConfiguration;
 
 import cs333.project_2.DOM.Buyer.Buyer;
@@ -29,7 +16,7 @@ public class BuyerDAL {
 				deleteCustomer(5);
 	}
 //
-		public static void insert() {
+		public static void insert(int ID, String username, String address) {
 		
 		 SessionFactory sessionFactory = new AnnotationConfiguration().
 				addAnnotatedClass(Buyer.class).
@@ -49,28 +36,21 @@ public class BuyerDAL {
 			buyer.setUsername("rayyanshaji");
 			buyer.setAddress("43 xyz st");	
 					
-			//Creating Order Object
-			Order order = new Order();
-			order.setSerialID(101);
-		
-			order.setOrderID(425);
-			order.setOrderedProductIDs(1182);
-			order.setBuyer(buyer);
-			
-			buyer.getOrderIDs().add(order);
-//			List<Order> orderlist = new ArrayList<Order>();
-//			buyer.setOrderIDs(orderlist);
+			//Creating Order Object as soon as Buyer buys a product. Something like an order receipt
+//			Order order = new Order();
+//			order.setSerialID(101);
+//		
+//			order.setOrderID(425);
+//			order.setOrderedProductIDs(1182);
+//			order.setBuyer(buyer);
 //			
-//			orderlist.add(order);
-								
-			//System.out.println(buyer.getID());
-			//System.out.println(orderlist.get(0).getBuyer().getID());
-			//starting a transaction
+//			buyer.getOrderIDs().add(order);
+
 			session.beginTransaction();
 	
 			session.save(buyer);
 
-			session.save(order);
+			//session.save(order);
 		
 			System.out.println("Buyer created in Database!");
 			//commit the transaction
@@ -87,7 +67,7 @@ public class BuyerDAL {
 						buildSessionFactory();
 
 				Session session = sessionFactory.getCurrentSession();
-				//Session session = sessionFactory.openSession();
+
 				session.beginTransaction();
 							
 			
@@ -131,8 +111,7 @@ public class BuyerDAL {
 				SessionFactory sessionFactory = new AnnotationConfiguration().addAnnotatedClass(Buyer.class).
 						configure("hibernate.cfg.xml").
 						buildSessionFactory();
-				
-				
+						
 					
 					Session session = sessionFactory.getCurrentSession();
 					session.beginTransaction();
@@ -150,40 +129,6 @@ public class BuyerDAL {
 }
 			
 
-
-					 
-
-		// Delete a row in the database
-//		try{
-//			int ID = 111;
-//			//Putting an existing ID in my database. Your database might have a different value.
-//			//Deleting a single Buyer
-//			//Get a new session and begin transaction
-//			session = sessionFactory.getCurrentSession();
-//			session.beginTransaction();
-//			
-//			System.out.println("Retrieving Buyer with id : " + ID);
-//			
-//			Buyer read_Buyer = (Buyer)session.get(Buyer.class, buyer.getBuyerID());   //specify KEY of the Buyer
-//			System.out.println("Deleting Buyer...");
-//			
-//			session.delete(read_Buyer); // avoiding duplicate name for read_buyer
-//			
-//			/*
-//			 *		//delete Buyer id=3001
-//			 *		System.out.println("Deleting Buyer where id=3001");
-//			 *		session.createQuery("delete from Buyer where id=3001").executeUpdate();
-//			 */
-//			
-//			//commit the transaction
-//			session.getTransaction().commit();
-//			
-//		} finally {
-//			//session.flush();
-//			session.close();
-//			sessionFactory.close();
-//			//Closing the session.
-//		}
 		
 	
 

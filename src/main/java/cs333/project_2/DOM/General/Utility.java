@@ -1,5 +1,6 @@
 package cs333.project_2.DOM.General;
 
+import cs333.project_2.DAL.Buyer.BuyerDAL;
 import cs333.project_2.DOM.Buyer.Buyer;
 
 import cs333.project_2.DOM.Product.Product;
@@ -36,9 +37,10 @@ public class Utility {
 	 * Requests will be sent via URI and that layer will ask this layer to do stuff for it - REST
 	 */
     
-    public Buyer getBuyer(int ID) {
+    public void getBuyer(int ID) {
 		// TODO grab the corresponding buyer object from the database
-		return new Buyer("testCustomer", "S0M3R@ND0M3H@$3DP@$SW0RD", 1234567890);
+    	BuyerDAL buyerDAL = new BuyerDAL();
+		buyerDAL.read(ID);
 	}
 	public Seller getSeller(int ID) {
 		// TODO grab the corresponding seller object from the database
@@ -50,7 +52,7 @@ public class Utility {
 	}
 	public Order getOrder(int ID) {
 		// TODO grab the corresponding order object from the database
-		return new Order(513437658, null, 98765878);
+		return null;
 	}
 	
 	/**
@@ -58,9 +60,9 @@ public class Utility {
 	 * parameters and create the objects here to then interact with the persistence layer.
 	 * The service layer also does not know how to generate ID's, so they must be generated here.
 	 */
-	public void addBuyer(String username, String password) {
-		int ID = generateID();
-		Buyer b = new Buyer(username, password, ID);
+	public static void addBuyer(int ID,String username,String address) {
+		BuyerDAL buyerDAL = new BuyerDAL();
+		buyerDAL.insert(ID,username,address);
 		// TODO add the buyer to the database
 	}
 	public void addSeller(String username, String password, String urladdress) {
@@ -75,11 +77,12 @@ public class Utility {
 	}
 	public void addOrder(int[] productIDs, int customerID) {
 		int ID = generateID();
-		Order o = new Order(ID, productIDs, customerID);
 		// TODO add the order to the database
 	}
 	
-	public void deleteBuyer(int ID) {
+	public static void deleteBuyer(int ID) {
+		BuyerDAL buyerDAL = new BuyerDAL();
+		buyerDAL.deleteCustomer(ID);
 		// TODO delete the given buyer
 	}
 	public void deleteSeller(int ID) {
@@ -96,7 +99,11 @@ public class Utility {
 	// My guess to eliminate the number of methods we make here is to pass a string that specifies the method 
 	// that we want to invoke to set element of type T - we would of course have to do a check to ensure that 
 	// type T is the correct type to pass to the method
-	public <T> void updateBuyer(int ID, String method, T element) {}
+	public void updateBuyer(int ID,int buyerID, String username, String address) {
+		BuyerDAL buyerDAL = new BuyerDAL();
+		buyerDAL.update(ID, buyerID,username,address);
+	}
+	
 	public <T> void updateSeller(int ID, String method, T element) {}
 	public <T> void updateProduct(int ID, String method, T element) {}
 	public <T> void updateOrder(int ID, String method, T element) {}

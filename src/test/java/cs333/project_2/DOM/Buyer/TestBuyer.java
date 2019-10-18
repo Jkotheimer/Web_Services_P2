@@ -11,7 +11,7 @@ import static org.junit.Assert.*;
  */
 public class TestBuyer {
 
-	private Buyer fixture = new Buyer("testCustomer", "S0M3R@ND0M3H@$3DP@$SW0RD", 123456789);
+	private Buyer fixture = new Buyer();
 
 	/**
 	 * Coverage:
@@ -27,7 +27,7 @@ public class TestBuyer {
 
 		// Quick test for initial values
 		assertEquals("testCustomer", fixture.getUsername());
-		assertEquals(123456789, fixture.getID());
+		assertEquals(123456789, fixture.getBuyerID());
 		assertTrue(fixture.AuthenticateCred("testCustomer", "S0M3R@ND0M3H@$3DP@$SW0RD"));
 
 		// Make some changes with the setters and retest
