@@ -21,7 +21,7 @@ public class OrderDAL {
 			System.out.println("Creating a new Order object...");
 
 			//create the Order object
-			Order order = new Order(1234, new int[]{4567, 9367}, 9870);
+			Order order = new Order();
 
 			//start a transaction
 			session.beginTransaction();
@@ -37,9 +37,9 @@ public class OrderDAL {
 			session.beginTransaction();
 
 			//Read the order
-			System.out.println("Getting the Order based on id: " + order.getID());
+			System.out.println("Getting the Order based on id: " + 101);
 
-			Order readorder = (Order)session.get(Order.class, order.getID());   //specify PRIMARY KEY of the order
+			Order readorder = (Order)session.get(Order.class, 101);   //specify PRIMARY KEY of the order
 
 			System.out.println("Retrieved Order details : " + order);
 
