@@ -16,7 +16,7 @@ public class ProductManager {
 		ProductDAL.updateProduct(ID, sellerID, price, itemDescrip);
 	}
 
-	public void deleteEmployee(int id) {
+	public void deleteProduct(int id) {
 		ProductDAL.deleteProduct(id);
 	}
 
