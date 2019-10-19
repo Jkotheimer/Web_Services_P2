@@ -1,8 +1,11 @@
 package cs333.project_2.DOM.Seller;
 import cs333.project_2.DOM.General.Address;
+import cs333.project_2.DOM.Order.Order;
 import cs333.project_2.DOM.Product.Product;
 
+import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.List;
 
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -19,69 +22,92 @@ import javax.persistence.Entity;
 
 @Entity
 @Table(name="seller")
-public class Seller {
-
+public class Seller implements Serializable {
+	
+	private int serialID;
 	private String username;
 	private String password;
-	private double ID;
+	private int sellerID;
 	private String address;
 	private String urlAddress;
 
 
-	private ArrayList<Product> products = new ArrayList<Product>();
+	private List<Product> products = new ArrayList<Product>();
 
 
 	private ArrayList<String> orders;
 	private float rating;
 	private int numRatings;
-
-	public Seller(String username, String password, int ID, String urladdress) {
-		this.username = username;
-		this.password = password;
-		this.ID = ID;
-		this.urlAddress = urladdress;
-		this.rating = -1; //negative 1 represents no ratings yet
-		this.numRatings = 0;
-		this.orders = new ArrayList<>();
-		this.products = new ArrayList<>();
+	
+	public Seller() {
+		
 	}
+
+//	public Seller(String username, int ID, String urladdress, List<Product> prod) {
+//		this.username = username;
+//		this.password = password;
+//		this.ID = ID;
+//		this.urlAddress = urladdress;
+//		this.rating = -1; //negative 1 represents no ratings yet
+//		this.numRatings = 0;
+//		this.orders = new ArrayList<>();
+//		this.products = new ArrayList<>();
+//	}
 
 	/**
 	 * GETTERS
 	 * ________________________________________________________________________
 	 */
 
+	@Id
+	@Column(name = "serialID")
+	@GeneratedValue(strategy=GenerationType.AUTO)
+	public int getSerialId() {
+		return serialID;
+	}
+	
 	@Column(name="sellerusername")
 	public String getUsername()				{ return this.username;	}
 
-	@Id
+	
 	@Column(name="sellerID")
-	public double getID()						{ return this.ID;		}
+	public int getsellerID()						{ return this.sellerID;		}
 
 	@Column(name="sellerurladdress")
-	public String geturlAddress()			{ return this.urlAddress;}
+	public String geturlAddress()				{ return this.urlAddress;}
 
 
 	@Column(name="selleraddress")
-	public String getaddress()		{ return this.address;	}
+	public String getaddress()					{ return this.address;	}
 	
 	
-
 	//Could be based on all product ratings combined
 
-	@Column(name="rating")
-	public float getRating()				{ return this.rating;	}
-
+	//@Column(name="rating")
 	@Transient
-	public ArrayList<String> getOrders()	{ return this.orders;	}
+	public float getRating()					{ return this.rating;	}
 
+
+	@OneToMany(cascade=CascadeType.PERSIST, mappedBy="seller", targetEntity=Product.class)
+	public List<Product> getProducts()			{ return this.products;	}
+	
+	
+//TRANSIENT
 	@Transient
-	public ArrayList<Product> getProducts()	{ return this.products;	}
+	public ArrayList<String> getOrders()		{ return this.orders;	}
 
 	/**
 	 * SETTERS
 	 * ________________________________________________________________________
 	 */
+	
+	public void setSerialId(int serialId) {
+		this.serialID = serialId;
+	}
+	
+	public void setSellerID(int sellerID) {
+		this.sellerID = sellerID;
+	}
 
 	public boolean setUsername(String username) {
 		// TODO - possibly add a database check for other profiles with the given username
@@ -98,15 +124,25 @@ public class Seller {
 		this.urlAddress = url;
 		return true;
 	}
+	
+	public boolean setAddress(String address) {
+		this.address = address;
+		return true;
+	}
+	
+	public void setProducts(List<Product> products) {
+		this.products = products;
+	}
+
 	public boolean addRating(float ratingnum) {
 		if(ratingnum < 0 || ratingnum > 10) return false;
 		this.rating = ((numRatings * this.rating) + ratingnum) / ++numRatings;
 		return true;
 	}
 	
-	public void addProduct(Product p) {
-		
-	}
+//	public void addProduct(Product p) {
+//		
+//	}
 //	public boolean addProduct(String productID) {
 //		// Add the new product ID in the correct alphabetical position
 //		if(this.products.size() == 0) {

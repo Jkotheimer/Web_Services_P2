@@ -36,6 +36,9 @@
 		
 		<mapping class="cs333.project_2.DOM.Buyer.Buyer"/>
 		<mapping class="cs333.project_2.DOM.Order.Order"/>
+		
+		<mapping class="cs333.project_2.DOM.Product.Product"/>
+		<mapping class="cs333.project_2.DOM.Seller.Seller"/>
 
  
     </session-factory>

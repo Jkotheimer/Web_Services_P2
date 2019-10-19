@@ -8,6 +8,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinColumns;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
@@ -15,14 +16,16 @@ import javax.persistence.Table;
 import javax.persistence.Transient;
 
 import cs333.project_2.DAL.Product.ProductDAL;
+import cs333.project_2.DOM.Seller.Seller;
 
 @Entity
 @Table(name = "product")
 public class Product {
 
-	private int ID;
+	private int serialID;
+	private int productID;
 	private double Price;
-	private int SellerID;
+	private Seller seller;
 	private String ItemDescrip;
 
 	private float Rating;
@@ -32,27 +35,30 @@ public class Product {
 	
 	}
 	
-	public Product(int ID, int sellerID, float price, String itemDescrip) {
-		this.ID = ID;
-		this.Price = price;
-		this.SellerID = sellerID;
-		this.ItemDescrip = itemDescrip;
-
-		this.Rating = -1; // -1 indicates no ratings yet
-		this.NumRatings = 0;
-	}
+//	public Product(int ID, int sellerID, float price, String itemDescrip) {
+//		this.ID = ID;
+//		this.Price = price;
+//		this.seller = sellerID;
+//		this.ItemDescrip = itemDescrip;
+//
+//		this.Rating = -1; // -1 indicates no ratings yet
+//		this.NumRatings = 0;
+//	}
 
 	/**
 	 * SETTERS
 	 * ________________________________________________________________________
 	 */
-	public void setID(int Id) {
-		this.ID = Id;
+	
+	public void setserialID(int serialId) {
+		this.serialID = serialId;
 	}
 	
-	public void setSellerID(int Id) {
-		this.SellerID = Id;
+	public void setproductID(int productId) {
+		this.productID = productId;
 	}
+	
+	
 
 	public void setPrice(double price) {
 		Price = price;
@@ -63,6 +69,10 @@ public class Product {
 
 	public void setRating(float rat) {
 		this.Rating = rat;
+	}
+	
+	public void setSeller(Seller seller) {
+		this.seller = seller;
 	}
 	
 	public boolean addRating(int rating) {
@@ -78,15 +88,18 @@ public class Product {
 	 */
 
 	@Id
+	@Column(name = "serialID")
+	@GeneratedValue(strategy=GenerationType.AUTO)
+	public int getSerialID() {
+		return serialID;
+	}
+	
+	
 	@Column(name="productid")
-	public int getID() {
-		return this.ID;
+	public int getProductID() {
+		return this.productID;
 	}
 
-	@Column(name = "sellerID")
-	public int getSellerID() {
-		return this.SellerID;
-	}
 
 	@Column(name = "price")
 	public double getPrice() {
@@ -101,5 +114,14 @@ public class Product {
 	@Column(name = "description")
 	public String getItemDescrip() {
 		return this.ItemDescrip;
+	}
+	
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumns({
+        @JoinColumn(name="Seller_ID", referencedColumnName="sellerID"),
+        @JoinColumn(name="Seller_URL_ADDR", referencedColumnName="sellerurladdress")
+    })
+	public Seller getSeller() {
+		return this.seller;
 	}
 }
