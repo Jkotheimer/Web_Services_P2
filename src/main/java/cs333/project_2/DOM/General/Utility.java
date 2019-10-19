@@ -2,6 +2,7 @@ package cs333.project_2.DOM.General;
 
 import cs333.project_2.DAL.Buyer.BuyerDAL;
 import cs333.project_2.DAL.Order.OrderDAL;
+import cs333.project_2.DAL.Product.ProductDAL;
 import cs333.project_2.DOM.Buyer.Buyer;
 
 import cs333.project_2.DOM.Product.Product;
@@ -19,18 +20,20 @@ public class Utility {
 	public Utility() {}
 
 	public static int generateID() {
-		//TODO make this generate random? string
+		//TODO make this generate random? string, we might not need this
 		return 124632;
 	}
 
-	public static String searchProduct(String productname) {
-		//TODO search database for product with same name
-		return "found";
+	public static Product searchProduct(int productID) {
+		Product prod = ProductDAL.readProduct(productID);
+		return prod;
 	}
 
-	public static boolean checkAvailability(String productname) {
-		//TODO check that a product is available in database
-		return true;
+	public static boolean checkAvailability(int productID) {
+		if(ProductDAL.readProduct(productID)!= null) {
+			return true;
+		};
+		return false;
 	}
     
 	/**
@@ -38,23 +41,13 @@ public class Utility {
 	 * Requests will be sent via URI and that layer will ask this layer to do stuff for it - REST
 	 */
     
-    public void getBuyer(int ID) {
-		// TODO grab the corresponding buyer object from the database
-    	BuyerDAL buyerDAL = new BuyerDAL();
-		buyerDAL.read(ID);
-	}
-	public Seller getSeller(int ID) {
-		// TODO grab the corresponding seller object from the database
+	public Seller getTestSeller(int ID) {
+		// creates test seller
 		return new Seller("testCustomer", "S0M3R@ND0M3H@$3DP@$SW0RD", 1234567890, "website.com");
 	}
-	public Product getProduct(int ID) {
-		// TODO grab the corresponding product object from the database
+	public Product getTestProduct(int ID) {
+		// creates test Product
 		return new Product(987654321, 12345678, 44.98f, "a new product");
-	}
-	public void getOrder(int ID) {
-		// TODO grab the corresponding order object from the database
-		OrderDAL orderdal = new OrderDAL();
-		orderdal.read(ID);
 	}
 	
 	/**
