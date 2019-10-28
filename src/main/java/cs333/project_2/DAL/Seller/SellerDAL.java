@@ -70,7 +70,7 @@ public class SellerDAL {
 		}
 
 
-			public static void read(int ID) {
+			public static Seller read(int ID) {
 
 				Seller seller = new Seller();
 				SessionFactory sessionFactory = new AnnotationConfiguration().
@@ -92,6 +92,8 @@ public class SellerDAL {
 
 				System.out.println("PARTNER USERNAME: "+seller.getUsername() +"\n PARTNER ADDRESS "+seller.getaddress()+
 						"\n PARTNER ID " +seller.getsellerID());
+				
+				return seller;
 
 			}
 
