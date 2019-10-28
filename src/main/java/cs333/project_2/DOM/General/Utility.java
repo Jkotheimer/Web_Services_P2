@@ -41,15 +41,6 @@ public class Utility {
 	 * Requests will be sent via URI and that layer will ask this layer to do stuff for it - REST
 	 */
     
-	public Seller getTestSeller(int ID) {
-		// creates test seller
-		return new Seller("testCustomer", "S0M3R@ND0M3H@$3DP@$SW0RD", 1234567890, "website.com");
-	}
-	public Product getTestProduct(int ID) {
-		// creates test Product
-		return new Product(987654321, 12345678, 44.98f, "a new product");
-	}
-	
 	/**
 	 * Since these requests are coming from the service layer, we don't want to pass objects, but pass the
 	 * parameters and create the objects here to then interact with the persistence layer.
@@ -60,7 +51,7 @@ public class Utility {
 		buyerDAL.insert(ID,username,address);
 		// TODO add the buyer to the database
 	}
-	public void addSeller(String username, String password, String urladdress) {
+	/*public void addSeller(String username, String password, String urladdress) {
 		int ID = generateID();
 		Seller s = new Seller(username, password, ID, urladdress);
 		// TODO add the seller to the database
@@ -70,6 +61,7 @@ public class Utility {
 		Product p = new Product(ID, sellerID, price, itemDescrip);
 		// TODO add the product to the database
 	}
+	*/
 	public void addOrder(int ID, int prod) {
 		OrderDAL orderdal = new OrderDAL();
 		orderdal.insert(ID, prod);

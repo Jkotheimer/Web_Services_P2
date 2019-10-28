@@ -42,13 +42,12 @@ public class Order {
 	private Buyer buyer;
 	private String Status;
 
-//	public Order(int ID, int productIDs, Buyer customerID) {
-//		this.orderID = ID;
-//		this.OrderedProductIDs = productIDs;
-//		this.CustomerID=customerID; 
-//		this.Status = "Order initiated";
-//	}
-//	
+	public Order(int ID, int productIDs) {
+		this.orderID = ID;
+		this.OrderedProductIDs = productIDs;
+		this.Status = "Order initiated";
+	}
+	
 	public Order() {
 		
 	}

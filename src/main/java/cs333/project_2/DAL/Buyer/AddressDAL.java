@@ -24,7 +24,7 @@ public class AddressDAL {
 			System.out.println("Creating a new Address object...");
 			
 			//create the Address object
-			Address address = new Address("321 Second St", "Seattle", "WA", 55555, 2319, 8204);
+			Address address = new Address("321 Second St", "Seattle", "WA", 55555);
 			
 			//start a transaction
 			session.beginTransaction();

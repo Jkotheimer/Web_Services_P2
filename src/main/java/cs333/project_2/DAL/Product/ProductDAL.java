@@ -1,6 +1,7 @@
 package cs333.project_2.DAL.Product;
 
 import org.hibernate.Session;
+
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.AnnotationConfiguration;
 import org.hibernate.cfg.Configuration;
@@ -21,7 +22,7 @@ public class ProductDAL {
 			System.out.println("Creating a new Product object...");
 
 			//create the Product object
-			Product product = new Product(ID,sellerID,price,itemDescrip);
+			Product product = new Product(ID,price,itemDescrip);
 
 			//start a transaction
 			session.beginTransaction();
@@ -87,7 +88,6 @@ public class ProductDAL {
 			Product updateProduct = (Product)session.get(Product.class, existingID);   //specify PRIMARY KEY of the Product
 			updateProduct.setItemDescrip(itemDescrip);
 			updateProduct.setPrice(price);
-			updateProduct.setSellerID(sellerID);
 			/*
 			//delete Product id=3001
 			System.out.println("Deleting Product where id=3001");

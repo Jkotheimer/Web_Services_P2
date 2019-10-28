@@ -35,15 +35,14 @@ public class Product {
 	
 	}
 	
-//	public Product(int ID, int sellerID, float price, String itemDescrip) {
-//		this.ID = ID;
-//		this.Price = price;
-//		this.seller = sellerID;
-//		this.ItemDescrip = itemDescrip;
-//
-//		this.Rating = -1; // -1 indicates no ratings yet
-//		this.NumRatings = 0;
-//	}
+	public Product(int ID, float price, String itemDescrip) {
+		this.productID = ID;
+		this.Price = price;
+		this.ItemDescrip = itemDescrip;
+
+		this.Rating = -1; // -1 indicates no ratings yet
+		this.NumRatings = 0;
+	}
 
 	/**
 	 * SETTERS

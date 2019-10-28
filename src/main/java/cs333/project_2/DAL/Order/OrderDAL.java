@@ -51,7 +51,7 @@ public class OrderDAL {
 		}
 
 
-			public static void read(int ID) {
+			public static Order read(int ID) {
 
 				Order order = new Order();
 				SessionFactory sessionFactory = new AnnotationConfiguration().
@@ -74,6 +74,7 @@ public class OrderDAL {
 				System.out.println("ORDER ID : "+order.getOrderID() +"\n ORDERED PRODUCT ID "+order.getOrderedProductIDs()
 				+"\n CUSTOMER ID " +order.getBuyer().getBuyerID() +"\n CUSTOMER USERNAME : " +order.getBuyer().getUsername());
 
+				return order;
 			}
 
 			public static void update(int serialID,int newOrderID, int producID) {

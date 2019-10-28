@@ -43,16 +43,15 @@ public class Seller implements Serializable {
 		
 	}
 
-//	public Seller(String username, int ID, String urladdress, List<Product> prod) {
-//		this.username = username;
-//		this.password = password;
-//		this.ID = ID;
-//		this.urlAddress = urladdress;
-//		this.rating = -1; //negative 1 represents no ratings yet
-//		this.numRatings = 0;
-//		this.orders = new ArrayList<>();
-//		this.products = new ArrayList<>();
-//	}
+	public Seller(String username, int ID, String urladdress) {
+		this.username = username;
+		this.password = password;
+		this.urlAddress = urladdress;
+		this.rating = -1; //negative 1 represents no ratings yet
+		this.numRatings = 0;		
+		this.orders = new ArrayList<>();
+		this.products = new ArrayList<>();
+	}
 
 	/**
 	 * GETTERS
