@@ -57,6 +57,9 @@ public class Buyer implements Serializable  {
 //		//this.payinfo = new ArrayList<>();
 //	}
 	
+	public Buyer() {
+		
+	}
 	
 	//For Buyer Activity Class
 	public Buyer(int ID, String username, String address) {
