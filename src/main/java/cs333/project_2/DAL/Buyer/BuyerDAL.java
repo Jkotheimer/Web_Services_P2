@@ -58,7 +58,7 @@ public class BuyerDAL {
 		}
 
 
-			public static void read(int ID) {
+			public static Buyer read(int ID) {
 
 				Buyer buyer = new Buyer();
 				SessionFactory sessionFactory = new AnnotationConfiguration().
@@ -80,6 +80,8 @@ public class BuyerDAL {
 
 				System.out.println(" CUSTOMER USERNAME: "+buyer.getUsername() +"\n CUSTOMER ADDRESS "+buyer.getAddress()+
 						"\n CUSTOMER ID " +buyer.getBuyerID());
+				
+				return buyer;
 
 			}
 

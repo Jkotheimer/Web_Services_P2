@@ -56,6 +56,14 @@ public class Buyer implements Serializable  {
 //		this.orderIDs = order;
 //		//this.payinfo = new ArrayList<>();
 //	}
+	
+	
+	//For Buyer Activity Class
+	public Buyer(int ID, String username, String address) {
+		this.buyerID = ID;
+		this.username = username;
+		this.address = address;
+	}
 
 
 	/**

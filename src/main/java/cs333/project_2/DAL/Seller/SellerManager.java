@@ -10,7 +10,8 @@ public class SellerManager {
 	
 	public Set<Seller> getSellers(){
 		Set<Seller> sellers = new HashSet<Seller>();
-		Seller a = new Seller("AppleCO",123,"applesales.com");
+		Seller s = new Seller("AppleCO",123,"applesales.com");
+		sellers.add(s);
 		return sellers;
 	}
 	
