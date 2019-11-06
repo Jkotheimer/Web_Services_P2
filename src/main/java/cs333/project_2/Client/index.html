@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8"/>
+		<meta name="viewport" content="width=device-width"/>
+		<link href="https://fonts.googleapis.com/css?family=Oleo+Script+Swash+Caps&display=swap" rel="stylesheet"/>
+		<link href="./home.css" rel="stylesheet"/>
+		<script type="text/javascript" src="./home.js"></script>
+		<title>Client Login</title>
+	</head>
+	<body>
+		<div class="panel">
+			<div class="panel_header">
+				Web Services Client
+			</div>
+			<div class="form">
+				<div class="form_element">
+					<div class="form_label">Username</div>
+					<input type="text" name="email" class="form_input" placeholder="Enter your username"
+						autocapitalize="off" autocomplete="off" spellcheck="false" autocorrect="off" required/>
+				</div>
+				
+				<div class="form_element">
+					<div class="form_label">Password</div>
+					<input type="password" name="password" class="form_input" placeholder="Enter your password" minlength="8"
+						autocapitalize="off" autocomplete="off" spellcheck="false" autocorrect="off" required/>
+				</div>
+				
+				<div class="form_element confirm_password">
+					<div class="form_label">Confirm Password</div>
+					<input type="password" name="confirm_password" class="form_input" placeholder="Confirm your password" minlength="8"
+						autocapitalize="off" autocomplete="off" spellcheck="false" autocorrect="off" required/>
+				</div>
+			</div>
+			<div class="links">
+				<button class="form_element create_account" onclick="switch_to_create_account()">Create Account</button>
+				<button class="form_element sign_in" onclick="sign_in">Sign In</button>
+			</div>
+		</div>
+	</body>
+</html>

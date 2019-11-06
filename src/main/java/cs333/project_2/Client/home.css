@@ -1,0 +1,77 @@
+body {
+	background-color: #FCFEFF;
+}
+.panel {
+	position: relative;
+	margin: auto;
+	top: 100px;
+	width: 400px;
+	height: auto;
+	padding: 10px;
+	border-radius: 25px;
+	box-shadow: 0 0 10px #999999;
+	background-color: white;
+}
+.panel_header {
+	position: relative;
+	margin: auto;
+	text-align: center;
+	line-height: 75px;
+	width: 100%;
+	height: 50px;
+	font-size: 36px;
+	font-family: 'Oleo Script Swash Caps', cursive;
+	color: #88BBFF;
+}
+.form {
+	position: relative;
+	display: inline-block;
+	width: 49%;
+	height: auto;
+}
+.form_element {
+	position: relative;
+	left: 20px;
+	margin-top: 25px;
+}
+.form_label {
+	font-size: 24px;
+}
+.form_input {
+	padding: 5px;
+	width: 80%;
+	box-shadow: 0 0 5px #999999;
+	border: 1px solid transparent;
+	border-radius: 5px;
+}
+.form_input:focus {
+	outline: none;
+	border-color: #88BBFF;
+	box-shadow: 0 0 5px #88BBFF;
+}
+.confirm_password {
+	display: none;
+	margin-bottom: 25px;
+}
+.links {
+	position: relative;
+	display: inline-block;
+	vertical-align: top;
+	width: 49%;
+	height: 200px;
+}
+button {
+	top: 25px;
+	width: calc(80% + 10px);
+	border-radius: 5px;
+	font-size: 20px;
+}
+button:focus { outline: none; }
+button:hover { cursor: pointer; }
+.create_account{
+	background-color: #EFEA90;
+}
+.sign_in {
+	top: 50px;
+	background-color: #88BBFF;
+}
