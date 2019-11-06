@@ -78,18 +78,41 @@ function sign_in() {
  */
 function create_account() {
 	var error = null;
+	var err_element = null;
 	
 	var username = document.getElementsByName("username")[0].value;
 	var password = document.getElementsByName("password")[0].value;
 	var confirm_password = document.getElementsByName("confirm_password")[0].value;
 	
 	// Test for valid username and passwords
-	if(!/^[a-zA-Z][a-zA-Z0-9]+$/.test(username)) error = "Invalid username - must be alphanumeric, starting with a letter";
-	else if(password.length < 8) error = "Password too short - must be at least 8 characters";
-	else if(password != confirm_password) error = "Non-matching passwords";
+	if(!/^[a-zA-Z][a-zA-Z0-9]+$/.test(username)) {
+		error = "Invalid username - must be alphanumeric, starting with a letter";
+		err_element = document.getElementById("username_error");
+	}
+	else if(password.length < 8) {
+		error = "Password too short - must be at least 8 characters";
+		err_element = document.getElementById("password_error");
+	}
+	else if(password != confirm_password) {
+		error = "Passwords do not match";
+		err_element = document.getElementById("confirm_password_error");
+	}
 	
 	if(error == null) {
 		console.log("create_account\nusername: " + username + '\n' + "password: " + password);
 	}
-	else console.error(error);
+	else {
+		console.error(error);
+		display_error(error, err_element);
+	}
+}
+
+function display_error(error, err_element) {
+	err_element.innerHTML = error;
+	err_element.style.display = "block";
+	var form = document.getElementsByClassName("form")[0];
+	form.addEventListener("keydown", function remove_error() {
+		err_element.innerHTML = "";
+		err_element.style.display = "none";
+	})
 }

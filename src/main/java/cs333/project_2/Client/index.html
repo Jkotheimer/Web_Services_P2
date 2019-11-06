@@ -4,8 +4,8 @@
 		<meta charset="utf-8"/>
 		<meta name="viewport" content="width=device-width"/>
 		<link href="https://fonts.googleapis.com/css?family=Oleo+Script+Swash+Caps&display=swap" rel="stylesheet"/>
-		<link href="./home.css" rel="stylesheet"/>
-		<script type="text/javascript" src="./home.js"></script>
+		<link href="./login.css" rel="stylesheet"/>
+		<script type="text/javascript" src="./login.js"></script>
 		<script type="text/javascript">
 			// This script area is used for global variables and listeners so as to distinguish
 			// from the clean functional style in the external javascript file
@@ -26,23 +26,26 @@
 					<div class="form_label">Username</div>
 					<input type="text" name="username" class="form_input" placeholder="Enter your username"
 						autocapitalize="off" autocomplete="off" spellcheck="false" autocorrect="off" required/>
+					<div class="form_error" id="username_error"></div>
 				</div>
 				
 				<div class="form_element">
 					<div class="form_label">Password</div>
 					<input type="password" name="password" class="form_input" placeholder="Enter your password" minlength="8"
 						autocapitalize="off" autocomplete="off" spellcheck="false" autocorrect="off" required/>
+					<div class="form_error" id="password_error"></div>
 				</div>
 				
 				<div class="form_element confirm_password">
 					<div class="form_label">Confirm Password</div>
 					<input type="password" name="confirm_password" class="form_input" placeholder="Confirm your password" minlength="8"
 						autocapitalize="off" autocomplete="off" spellcheck="false" autocorrect="off" required/>
+					<div class="form_error" id="confirm_password_error"></div>
 				</div>
 			</div>
 			<div class="links">
 				<button class="form_element create_account" onclick="switch_to_create_account()">Create Account</button>
-				<button class="form_element sign_in" onclick="sign_in">Sign In</button>
+				<button class="form_element sign_in" onclick="sign_in()">Sign In</button>
 			</div>
 		</div>
 	</body>
