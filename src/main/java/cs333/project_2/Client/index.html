@@ -6,6 +6,14 @@
 		<link href="https://fonts.googleapis.com/css?family=Oleo+Script+Swash+Caps&display=swap" rel="stylesheet"/>
 		<link href="./home.css" rel="stylesheet"/>
 		<script type="text/javascript" src="./home.js"></script>
+		<script type="text/javascript">
+			// This script area is used for global variables and listeners so as to distinguish
+			// from the clean functional style in the external javascript file
+			
+			// This event handler is a variable because it changes dynamically with the page
+			var handle_keypress = event => handle_keypress_facade(event, sign_in);
+			document.addEventListener("keydown", e => handle_keypress(e));
+		</script>
 		<title>Client Login</title>
 	</head>
 	<body>
@@ -16,7 +24,7 @@
 			<div class="form">
 				<div class="form_element">
 					<div class="form_label">Username</div>
-					<input type="text" name="email" class="form_input" placeholder="Enter your username"
+					<input type="text" name="username" class="form_input" placeholder="Enter your username"
 						autocapitalize="off" autocomplete="off" spellcheck="false" autocorrect="off" required/>
 				</div>
 				
