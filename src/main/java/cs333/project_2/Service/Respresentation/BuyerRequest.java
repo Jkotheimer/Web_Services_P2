@@ -10,13 +10,13 @@ import javax.xml.bind.annotation.XmlType;
 @XmlType(name = "")
 public class BuyerRequest {
 	
-private int buyerId;
+private String buyerId;
 private String username;
-private String address;
-public int getBuyerId() {
+private String password;
+public String getBuyerId() {
 	return buyerId;
 }
-public void setBuyerId(int buyerId) {
+public void setBuyerId(String buyerId) {
 	this.buyerId = buyerId;
 }
 public String getUsername() {
@@ -25,10 +25,10 @@ public String getUsername() {
 public void setUsername(String username) {
 	this.username = username;
 }
-public String getAddress() {
-	return address;
+public String getPassword() {
+	return password;
 }
-public void setAddress(String address) {
-	this.address = address;
+public void setPassword(String password) {
+	this.password = password;
 }
 }

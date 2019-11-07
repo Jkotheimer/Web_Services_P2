@@ -1,47 +1,32 @@
 package cs333.project_2.DOM.Product;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinColumns;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
-import javax.persistence.Table;
-import javax.persistence.Transient;
+import java.util.ArrayList;
+import java.util.List;
 
 import cs333.project_2.DAL.Product.ProductDAL;
 import cs333.project_2.DOM.Seller.Seller;
+import cs333.project_2.DOM.Rating.Rating;
 
-@Entity
-@Table(name = "product")
 public class Product {
 
-	private int serialID;
-	private int productID;
+	private String productID;
 	private double Price;
 	private Seller seller;
 	private String ItemDescrip;
-
 	private float Rating;
-	private int NumRatings;
+	private int totalRating = 0;
+	private List<Rating> Ratings = new ArrayList<Rating>();
 
 	public Product() {
 	
 	}
 	
-	public Product(int ID, float price, String itemDescrip) {
+	public Product(String ID, float price, String itemDescrip, Seller producer) {
 		this.productID = ID;
 		this.Price = price;
 		this.ItemDescrip = itemDescrip;
-
+		this.seller = producer;
 		this.Rating = -1; // -1 indicates no ratings yet
-		this.NumRatings = 0;
 	}
 
 	/**
@@ -49,15 +34,9 @@ public class Product {
 	 * ________________________________________________________________________
 	 */
 	
-	public void setserialID(int serialId) {
-		this.serialID = serialId;
-	}
-	
-	public void setproductID(int productId) {
+	public void setproductID(String productId) {
 		this.productID = productId;
 	}
-	
-	
 
 	public void setPrice(double price) {
 		Price = price;
@@ -74,10 +53,12 @@ public class Product {
 		this.seller = seller;
 	}
 	
-	public boolean addRating(int rating) {
-		if (rating < 0 || rating > 10) return false;
+	public boolean addRating(Rating rating) {
+		if (rating.getRateval() < 0 || rating.getRateval() > 10) return false;
 		// Update the current average rating of the product
-		this.Rating = ((NumRatings * this.Rating) + rating) / ++NumRatings;
+		this.totalRating += rating.getRateval();
+		this.Ratings.add(rating);
+		this.Rating = this.totalRating / this.Ratings.size();
 		return true;
 	}
 
@@ -85,41 +66,23 @@ public class Product {
 	 * GETTERS
 	 * ________________________________________________________________________
 	 */
-
-	@Id
-	@Column(name = "serialID")
-	@GeneratedValue(strategy=GenerationType.AUTO)
-	public int getSerialID() {
-		return serialID;
-	}
 	
-	
-	@Column(name="productid")
-	public int getProductID() {
+	public String getProductID() {
 		return this.productID;
 	}
 
-
-	@Column(name = "price")
 	public double getPrice() {
 		return this.Price;
 	}
 
-	@Column(name = "rating")
 	public float getRating() {
 		return this.Rating;
 	}
 
-	@Column(name = "description")
 	public String getItemDescrip() {
 		return this.ItemDescrip;
 	}
-	
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumns({
-        @JoinColumn(name="Seller_ID", referencedColumnName="sellerID"),
-        @JoinColumn(name="Seller_URL_ADDR", referencedColumnName="sellerurladdress")
-    })
+
 	public Seller getSeller() {
 		return this.seller;
 	}

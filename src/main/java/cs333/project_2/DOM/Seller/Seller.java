@@ -1,28 +1,13 @@
 package cs333.project_2.DOM.Seller;
 import cs333.project_2.DOM.General.Address;
+
 import cs333.project_2.DOM.Order.Order;
 import cs333.project_2.DOM.Product.Product;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
-import javax.persistence.Table;
-import javax.persistence.Transient;
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-
-
-@Entity
-@Table(name="seller")
-public class Seller implements Serializable {
+public class Seller {
 	
 	private int serialID;
 	private String username;
@@ -58,41 +43,22 @@ public class Seller implements Serializable {
 	 * ________________________________________________________________________
 	 */
 
-	@Id
-	@Column(name = "serialID")
-	@GeneratedValue(strategy=GenerationType.AUTO)
 	public int getSerialId() {
 		return serialID;
 	}
 	
-	@Column(name="sellerusername")
 	public String getUsername()				{ return this.username;	}
 
-	
-	@Column(name="sellerID")
 	public int getsellerID()						{ return this.sellerID;		}
 
-	@Column(name="sellerurladdress")
 	public String geturlAddress()				{ return this.urlAddress;}
 
-
-	@Column(name="selleraddress")
 	public String getaddress()					{ return this.address;	}
 	
-	
-	//Could be based on all product ratings combined
-
-	//@Column(name="rating")
-	@Transient
 	public float getRating()					{ return this.rating;	}
 
-
-	@OneToMany(cascade=CascadeType.PERSIST, mappedBy="seller", targetEntity=Product.class)
 	public List<Product> getProducts()			{ return this.products;	}
 	
-	
-//TRANSIENT
-	@Transient
 	public ArrayList<String> getOrders()		{ return this.orders;	}
 
 	/**

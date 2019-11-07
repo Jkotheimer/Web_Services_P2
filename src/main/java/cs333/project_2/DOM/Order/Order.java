@@ -19,6 +19,7 @@ import javax.persistence.Table;
 import javax.persistence.Transient;
 
 import cs333.project_2.DOM.Buyer.Buyer;
+import cs333.project_2.DOM.Product.Product;
 
 
 /**
@@ -32,87 +33,60 @@ import cs333.project_2.DOM.Buyer.Buyer;
  * - A customer who bought them
  */
 
-@Entity
-@Table(name= "orders")
 public class Order {
 	
-	private int serialID;
-	private int orderID;
-	private int OrderedProductIDs;
+	private String orderID;
+	private List<Product> OrderedProductIDs;
 	private Buyer buyer;
 	private String Status;
 
-	public Order(int ID, int productIDs) {
+	public Order(String ID, Buyer purchaser, List<Product> productIDs) {
 		this.orderID = ID;
 		this.OrderedProductIDs = productIDs;
 		this.Status = "Order initiated";
+		this.buyer = purchaser;
 	}
 	
 	public Order() {
 		
 	}
 
-//	public int getID() {
-//		return this.orderID;
-//	}
-	@Id
-	@Column(name = "serialID")
-	@GeneratedValue(strategy=GenerationType.AUTO)
-	public int getSerialID() {
-		return serialID;
+	public String getID() {
+		return this.orderID;
 	}
-	
-	
-	@Column(name="OrderID")
-		public int getOrderID() {
-			return orderID;
-		}
 
-	@Column(name="productID")
-	public int getOrderedProductIDs() {
+	public List<Product> getOrderedProductIDs() {
 		return this.OrderedProductIDs;
 	}
 	
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumns({
-        @JoinColumn(name="Buyer_ID", referencedColumnName="buyerID"),
-        @JoinColumn(name="Buyer_UserName", referencedColumnName="buyerusername")
-    })
 	public Buyer getBuyer() {
 		return this.buyer;
+	}
+	
+	public String getStatus() {
+		return this.Status;
 	}
 
 	/**
 	 * SETTERS
 	 * ________________________________________________________________________
 	 */
-	
-	public void setSerialID(int serialID) {
-		this.serialID = serialID;
-	}
 
-	public void setOrderID(int orderID) {
+	public void setOrderID(String orderID) {
 		this.orderID = orderID;
 	}
 
-
-	public void setOrderedProductIDs(int orderedProductIDs) {
+	public void setOrderedProductIDs(List<Product> orderedProductIDs) {
 		this.OrderedProductIDs = orderedProductIDs;
 	}
-
 
 	public void setBuyer(Buyer buyer) {
 		this.buyer = buyer;
 	}
 	
-@Transient
 	public boolean updateStatus(String status) {
 		this.Status = status;
 		return true;
 	}
-@Transient
-public String getStatus() {
-	return this.Status;
-}
 
 }
