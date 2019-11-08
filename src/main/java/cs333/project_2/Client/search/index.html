@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8"/>
+		<meta name="viewport" content="width=device-width"/>
+		<link src="./search.css" rel="stylesheet"/>
+		<script type="text/javascript" src="./search.js"></script>
+		<title>Search</title>
+	</head>
+	<body>
+		<div class="panel header_panel">
+			<h>Search for a product</h>
+			<button id="toggle_actions">Post a new product</button>
+		</div>
+		<div class="panel body_panel">
+			<div id="search_content">
+				<input type="text" name="search" class="text_box search" placeholder="Search for a product here"/>
+				<button id="submit_search" onclick="search()">Search</button>
+			</div>
+			
+			<div id="post_content">
+				<input type="text" name="product" class="text_box product" placeholder="Name of product here"/>
+				<input type="number" name="price" class="text_box price" placeholder="Price"/>
+				<input type="text" name="description" class="text_box description" placeholder="A short description of your product"/>
+				<button id="submit_post" onclick="post()">Add Product</button>
+			</div>
+		</div>
+	</body>
+</html>

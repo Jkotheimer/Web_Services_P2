@@ -69,6 +69,7 @@ function sign_in() {
 	var username = document.getElementsByName("username")[0].value;
 	var password = document.getElementsByName("password")[0].value;
 	console.log("sign_in\nusername: " + username + '\n' + "password: " + password);
+	document.location.href = "./search"
 }
 
 /**
