@@ -1,3 +1,7 @@
+:root {
+	--blue: #88BBFF;
+	--yellow: #FFFFA0;
+}
 body {
 	background-color: #FCFEFF;
 }
@@ -21,7 +25,7 @@ body {
 	height: 50px;
 	font-size: 36px;
 	font-family: 'Oleo Script Swash Caps', cursive;
-	color: #88BBFF;
+	color: var(--blue);
 }
 .form {
 	position: relative;
@@ -46,8 +50,8 @@ body {
 }
 .form_input:focus {
 	outline: none;
-	border-color: #88BBFF;
-	box-shadow: 0 0 5px #88BBFF;
+	border-color: var(--blue);
+	box-shadow: 0 0 5px var(--blue);
 }
 .form_error {
 	display: none;
@@ -76,9 +80,9 @@ button {
 button:focus { outline: none; }
 button:hover { cursor: pointer; }
 .create_account{
-	background-color: #EFEA90;
+	background-color: var(--yellow);
 }
 .sign_in {
 	top: 50px;
-	background-color: #88BBFF;
+	background-color: var(--blue);
 }

@@ -3,7 +3,7 @@
 	<head>
 		<meta charset="utf-8"/>
 		<meta name="viewport" content="width=device-width"/>
-		<link src="./search.css" rel="stylesheet"/>
+		<link href="./search.css" rel="stylesheet"/>
 		<script type="text/javascript" src="./search.js"></script>
 		<title>Search</title>
 	</head>
@@ -14,15 +14,19 @@
 		</div>
 		<div class="panel body_panel">
 			<div id="search_content">
-				<input type="text" name="search" class="text_box search" placeholder="Search for a product here"/>
+				<input type="text" name="search" class="search" placeholder="Search for a product here" autocomplete="off" spellcheck="false" autocorrect="off"/>
 				<button id="submit_search" onclick="search()">Search</button>
+				<div id="search_results"></div>
 			</div>
 			
 			<div id="post_content">
-				<input type="text" name="product" class="text_box product" placeholder="Name of product here"/>
-				<input type="number" name="price" class="text_box price" placeholder="Price"/>
-				<input type="text" name="description" class="text_box description" placeholder="A short description of your product"/>
+				<input type="text" name="product" class="product" placeholder="Name of product here" autocomplete="off" spellcheck="false" autocorrect="off"/>
+				<input type="number" name="price" class="price" placeholder="Price" autocomplete="off" spellcheck="false" autocorrect="off"/>
+				<br/>
+				<textarea name="description" class="description" rows=5 placeholder="A short description of your product" autocomplete="off" spellcheck="false" autocorrect="off"></textarea>
+				<br/>
 				<button id="submit_post" onclick="post()">Add Product</button>
+				<div id="post_result"></div>
 			</div>
 		</div>
 	</body>
