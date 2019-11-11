@@ -59,7 +59,7 @@ input, textarea {
 	border-radius: 10px;
 }
 #search_content {
-	display: none;
+	display: block;
 	text-align: center;
 }
 .search {
@@ -74,20 +74,18 @@ input, textarea {
 	
 }
 #post_content {
-	display: block;
+	display: none;
 	text-align: center;
 }
 .product {
 	width: 300px;
-	margin-right: 50px;
+	margin-right: 95px;
 }
 .price {
 	width: 100px;
-	margin-left: 50px;
+	margin-left: 5px;
 }
 .description {
 	width: 520px;
-}
-#submit_post {
-	
+	resize: vertical;
 }

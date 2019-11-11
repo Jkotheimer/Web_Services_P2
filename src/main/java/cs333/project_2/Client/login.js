@@ -69,7 +69,8 @@ function sign_in() {
 	var username = document.getElementsByName("username")[0].value;
 	var password = document.getElementsByName("password")[0].value;
 	console.log("sign_in\nusername: " + username + '\n' + "password: " + password);
-	document.location.href = "./search"
+	document.location.href = "./search";
+	// TODO: make get request to localhost uri
 }
 
 /**
@@ -86,6 +87,7 @@ function create_account() {
 	if(acct_creation_error(username, password, confirm_password)) return;
 	
 	console.log("create_account\nusername: " + username + '\n' + "password: " + password);
+	// TODO: make post request to localhost uri
 }
 
 /**
