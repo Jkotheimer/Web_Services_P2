@@ -14,12 +14,14 @@ function toggle_actions() {
 		post.style.display = "none";
 		toggle_btn.innerHTML = "Post a new product";
 		header.innerHTML = "Search for a product";
+		document.title = "Search";
 		
 	} else {
 		search.style.display = "none";
 		post.style.display = "block";
 		toggle_btn.innerHTML = "Search for a product";
 		header.innerHTML = "Post a new product";
+		document.title = "Post New Product"
 	}
 }
 

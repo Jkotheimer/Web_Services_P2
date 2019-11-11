@@ -13,6 +13,8 @@ function switch_to_create_account() {
 	old_login_btn.innerHTML = "Create Account";
 	old_login_btn.onclick = create_account;
 	
+	document.title = "Client Create Account";
+	
 	handle_keypress = event => handle_keypress_facade(event, create_account);
 	
 	document.getElementsByClassName("confirm_password")[0].style.display = "block";
@@ -33,6 +35,8 @@ function switch_to_login() {
 	var login_btn = document.getElementsByClassName("sign_in")[0];
 	login_btn.innerHTML = "Sign In";
 	login_btn.onclick = sign_in;
+	
+	document.title = "Client Login";
 	
 	handle_keypress = event => handle_keypress_facade(event, sign_in);
 	
