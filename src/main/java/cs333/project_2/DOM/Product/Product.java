@@ -3,7 +3,6 @@ package cs333.project_2.DOM.Product;
 import java.util.ArrayList;
 import java.util.List;
 
-import cs333.project_2.DAL.Product.ProductDAL;
 import cs333.project_2.DOM.Seller.Seller;
 import cs333.project_2.DOM.Rating.Rating;
 

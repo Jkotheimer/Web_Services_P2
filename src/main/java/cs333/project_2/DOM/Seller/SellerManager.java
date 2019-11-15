@@ -1,38 +1,32 @@
-package cs333.project_2.DAL.Seller;
+package cs333.project_2.DOM.Seller;
 
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import cs333.project_2.DAL.Seller.SellerDAL;
+import cs333.project_2.DOM.Product.Product;
 import cs333.project_2.DOM.Seller.Seller;
 
 public class SellerManager {
 	
-	public Set<Seller> getSellers(){
-		Set<Seller> sellers = new HashSet<Seller>();
-		Seller s = new Seller("AppleCO",123,"applesales.com");
-		sellers.add(s);
-		return sellers;
+	public List<Seller> getSellers(){
+		return SellerDAL.getSellers();
 	}
 	
-	public void addSeller(int Id, String username, String url, String address) {
-		SellerDAL sellerdal = new SellerDAL();
-		sellerdal.insert(Id, username, url, address);
-		// TODO add the seller to the database
+	public static void insertSeller(String Id, String username, String password) {
+		SellerDAL.insertSeller(Id, username, password);
 	}
-		
-	public Seller readSeller(int serialID) {
-		return SellerDAL.read(serialID);
+
+	public static Seller readSeller(String ID) {
+		return SellerDAL.readSeller(ID);
 	}
 	
-	public void updateSeller(int serialID,int newSellerID, String newusername, String newurl, String newaddress) {
-		SellerDAL sellerdal = new SellerDAL();
-		sellerdal.update(serialID,newSellerID, newusername, newurl, newaddress);
+	public static void updateSeller(String ID,String newusername, String newpassword) {
+		SellerDAL.updateSeller(ID, newusername, newpassword);
 	}
 	
-	public void deleteSeller(int ID) {
-		// TODO delete the given seller
-		SellerDAL sellerdal = new SellerDAL();
-		sellerdal.deleteSeller(ID);
+	public static void deleteSeller(String ID) {
+		SellerDAL.deleteSeller(ID);
 	}
 }

@@ -13,6 +13,7 @@ public class BuyerRequest {
 private String buyerId;
 private String username;
 private String password;
+
 public String getBuyerId() {
 	return buyerId;
 }

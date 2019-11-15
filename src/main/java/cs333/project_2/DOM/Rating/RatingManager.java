@@ -1,23 +1,11 @@
 package cs333.project_2.DOM.Rating;
-import cs333.project_2.DAL.Rating.RatingDAL;
+
+import cs333.project_2.DAL.Seller.SellerDAL;
 
 public class RatingManager {
 	
-	public Rating getRating(int id) {
-		return RatingDAL.readRating(id);
+	public void addRating(String prodName,String reviewname,int score, String reviewcontent) {
+		SellerDAL.addProductReview(prodName, reviewname, score, reviewcontent);
 	}
 	
-
-	public void addRating(int ID, int rateval, String review) {
-		RatingDAL.createRating(ID, rateval, review);
-	}
-
-	public void updateRating(int ID, int rateval, String review) {
-		RatingDAL.updateRating(ID, rateval, review);
-	}
-
-	public void deleteEmployee(int id) {
-		RatingDAL.deleteRating(id);
-	}
-
 }

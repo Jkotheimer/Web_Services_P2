@@ -12,22 +12,19 @@ import cs333.project_2.Service.Respresentation.BuyerRepresentation;
 
 public class BuyerActivity {
 	
-	private static BuyerManager buyer = new BuyerManager();
-	
 	public List<BuyerRepresentation> getBuyers() {
 		
 		List<Buyer> buyers = new ArrayList<Buyer>();
 		List<BuyerRepresentation> buyerRepresentations = new ArrayList<BuyerRepresentation>();
-		buyers = buyer.getBuyers();
+		buyers = BuyerManager.getBuyers();
 		
 		Iterator<Buyer> it = buyers.iterator();
 		while(it.hasNext()) {
           Buyer b = (Buyer)it.next();
-          BuyerRepresentation buyerRepresentation = new BuyerRepresentation();
-          buyerRepresentation.setBuyerID(b.getBuyerID());
-          buyerRepresentation.setUsername(b.getUsername());
-          buyerRepresentation.setPassword(b.getPassword());
-          
+          BuyerRepresentation buyerRepresentation = new BuyerRepresentation(b.getBuyerID(),b.getUsername(),b.getPassword());
+          buyerRepresentation.setOrderIDs(b.getOrders());
+          buyerRepresentation.setAdresses(b.getAddress());
+          buyerRepresentation.setPaymentInfos(b.getPayInfos());
           //now add this representation in the list
           buyerRepresentations.add(buyerRepresentation);
         }
@@ -36,33 +33,35 @@ public class BuyerActivity {
 	
 	public BuyerRepresentation getBuyer(String id) {
 		
-		Buyer b = buyer.getBuyer(id);
+		Buyer b = BuyerManager.getBuyer(id);
 		
-		BuyerRepresentation bRep = new BuyerRepresentation();
-		bRep.setBuyerID(b.getBuyerID());
-		bRep.setUsername(b.getUsername());
-		bRep.setPassword(b.getPassword());
+		BuyerRepresentation buyerRepresentation = new BuyerRepresentation(b.getBuyerID(),b.getUsername(),b.getPassword());
+        buyerRepresentation.setOrderIDs(b.getOrders());
+        buyerRepresentation.setAdresses(b.getAddress());
+        buyerRepresentation.setPaymentInfos(b.getPayInfos());
 		
-		return bRep;
+		return buyerRepresentation;
 	}
 	
 	public BuyerRepresentation createBuyer(String ID, String username, String password) {
 		
-		buyer.addBuyer(ID, username , password);
+		BuyerManager.addBuyer(ID, username , password);
 		Buyer b = new Buyer(ID, username, password);
 		
-		BuyerRepresentation bRep = new BuyerRepresentation();
-		bRep.setBuyerID(b.getBuyerID());
-		bRep.setUsername(b.getUsername());
-		bRep.setPassword(b.getPassword());
+		BuyerRepresentation bRep = new BuyerRepresentation(b.getBuyerID(),b.getUsername(),b.getPassword());
 		
 		return bRep;
+	}
+	
+	public void updateBuyer(String id,String username, String password) {
+		BuyerManager.updateBuyer(id, username, password);
+		
 	}
 	
 	public String deleteBuyer(String id) {
 		
 		//dao.deleteBuyer(id);
-		buyer.deleteBuyer(id);
+		BuyerManager.deleteBuyer(id);
 		
 		return "OK";
 	}

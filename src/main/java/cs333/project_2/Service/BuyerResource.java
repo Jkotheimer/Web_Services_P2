@@ -1,7 +1,6 @@
 package cs333.project_2.Service;
 
 import java.util.List;
-import java.util.Set;
 
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
@@ -39,6 +38,15 @@ public class BuyerResource {
 	@Produces({"application/xml" , "application/json"})
 	@Path("/buyer")
 	public BuyerRepresentation createBuyer(BuyerRequest  buyerRequest) {
+		System.out.println("POST METHOD Request from Client with ............." + buyerRequest.getBuyerId() + "  " + buyerRequest.getPassword());
+		BuyerActivity buyerActivity = new BuyerActivity();
+		return buyerActivity.createBuyer(buyerRequest.getBuyerId(),buyerRequest.getUsername(), buyerRequest.getPassword());
+	}
+	
+	@POST
+	@Produces({"application/xml" , "application/json"})
+	@Path("/buyer/{buyerID}")
+	public BuyerRepresentation UpdateBuyer(BuyerRequest  buyerRequest) {
 		System.out.println("POST METHOD Request from Client with ............." + buyerRequest.getBuyerId() + "  " + buyerRequest.getPassword());
 		BuyerActivity buyerActivity = new BuyerActivity();
 		return buyerActivity.createBuyer(buyerRequest.getBuyerId(),buyerRequest.getUsername(), buyerRequest.getPassword());

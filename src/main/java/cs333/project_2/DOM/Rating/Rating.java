@@ -2,7 +2,7 @@ package cs333.project_2.DOM.Rating;
 
 public class Rating {
 
-	private int ID;
+	private String ID;
 	private int Rateval;
 	private String Review;
 
@@ -10,7 +10,7 @@ public class Rating {
 	
 	}
 	
-	public Rating(int ID, int rateval, String review) {
+	public Rating(String ID, int rateval, String review) {
 		this.ID = ID;
 		this.Rateval = rateval;
 		this.Review = review;
@@ -20,7 +20,7 @@ public class Rating {
 	 * SETTERS
 	 * ________________________________________________________________________
 	 */
-	public void setID(int Id) {
+	public void setID(String Id) {
 		this.ID = Id;
 	}
 	
@@ -37,7 +37,7 @@ public class Rating {
 	 * ________________________________________________________________________
 	 */
 
-	public int getID() {
+	public String getID() {
 		return this.ID;
 	}
 

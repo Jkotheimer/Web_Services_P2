@@ -14,7 +14,7 @@ public class Buyer  {
 	private String buyerID;
 	private List<Order> orders = new ArrayList<>();
 	private List<Address> addresslist = new ArrayList<>();
-	private ArrayList<PaymentInfo> payinfo = new ArrayList<>();; // Allow buyers to have multiple payment options
+	private List<PaymentInfo> payinfo = new ArrayList<>();; // Allow buyers to have multiple payment options
 
 	public Buyer(String ID,String username, String password) {
 		this.username = username;
@@ -48,7 +48,7 @@ public class Buyer  {
 		return this.orders;	
 	}
 	
-	public ArrayList<PaymentInfo> getPayInfos()	{ 
+	public List<PaymentInfo> getPayInfos()	{ 
 		return this.payinfo;  
 	}
 
@@ -94,6 +94,14 @@ public class Buyer  {
 	public void setOrderIDs(List<Order> orderIDs) {
 		this.orders = orderIDs;
 	}
+	
+	public void setAdresses(List<Address> addresses) {
+		this.addresslist = addresses;
+	}
+	
+	public void setPaymentInfos(List<PaymentInfo> payInfos) {
+		this.payinfo = payInfos;
+	}
 
 	public boolean setPassword(String password) {
 		// If the password has been used before, inform the user and have them change it to something else
@@ -108,7 +116,7 @@ public class Buyer  {
 	 */
 
 	public boolean AuthenticateCred(String username, String password) {
-		// TODO possibly add another hash algorithm here for safetyaaaaa
+		// TODO possibly add another hash algorithm here for safety
 		if(this.username == username && this.password == password) return true;
 		else return false;
 	}

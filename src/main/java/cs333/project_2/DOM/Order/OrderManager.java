@@ -1,40 +1,33 @@
 package cs333.project_2.DOM.Order;
 
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
-import cs333.project_2.DAL.Order.OrderDAL;
+import cs333.project_2.DAL.Buyer.BuyerDAL;
 import cs333.project_2.DOM.Order.Order;
+import cs333.project_2.DOM.Product.Product;
 
 public class OrderManager {
 	
-	public Set<Order> getOrders(){
-		Set<Order> orders = new HashSet<Order>();
-		Order a = new Order(123,12);
-		Order b = new Order(124,11);
-		Order c = new Order(125,9);
-		orders.add(a);
-		orders.add(b);
-		orders.add(c);
-		return orders;
+	public List<Order> getOrders(){
+		return BuyerDAL.getOrders();
 	}
 	
-	public void addOrder(int ID, int prod) {
-		OrderDAL.insert(ID, prod);
-		// TODO add the order to the database
+	public void addOrder(String attachedBuyerID, String ID, List<Product> products) {
+		BuyerDAL.insertOrder(attachedBuyerID, ID, products);
 	}
 	
-	public Order readOrder(int serialID) {
-		return OrderDAL.read(serialID);
+	public Order readOrder(String ID) {
+		return BuyerDAL.readOrder(ID);
 	}
 	
-	public void updateOrder(int serialID,int newOrderID, int orderID) {
-		OrderDAL.update(serialID,newOrderID, orderID);
+	public void updateOrder(String ID, String newStatus) {
+		BuyerDAL.updateOrder(ID, newStatus);
 	}
 	
-	public void deleteOrder(int ID) {
-		// TODO delete the given order
-		OrderDAL.deleteOrder(ID);
+	public void deleteOrder(String ID) {
+		BuyerDAL.deleteOrder(ID);
 	}
 
 }
