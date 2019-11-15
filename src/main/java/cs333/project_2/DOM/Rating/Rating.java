@@ -1,24 +1,8 @@
 package cs333.project_2.DOM.Rating;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
-import javax.persistence.Table;
-import javax.persistence.Transient;
-
-@Entity
-@Table(name = "rating")
 public class Rating {
 
-	private int ID;
+	private String ID;
 	private int Rateval;
 	private String Review;
 
@@ -26,7 +10,7 @@ public class Rating {
 	
 	}
 	
-	public Rating(int ID, int rateval, String review) {
+	public Rating(String ID, int rateval, String review) {
 		this.ID = ID;
 		this.Rateval = rateval;
 		this.Review = review;
@@ -36,7 +20,7 @@ public class Rating {
 	 * SETTERS
 	 * ________________________________________________________________________
 	 */
-	public void setID(int Id) {
+	public void setID(String Id) {
 		this.ID = Id;
 	}
 	
@@ -53,18 +37,14 @@ public class Rating {
 	 * ________________________________________________________________________
 	 */
 
-	@Id
-	@Column(name="ratingid")
-	public int getID() {
+	public String getID() {
 		return this.ID;
 	}
 
-	@Column(name = "review")
 	public String getReview() {
 		return this.Review;
 	}
 
-	@Column(name = "rateval")
 	public int getRateval() {
 		return this.Rateval;
 	}

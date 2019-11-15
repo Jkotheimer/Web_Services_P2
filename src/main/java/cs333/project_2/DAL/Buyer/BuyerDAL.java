@@ -1,132 +1,124 @@
 package cs333.project_2.DAL.Buyer;
 
 import cs333.project_2.DOM.Order.Order;
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
-import org.hibernate.cfg.AnnotationConfiguration;
-
+import cs333.project_2.DOM.Product.Product;
 import cs333.project_2.DOM.Buyer.Buyer;
+import cs333.project_2.DOM.General.Address;
+import cs333.project_2.DOM.General.PaymentInfo;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 public class BuyerDAL {
 
-	public static void main(String[] args) {
-				//insert();
-				read(2);
-				update(2,202,"mshaji","45 N Campbell Ave");
-				deleteCustomer(5);
+	//Orders should not exist without Buyers, these can probably be separate files but for now they are one
+	private static List<Buyer> BuyerDB = new ArrayList<Buyer>(Arrays.asList(new Buyer("acc1","jman","password1"),new Buyer("acc2","jmon","password2"),new Buyer("acc3","jmen","password3")));
+	private static List<Order> OrderDB = new ArrayList<Order>();
+	
+	public static List<Buyer> getBuyers(){
+		return BuyerDB;
 	}
-//
-		public static void insert(int ID, String username, String address) {
-
-		 SessionFactory sessionFactory = new AnnotationConfiguration().
-				addAnnotatedClass(Buyer.class).
-				configure("hibernate.cfg.xml").
-				buildSessionFactory();
-
-		//create a Session for Insertion into database, and read data
-		Session session = sessionFactory.getCurrentSession();
-
-			System.out.println("Creating a new Buyer object...");
-
-			//create the Buyer object
-
-			Buyer buyer = new Buyer();
-			buyer.setSerialId(1);
-			buyer.setbuyerID(101);
-			buyer.setUsername("rayyanshaji");
-			buyer.setAddress("43 xyz st");
-
-			//Creating Order Object as soon as Buyer buys a product. Something like an order receipt
-//			Order order = new Order();
-//			order.setSerialID(101);
-//
-//			order.setOrderID(425);
-//			order.setOrderedProductIDs(1182);
-//			order.setBuyer(buyer);
-//
-//			buyer.getOrderIDs().add(order);
-
-			session.beginTransaction();
-
-			session.save(buyer);
-
-			//session.save(order);
-
-			System.out.println("Buyer created in Database!");
-			//commit the transaction
-			session.getTransaction().commit();
+	
+	public static List<Order> getOrders(){
+		return OrderDB;
+	}
+	
+	public static void insertBuyer(String ID, String username, String password) {
+		Buyer toBeAdded = new Buyer(ID,username,password);
+		BuyerDB.add(toBeAdded);
+	}
+	
+	public static void insertOrder(String attachedBuyerID, String ID, List<Product> products) {
+		for(int i=0;i<BuyerDB.size();i++) {
+			if(BuyerDB.get(i).getBuyerID() == attachedBuyerID) {
+				Buyer selected = BuyerDB.get(i);
+				Order newOrder = new Order(ID,selected,products);
+				selected.addOrder(newOrder);
+			}
 		}
+	}
 
-
-			public static Buyer read(int ID) {
-
-				Buyer buyer = new Buyer();
-				SessionFactory sessionFactory = new AnnotationConfiguration().
-						addAnnotatedClass(Buyer.class).
-						configure("hibernate.cfg.xml").
-						buildSessionFactory();
-
-				Session session = sessionFactory.getCurrentSession();
-
-				session.beginTransaction();
-
-
-				//Read the buyer
-				System.out.println("Getting the buyer based on id: ");
-
-				buyer = (Buyer)session.get(Buyer.class,ID);
-
-				session.getTransaction().commit();
-
-				System.out.println(" CUSTOMER USERNAME: "+buyer.getUsername() +"\n CUSTOMER ADDRESS "+buyer.getAddress()+
-						"\n CUSTOMER ID " +buyer.getBuyerID());
-				
-				return buyer;
-
+	public static Buyer read(String ID) {
+		for(int i=0;i<BuyerDB.size();i++) {
+			if(BuyerDB.get(i).getBuyerID() == ID) {
+				return BuyerDB.get(i);
 			}
-
-			public static void update(int serialID,int newBuyerID, String newusername, String newaddress) {
-				//SerialID is the primary key here which you enter as a parameter for the row you wish to change
-
-				Buyer buyer = new Buyer();
-				SessionFactory sessionFactory = new AnnotationConfiguration().
-						addAnnotatedClass(Buyer.class).
-						configure("hibernate.cfg.xml").
-						buildSessionFactory();
-
-				Session session = sessionFactory.getCurrentSession();
-
-				session.beginTransaction();
-
-				buyer = (Buyer)session.get(Buyer.class,serialID);
-
-				buyer.setUsername(newusername);
-				buyer.setbuyerID(newBuyerID);
-				buyer.setAddress(newaddress);
-
-				session.saveOrUpdate(buyer);
-
-				session.getTransaction().commit();
+		}
+		return null;
+	}
+	
+	public static Order readOrder(String ID) {
+		for(int i=0;i<OrderDB.size();i++) {
+			if(OrderDB.get(i).getID() == ID) {
+				return OrderDB.get(i);
 			}
+		}
+		return null;
+	}
 
-
-			public static void deleteCustomer(int ID) {
-				SessionFactory sessionFactory = new AnnotationConfiguration().addAnnotatedClass(Buyer.class).
-						configure("hibernate.cfg.xml").
-						buildSessionFactory();
-
-
-					Session session = sessionFactory.getCurrentSession();
-					session.beginTransaction();
-
-					System.out.println("DELETING BUYER with id : " + ID);
-
-					Buyer deleteBuyer = (Buyer)session.get(Buyer.class, ID);   //specify PRIMARY KEY of the Product
-
-					session.delete(deleteBuyer);
-
-					session.getTransaction().commit();
-
+	public static void update(String ID,String username, String password) {
+	//SerialID is the primary key here which you enter as a parameter for the row you wish to change
+		for(int i=0;i<BuyerDB.size();i++) {
+			if(BuyerDB.get(i).getBuyerID() == ID) {
+				Buyer change = BuyerDB.get(i);
+				change.setPassword(password);
+				change.setUsername(username);
+			}
+		}
+	}
+	
+	public static void updateOrder(String ID, String status) {
+		//SerialID is the primary key here which you enter as a parameter for the row you wish to change
+			for(int i=0;i<OrderDB.size();i++) {
+				if(OrderDB.get(i).getID() == ID) {
+					Order change = OrderDB.get(i);
+					change.updateStatus(status);
 				}
+			}
+		}
+	
+	public static void addOrder(String ID, Order ord) {
+		for(int i=0;i<BuyerDB.size();i++) {
+			if(BuyerDB.get(i).getBuyerID() == ID) {
+				Buyer change = BuyerDB.get(i);
+				change.addOrder(ord);
+			}
+		}
+	}
+
+	public static void addAddress(String ID, Address addr) {
+		for(int i=0;i<BuyerDB.size();i++) {
+			if(BuyerDB.get(i).getBuyerID() == ID) {
+				Buyer change = BuyerDB.get(i);
+				change.addAddress(addr);
+			}
+		}
+	}
+	
+	public static void addPaymentInfo(String ID, PaymentInfo payinf) {
+		for(int i=0;i<BuyerDB.size();i++) {
+			if(BuyerDB.get(i).getBuyerID() == ID) {
+				Buyer change = BuyerDB.get(i);
+				change.addPayInfo(payinf);
+			}
+		}
+	}
+	
+	public static void deleteBuyer(String ID) {
+		for(int i=0;i<BuyerDB.size();i++) {
+			if(BuyerDB.get(i).getBuyerID() == ID) {
+				BuyerDB.remove(i);
+			}
+		}
+	}
+	
+	public static void deleteOrder(String ID) {
+		for(int i=0;i<OrderDB.size();i++) {
+			if(OrderDB.get(i).getID() == ID) {
+				OrderDB.remove(i);
+			}
+		}
+	}
 
 }

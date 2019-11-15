@@ -1,12 +1,5 @@
 package cs333.project_2.DOM.General;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
-
-@Entity
-@Table(name="paymentinfo")
 public class PaymentInfo {    
 
     private String CreditCardNum;
@@ -28,24 +21,22 @@ public class PaymentInfo {
 	 * ________________________________________________________________________
 	 */
 
-    @Id
-    @Column(name="creditcardno")
     public String getCreditCardNum() {
         return this.CreditCardNum;
     }
-    @Column(name="cardholder")
+
     public String getCreditCardHolder() {
         return this.CreditCardHolder;
     }
-    @Column(name="expirydate")
+
     public String getExpDate() {
         return this.ExpDate;
     }
-    @Column(name="cvv")
+
     public int getCCV() {
         return this.CCV;
     }
-    @Column(name="billingaddress")
+ 
     public int getBillingAddressID() {
         return this.billingAddressID;
     }
