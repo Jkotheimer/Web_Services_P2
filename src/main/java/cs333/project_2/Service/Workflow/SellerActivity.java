@@ -5,7 +5,7 @@ import java.util.Iterator;
 import java.util.Set;
 
 import cs333.project_2.DOM.Seller.Seller;
-import cs333.project_2.DAL.Seller.SellerManager;
+import cs333.project_2.DOM.Seller.SellerManager;
 import cs333.project_2.Service.Respresentation.SellerRepresentation;
 
 public class SellerActivity {

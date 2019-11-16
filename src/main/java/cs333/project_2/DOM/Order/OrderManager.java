@@ -10,7 +10,7 @@ import cs333.project_2.DOM.Product.Product;
 
 public class OrderManager {
 	
-	public List<Order> getOrders(){
+	public Set<Order> getOrders(){
 		return BuyerDAL.getOrders();
 	}
 	

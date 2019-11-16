@@ -13,28 +13,25 @@ import java.util.List;
 public class BuyerDAL {
 
 	//Orders should not exist without Buyers, these can probably be separate files but for now they are one
-	private static List<Buyer> BuyerDB = new ArrayList<Buyer>(Arrays.asList(new Buyer("acc1","jman","password1"),new Buyer("acc2","jmon","password2"),new Buyer("acc3","jmen","password3")));
-	private static List<Order> OrderDB = new ArrayList<Order>();
+	private static Set<Buyer> BuyerDB = new HashSet<Buyer>(Arrays.asList(new Buyer("acc1","jman","password1"),new Buyer("acc2","jmon","password2"),new Buyer("acc3","jmen","password3")));
+	private static Set<Order> OrderDB = new HashSet<Order>();
 	
-	public static List<Buyer> getBuyers(){
+	public static Set<Buyer> getBuyers(){
 		return BuyerDB;
 	}
 	
-	public static List<Order> getOrders(){
+	public static Set<Order> getOrders(){
 		return OrderDB;
 	}
 	
 	public static void insertBuyer(String ID, String username, String password) {
-		Buyer toBeAdded = new Buyer(ID,username,password);
-		BuyerDB.add(toBeAdded);
+		BuyerDB.add(new Buyer(ID,username,password));
 	}
 	
 	public static void insertOrder(String attachedBuyerID, String ID, List<Product> products) {
-		for(int i=0;i<BuyerDB.size();i++) {
-			if(BuyerDB.get(i).getBuyerID() == attachedBuyerID) {
-				Buyer selected = BuyerDB.get(i);
-				Order newOrder = new Order(ID,selected,products);
-				selected.addOrder(newOrder);
+		for(Buyer b : BuyerDB) 
+			if(b.getBuyerID() == attachedBuyerID) {
+				selected.addOrder(new Order(ID,b,products));
 			}
 		}
 	}
