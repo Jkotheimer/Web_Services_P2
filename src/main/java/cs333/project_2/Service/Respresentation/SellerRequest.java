@@ -12,9 +12,10 @@ public class SellerRequest {
 	
 	private String username;
 	private String password;
-	private int sellerID;
+	private String sellerID;
 	private String address;
 	private String urlAddress;
+	
 	public String getUsername() {
 		return username;
 	}
@@ -27,10 +28,10 @@ public class SellerRequest {
 	public void setPassword(String password) {
 		this.password = password;
 	}
-	public int getSellerID() {
+	public String getSellerID() {
 		return sellerID;
 	}
-	public void setSellerID(int sellerID) {
+	public void setSellerID(String sellerID) {
 		this.sellerID = sellerID;
 	}
 	public String getAddress() {

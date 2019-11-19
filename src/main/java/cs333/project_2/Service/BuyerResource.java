@@ -11,10 +11,14 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.Status;
 
+import javax.jws.WebService;
+
 import cs333.project_2.Service.Respresentation.BuyerRepresentation;
 import cs333.project_2.Service.Respresentation.BuyerRequest;
 import cs333.project_2.Service.Workflow.BuyerActivity;
 
+@Path("/buyers/")
+@WebService
 public class BuyerResource {
 	@GET
 	@Produces({"application/xml" , "application/json"})
@@ -22,7 +26,7 @@ public class BuyerResource {
 	public List<BuyerRepresentation> getBuyers() {
 		System.out.println("GET METHOD Request for all buyers .............");
 		BuyerActivity buyerActivity = new BuyerActivity();
-		return buyerActivity.getBuyers();	
+		return buyerActivity.getBuyers();
 	}
 	
 	@GET

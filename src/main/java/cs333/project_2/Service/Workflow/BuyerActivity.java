@@ -1,10 +1,8 @@
 package cs333.project_2.Service.Workflow;
 
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
-import java.util.Set;
 
 import cs333.project_2.DOM.Buyer.BuyerManager;
 import cs333.project_2.DOM.Buyer.Buyer;
@@ -21,7 +19,10 @@ public class BuyerActivity {
 		Iterator<Buyer> it = buyers.iterator();
 		while(it.hasNext()) {
           Buyer b = (Buyer)it.next();
-          BuyerRepresentation buyerRepresentation = new BuyerRepresentation(b.getBuyerID(),b.getUsername(),b.getPassword());
+          BuyerRepresentation buyerRepresentation = new BuyerRepresentation();
+		  buyerRepresentation.setID(b.getBuyerID());
+		  buyerRepresentation.setUsername(b.getUsername());
+		  buyerRepresentation.setPassword(b.getPassword());
           buyerRepresentation.setOrderIDs(b.getOrders());
           buyerRepresentation.setAdresses(b.getAddress());
           buyerRepresentation.setPaymentInfos(b.getPayInfos());
@@ -35,7 +36,10 @@ public class BuyerActivity {
 		
 		Buyer b = BuyerManager.getBuyer(id);
 		
-		BuyerRepresentation buyerRepresentation = new BuyerRepresentation(b.getBuyerID(),b.getUsername(),b.getPassword());
+		BuyerRepresentation buyerRepresentation = new BuyerRepresentation();
+		buyerRepresentation.setID(b.getBuyerID());
+		buyerRepresentation.setUsername(b.getUsername());
+		buyerRepresentation.setPassword(b.getPassword());
         buyerRepresentation.setOrderIDs(b.getOrders());
         buyerRepresentation.setAdresses(b.getAddress());
         buyerRepresentation.setPaymentInfos(b.getPayInfos());
@@ -48,9 +52,12 @@ public class BuyerActivity {
 		BuyerManager.addBuyer(ID, username , password);
 		Buyer b = new Buyer(ID, username, password);
 		
-		BuyerRepresentation bRep = new BuyerRepresentation(b.getBuyerID(),b.getUsername(),b.getPassword());
+		BuyerRepresentation buyerRepresentation = new BuyerRepresentation();
+		buyerRepresentation.setID(b.getBuyerID());
+		buyerRepresentation.setUsername(b.getUsername());
+		buyerRepresentation.setPassword(b.getPassword());
 		
-		return bRep;
+		return buyerRepresentation;
 	}
 	
 	public void updateBuyer(String id,String username, String password) {

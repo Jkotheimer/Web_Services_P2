@@ -23,12 +23,8 @@ public class BuyerRepresentation {
 	private List<Order> orders = new ArrayList<>();
 	private List<Address> addresslist = new ArrayList<>();
 	private List<PaymentInfo> payinfo = new ArrayList<>();; // Allow buyers to have multiple payment options
-
-	public BuyerRepresentation(String ID,String username, String password) {
-		this.username = username;
-		this.password = password;
-		this.buyerID = ID;
-	}
+	
+	public BuyerRepresentation() {}
 
 	/**
 	 * GETTERS
@@ -90,7 +86,7 @@ public class BuyerRepresentation {
 		return true;
 	}
 
-	public void setbuyerID(String iD) {
+	public void setID(String iD) {
 		this.buyerID = iD;
 	}
 

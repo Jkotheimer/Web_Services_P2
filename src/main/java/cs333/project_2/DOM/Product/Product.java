@@ -9,8 +9,8 @@ import cs333.project_2.DOM.Rating.Rating;
 public class Product {
 
 	private String productID;
-	private double Price;
-	private Seller seller;
+	private float Price;
+	private String sellerID;
 	private String ItemDescrip;
 	private float Rating;
 	private int totalRating = 0;
@@ -20,11 +20,11 @@ public class Product {
 	
 	}
 	
-	public Product(String ID, float price, String itemDescrip, Seller producer) {
+	public Product(String ID, float price, String itemDescrip, String sellerID) {
 		this.productID = ID;
 		this.Price = price;
 		this.ItemDescrip = itemDescrip;
-		this.seller = producer;
+		this.sellerID = sellerID;
 		this.Rating = -1; // -1 indicates no ratings yet
 	}
 
@@ -37,7 +37,7 @@ public class Product {
 		this.productID = productId;
 	}
 
-	public void setPrice(double price) {
+	public void setPrice(float price) {
 		Price = price;
 	}
 	public void setItemDescrip(String itemdescrip) {
@@ -48,8 +48,8 @@ public class Product {
 		this.Rating = rat;
 	}
 	
-	public void setSeller(Seller seller) {
-		this.seller = seller;
+	public void setSeller(String seller) {
+		this.sellerID = seller;
 	}
 	
 	public boolean addRating(Rating rating) {
@@ -82,7 +82,7 @@ public class Product {
 		return this.ItemDescrip;
 	}
 
-	public Seller getSeller() {
-		return this.seller;
+	public String getSellerID() {
+		return this.sellerID;
 	}
 }

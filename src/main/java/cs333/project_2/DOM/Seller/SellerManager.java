@@ -1,8 +1,6 @@
 package cs333.project_2.DOM.Seller;
 
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 import cs333.project_2.DAL.Seller.SellerDAL;
 import cs333.project_2.DOM.Product.Product;
@@ -10,23 +8,33 @@ import cs333.project_2.DOM.Seller.Seller;
 
 public class SellerManager {
 	
+	private SellerDAL sellerDAL = new SellerDAL();
+	
 	public List<Seller> getSellers(){
-		return SellerDAL.getSellers();
+		return sellerDAL.getSellers();
 	}
 	
-	public static void insertSeller(String Id, String username, String password) {
-		SellerDAL.insertSeller(Id, username, password);
+	public void insertSeller(String Id, String username, String password) {
+		sellerDAL.insertSeller(Id, username, password);
+	}
+	
+	public void insertSeller(String Id, String urlAddress, String username, String password) {
+		sellerDAL.insertSeller(Id, urlAddress, username, password);
 	}
 
-	public static Seller readSeller(String ID) {
-		return SellerDAL.readSeller(ID);
+	public Seller readSeller(String ID) {
+		return sellerDAL.readSeller(ID);
 	}
 	
-	public static void updateSeller(String ID,String newusername, String newpassword) {
-		SellerDAL.updateSeller(ID, newusername, newpassword);
+	public void updateSeller(String ID,String newusername, String newpassword) {
+		sellerDAL.updateSeller(ID, newusername, newpassword);
 	}
 	
-	public static void deleteSeller(String ID) {
-		SellerDAL.deleteSeller(ID);
+	public void updateSeller(String ID, String urlAddress, String username, String password) {
+		sellerDAL.updateSeller(ID, urlAddress, username, password);
+	}
+	
+	public void deleteSeller(String ID) {
+		sellerDAL.deleteSeller(ID);
 	}
 }

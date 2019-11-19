@@ -1,6 +1,6 @@
 package cs333.project_2.Service;
 
-import java.util.Set;
+import java.util.List;
 
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
@@ -11,15 +11,19 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.Status;
 
+import javax.jws.WebService;
+
 import cs333.project_2.Service.Respresentation.SellerRepresentation;
 import cs333.project_2.Service.Respresentation.SellerRequest;
 import cs333.project_2.Service.Workflow.SellerActivity;
 
+@Path("/sellers/")
+@WebService
 public class SellerResource {
 	@GET
 	@Produces({"application/xml" , "application/json"})
 	@Path("/seller")
-	public Set<SellerRepresentation> getSellers() {
+	public List<SellerRepresentation> getSellers() {
 		System.out.println("GET METHOD Request for all sellers .............");
 		SellerActivity sellerActivity = new SellerActivity();
 		return sellerActivity.getSellers();	
@@ -28,7 +32,7 @@ public class SellerResource {
 	@GET
 	@Produces({"application/xml" , "application/json"})
 	@Path("/seller/{sellerId}")
-	public SellerRepresentation getSeller(@PathParam("sellerId") int id) {
+	public SellerRepresentation getSeller(@PathParam("sellerId") String id) {
 		System.out.println("GET METHOD Request from Client with sellerRequest String ............." + id);
 		SellerActivity sellerActivity = new SellerActivity();
 		return sellerActivity.getSeller(id);
@@ -46,7 +50,7 @@ public class SellerResource {
 	@DELETE
 	@Produces({"application/xml" , "application/json"})
 	@Path("/seller/{sellerId}")
-	public Response deleteSeller(@PathParam("sellerId") int id) {
+	public Response deleteSeller(@PathParam("sellerId") String id) {
 		System.out.println("Delete METHOD Request from Client with sellerRequest String ............." + id);
 		SellerActivity sellerActivity = new SellerActivity();
 		String res = sellerActivity.deleteSeller(id);

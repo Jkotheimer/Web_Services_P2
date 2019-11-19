@@ -10,17 +10,19 @@ import javax.xml.bind.annotation.XmlType;
 @XmlType(name = "")
 public class SellerRepresentation {
 
-	private int serialID;
+	private String serialID;
 	private String username;
 	private String password;
-	private int sellerID;
+	private String sellerID;
 	private String address;
 	private String urlAddress;
 	
-	public int getSerialID() {
+	public SellerRepresentation() {}
+	
+	public String getSerialID() {
 		return serialID;
 	}
-	public void setSerialID(int serialID) {
+	public void setSerialID(String serialID) {
 		this.serialID = serialID;
 	}
 	public String getUsername() {
@@ -35,10 +37,10 @@ public class SellerRepresentation {
 	public void setPassword(String password) {
 		this.password = password;
 	}
-	public int getSellerID() {
+	public String getSellerID() {
 		return sellerID;
 	}
-	public void setSellerID(int sellerID) {
+	public void setSellerID(String sellerID) {
 		this.sellerID = sellerID;
 	}
 	public String getAddress() {

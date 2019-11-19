@@ -1,8 +1,6 @@
 package cs333.project_2.DOM.Order;
 
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 import cs333.project_2.DAL.Buyer.BuyerDAL;
 import cs333.project_2.DOM.Order.Order;
@@ -10,11 +8,11 @@ import cs333.project_2.DOM.Product.Product;
 
 public class OrderManager {
 	
-	public Set<Order> getOrders(){
+	public List<Order> getOrders(){
 		return BuyerDAL.getOrders();
 	}
 	
-	public void addOrder(String attachedBuyerID, String ID, List<Product> products) {
+	public void addOrder(String attachedBuyerID, String ID, List<String> products) {
 		BuyerDAL.insertOrder(attachedBuyerID, ID, products);
 	}
 	

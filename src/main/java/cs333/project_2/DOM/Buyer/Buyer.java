@@ -22,9 +22,7 @@ public class Buyer  {
 		this.buyerID = ID;
 	}
 	
-	public Buyer() {
-		
-	}
+	public Buyer() {}
 
 
 	/**

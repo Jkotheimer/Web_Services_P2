@@ -9,7 +9,7 @@ import static org.junit.Assert.*;
 public class TestProduct {
 
 	private Product fixture;
-
+	/*
 	@Test
 	public void test_Product_Getters_N_Setters() {
 		fixture = new Product(1089, 6354, "A great product from Yokos");
@@ -31,4 +31,5 @@ public class TestProduct {
         assertEquals(7,fixture.getRating(), 0);
         assertEquals("An even greater product from Bokos",fixture.getItemDescrip());
     }
+    */
 }

@@ -1,18 +1,22 @@
 package cs333.project_2.Service.Respresentation;
 
+import cs333.project_2.DOM.Product.Product;
+
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
+
+import java.util.List;
 
 @XmlRootElement(name = "Order")
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "")
 public class OrderRepresentation {
 	
-	private int productId;
+	private List<String> products;
 	private String status;
-	private int Id;
+	private String Id;
 
 	public OrderRepresentation() {}
 
@@ -24,20 +28,20 @@ public class OrderRepresentation {
 		this.status = stat;
 	}
 
-	public int getId() {
+	public String getId() {
 		return Id;
 	}
 
-	public void setId(int id) {
+	public void setId(String id) {
 		this.Id = id;
 	}
 
-	public int getProductId() {
-		return productId;
+	public List<String> getProducts() {
+		return products;
 	}
 
-	public void setProductId(int prodId) {
-		this.productId = prodId;
+	public void setProducts(List<String> prod) {
+		this.products = prod;
 	}
 
 }

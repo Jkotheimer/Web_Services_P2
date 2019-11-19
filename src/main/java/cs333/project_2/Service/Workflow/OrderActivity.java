@@ -1,8 +1,8 @@
 package cs333.project_2.Service.Workflow;
 
-import java.util.HashSet;
 import java.util.Iterator;
-import java.util.Set;
+import java.util.List;
+import java.util.ArrayList;
 
 import cs333.project_2.DOM.Order.Order;
 import cs333.project_2.DOM.Order.OrderManager;
@@ -16,19 +16,19 @@ public class OrderActivity {
 
 	private static OrderManager ord = new OrderManager();
 	
-	public Set<OrderRepresentation> getOrders() {
+	public List<OrderRepresentation> getOrders() {
 		
-		Set<Order> orders = new HashSet<Order>();
-		Set<OrderRepresentation> orderRepresentations = new HashSet<OrderRepresentation>();
+		List<Order> orders = new ArrayList<Order>();
+		List<OrderRepresentation> orderRepresentations = new ArrayList<OrderRepresentation>();
 		orders = ord.getOrders();
 		
 		Iterator<Order> it = orders.iterator();
 		while(it.hasNext()) {
           Order p = (Order)it.next();
           OrderRepresentation orderRepresentation = new OrderRepresentation();
-          orderRepresentation.setId(p.getOrderID());
+          orderRepresentation.setId(p.getID());
           orderRepresentation.setStatus(p.getStatus());
-          orderRepresentation.setProductId((int)p.getOrderedProductIDs());
+          orderRepresentation.setProducts(p.getOrderedProducts());
           
           //now add this representation in the list
           orderRepresentations.add(orderRepresentation);
@@ -36,32 +36,32 @@ public class OrderActivity {
 		return orderRepresentations;
 	}
 	
-	public OrderRepresentation getOrder(int id) {
+	public OrderRepresentation getOrder(String id) {
 		
 		Order p = ord.readOrder(id);
 		
 		OrderRepresentation pRep = new OrderRepresentation();
-		pRep.setProductId((int)p.getOrderedProductIDs());
+		pRep.setProducts(p.getOrderedProducts());
 		pRep.setStatus(p.getStatus());
-		pRep.setId(p.getOrderID());
+		pRep.setId(p.getID());
 		
 		return pRep;
 	}
 	
-	public OrderRepresentation createOrder(int ID,int ProductID) {
+	public OrderRepresentation createOrder(String ID, String buyerID, List<String> Products) {
 		
-		ord.addOrder(ID,ProductID);
-		Order p = new Order(ID,ProductID);
+		ord.addOrder(buyerID, ID, Products);
+		Order p = new Order(ID, buyerID, Products);
 		
 		OrderRepresentation pRep = new OrderRepresentation();
-		pRep.setId(p.getOrderID());
+		pRep.setId(p.getID());
 		pRep.setStatus(p.getStatus());
-		pRep.setProductId((int)p.getOrderedProductIDs());
+		pRep.setProducts(p.getOrderedProducts());
 		
 		return pRep;
 	}
 	
-	public String deleteOrder(int id) {
+	public String deleteOrder(String id) {
 		
 		//dao.deleteOrder(id);
 		ord.deleteOrder(id);

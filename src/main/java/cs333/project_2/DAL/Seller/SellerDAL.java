@@ -15,6 +15,8 @@ public class SellerDAL {
 	private static List<Seller> SellerDB = new ArrayList<Seller>(Arrays.asList(new Seller("acc1","gman","password1"),new Seller("acc2","gmon","password2"),new Seller("acc3","gmen","password3")));
 	private static List<Product> ProductDB = new ArrayList<Product>();
 	
+	public SellerDAL() {}
+	
 	public static List<Seller> getSellers(){
 		return SellerDB;
 	}
@@ -24,85 +26,71 @@ public class SellerDAL {
 	}
 	
 	public static void insertSeller(String Id, String username, String password) {
-		Seller toBeInserted = new Seller(Id,username,password);
-		SellerDB.add(toBeInserted);
+		SellerDB.add(new Seller(Id,username,password));
+	}
+	
+	public static void insertSeller(String Id, String urlAddress, String username, String password) {
+		SellerDB.add(new Seller(Id, urlAddress, username, password));
 	}
 
 	public static void insertProduct(String SellerID, String prodName, float price, String prodDesc) {
-		for(int i=0;i<SellerDB.size();i++) {
-			if(SellerDB.get(i).getsellerID() == SellerID) {
-				Seller foundSeller = SellerDB.get(i);
-				Product newProd = new Product(prodName,price,prodDesc,foundSeller);
-				foundSeller.addProduct(newProd);
-				ProductDB.add(newProd);
+		for(Seller s : SellerDB) {
+			if(s.getSellerID() == SellerID) {
+				Product p = new Product(prodName, price, prodDesc, SellerID);
+				s.addProduct(p);
+				ProductDB.add(p);
 			}
 		}
 	}
 	
 	public static Seller readSeller(String ID) {
-		for(int i=0;i<SellerDB.size();i++) {
-			if(SellerDB.get(i).getsellerID() == ID) {
-				Seller foundSeller = SellerDB.get(i);
-				return foundSeller;
-			}
-		}
+		for(Seller s : SellerDB) if(s.getSellerID() == ID) return s;
 		return null;
 	}
 	
 	public static Product readProduct(String ID) {
-		for(int i=0;i<ProductDB.size();i++) {
-			if(ProductDB.get(i).getProductID() == ID) {
-				Product foundProduct = ProductDB.get(i);
-				return foundProduct;
-			}
-		}
+		for(Product p : ProductDB) if(p.getProductID() == ID) return p;
 		return null;
 	}
 
 	public static void updateSeller(String ID,String newusername, String newpassword) {
-		for(int i=0;i<SellerDB.size();i++) {
-			if(SellerDB.get(i).getsellerID() == ID) {
-				Seller change = SellerDB.get(i);
-				change.setPassword(newpassword);
-				change.setUsername(newusername);
+		for(Seller s : SellerDB) {
+			if(s.getSellerID() == ID) {
+				s.setUsername(newusername);
+				s.setPassword(newpassword);
 			}
-		}		
+		}
 	}
 	
-	public static void updateProduct(String prodName, float price, String prodDesc) {
-		for(int i=0;i<ProductDB.size();i++) {
-			if(ProductDB.get(i).getProductID() == prodName) {
-				Product change = ProductDB.get(i);
-				change.setPrice(price);
-				change.setItemDescrip(prodDesc);
+	public static void updateSeller(String ID, String urlAddress, String username, String password) {
+		for(Seller s : SellerDB) {
+			if(s.getSellerID() == ID) {
+				s.seturlAddress(urlAddress);
+				s.setUsername(username);
+				s.setPassword(password);
 			}
-		}		
+		}
+	}
+	
+	public static void updateProduct(String ID, float price, String prodDesc) {
+		for(Product p : ProductDB) {
+			if(p.getProductID() == ID) {
+				p.setPrice(price);
+				p.setItemDescrip(prodDesc);
+			}
+		}
 	}
 
 	public static void deleteSeller(String ID) {
-		for(int i=0;i<SellerDB.size();i++) {
-			if(SellerDB.get(i).getsellerID() == ID) {
-				SellerDB.remove(i);
-			}
-		}	
+		for(Seller s : SellerDB) if(s.getSellerID() == ID) SellerDB.remove(s);
 	}
 			
 	public static void deleteProduct(String ID) {
-		for(int i=0;i<ProductDB.size();i++) {
-			if(ProductDB.get(i).getProductID() == ID) {
-				ProductDB.remove(i);
-			}
-		}	
+		for(Product p : ProductDB) if(p.getProductID() == ID) ProductDB.remove(p);
 	}
 	
-	public static void addProductReview(String prodName,String reviewname,int score, String reviewcontent) {
-		for(int i=0;i<ProductDB.size();i++) {
-			if(ProductDB.get(i).getProductID() == prodName) {
-				Product change = ProductDB.get(i);
-				Rating newrat = new Rating(reviewname,score,reviewcontent);
-				change.addRating(newrat);
-			}
-		}		
+	public static void addProductReview(String prodID,String reviewname,int score, String reviewcontent) {
+		for(Product p : ProductDB) if(p.getProductID() == prodID) p.addRating(new Rating(reviewname, score, reviewcontent));
 	}
 
 }

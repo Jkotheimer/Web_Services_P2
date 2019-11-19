@@ -1,6 +1,5 @@
 package cs333.project_2.DOM.Order;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.Column;
@@ -36,31 +35,34 @@ import cs333.project_2.DOM.Product.Product;
 public class Order {
 	
 	private String orderID;
-	private List<Product> OrderedProductIDs;
-	private Buyer buyer;
+	private List<String> OrderedProducts;
+	private String buyerID;
 	private String Status;
 
-	public Order(String ID, Buyer purchaser, List<Product> productIDs) {
+	public Order(String ID, String buyerID, List<String> products) {
 		this.orderID = ID;
-		this.OrderedProductIDs = productIDs;
+		this.OrderedProducts = products;
 		this.Status = "Order initiated";
-		this.buyer = purchaser;
+		this.buyerID = buyerID;
 	}
 	
-	public Order() {
-		
-	}
+	public Order() {}
+	
+	/**
+	 * GETTERS
+	 * ________________________________________________________________________
+	 */
 
 	public String getID() {
 		return this.orderID;
 	}
 
-	public List<Product> getOrderedProductIDs() {
-		return this.OrderedProductIDs;
+	public List<String> getOrderedProducts() {
+		return this.OrderedProducts;
 	}
 	
-	public Buyer getBuyer() {
-		return this.buyer;
+	public String getBuyerID() {
+		return this.buyerID;
 	}
 	
 	public String getStatus() {
@@ -76,12 +78,12 @@ public class Order {
 		this.orderID = orderID;
 	}
 
-	public void setOrderedProductIDs(List<Product> orderedProductIDs) {
-		this.OrderedProductIDs = orderedProductIDs;
+	public void setOrderedProducts(List<String> orderedProducts) {
+		this.OrderedProducts = orderedProducts;
 	}
 
-	public void setBuyer(Buyer buyer) {
-		this.buyer = buyer;
+	public void setBuyerID(String buyerID) {
+		this.buyerID = buyerID;
 	}
 	
 	public boolean updateStatus(String status) {

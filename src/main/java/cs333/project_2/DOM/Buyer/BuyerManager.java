@@ -11,8 +11,7 @@ import cs333.project_2.DOM.Product.Product;
 public class BuyerManager {
 	
 	public static List<Buyer> getBuyers() {
-		List<Buyer> buyers = BuyerDAL.getBuyers();
-		return buyers;
+		return BuyerDAL.getBuyers();
 	}
 	
     public static Buyer getBuyer(String ID) {
@@ -31,7 +30,7 @@ public class BuyerManager {
 		BuyerDAL.update(ID,username,password);
 	}
 
-	public static void insertOrder(String attachedBuyerID, String ID, List<Product> products) {
+	public static void insertOrder(String attachedBuyerID, String ID, List<String> products) {
 		BuyerDAL.insertOrder(attachedBuyerID, ID, products);
 	}
 	

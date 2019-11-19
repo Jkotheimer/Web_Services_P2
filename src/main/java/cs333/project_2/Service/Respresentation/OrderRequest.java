@@ -5,15 +5,35 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
 
+import java.util.List;
+
 @XmlRootElement
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "")
 public class OrderRequest {
 	
-	private int productId;
+	private String ID;
+	private String buyerID;
+	private List<String> productIds;
 	private String status;
 
 	public OrderRequest() {}
+	
+	public String getID() {
+		return ID;
+	}
+	
+	public void setID(String ID) {
+		this.ID = ID;
+	}
+	
+	public String getBuyerID() {
+		return buyerID;
+	}
+	
+	public void setBuyerID(String ID) {
+		this.buyerID = ID;
+	}
 
 	public String getStatus() {
 		return status;
@@ -23,12 +43,12 @@ public class OrderRequest {
 		this.status = stat;
 	}
 
-	public int getProductId() {
-		return productId;
+	public List<String> getProductIds() {
+		return productIds;
 	}
 
-	public void setProductId(int prodId) {
-		this.productId = prodId;
+	public void setProductIds(List<String> prodIds) {
+		this.productIds = prodIds;
 	}
 
 }

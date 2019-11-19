@@ -1,5 +1,7 @@
 package cs333.project_2.DOM.Seller;
+
 import cs333.project_2.DOM.Product.Product;
+import cs333.project_2.DOM.Rating.Rating;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -9,16 +11,24 @@ public class Seller {
 	private String username;
 	private String password;
 	private String sellerID;
+	private String urlAddress;
 	private List<Product> products = new ArrayList<Product>();
+	private List<Rating> ratings = new ArrayList<Rating>();
 	
-	public Seller() {
-		
-	}
+	public Seller() {}
 
 	public Seller(String ID, String username, String password) {
 		this.username = username;
+		this.password = password;
+		this.sellerID = ID;
+		this.urlAddress = "";
+	}
+	
+	public Seller(String ID, String urlAddress, String username, String password) {
+		this.username = username;
 		this.password = password;	
 		this.sellerID = ID;
+		this.urlAddress = urlAddress;
 	}
 
 	/**
@@ -26,11 +36,15 @@ public class Seller {
 	 * ________________________________________________________________________
 	 */
 
-	public String getUsername()				{ return this.username;	}
+	public String getUsername()				{ return this.username;		}
 
-	public String getsellerID()						{ return this.sellerID;		}
+	public String getSellerID()				{ return this.sellerID;		}
+	
+	public String geturlAddress()			{ return this.urlAddress;	}
 
-	public List<Product> getProducts()			{ return this.products;	}
+	public List<Product> getProducts()		{ return this.products;		}
+	
+	public List<Rating> getRatings()		{ return this.ratings;		}
 
 	/**
 	 * SETTERS
@@ -42,6 +56,12 @@ public class Seller {
 		this.username = username;
 		return true;
 	}
+	
+	public boolean seturlAddress(String urlAddress) {
+		this.urlAddress = urlAddress;
+		return true;
+	}
+	
 	public boolean setPassword(String password) {
 		// If the password has been used before, inform the user and have them change it to something else
 		if(this.password == password) return false;
@@ -53,8 +73,12 @@ public class Seller {
 		this.products = products;
 	}
 	
-	public void addProduct(Product productID) {
-		this.products.add(productID);	
+	public void addProduct(Product product) {
+		this.products.add(product);	
+	}
+	
+	public void addRating(Rating rating) {
+		this.ratings.add(rating);
 	}
 
 	/**

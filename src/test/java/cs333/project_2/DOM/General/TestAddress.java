@@ -10,7 +10,7 @@ import static org.junit.Assert.*;
 public class TestAddress {
 
 	private Address fixture;
-
+	/*
 	@Test
 	public void test_Address_Getters_N_Setters() {
 		// Test Object Initialization
@@ -33,4 +33,5 @@ public class TestAddress {
 		assertEquals("Yorulia",fixture.getState());
 		assertEquals(90456,fixture.getZipcode());
     }
+    */
 }

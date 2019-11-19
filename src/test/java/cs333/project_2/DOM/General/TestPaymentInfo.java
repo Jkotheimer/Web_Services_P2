@@ -9,7 +9,7 @@ import static org.junit.Assert.*;
 public class TestPaymentInfo {
 
 	private PaymentInfo fixture;
-
+	/*
 	@Test
 	public void test_Payinfo_Getters_N_Setters() {
 		// Test Object Initialization
@@ -36,4 +36,5 @@ public class TestPaymentInfo {
 		assertEquals(543, fixture.getCCV());
 		assertEquals(4096, fixture.getBillingAddressID());
     }
+    */
 }

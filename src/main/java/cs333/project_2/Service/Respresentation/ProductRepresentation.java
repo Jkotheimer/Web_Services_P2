@@ -12,7 +12,7 @@ public class ProductRepresentation {
 	
 	private int price;
 	private String itemdescrip;
-	private int Id;
+	private String Id;
 
 	public ProductRepresentation() {}
 
@@ -24,11 +24,11 @@ public class ProductRepresentation {
 		this.itemdescrip = desc;
 	}
 
-	public int getId() {
+	public String getId() {
 		return Id;
 	}
 
-	public void setId(int id) {
+	public void setId(String id) {
 		this.Id = id;
 	}
 
