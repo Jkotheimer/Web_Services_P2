@@ -1,12 +1,15 @@
 package cs333.project_2.Service.Workflow;
 
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
-import java.util.Set;
 
 import cs333.project_2.DOM.Buyer.BuyerManager;
+import cs333.project_2.DOM.General.Address;
+import cs333.project_2.DOM.General.PaymentInfo;
+import cs333.project_2.DOM.Order.Order;
+import cs333.project_2.DOM.Product.Product;
+import cs333.project_2.DAL.Buyer.BuyerDAL;
 import cs333.project_2.DOM.Buyer.Buyer;
 import cs333.project_2.Service.Respresentation.BuyerRepresentation;
 
@@ -66,4 +69,20 @@ public class BuyerActivity {
 		return "OK";
 	}
 
+	public static void insertOrder(String attachedBuyerID, String ID, List<Product> products) {
+		BuyerManager.insertOrder(attachedBuyerID, ID, products);
+	}
+	
+	public static void addOrder(String ID, Order ord) {
+		BuyerManager.addOrder(ID, ord);
+	}
+
+	public static void addAddress(String ID, Address addr) {
+		BuyerManager.addAddress(ID, addr);
+	}
+	
+	public static void addPaymentInfo(String ID, PaymentInfo payinf) {
+		BuyerManager.addPaymentInfo(ID, payinf);
+	}
+	
 }

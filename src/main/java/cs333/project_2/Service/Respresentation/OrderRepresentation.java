@@ -1,43 +1,72 @@
 package cs333.project_2.Service.Respresentation;
 
+import java.util.List;
+
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
+
+import cs333.project_2.DOM.Buyer.Buyer;
+import cs333.project_2.DOM.Product.Product;
 
 @XmlRootElement(name = "Order")
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "")
 public class OrderRepresentation {
 	
-	private int productId;
-	private String status;
-	private int Id;
+	private String orderID;
+	private List<Product> OrderedProductIDs;
+	private Buyer buyer;
+	private String Status;
 
-	public OrderRepresentation() {}
+	public OrderRepresentation(String ID, Buyer purchaser, List<Product> productIDs) {
+		this.orderID = ID;
+		this.OrderedProductIDs = productIDs;
+		this.Status = "Order initiated";
+		this.buyer = purchaser;
+	}
+	
+	public OrderRepresentation() {
+		
+	}
 
+	public String getID() {
+		return this.orderID;
+	}
+
+	public List<Product> getOrderedProductIDs() {
+		return this.OrderedProductIDs;
+	}
+	
+	public Buyer getBuyer() {
+		return this.buyer;
+	}
+	
 	public String getStatus() {
-		return status;
+		return this.Status;
 	}
 
-	public void setStatus(String stat) {
-		this.status = stat;
+	/**
+	 * SETTERS
+	 * ________________________________________________________________________
+	 */
+
+	public void setOrderID(String orderID) {
+		this.orderID = orderID;
 	}
 
-	public int getId() {
-		return Id;
+	public void setOrderedProductIDs(List<Product> orderedProductIDs) {
+		this.OrderedProductIDs = orderedProductIDs;
 	}
 
-	public void setId(int id) {
-		this.Id = id;
+	public void setBuyer(Buyer buyer) {
+		this.buyer = buyer;
 	}
-
-	public int getProductId() {
-		return productId;
-	}
-
-	public void setProductId(int prodId) {
-		this.productId = prodId;
+	
+	public boolean updateStatus(String status) {
+		this.Status = status;
+		return true;
 	}
 
 }

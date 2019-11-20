@@ -1,16 +1,22 @@
 package cs333.project_2.Service.Respresentation;
 
+import java.util.List;
+
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
+
+import cs333.project_2.DOM.Buyer.Buyer;
+import cs333.project_2.DOM.Product.Product;
 
 @XmlRootElement
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "")
 public class OrderRequest {
 	
-	private int productId;
+	private String orderID;
+	private List<Product> OrderedProductIDs;
 	private String status;
 
 	public OrderRequest() {}
@@ -22,13 +28,21 @@ public class OrderRequest {
 	public void setStatus(String stat) {
 		this.status = stat;
 	}
-
-	public int getProductId() {
-		return productId;
+	
+	public String getID() {
+		return this.orderID;
+	}
+	
+	public void setOrderID(String orderID) {
+		this.orderID = orderID;
 	}
 
-	public void setProductId(int prodId) {
-		this.productId = prodId;
+	public List<Product> getProductIds() {
+		return OrderedProductIDs;
+	}
+
+	public void setProductIds(List<Product> prodId) {
+		this.OrderedProductIDs = prodId;
 	}
 
 }
