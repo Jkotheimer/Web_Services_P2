@@ -9,8 +9,8 @@ import cs333.project_2.DOM.General.Address;
 import cs333.project_2.DOM.General.PaymentInfo;
 import cs333.project_2.DOM.Order.Order;
 import cs333.project_2.DOM.Product.Product;
-import cs333.project_2.DAL.Buyer.BuyerDAL;
 import cs333.project_2.DOM.Buyer.Buyer;
+import cs333.project_2.Service.Link;
 import cs333.project_2.Service.Respresentation.BuyerRepresentation;
 
 public class BuyerActivity {
@@ -42,7 +42,8 @@ public class BuyerActivity {
         buyerRepresentation.setOrderIDs(b.getOrders());
         buyerRepresentation.setAdresses(b.getAddress());
         buyerRepresentation.setPaymentInfos(b.getPayInfos());
-		
+		setLinks(buyerRepresentation);
+        
 		return buyerRepresentation;
 	}
 	
@@ -83,6 +84,13 @@ public class BuyerActivity {
 	
 	public static void addPaymentInfo(String ID, PaymentInfo payinf) {
 		BuyerManager.addPaymentInfo(ID, payinf);
+	}
+	
+	private void setLinks(BuyerRepresentation buyer) {
+		// Set up the activities that can be performed on orders
+		Link buy = new Link("buy", 
+			"http://api.mississippi.com:8080/bookstore/books/order?book_id=" + buyer.getBuyerID());	
+		buyer.setLinks(buy);
 	}
 	
 }

@@ -8,7 +8,7 @@ import cs333.project_2.Service.Respresentation.BuyerRequest;
 public interface BuyerService {
 	
 	public List<BuyerRepresentation> getBuyers();
-	public BuyerRepresentation getBuyer(int buyerId);
+	public BuyerRepresentation getBuyer(String buyerId);
 	public BuyerRepresentation createBuyer(BuyerRequest buyerRequest);
 	
 }

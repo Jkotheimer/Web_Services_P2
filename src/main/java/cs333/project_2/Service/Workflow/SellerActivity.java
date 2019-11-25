@@ -1,30 +1,28 @@
 package cs333.project_2.Service.Workflow;
 
-import java.util.HashSet;
+import java.util.ArrayList;
 import java.util.Iterator;
-import java.util.Set;
+import java.util.List;
 
 import cs333.project_2.DOM.Seller.Seller;
-import cs333.project_2.DAL.Seller.SellerManager;
+import cs333.project_2.DOM.Seller.SellerManager;
+import cs333.project_2.Service.Link;
 import cs333.project_2.Service.Respresentation.SellerRepresentation;
 
 public class SellerActivity {
 	
-	private static SellerManager seller = new SellerManager();
-	
-	public Set<SellerRepresentation> getSellers() {
+	public List<SellerRepresentation> getSellers() {
 		
-		Set<Seller> sellers = new HashSet<Seller>();
-		Set<SellerRepresentation> sellerRepresentations = new HashSet<SellerRepresentation>();
-		sellers = seller.getSellers();
+		List<Seller> sellers = new ArrayList<Seller>();
+		List<SellerRepresentation> sellerRepresentations = new ArrayList<SellerRepresentation>();
+		sellers = SellerManager.getSellers();
 		
 		Iterator<Seller> it = sellers.iterator();
 		while(it.hasNext()) {
           Seller s = (Seller)it.next();
           SellerRepresentation sellerRepresentation = new SellerRepresentation();
-          sellerRepresentation.setSellerID(s.getsellerID());
           sellerRepresentation.setUsername(s.getUsername());
-          sellerRepresentation.setUrlAddress(s.geturlAddress());
+          sellerRepresentation.setProducts(s.getProducts());;
           
           //now add this representation in the list
           sellerRepresentations.add(sellerRepresentation);
@@ -32,41 +30,43 @@ public class SellerActivity {
 		return sellerRepresentations;
 	}
 	
-	public SellerRepresentation getSeller(int id) {
+	public SellerRepresentation getSeller(String id) {
 		
-		Seller s = seller.readSeller(id);
+		Seller s = SellerManager.readSeller(id);
 		
 		SellerRepresentation sRep = new SellerRepresentation();
-		sRep.setSellerID(s.getsellerID());
+		sRep.setProducts(s.getProducts());
 		sRep.setUsername(s.getUsername());
-		sRep.setUrlAddress(s.geturlAddress());
 		
-//		sRep.setProductId((int)p.getSelleredProductIDs());
-//		sRep.setStatus(p.getStatus());
-//		sRep.setId(p.getSellerID());
+		setLinks(sRep);
 		
 		return sRep;
 	}
 	
-	public SellerRepresentation createSeller(int ID, String username, String urladdress, String address) {
+	public SellerRepresentation createSeller(String ID, String username, String password) {
 		
-		seller.addSeller(ID, username, urladdress, address);
-		Seller s = new Seller(username,ID, urladdress);
+		SellerManager.insertSeller(ID, username,password);
+		Seller s = new Seller(username,ID, password);
 		
 		SellerRepresentation sRep = new SellerRepresentation();
-		sRep.setSellerID(s.getsellerID());
 		sRep.setUsername(s.getUsername());
-		sRep.setUrlAddress(s.geturlAddress());
 		
 		return sRep;
 	}
 	
-	public String deleteSeller(int id) {
+	public String deleteSeller(String id) {
 		
 		//dao.deleteSeller(id);
-		seller.deleteSeller(id);
+		SellerManager.deleteSeller(id);
 		
 		return "OK";
 	}
-
+	
+	private void setLinks(SellerRepresentation seller) {
+		// Set up the activities that can be performed on orders
+		Link buy = new Link("buy", 
+			"http://api.mississippi.com:8080/bookstore/books/order?book_id=" + seller.getsellerID());	
+		seller.setLinks(buy);
+	}
+	
 }

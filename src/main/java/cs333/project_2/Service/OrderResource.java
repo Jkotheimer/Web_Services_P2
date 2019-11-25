@@ -1,6 +1,6 @@
 package cs333.project_2.Service;
 
-import java.util.Set;
+import java.util.List;
 
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
@@ -16,42 +16,42 @@ import cs333.project_2.Service.Respresentation.OrderRequest;
 import cs333.project_2.Service.Workflow.OrderActivity;
 
 @Path("/orderservice/")
-public class OrderResource implements OrderService {
+public class OrderResource implements OrderService{
 
 	@GET
 	@Produces({"application/xml" , "application/json"})
 	@Path("/order")
-	public Set<OrderRepresentation> getOrders() {
+	public List<OrderRepresentation> getOrders() {
 		System.out.println("GET METHOD Request for all orders .............");
-		OrderActivity prodActivity = new OrderActivity();
-		return prodActivity.getOrders();	
+		OrderActivity OrdActivity = new OrderActivity();
+		return OrdActivity.getOrders();	
 	}
 	
 	@GET
 	@Produces({"application/xml" , "application/json"})
-	@Path("/order/{orderId}")
-	public OrderRepresentation getOrder(@PathParam("orderId") int id) {
+	@Path("/order/{OrderId}")
+	public OrderRepresentation getOrdersOfCustomer(@PathParam("OrderId") String id) {
 		System.out.println("GET METHOD Request from Client with orderRequest String ............." + id);
-		OrderActivity prodActivity = new OrderActivity();
-		return prodActivity.getOrder(id);
+		OrderActivity OrdActivity = new OrderActivity();
+		return OrdActivity.getOrder(id);
 	}
 	
 	@POST
 	@Produces({"application/xml" , "application/json"})
 	@Path("/order")
 	public OrderRepresentation createOrder(OrderRequest  orderRequest) {
-		System.out.println("POST METHOD Request from Client with ............." + orderRequest.getStatus() + "  " + orderRequest.getProductId());
-		OrderActivity prodActivity = new OrderActivity();
-		return prodActivity.createOrder(1234,orderRequest.getProductId());
+		System.out.println("POST METHOD Request from Client with ............." + orderRequest.getStatus() + "  " + orderRequest.getOrderedProductIDs());
+		OrderActivity OrdActivity = new OrderActivity();
+		return OrdActivity.createOrder(orderRequest.getID(),orderRequest.getBuyer().getBuyerID(),orderRequest.getOrderedProductIDs());
 	}
 	
 	@DELETE
 	@Produces({"application/xml" , "application/json"})
 	@Path("/order/{orderId}")
-	public Response deleteOrder(@PathParam("orderId") int id) {
+	public Response deleteOrder(@PathParam("orderId") String id) {
 		System.out.println("Delete METHOD Request from Client with orderRequest String ............." + id);
-		OrderActivity prodActivity = new OrderActivity();
-		String res = prodActivity.deleteOrder(id);
+		OrderActivity OrdActivity = new OrderActivity();
+		String res = OrdActivity.deleteOrder(id);
 		if (res.equals("OK")) {
 			return Response.status(Status.OK).build();
 		}

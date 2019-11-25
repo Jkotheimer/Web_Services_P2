@@ -18,6 +18,8 @@
 		<jaxrs:serviceBeans>
 			<ref bean="productServiceRest" />
 			<ref bean="orderServiceRest" />
+			<ref bean="sellerServiceRest" />
+			<ref bean="buyerServiceRest" />
 		</jaxrs:serviceBeans>
 		<jaxrs:providers>
 			<ref bean="jacksonProvider" />
@@ -28,10 +30,16 @@
 			<jaxrs:schemaLocation>cs333.project_2.Service.Representation.ProductRepresentation</jaxrs:schemaLocation>
 			<jaxrs:schemaLocation>cs333.project_2.Service.Representation.OrderRequest</jaxrs:schemaLocation>
 			<jaxrs:schemaLocation>cs333.project_2.Service.Representation.OrderRepresentation</jaxrs:schemaLocation>
+			<jaxrs:schemaLocation>cs333.project_2.Service.Representation.SellerRequest</jaxrs:schemaLocation>
+			<jaxrs:schemaLocation>cs333.project_2.Service.Representation.SellerRepresentation</jaxrs:schemaLocation>
+			<jaxrs:schemaLocation>cs333.project_2.Service.Representation.BuyerRequest</jaxrs:schemaLocation>
+			<jaxrs:schemaLocation>cs333.project_2.Service.Representation.BuyerRepresentation</jaxrs:schemaLocation>
 		</jaxrs:schemaLocations>
 
 	</jaxrs:server>
   	<bean id="productServiceRest" class="cs333.project_2.Service.ProductResource" />
   	<bean id="orderServiceRest" class="cs333.project_2.Service.OrderResource" />
+  	<bean id="sellerServiceRest" class="cs333.project_2.Service.SellerResource" />
+  	<bean id="buyerServiceRest" class="cs333.project_2.Service.BuyerResource" />
   
 </beans>

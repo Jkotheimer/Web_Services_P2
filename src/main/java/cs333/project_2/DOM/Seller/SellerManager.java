@@ -1,16 +1,13 @@
 package cs333.project_2.DOM.Seller;
 
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 import cs333.project_2.DAL.Seller.SellerDAL;
-import cs333.project_2.DOM.Product.Product;
 import cs333.project_2.DOM.Seller.Seller;
 
 public class SellerManager {
 	
-	public List<Seller> getSellers(){
+	public static List<Seller> getSellers(){
 		return SellerDAL.getSellers();
 	}
 	

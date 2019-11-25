@@ -1,6 +1,6 @@
 package cs333.project_2.Service;
 
-import java.util.Set;
+import java.util.List;
 
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
@@ -15,11 +15,12 @@ import cs333.project_2.Service.Respresentation.SellerRepresentation;
 import cs333.project_2.Service.Respresentation.SellerRequest;
 import cs333.project_2.Service.Workflow.SellerActivity;
 
-public class SellerResource {
+public class SellerResource implements SellerService{
+	
 	@GET
 	@Produces({"application/xml" , "application/json"})
 	@Path("/seller")
-	public Set<SellerRepresentation> getSellers() {
+	public List<SellerRepresentation> getSellers() {
 		System.out.println("GET METHOD Request for all sellers .............");
 		SellerActivity sellerActivity = new SellerActivity();
 		return sellerActivity.getSellers();	
@@ -28,7 +29,7 @@ public class SellerResource {
 	@GET
 	@Produces({"application/xml" , "application/json"})
 	@Path("/seller/{sellerId}")
-	public SellerRepresentation getSeller(@PathParam("sellerId") int id) {
+	public SellerRepresentation getSeller(@PathParam("sellerId") String id) {
 		System.out.println("GET METHOD Request from Client with sellerRequest String ............." + id);
 		SellerActivity sellerActivity = new SellerActivity();
 		return sellerActivity.getSeller(id);
@@ -38,15 +39,15 @@ public class SellerResource {
 	@Produces({"application/xml" , "application/json"})
 	@Path("/seller")
 	public SellerRepresentation createSeller(SellerRequest  sellerRequest) {
-		System.out.println("POST METHOD Request from Client with ............." + sellerRequest.getSellerID() + "  " + sellerRequest.getUrlAddress());
+		System.out.println("POST METHOD Request from Client with ............." + sellerRequest.getUsername());
 		SellerActivity sellerActivity = new SellerActivity();
-		return sellerActivity.createSeller(sellerRequest.getSellerID(),sellerRequest.getUsername(), sellerRequest.getUrlAddress(), sellerRequest.getAddress());
+		return sellerActivity.createSeller(sellerRequest.getsellerID(),sellerRequest.getUsername(),sellerRequest.getPassword());
 	}
 	
 	@DELETE
 	@Produces({"application/xml" , "application/json"})
 	@Path("/seller/{sellerId}")
-	public Response deleteSeller(@PathParam("sellerId") int id) {
+	public Response deleteSeller(@PathParam("sellerId") String id) {
 		System.out.println("Delete METHOD Request from Client with sellerRequest String ............." + id);
 		SellerActivity sellerActivity = new SellerActivity();
 		String res = sellerActivity.deleteSeller(id);
@@ -55,4 +56,5 @@ public class SellerResource {
 		}
 		return null;
 	}
+	
 }

@@ -1,7 +1,6 @@
 package cs333.project_2.DAL.Seller;
 
 import cs333.project_2.DOM.Seller.Seller;
-import cs333.project_2.DOM.Buyer.Buyer;
 import cs333.project_2.DOM.Product.Product;
 import cs333.project_2.DOM.Rating.Rating;
 

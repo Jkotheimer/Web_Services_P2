@@ -9,11 +9,12 @@ import javax.xml.bind.annotation.XmlType;
 
 import cs333.project_2.DOM.Buyer.Buyer;
 import cs333.project_2.DOM.Product.Product;
+import cs333.project_2.Service.AbstractRepresentation;
 
 @XmlRootElement(name = "Order")
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "")
-public class OrderRepresentation {
+public class OrderRepresentation extends AbstractRepresentation{
 	
 	private String orderID;
 	private List<Product> OrderedProductIDs;

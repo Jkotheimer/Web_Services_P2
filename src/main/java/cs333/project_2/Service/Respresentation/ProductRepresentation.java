@@ -1,43 +1,98 @@
 package cs333.project_2.Service.Respresentation;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
 
+import cs333.project_2.DOM.Rating.Rating;
+import cs333.project_2.DOM.Seller.Seller;
+import cs333.project_2.Service.AbstractRepresentation;
+
 @XmlRootElement(name = "Product")
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "")
-public class ProductRepresentation {
+public class ProductRepresentation extends AbstractRepresentation{
 	
-	private int price;
-	private String itemdescrip;
-	private int Id;
+	private String productID;
+	private double Price;
+	private Seller seller;
+	private String ItemDescrip;
+	private float Rating;
+	private int totalRating = 0;
+	private List<Rating> Ratings = new ArrayList<Rating>();
 
-	public ProductRepresentation() {}
+	public ProductRepresentation() {
+	
+	}
+	
+	public ProductRepresentation(String ID, float price, String itemDescrip, Seller producer) {
+		this.productID = ID;
+		this.Price = price;
+		this.ItemDescrip = itemDescrip;
+		this.seller = producer;
+		this.Rating = -1; // -1 indicates no ratings yet
+	}
+
+	/**
+	 * SETTERS
+	 * ________________________________________________________________________
+	 */
+	
+	public void setproductID(String productId) {
+		this.productID = productId;
+	}
+
+	public void setPrice(double price) {
+		Price = price;
+	}
+	public void setItemDescrip(String itemdescrip) {
+		this.ItemDescrip = itemdescrip;
+	}
+
+	public void setRating(float rat) {
+		this.Rating = rat;
+	}
+	
+	public void setSeller(Seller seller) {
+		this.seller = seller;
+	}
+	
+	public boolean addRating(Rating rating) {
+		if (rating.getRateval() < 0 || rating.getRateval() > 10) return false;
+		// Update the current average rating of the product
+		this.totalRating += rating.getRateval();
+		this.Ratings.add(rating);
+		this.Rating = this.totalRating / this.Ratings.size();
+		return true;
+	}
+
+	/**
+	 * GETTERS
+	 * ________________________________________________________________________
+	 */
+	
+	public String getProductID() {
+		return this.productID;
+	}
+
+	public double getPrice() {
+		return this.Price;
+	}
+
+	public float getRating() {
+		return this.Rating;
+	}
 
 	public String getItemDescrip() {
-		return itemdescrip;
+		return this.ItemDescrip;
 	}
 
-	public void setItemDescrip(String desc) {
-		this.itemdescrip = desc;
-	}
-
-	public int getId() {
-		return Id;
-	}
-
-	public void setId(int id) {
-		this.Id = id;
-	}
-
-	public int getPrice() {
-		return price;
-	}
-
-	public void setPrice(int Price) {
-		this.price = Price;
+	public Seller getSeller() {
+		return this.seller;
 	}
 
 }

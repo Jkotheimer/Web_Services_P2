@@ -11,11 +11,12 @@ import javax.xml.bind.annotation.XmlType;
 import cs333.project_2.DOM.General.Address;
 import cs333.project_2.DOM.General.PaymentInfo;
 import cs333.project_2.DOM.Order.Order;
+import cs333.project_2.Service.AbstractRepresentation;
 
 @XmlRootElement(name = "Buyer")
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "")
-public class BuyerRepresentation {
+public class BuyerRepresentation extends AbstractRepresentation {
 	
 	private String username;
 	private String password;

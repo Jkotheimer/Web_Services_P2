@@ -17,32 +17,56 @@ public class OrderRequest {
 	
 	private String orderID;
 	private List<Product> OrderedProductIDs;
-	private String status;
+	private Buyer buyer;
+	private String Status;
 
-	public OrderRequest() {}
-
-	public String getStatus() {
-		return status;
-	}
-
-	public void setStatus(String stat) {
-		this.status = stat;
+	public OrderRequest(String ID, Buyer purchaser, List<Product> productIDs) {
+		this.orderID = ID;
+		this.OrderedProductIDs = productIDs;
+		this.Status = "Order initiated";
+		this.buyer = purchaser;
 	}
 	
+	public OrderRequest() {
+		
+	}
+
 	public String getID() {
 		return this.orderID;
 	}
+
+	public List<Product> getOrderedProductIDs() {
+		return this.OrderedProductIDs;
+	}
 	
+	public Buyer getBuyer() {
+		return this.buyer;
+	}
+	
+	public String getStatus() {
+		return this.Status;
+	}
+
+	/**
+	 * SETTERS
+	 * ________________________________________________________________________
+	 */
+
 	public void setOrderID(String orderID) {
 		this.orderID = orderID;
 	}
 
-	public List<Product> getProductIds() {
-		return OrderedProductIDs;
+	public void setOrderedProductIDs(List<Product> orderedProductIDs) {
+		this.OrderedProductIDs = orderedProductIDs;
 	}
 
-	public void setProductIds(List<Product> prodId) {
-		this.OrderedProductIDs = prodId;
+	public void setBuyer(Buyer buyer) {
+		this.buyer = buyer;
+	}
+	
+	public boolean updateStatus(String status) {
+		this.Status = status;
+		return true;
 	}
 
 }

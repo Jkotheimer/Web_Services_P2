@@ -1,57 +1,71 @@
 package cs333.project_2.Service.Respresentation;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
 
+import cs333.project_2.DOM.Product.Product;
+import cs333.project_2.Service.AbstractRepresentation;
+
 @XmlRootElement(name = "Seller")
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "")
-public class SellerRepresentation {
+public class SellerRepresentation extends AbstractRepresentation{
 
-	private int serialID;
 	private String username;
-	private String password;
-	private int sellerID;
-	private String address;
-	private String urlAddress;
+	private String sellerID;
+	private List<Product> products = new ArrayList<Product>();
 	
-	public int getSerialID() {
-		return serialID;
+	public SellerRepresentation() {
+		
 	}
-	public void setSerialID(int serialID) {
-		this.serialID = serialID;
+
+	public SellerRepresentation(String ID, String username) {
+		this.username = username;	
+		this.sellerID = ID;
 	}
-	public String getUsername() {
-		return username;
-	}
-	public void setUsername(String username) {
+
+	/**
+	 * GETTERS
+	 * ________________________________________________________________________
+	 */
+
+	public String getUsername()				{ return this.username;	}
+
+	public String getsellerID()						{ return this.sellerID;		}
+
+	public List<Product> getProducts()			{ return this.products;	}
+
+	/**
+	 * SETTERS
+	 * ________________________________________________________________________
+	 */
+
+	public boolean setUsername(String username) {
+		// TODO - possibly add a database check for other profiles with the given username
 		this.username = username;
+		return true;
 	}
-	public String getPassword() {
-		return password;
+	
+	public void setProducts(List<Product> products) {
+		this.products = products;
 	}
-	public void setPassword(String password) {
-		this.password = password;
+	
+	public void addProduct(Product productID) {
+		this.products.add(productID);	
 	}
-	public int getSellerID() {
-		return sellerID;
-	}
-	public void setSellerID(int sellerID) {
-		this.sellerID = sellerID;
-	}
-	public String getAddress() {
-		return address;
-	}
-	public void setAddress(String address) {
-		this.address = address;
-	}
-	public String getUrlAddress() {
-		return urlAddress;
-	}
-	public void setUrlAddress(String urlAddress) {
-		this.urlAddress = urlAddress;
+
+	/**
+	 * GENERAL METHODS
+	 * ________________________________________________________________________
+	 */
+	
+	public boolean removeProduct(Product ID) {
+		return this.products.remove(ID);
 	}
 	
 }
