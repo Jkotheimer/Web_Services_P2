@@ -72,9 +72,23 @@ function handle_keypress_facade(event, func) {
 function sign_in() {
 	var username = document.getElementsByName("username")[0].value;
 	var password = document.getElementsByName("password")[0].value;
-	console.log("sign_in\nusername: " + username + '\n' + "password: " + password);
-	document.location.href = "./search";
+	console.log("sign_in\nusername: " + username + '\n' + "password: " + password);    
 	// TODO: make get request to localhost uri
+	var xhr = createRequest("GET", "http://localhost:8080/users/buyers");
+	xhr.onload = function() {
+		var text = xhr.responseText;
+		var title = getTitle(text);
+		alert('Response from CORS request to ' + url + ': ' + title);
+	};
+	
+	xhr.onerror = function() {
+		alert('Woops, there was an error making the request.');
+	};
+	
+	xhr.send();
+// 	$.get('http://localhost:8080/users/buyers', function (response) {
+// 		console.log(response);
+// 	});
 }
 
 /**

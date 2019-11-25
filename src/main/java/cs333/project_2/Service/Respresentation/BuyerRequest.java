@@ -5,7 +5,7 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
 
-@XmlRootElement
+@XmlRootElement(name="Buyer")
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "")
 public class BuyerRequest {

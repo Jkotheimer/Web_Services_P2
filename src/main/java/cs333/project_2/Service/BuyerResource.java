@@ -5,6 +5,7 @@ import java.util.List;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
+import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
@@ -17,12 +18,14 @@ import cs333.project_2.Service.Respresentation.BuyerRepresentation;
 import cs333.project_2.Service.Respresentation.BuyerRequest;
 import cs333.project_2.Service.Workflow.BuyerActivity;
 
-@Path("/buyers/")
-@WebService
-public class BuyerResource {
+@Path("/users/buyers")
+@WebService(endpointInterface = "cs333.project_2.Service.BuyerService", targetNamespace = "http://localhost:8080/users/buyers")
+public class BuyerResource implements BuyerService {
+	
+	public BuyerResource() {}
+	
 	@GET
 	@Produces({"application/xml" , "application/json"})
-	@Path("/buyer")
 	public List<BuyerRepresentation> getBuyers() {
 		System.out.println("GET METHOD Request for all buyers .............");
 		BuyerActivity buyerActivity = new BuyerActivity();
@@ -31,8 +34,8 @@ public class BuyerResource {
 	
 	@GET
 	@Produces({"application/xml" , "application/json"})
-	@Path("/buyer/{buyerId}")
-	public BuyerRepresentation getBuyer(@PathParam("buyerId") String id) {
+	@Path("/{buyerID}")
+	public BuyerRepresentation getBuyer(@PathParam("buyerID") String id) {
 		System.out.println("GET METHOD Request from Client with buyerRequest String ............." + id);
 		BuyerActivity buyerActivity = new BuyerActivity();
 		return buyerActivity.getBuyer(id);
@@ -40,16 +43,15 @@ public class BuyerResource {
 	
 	@POST
 	@Produces({"application/xml" , "application/json"})
-	@Path("/buyer")
 	public BuyerRepresentation createBuyer(BuyerRequest  buyerRequest) {
 		System.out.println("POST METHOD Request from Client with ............." + buyerRequest.getBuyerId() + "  " + buyerRequest.getPassword());
 		BuyerActivity buyerActivity = new BuyerActivity();
 		return buyerActivity.createBuyer(buyerRequest.getBuyerId(),buyerRequest.getUsername(), buyerRequest.getPassword());
 	}
 	
-	@POST
+	@PUT
 	@Produces({"application/xml" , "application/json"})
-	@Path("/buyer/{buyerID}")
+	@Path("/{buyerID}")
 	public BuyerRepresentation UpdateBuyer(BuyerRequest  buyerRequest) {
 		System.out.println("POST METHOD Request from Client with ............." + buyerRequest.getBuyerId() + "  " + buyerRequest.getPassword());
 		BuyerActivity buyerActivity = new BuyerActivity();
@@ -58,8 +60,8 @@ public class BuyerResource {
 	
 	@DELETE
 	@Produces({"application/xml" , "application/json"})
-	@Path("/buyer/{buyerId}")
-	public Response deleteBuyer(@PathParam("buyerId") String id) {
+	@Path("/{buyerID}")
+	public Response deleteBuyer(@PathParam("buyerID") String id) {
 		System.out.println("Delete METHOD Request from Client with buyerRequest String ............." + id);
 		BuyerActivity buyerActivity = new BuyerActivity();
 		String res = buyerActivity.deleteBuyer(id);

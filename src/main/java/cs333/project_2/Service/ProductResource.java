@@ -17,13 +17,12 @@ import cs333.project_2.Service.Respresentation.ProductRepresentation;
 import cs333.project_2.Service.Respresentation.ProductRequest;
 import cs333.project_2.Service.Workflow.ProductActivity;
 
-@Path("/products/")
-@WebService
+@Path("/products")
+@WebService(endpointInterface = "cs333.project_2.Service.ProductService", targetNamespace = "http://localhost:8080/products")
 public class ProductResource implements ProductService {
 
 	@GET
 	@Produces({"application/xml" , "application/json"})
-	@Path("/product")
 	public List<ProductRepresentation> getProducts() {
 		System.out.println("GET METHOD Request for all products .............");
 		ProductActivity empActivity = new ProductActivity();
@@ -32,7 +31,7 @@ public class ProductResource implements ProductService {
 	
 	@GET
 	@Produces({"application/xml" , "application/json"})
-	@Path("/product/{productId}")
+	@Path("/{productId}")
 	public ProductRepresentation getProduct(@PathParam("productId") String id) {
 		System.out.println("GET METHOD Request from Client with productRequest String ............." + id);
 		ProductActivity empActivity = new ProductActivity();
@@ -41,7 +40,6 @@ public class ProductResource implements ProductService {
 	
 	@POST
 	@Produces({"application/xml" , "application/json"})
-	@Path("/product")
 	public ProductRepresentation createProduct(ProductRequest  productRequest) {
 		System.out.println("POST METHOD Request from Client with ............." + productRequest.getItemDescrip() + "  " + productRequest.getPrice());
 		ProductActivity empActivity = new ProductActivity();
@@ -51,7 +49,7 @@ public class ProductResource implements ProductService {
 	
 	@DELETE
 	@Produces({"application/xml" , "application/json"})
-	@Path("/product/{productId}")
+	@Path("/{productId}")
 	public Response deleteProduct(@PathParam("productId") String id) {
 		System.out.println("Delete METHOD Request from Client with productRequest String ............." + id);
 		ProductActivity empActivity = new ProductActivity();

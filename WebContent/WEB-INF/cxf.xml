@@ -14,8 +14,10 @@
   	
   <bean id="jacksonProvider" class="org.codehaus.jackson.jaxrs.JacksonJaxbJsonProvider" />
       	
-  <jaxrs:server name="OnlineStoreService" address="http://localhost:8080">
+  <jaxrs:server name="OnlineStoreService" address="http://localhost:8080/">
 		<jaxrs:serviceBeans>
+			<ref bean="buyerServiceRest" />
+			<ref bean="sellerServiceRest" />
 			<ref bean="productServiceRest" />
 			<ref bean="orderServiceRest" />
 		</jaxrs:serviceBeans>

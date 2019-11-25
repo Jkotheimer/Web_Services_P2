@@ -17,12 +17,11 @@ import cs333.project_2.Service.Respresentation.SellerRepresentation;
 import cs333.project_2.Service.Respresentation.SellerRequest;
 import cs333.project_2.Service.Workflow.SellerActivity;
 
-@Path("/sellers/")
-@WebService
+@Path("/users/sellers")
+@WebService(endpointInterface = "cs333.project_2.Service.SellerService", targetNamespace = "http://localhost:8080/users/sellers")
 public class SellerResource {
 	@GET
 	@Produces({"application/xml" , "application/json"})
-	@Path("/seller")
 	public List<SellerRepresentation> getSellers() {
 		System.out.println("GET METHOD Request for all sellers .............");
 		SellerActivity sellerActivity = new SellerActivity();
@@ -31,8 +30,8 @@ public class SellerResource {
 	
 	@GET
 	@Produces({"application/xml" , "application/json"})
-	@Path("/seller/{sellerId}")
-	public SellerRepresentation getSeller(@PathParam("sellerId") String id) {
+	@Path("/{sellerID}")
+	public SellerRepresentation getSeller(@PathParam("sellerID") String id) {
 		System.out.println("GET METHOD Request from Client with sellerRequest String ............." + id);
 		SellerActivity sellerActivity = new SellerActivity();
 		return sellerActivity.getSeller(id);
@@ -40,7 +39,6 @@ public class SellerResource {
 	
 	@POST
 	@Produces({"application/xml" , "application/json"})
-	@Path("/seller")
 	public SellerRepresentation createSeller(SellerRequest  sellerRequest) {
 		System.out.println("POST METHOD Request from Client with ............." + sellerRequest.getSellerID() + "  " + sellerRequest.getUrlAddress());
 		SellerActivity sellerActivity = new SellerActivity();
@@ -49,7 +47,7 @@ public class SellerResource {
 	
 	@DELETE
 	@Produces({"application/xml" , "application/json"})
-	@Path("/seller/{sellerId}")
+	@Path("/{sellerId}")
 	public Response deleteSeller(@PathParam("sellerId") String id) {
 		System.out.println("Delete METHOD Request from Client with sellerRequest String ............." + id);
 		SellerActivity sellerActivity = new SellerActivity();

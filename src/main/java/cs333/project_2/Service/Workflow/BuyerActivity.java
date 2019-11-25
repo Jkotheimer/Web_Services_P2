@@ -10,6 +10,8 @@ import cs333.project_2.Service.Respresentation.BuyerRepresentation;
 
 public class BuyerActivity {
 	
+	public BuyerActivity() {}
+	
 	public List<BuyerRepresentation> getBuyers() {
 		
 		List<Buyer> buyers = new ArrayList<Buyer>();

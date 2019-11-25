@@ -17,13 +17,12 @@ import cs333.project_2.Service.Respresentation.OrderRepresentation;
 import cs333.project_2.Service.Respresentation.OrderRequest;
 import cs333.project_2.Service.Workflow.OrderActivity;
 
-@Path("/orders/")
-@WebService
+@Path("/orders")
+@WebService(endpointInterface = "cs333.project_2.Service.OrderService", targetNamespace = "http://localhost:8080/orders")
 public class OrderResource implements OrderService {
 
 	@GET
 	@Produces({"application/xml" , "application/json"})
-	@Path("/order")
 	public List<OrderRepresentation> getOrders() {
 		System.out.println("GET METHOD Request for all orders .............");
 		OrderActivity prodActivity = new OrderActivity();
@@ -32,7 +31,7 @@ public class OrderResource implements OrderService {
 	
 	@GET
 	@Produces({"application/xml" , "application/json"})
-	@Path("/order/{orderId}")
+	@Path("/{orderId}")
 	public OrderRepresentation getOrder(@PathParam("orderId") String id) {
 		System.out.println("GET METHOD Request from Client with orderRequest String .............\nID: " + id);
 		OrderActivity prodActivity = new OrderActivity();
@@ -41,7 +40,6 @@ public class OrderResource implements OrderService {
 	
 	@POST
 	@Produces({"application/xml" , "application/json"})
-	@Path("/order")
 	public OrderRepresentation createOrder(OrderRequest  orderRequest) {
 		System.out.println("POST METHOD Request from Client with .............\nID: " + orderRequest.getID() + "\nBuyer ID: " + orderRequest.getBuyerID() + 
 							"\nStatus: " + orderRequest.getStatus() + "\nProduct IDs: " + orderRequest.getProductIds());
@@ -53,7 +51,7 @@ public class OrderResource implements OrderService {
 	
 	@DELETE
 	@Produces({"application/xml" , "application/json"})
-	@Path("/order/{orderId}")
+	@Path("/{orderId}")
 	public Response deleteOrder(@PathParam("orderId") String id) {
 		System.out.println("Delete METHOD Request from Client with orderRequest String .............\nID: " + id);
 		OrderActivity prodActivity = new OrderActivity();
