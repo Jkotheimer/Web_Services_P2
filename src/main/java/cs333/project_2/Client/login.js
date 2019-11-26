@@ -74,15 +74,15 @@ function sign_in() {
 	var password = document.getElementsByName("password")[0].value;
 	console.log("sign_in\nusername: " + username + '\n' + "password: " + password);    
 	// TODO: make get request to localhost uri
-	var xhr = createRequest("GET", "http://localhost:8080/users/buyers");
+	var url = "http://localhost:8081/buyer"
+	var xhr = createRequest("GET", url);
 	xhr.onload = function() {
 		var text = xhr.responseText;
-		var title = getTitle(text);
-		alert('Response from CORS request to ' + url + ': ' + title);
+		console.log('Response from CORS request to ' + url + ': ' + text);
 	};
 	
 	xhr.onerror = function() {
-		alert('Woops, there was an error making the request.');
+		console.log('Woops, there was an error making the request.');
 	};
 	
 	xhr.send();

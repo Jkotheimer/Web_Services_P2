@@ -822,4 +822,13 @@ standard deployment descriptor.
 	  <servlet-name>default</servlet-name>
 	  <url-pattern>/</url-pattern>
   </servlet-mapping>
+  <filter>
+    <filter-name>CorsFilter</filter-name>
+    <filter-class>cs333.project_2.Service.CORSFilter</filter-class>
+</filter>
+ 
+<filter-mapping>
+    <filter-name>CorsFilter</filter-name>
+    <url-pattern>/*</url-pattern>
+</filter-mapping>
 </web-app>

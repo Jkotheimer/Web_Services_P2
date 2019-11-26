@@ -21,13 +21,17 @@ import cs333.project_2.Service.Respresentation.OrderRequest;
 import cs333.project_2.Service.Workflow.BuyerActivity;
 
 public class BuyerResource implements BuyerService {
+	
+	final CORSFilter filter = new CORSFilter();
+	
 	@GET
-	@Produces({"application/xml" , "application/json"})
+	@Produces("application/json")
 	@Path("/buyer")
-	public List<BuyerRepresentation> getBuyers() {
+	public Response getBuyers() {
 		System.out.println("GET METHOD Request for all buyers .............");
 		BuyerActivity buyerActivity = new BuyerActivity();
-		return buyerActivity.getBuyers();	
+		List<BuyerRepresentation> buyers = buyerActivity.getBuyers();
+		return filter.addCORS(Response.ok(buyers));
 	}
 	
 	@GET
