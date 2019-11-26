@@ -30,6 +30,8 @@ public class BuyerRepresentation extends AbstractRepresentation {
 		this.password = password;
 		this.buyerID = ID;
 	}
+	
+	public BuyerRepresentation() {}
 
 	/**
 	 * GETTERS
