@@ -9,6 +9,7 @@ import cs333.project_2.DOM.General.PaymentInfo;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.regex.Pattern;
 
 public class BuyerDAL {
 
@@ -41,11 +42,11 @@ public class BuyerDAL {
 
 	public static Buyer read(String ID) {
 		for(int i=0;i<BuyerDB.size();i++) {
-			if(BuyerDB.get(i).getBuyerID() == ID) {
+			if(Pattern.matches(ID,BuyerDB.get(i).getBuyerID())) {
 				return BuyerDB.get(i);
 			}
 		}
-		return null;
+		return new Buyer("acc1","NOTFOUND","password1");
 	}
 	
 	public static Order readOrder(String ID) {
