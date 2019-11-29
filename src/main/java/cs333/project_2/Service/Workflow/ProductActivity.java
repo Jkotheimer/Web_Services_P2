@@ -96,7 +96,7 @@ public class ProductActivity {
 	private void setLinks(ProductRepresentation product) {
 		// Set up the activities that can be performed on orders
 		Link buy = new Link("buy", 
-			"http://api.mississippi.com:8080/bookstore/books/order?book_id=" + product.getProductID());	
+			"http://localhost:8081/orderservice/order/" + product.getProductID());	
 		product.setLinks(buy);
 	}
 	

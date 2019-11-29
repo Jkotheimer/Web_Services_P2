@@ -65,7 +65,7 @@ public class SellerActivity {
 	private void setLinks(SellerRepresentation seller) {
 		// Set up the activities that can be performed on orders
 		Link buy = new Link("buy", 
-			"http://api.mississippi.com:8080/bookstore/books/order?book_id=" + seller.getsellerID());	
+			"http://localhost:8081/productservice/product/" + seller.getsellerID());	
 		seller.setLinks(buy);
 	}
 	

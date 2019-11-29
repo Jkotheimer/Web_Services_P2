@@ -73,8 +73,10 @@ public class OrderActivity {
 	
 	private void setLinks(OrderRepresentation order) {
 		// Set up the activities that can be performed on orders
-		Link buy = new Link("buy", 
-			"http://api.mississippi.com:8080/bookstore/books/order?book_id=" + order.getID());	
+		Link[] buy = new Link[] {new Link("buy", 
+			"http://localhost:8081/orderservice/order/" + order.getID()),new Link("buy", 
+					"http://localhost:8081/buyer")
+		};
 		order.setLinks(buy);
 	}
 	
