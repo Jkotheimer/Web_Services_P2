@@ -3,6 +3,38 @@
  * - Hide one of the content boxes
  * - Display the other content box
  */
+
+var userinfo = document.getElementById('button1');
+if(userinfo) {
+userinfo.addEventListener('click', loaduser, false);
+}
+
+function loaduser(){
+
+var httpClient = new XMLHttpRequest();
+
+var api = "http://localhost:8081/buyer";
+
+httpClient.open("GET", api, true);
+
+
+  httpClient.onload = function(){
+    if(this.status == 200){
+      var user = JSON.parse(this.responseText);
+      console.log(user[5].username);
+      
+      var output = '';
+      output += '<ul>' +
+       '<li> Username: ' +user[5].username+ '</li>' + '</ul>';
+      document.getElementById('user').innerHTML = output;
+    }
+  }
+  
+  
+httpClient.send();
+  
+}
+
 function toggle_actions() {
 	var search = document.getElementById("search_content");
 	var post = document.getElementById("post_content");
