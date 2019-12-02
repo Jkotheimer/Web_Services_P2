@@ -82,7 +82,7 @@ function change_username() {
 	var new_username = document.getElementById("new_username").value;
 	if(new_username == "") alert("New username field is empty");
 	
-	const uri = "http://localhost:8081/" + user.accountType + "s/" + user.buyerID + "?action=username";
+	const uri = "http://localhost:8081/" + user.accountType + "s/" + user.id + "?action=username";
 	var xhr = createRequest("POST", uri);
 	xhr.send(new_username);
 	xhr.onload = function() {
@@ -115,7 +115,7 @@ function change_password() {
 		current_password : current_password,
 		new_password : new_password
 	});
-	var uri = "http://localhost:8081/" + user.accountType + "s/" + user.buyerID + "?action=password";
+	var uri = "http://localhost:8081/" + user.accountType + "s/" + user.id + "?action=password";
 	
 	var xhr = createRequest("POST", uri);
 	xhr.setRequestHeader("Content-Type", "text/plain")
@@ -154,7 +154,7 @@ function add_address() {
 		state: state,
 		zipcode: zip
 	});
-	var uri = "http://localhost:8081/" + user.accountType + "s/" + user.buyerID + "?action=address";
+	var uri = "http://localhost:8081/" + user.accountType + "s/" + user.id + "?action=address";
 	
 	var xhr = createRequest("POST", uri);
 	xhr.setRequestHeader("Content-Type", "text/plain")
@@ -198,7 +198,7 @@ function add_payment() {
 		expDate: exp_date,
 		ccv: ccv
 	});
-	var uri = "http://localhost:8081/" + user.accountType + "s/" + user.buyerID + "?action=payment";
+	var uri = "http://localhost:8081/" + user.accountType + "s/" + user.id + "?action=payment";
 	
 	var xhr = createRequest("POST", uri);
 	xhr.setRequestHeader("Content-Type", "text/plain")
@@ -224,4 +224,18 @@ function add_payment() {
 function log_out() {
 	localStorage.removeItem("user");
 	window.location.href = "/";
+}
+
+function delete_user() {
+	var uri = "http://localhost:8081/" + user.accountType + "s/" + user.id;
+	var xhr = createRequest("DELETE", uri);
+	xhr.onload = function() {
+		if(xhr.status == 400) alert("Format Error");
+		else if(xhr.status != 200) alert("Something went wrong :/");
+		else {
+			localStorage.removeItem("user");
+			window.location.href = "/";
+		}
+	}
+	xhr.send();
 }

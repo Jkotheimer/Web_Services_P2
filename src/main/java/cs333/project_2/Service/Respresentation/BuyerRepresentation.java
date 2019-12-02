@@ -18,14 +18,14 @@ public class BuyerRepresentation extends AbstractRepresentation {
 	
 	private final String accountType = "buyer";
 	private String username;
-	private String buyerID;
+	private String ID;
 	private List<Order> orders = new ArrayList<>();
 	private List<Address> addresslist = new ArrayList<>();
 	private List<PaymentInfo> payinfo = new ArrayList<>();; // Allow buyers to have multiple payment options
 
 	public BuyerRepresentation(String ID,String username) {
 		this.username = username;
-		this.buyerID = ID;
+		this.ID = ID;
 	}
 	
 	public BuyerRepresentation() {}
@@ -43,8 +43,8 @@ public class BuyerRepresentation extends AbstractRepresentation {
 		return this.username;	
 	}
 
-	public String getBuyerID() {  
-		return this.buyerID;		
+	public String getID() {  
+		return this.ID;		
 	}
 	
 	public List<Address> getAddress() {
@@ -94,8 +94,8 @@ public class BuyerRepresentation extends AbstractRepresentation {
 		return true;
 	}
 
-	public void setbuyerID(String iD) {
-		this.buyerID = iD;
+	public void setID(String iD) {
+		this.ID = iD;
 	}
 
 	public void setOrderIDs(List<Order> orderIDs) {

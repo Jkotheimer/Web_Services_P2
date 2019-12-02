@@ -24,7 +24,7 @@ public class BuyerActivity {
 		Iterator<Buyer> it = buyers.iterator();
 		while(it.hasNext()) {
           Buyer b = (Buyer)it.next();
-          BuyerRepresentation buyerRepresentation = new BuyerRepresentation(b.getBuyerID(),b.getUsername());
+          BuyerRepresentation buyerRepresentation = new BuyerRepresentation(b.getID(),b.getUsername());
           buyerRepresentation.setOrderIDs(b.getOrders());
           buyerRepresentation.setAddresses(b.getAddressList());
           buyerRepresentation.setPaymentInfos(b.getPayInfos());
@@ -38,7 +38,7 @@ public class BuyerActivity {
 		Buyer b = BuyerManager.login(username, password);
 		if(b == null) return null;
 		
-		BuyerRepresentation buyerRep = new BuyerRepresentation(b.getBuyerID(), b.getUsername());
+		BuyerRepresentation buyerRep = new BuyerRepresentation(b.getID(), b.getUsername());
 		buyerRep.setOrderIDs(b.getOrders());
 		buyerRep.setAddresses(b.getAddressList());
 		buyerRep.setPaymentInfos(b.getPayInfos());
@@ -51,7 +51,7 @@ public class BuyerActivity {
 		
 		Buyer b = BuyerManager.getBuyer(id);
 		
-		BuyerRepresentation buyerRepresentation = new BuyerRepresentation(b.getBuyerID(),b.getUsername());
+		BuyerRepresentation buyerRepresentation = new BuyerRepresentation(b.getID(),b.getUsername());
         buyerRepresentation.setOrderIDs(b.getOrders());
         buyerRepresentation.setAddresses(b.getAddressList());
         buyerRepresentation.setPaymentInfos(b.getPayInfos());
@@ -64,7 +64,7 @@ public class BuyerActivity {
 		
 		Buyer b = BuyerManager.addBuyer(username , password);
 		if(b == null) return null;
-		BuyerRepresentation bRep = new BuyerRepresentation(b.getBuyerID(), b.getUsername());
+		BuyerRepresentation bRep = new BuyerRepresentation(b.getID(), b.getUsername());
 		setLinks(bRep);
 		
 		return bRep;
@@ -79,7 +79,7 @@ public class BuyerActivity {
 		
 		if(b == null) return null;
 
-		BuyerRepresentation buyerRepresentation = new BuyerRepresentation(b.getBuyerID(),b.getUsername());
+		BuyerRepresentation buyerRepresentation = new BuyerRepresentation(b.getID(),b.getUsername());
         buyerRepresentation.setOrderIDs(b.getOrders());
         buyerRepresentation.setAddresses(b.getAddressList());
         buyerRepresentation.setPaymentInfos(b.getPayInfos());
@@ -88,20 +88,26 @@ public class BuyerActivity {
 		return buyerRepresentation;
 	}
 	
-	public String deleteBuyer(String id) {
-		
-		//dao.deleteBuyer(id);
-		BuyerManager.deleteBuyer(id);
-		
-		return "OK";
+	public int deleteBuyer(String id) {
+		return BuyerManager.deleteBuyer(id);
 	}
 
 	public static void insertOrder(String attachedBuyerID, String ID, List<Product> products) {
 		BuyerManager.insertOrder(attachedBuyerID, ID, products);
 	}
 	
-	public static void addOrder(String ID, Order ord) {
-		BuyerManager.addOrder(ID, ord);
+	public BuyerRepresentation addOrder(String ID, Order ord) {
+		Buyer b = BuyerManager.addOrder(ID, ord);
+		
+		if(b == null) return null;
+
+		BuyerRepresentation buyerRepresentation = new BuyerRepresentation(b.getID(),b.getUsername());
+        buyerRepresentation.setOrderIDs(b.getOrders());
+        buyerRepresentation.setAddresses(b.getAddressList());
+        buyerRepresentation.setPaymentInfos(b.getPayInfos());
+		setLinks(buyerRepresentation);
+        
+		return buyerRepresentation;
 	}
 
 	public BuyerRepresentation addAddress(String ID, Address addr) {
@@ -109,7 +115,7 @@ public class BuyerActivity {
 		
 		if(b == null) return null;
 
-		BuyerRepresentation buyerRepresentation = new BuyerRepresentation(b.getBuyerID(),b.getUsername());
+		BuyerRepresentation buyerRepresentation = new BuyerRepresentation(b.getID(),b.getUsername());
         buyerRepresentation.setOrderIDs(b.getOrders());
         buyerRepresentation.setAddresses(b.getAddressList());
         buyerRepresentation.setPaymentInfos(b.getPayInfos());
@@ -123,7 +129,7 @@ public class BuyerActivity {
 		
 		if(b == null) return null;
 
-		BuyerRepresentation buyerRepresentation = new BuyerRepresentation(b.getBuyerID(),b.getUsername());
+		BuyerRepresentation buyerRepresentation = new BuyerRepresentation(b.getID(),b.getUsername());
         buyerRepresentation.setOrderIDs(b.getOrders());
         buyerRepresentation.setAddresses(b.getAddressList());
         buyerRepresentation.setPaymentInfos(b.getPayInfos());
@@ -135,7 +141,7 @@ public class BuyerActivity {
 	private void setLinks(BuyerRepresentation buyer) {
 		// Set up the activities that can be performed on orders
 		Link buy = new Link("ViewOrders", 
-			"http://localhost:8081/orderservice/order" + buyer.getBuyerID());	
+			"http://localhost:8081/orderservice/order" + buyer.getID());	
 		buyer.setLinks(buy);
 	}
 	

@@ -114,39 +114,37 @@ public class BuyerResource implements BuyerService {
 			if(b == null) return filter.addCORS(Response.status(400));
 			else return filter.addCORS(Response.ok(b));
 		}
+		else if(action.equals("order")) {
+			Order order;
+			try {
+				order = mapper.readValue(req, Order.class);
+			} catch (JsonProcessingException e) {
+				e.printStackTrace();
+				return filter.addCORS(Response.status(400));
+			}
+			BuyerRepresentation b = buyerActivity.addOrder(ID, order);
+			if(b == null) return filter.addCORS(Response.status(400));
+			else return filter.addCORS(Response.ok(b));
+		}
 		return filter.addCORS(Response.status(400));
 	}
 	
-	/*
-	@PUT
-	@Produces({"application/xml" , "application/json"})
-	@Path("/{buyerID}/addorder")
-	public void UpdateBuyerOrder(BuyerRequest  buyerRequest,OrderRequest ord) {
-		System.out.println("POST METHOD Request from Client with ............." + buyerRequest.getID() + "  " + buyerRequest.getPassword());
-		Order ordd = new Order(ord.getID(),BuyerManager.getBuyer(buyerRequest.getID()),ord.getOrderedProductIDs());
-		BuyerActivity.addOrder(buyerRequest.getID(),ordd);
+	@OPTIONS
+	@Produces("application/json")
+	@Path("/{buyerId}")
+	public Response options(@PathParam("buyerId") String ID) {
+		System.out.println("OPTIONS METHOD Request from Client with buyerRequest String ............." + ID);
+		return filter.addCORS(Response.ok());
 	}
 	
-	@PUT
-	@Produces({"application/xml" , "application/json"})
-	@Path("/{buyerID}/addaddress")
-	public void UpdateBuyerOrder(BuyerRequest  buyerRequest,AddressRequest adr) {
-		System.out.println("POST METHOD Request from Client with ............." + buyerRequest.getID() + "  " + buyerRequest.getPassword());
-		Address addr = new Address(adr.getStreet(),adr.getCity(),adr.getState(),adr.getZipcode());
-		BuyerActivity.addAddress(buyerRequest.getID(), addr);
-	}
-	*/
+	
 	@DELETE
-	@Produces({"application/xml" , "application/json"})
+	@Produces("application/json")
 	@Path("/{buyerId}")
-	public Response deleteBuyer(@PathParam("buyerId") String id) {
-		System.out.println("Delete METHOD Request from Client with buyerRequest String ............." + id);
+	public Response delete(@PathParam("buyerId") String ID) {
+		System.out.println("Delete METHOD Request from Client with buyerRequest String ............." + ID);
 		BuyerActivity buyerActivity = new BuyerActivity();
-		String res = buyerActivity.deleteBuyer(id);
-		if (res.equals("OK")) {
-			return Response.status(Status.OK).build();
-		}
-		return null;
+		return filter.addCORS(Response.status(buyerActivity.deleteBuyer(ID)));
 	}
 
 }

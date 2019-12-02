@@ -36,7 +36,7 @@ public class BuyerDAL {
 	
 	public static void insertOrder(String attachedBuyerID, String ID, List<Product> products) {
 		for(int i=0;i<BuyerDB.size();i++) {
-			if(BuyerDB.get(i).getBuyerID().equals(attachedBuyerID)) {
+			if(BuyerDB.get(i).getID().equals(attachedBuyerID)) {
 				Buyer selected = BuyerDB.get(i);
 				Order newOrder = new Order(ID,selected,products);
 				selected.addOrder(newOrder);
@@ -51,7 +51,7 @@ public class BuyerDAL {
 
 	public static Buyer read(String ID) {
 		for(int i=0;i<BuyerDB.size();i++) {
-			if(Pattern.matches(ID,BuyerDB.get(i).getBuyerID())) {
+			if(Pattern.matches(ID,BuyerDB.get(i).getID())) {
 				return BuyerDB.get(i);
 			}
 		}
@@ -70,7 +70,7 @@ public class BuyerDAL {
 	public static int update(String ID, String oldPassword, String newPassword) {
 	//SerialID is the primary key here which you enter as a parameter for the row you wish to change
 		for(Buyer b : BuyerDB) {
-			if(b.getBuyerID().equals(ID)) {
+			if(b.getID().equals(ID)) {
 				if(b.setPassword(oldPassword, newPassword)) return 200;
 				else return 401;
 			}
@@ -80,7 +80,7 @@ public class BuyerDAL {
 	
 	public static Buyer update(String ID, String newUsername) {
 		for(Buyer b : BuyerDB) {
-			if(b.getBuyerID().equals(ID)) {
+			if(b.getID().equals(ID)) {
 				b.setUsername(newUsername);
 				return b;
 			}
@@ -98,18 +98,20 @@ public class BuyerDAL {
 			}
 		}
 	
-	public static void addOrder(String ID, Order ord) {
+	public static Buyer addOrder(String ID, Order ord) {
 		for(int i=0;i<BuyerDB.size();i++) {
-			if(BuyerDB.get(i).getBuyerID().equals(ID)) {
+			if(BuyerDB.get(i).getID().equals(ID)) {
 				Buyer change = BuyerDB.get(i);
 				change.addOrder(ord);
+				return change;
 			}
 		}
+		return null;
 	}
 
 	public static Buyer addAddress(String ID, Address addr) {
 		for(int i=0;i<BuyerDB.size();i++) {
-			if(BuyerDB.get(i).getBuyerID().equals(ID)) {
+			if(BuyerDB.get(i).getID().equals(ID)) {
 				Buyer change = BuyerDB.get(i);
 				change.addAddress(addr);
 				return change;
@@ -120,7 +122,7 @@ public class BuyerDAL {
 	
 	public static Buyer addPaymentInfo(String ID, PaymentInfo payinf) {
 		for(int i=0;i<BuyerDB.size();i++) {
-			if(BuyerDB.get(i).getBuyerID().equals(ID)) {
+			if(BuyerDB.get(i).getID().equals(ID)) {
 				Buyer change = BuyerDB.get(i);
 				change.addPayInfo(payinf);
 				return BuyerDB.get(i);
@@ -129,17 +131,19 @@ public class BuyerDAL {
 		return null;
 	}
 	
-	public static void deleteBuyer(String ID) {
+	public static int deleteBuyer(String ID) {
 		for(int i=0;i<BuyerDB.size();i++) {
-			if(BuyerDB.get(i).getBuyerID() == ID) {
+			if(BuyerDB.get(i).getID().equals(ID)) {
 				BuyerDB.remove(i);
+				return 200;
 			}
 		}
+		return 404;
 	}
 	
 	public static void deleteOrder(String ID) {
 		for(int i=0;i<OrderDB.size();i++) {
-			if(OrderDB.get(i).getID() == ID) {
+			if(OrderDB.get(i).getID().equals(ID)) {
 				OrderDB.remove(i);
 			}
 		}

@@ -11,7 +11,7 @@ public class Buyer  {
 
 	private String username;
 	private String password;
-	private String buyerID;
+	private String ID;
 	private List<Order> orders = new ArrayList<>();
 	private List<Address> addressList = new ArrayList<>();
 	private List<PaymentInfo> payInfos = new ArrayList<>();; // Allow buyers to have multiple payment options
@@ -19,7 +19,7 @@ public class Buyer  {
 	public Buyer(String ID,String username, String password) {
 		this.username = username;
 		this.password = password;
-		this.buyerID = ID;
+		this.ID = ID;
 	}
 	
 	public Buyer() {}
@@ -34,8 +34,8 @@ public class Buyer  {
 		return this.username;	
 	}
 
-	public String getBuyerID() {  
-		return this.buyerID;		
+	public String getID() {  
+		return this.ID;		
 	}
 	
 	public List<Address> getAddressList() {
@@ -85,8 +85,8 @@ public class Buyer  {
 		return true;
 	}
 
-	public void setbuyerID(String iD) {
-		this.buyerID = iD;
+	public void setID(String iD) {
+		this.ID = iD;
 	}
 
 	public void setOrderIDs(List<Order> orderIDs) {

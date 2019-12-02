@@ -27,8 +27,8 @@ public class BuyerManager {
 		return BuyerDAL.insertBuyer(username,password);
 	}
 	
-	public static void deleteBuyer(String ID) {
-		BuyerDAL.deleteBuyer(ID);
+	public static int deleteBuyer(String ID) {
+		return BuyerDAL.deleteBuyer(ID);
 	}
 	
 	public static int changePassword(String ID, String oldPassword, String newPassword) {
@@ -43,8 +43,8 @@ public class BuyerManager {
 		BuyerDAL.insertOrder(attachedBuyerID, ID, products);
 	}
 	
-	public static void addOrder(String ID, Order ord) {
-		BuyerDAL.addOrder(ID, ord);
+	public static Buyer addOrder(String ID, Order ord) {
+		return BuyerDAL.addOrder(ID, ord);
 	}
 
 	public static Buyer addAddress(String ID, Address addr) {
