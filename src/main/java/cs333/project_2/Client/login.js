@@ -69,6 +69,45 @@ function handle_keypress_facade(event, func) {
  * - Grab the input fields for username and password
  * - Send a get request to the appropriate link with the given fields
  */
+
+    function login() {
+        // Form fields, see IDs above
+   
+       const params = {
+        	buyerId: document.getElementsByName("buyerId")[0].value,
+            username: document.getElementsByName("username")[0].value,
+            password: document.getElementsByName("password")[0].value
+        }
+
+        const http = new XMLHttpRequest()
+        http.open('POST', 'http://localhost:8081/buyer')
+        http.setRequestHeader('Content-type', 'application/json')
+        http.send(JSON.stringify(params))
+        window.location.href = 'search/index.html';  // Make sure to stringify
+        http.onload = function() {
+	       // Do whatever with response
+            alert(http.responseText)
+        }
+    }
+
+    function createRequest(method, url) {
+	var xhr = new XMLHttpRequest();
+	if ("withCredentials" in xhr) {	
+		// Check if the XMLHttpRequest object has a "withCredentials" property.
+		// "withCredentials" only exists on XMLHTTPRequest2 objects.
+		xhr.open(method, url, true);		
+	} else if (typeof XDomainRequest != "undefined") {	
+		// Otherwise, check if XDomainRequest.
+		// XDomainRequest only exists in IE, and is IE's way of making CORS requests.
+		xhr = new XDomainRequest();
+		xhr.open(method, url);	
+	} else {
+		// Otherwise, CORS is not supported by the browser.
+		xhr = null;		
+	}
+	return xhr;
+}
+
 function sign_in() {
 	var username = document.getElementsByName("username")[0].value;
 	var password = document.getElementsByName("password")[0].value;
