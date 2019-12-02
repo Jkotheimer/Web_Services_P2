@@ -140,8 +140,8 @@ public class BuyerActivity {
 	
 	private void setLinks(BuyerRepresentation buyer) {
 		// Set up the activities that can be performed on orders
-		Link buy = new Link("ViewOrders", 
-			"http://localhost:8081/orderservice/order" + buyer.getID());	
+		Link[] buy = new Link[] {new Link("ViewOrders", 
+			"http://localhost:8081/orderservice/order" + buyer.getID()),new Link("ViewProducts","http://localhost:8081/productservice/product")};	
 		buyer.setLinks(buy);
 	}
 	
