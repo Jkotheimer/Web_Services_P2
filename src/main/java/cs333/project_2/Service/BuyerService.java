@@ -8,7 +8,7 @@ import cs333.project_2.Service.Respresentation.BuyerRequest;
 public interface BuyerService {
 	
 	public Response getBuyers();
-	public BuyerRepresentation getBuyer(String buyerId);
-	public BuyerRepresentation createBuyer(BuyerRequest buyerRequest);
-	
+	public Response login(String username, String password);
+	public Response createBuyer(String username, String password);
+	public Response changePassword(String ID, String oldPassword, String newPassword);
 }

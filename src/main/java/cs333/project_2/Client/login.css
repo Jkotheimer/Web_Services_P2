@@ -86,3 +86,7 @@ button:hover { cursor: pointer; }
 	top: 50px;
 	background-color: var(--blue);
 }
+.acc_type {
+	top: 50px;
+	display: none;
+}

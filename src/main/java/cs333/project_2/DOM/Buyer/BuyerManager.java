@@ -15,20 +15,28 @@ public class BuyerManager {
 		return buyers;
 	}
 	
+	public static Buyer login(String username, String password) {
+		return BuyerDAL.read(username, password);
+	}
+	
     public static Buyer getBuyer(String ID) {
     	return BuyerDAL.read(ID);
 	}
     
-	public static void addBuyer(String ID,String username,String password) {
-		BuyerDAL.insertBuyer(ID,username,password);
+	public static Buyer addBuyer(String username,String password) {
+		return BuyerDAL.insertBuyer(username,password);
 	}
 	
 	public static void deleteBuyer(String ID) {
 		BuyerDAL.deleteBuyer(ID);
 	}
 	
-	public static void updateBuyer(String ID, String username, String password) {
-		BuyerDAL.update(ID,username,password);
+	public static int changePassword(String ID, String oldPassword, String newPassword) {
+		return BuyerDAL.update(ID, oldPassword, newPassword);
+	}
+	
+	public static Buyer changeUsername(String ID, String newUsername) {
+		return BuyerDAL.update(ID, newUsername);
 	}
 
 	public static void insertOrder(String attachedBuyerID, String ID, List<Product> products) {

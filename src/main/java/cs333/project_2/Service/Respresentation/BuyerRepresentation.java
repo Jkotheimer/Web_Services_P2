@@ -18,16 +18,15 @@ import cs333.project_2.Service.AbstractRepresentation;
 @XmlType(name = "")
 public class BuyerRepresentation extends AbstractRepresentation {
 	
+	private final String accountType = "buyer";
 	private String username;
-	private String password;
 	private String buyerID;
 	private List<Order> orders = new ArrayList<>();
 	private List<Address> addresslist = new ArrayList<>();
 	private List<PaymentInfo> payinfo = new ArrayList<>();; // Allow buyers to have multiple payment options
 
-	public BuyerRepresentation(String ID,String username, String password) {
+	public BuyerRepresentation(String ID,String username) {
 		this.username = username;
-		this.password = password;
 		this.buyerID = ID;
 	}
 	
@@ -38,6 +37,10 @@ public class BuyerRepresentation extends AbstractRepresentation {
 	 * ________________________________________________________________________
 	 */
 
+	public String getAccountType() {
+		return this.accountType;
+	}
+	
 	public String getUsername()	{ 
 		return this.username;	
 	}
@@ -107,12 +110,5 @@ public class BuyerRepresentation extends AbstractRepresentation {
 	
 	public void setPaymentInfos(List<PaymentInfo> payInfos) {
 		this.payinfo = payInfos;
-	}
-
-	public boolean setPassword(String password) {
-		// If the password has been used before, inform the user and have them change it to something else
-		if(this.password == password) return false;
-		this.password = password;
-		return true;
 	}
 }

@@ -22,9 +22,7 @@ public class Buyer  {
 		this.buyerID = ID;
 	}
 	
-	public Buyer() {
-		
-	}
+	public Buyer() {}
 
 
 	/**
@@ -103,11 +101,13 @@ public class Buyer  {
 		this.payinfo = payInfos;
 	}
 
-	public boolean setPassword(String password) {
+	public boolean setPassword(String oldPassword, String newPassword) {
 		// If the password has been used before, inform the user and have them change it to something else
-		if(this.password == password) return false;
-		this.password = password;
-		return true;
+		if(this.password.equals(oldPassword)) {
+			this.password = newPassword;
+			return true;
+		}
+		return false;
 	}
 
 	/**
@@ -117,7 +117,7 @@ public class Buyer  {
 
 	public boolean AuthenticateCred(String username, String password) {
 		// TODO possibly add another hash algorithm here for safety
-		if(this.username == username && this.password == password) return true;
+		if(this.username.equals(username) && this.password.equals(password)) return true;
 		else return false;
 	}
 	

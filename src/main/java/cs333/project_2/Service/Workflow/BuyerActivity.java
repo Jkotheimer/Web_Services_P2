@@ -24,7 +24,7 @@ public class BuyerActivity {
 		Iterator<Buyer> it = buyers.iterator();
 		while(it.hasNext()) {
           Buyer b = (Buyer)it.next();
-          BuyerRepresentation buyerRepresentation = new BuyerRepresentation(b.getBuyerID(),b.getUsername(),b.getPassword());
+          BuyerRepresentation buyerRepresentation = new BuyerRepresentation(b.getBuyerID(),b.getUsername());
           buyerRepresentation.setOrderIDs(b.getOrders());
           buyerRepresentation.setAdresses(b.getAddress());
           buyerRepresentation.setPaymentInfos(b.getPayInfos());
@@ -34,11 +34,24 @@ public class BuyerActivity {
 		return buyerRepresentations;
 	}
 	
+	public BuyerRepresentation login(String username, String password) {
+		Buyer b = BuyerManager.login(username, password);
+		if(b == null) return null;
+		
+		BuyerRepresentation buyerRep = new BuyerRepresentation(b.getBuyerID(), b.getUsername());
+		buyerRep.setOrderIDs(b.getOrders());
+		buyerRep.setAdresses(b.getAddress());
+		buyerRep.setPaymentInfos(b.getPayInfos());
+		setLinks(buyerRep);
+		
+		return buyerRep;
+	}
+	
 	public BuyerRepresentation getBuyer(String id) {
 		
 		Buyer b = BuyerManager.getBuyer(id);
 		
-		BuyerRepresentation buyerRepresentation = new BuyerRepresentation(b.getBuyerID(),b.getUsername(),b.getPassword());
+		BuyerRepresentation buyerRepresentation = new BuyerRepresentation(b.getBuyerID(),b.getUsername());
         buyerRepresentation.setOrderIDs(b.getOrders());
         buyerRepresentation.setAdresses(b.getAddress());
         buyerRepresentation.setPaymentInfos(b.getPayInfos());
@@ -47,19 +60,32 @@ public class BuyerActivity {
 		return buyerRepresentation;
 	}
 	
-	public BuyerRepresentation createBuyer(String ID, String username, String password) {
+	public BuyerRepresentation createBuyer(String username, String password) {
 		
-		BuyerManager.addBuyer(ID, username , password);
-		Buyer b = new Buyer(ID, username, password);
-		
-		BuyerRepresentation bRep = new BuyerRepresentation(b.getBuyerID(),b.getUsername(),b.getPassword());
+		Buyer b = BuyerManager.addBuyer(username , password);
+		if(b == null) return null;
+		BuyerRepresentation bRep = new BuyerRepresentation(b.getBuyerID(), b.getUsername());
+		setLinks(bRep);
 		
 		return bRep;
 	}
 	
-	public void updateBuyer(String id,String username, String password) {
-		BuyerManager.updateBuyer(id, username, password);
+	public int changePassword(String ID, String oldPassword, String newPassword) {
+		return BuyerManager.changePassword(ID, oldPassword, newPassword);
+	}
+	
+	public BuyerRepresentation changeUsername(String ID, String newUsername) {
+		Buyer b = BuyerManager.changeUsername(ID, newUsername);
 		
+		if(b == null) return null;
+
+		BuyerRepresentation buyerRepresentation = new BuyerRepresentation(b.getBuyerID(),b.getUsername());
+        buyerRepresentation.setOrderIDs(b.getOrders());
+        buyerRepresentation.setAdresses(b.getAddress());
+        buyerRepresentation.setPaymentInfos(b.getPayInfos());
+		setLinks(buyerRepresentation);
+        
+		return buyerRepresentation;
 	}
 	
 	public String deleteBuyer(String id) {

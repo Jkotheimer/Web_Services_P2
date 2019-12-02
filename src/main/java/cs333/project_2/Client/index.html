@@ -47,7 +47,12 @@
 			</div>
 			<div class="links">
 				<button class="form_element create_account" onclick="switch_to_create_account()">Create Account</button>
-				<button class="form_element sign_in" onclick="login()">Sign In</button>
+				<button class="form_element sign_in" onclick="sign_in()">Sign In</button>
+				<div class="form_element acc_type">
+					<div class="form_label">Account Type</div>
+					<input type="radio" name="account_type" value="buyers" checked>Buyer
+					<input type="radio" name="account_type" value="sellers">Seller
+				</div>
 			</div>
 		</div>
 	</body>

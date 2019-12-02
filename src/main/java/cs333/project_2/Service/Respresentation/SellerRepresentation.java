@@ -16,6 +16,7 @@ import cs333.project_2.Service.AbstractRepresentation;
 @XmlType(name = "")
 public class SellerRepresentation extends AbstractRepresentation{
 
+	private final String accountType = "seller";
 	private String username;
 	private String sellerID;
 	private List<Product> products = new ArrayList<Product>();
@@ -34,11 +35,13 @@ public class SellerRepresentation extends AbstractRepresentation{
 	 * ________________________________________________________________________
 	 */
 
+	public String getAccountType()			{ return this.accountType; }
+	
 	public String getUsername()				{ return this.username;	}
 
-	public String getsellerID()						{ return this.sellerID;		}
+	public String getsellerID()				{ return this.sellerID;		}
 
-	public List<Product> getProducts()			{ return this.products;	}
+	public List<Product> getProducts()		{ return this.products;	}
 
 	/**
 	 * SETTERS

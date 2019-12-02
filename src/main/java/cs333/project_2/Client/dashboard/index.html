@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8"/>
+		<meta name="viewport" content="width=device-width"/>
+		<link href="./search.css" rel="stylesheet"/>
+		<script type="text/javascript" src="/request.js"></script>
+		<script type="text/javascript" src="./search.js"></script>
+		<script type="text/javascript" src="/request.js"></script>
+		<title>Dashboard</title>
+	</head>
+	<body onload="load()">
+		<div class="panel header_panel">
+			<div id="user_welcome" onclick="show_user_content()">
+				Welcome, <span id="username"></span>!
+			</div>
+			<h>Search for a product</h>
+			<button class="log_out" onclick="log_out()">Log Out</button>
+		</div>
+		<div class="panel body_panel">
+			<div id="search_content">
+				<input type="text" name="search" class="search" placeholder="Search for a product here" autocomplete="off" spellcheck="false" autocorrect="off"/>
+				<button id="submit_search" onclick="search()">Search</button>
+				<div id="search_results"></div>
+			</div>
+			
+			<div id="post_content">
+				<input type="text" name="product" class="product" placeholder="Name of product here" autocomplete="off" spellcheck="false" autocorrect="off"/>
+				$<input type="number" name="price" class="price" placeholder="Price" autocomplete="off" step="any"/>
+				<br/>
+				<textarea name="description" class="description" rows=5 placeholder="A short description of your product" autocomplete="off" spellcheck="false" autocorrect="off"></textarea>
+				<br/>
+				<button id="submit_post" onclick="post()">Add Product</button>
+				<div id="post_result"></div>
+			</div>
+			
+			<div id="user_content">
+				<button style="display:block;" onclick="back()">Back</button>
+				<br/>
+				
+				<div class="setting_element">
+					<span class="user_setting">Account Type: </span>
+					<span id="account_type"></span>
+				</div>
+				
+				<div class="setting_element">
+					<span class="user_setting">Username: </span>
+					<span id="current_username"></span>
+					<input id="new_username" class="change_input" placeholder="Change Username"/>
+					<button style="margin: 0 10px;" onclick="change_username()">Change Username</button>
+				</div>
+				
+				<div class="setting_element">
+					<span class="user_setting">Change Password</span>
+					<input id="current_password" class="change_input" placeholder="Current Password"/>
+					<input id="new_password" class="change_input" placeholder="New Password"/>
+					<input id="confirm_new_password" class="change_input" placeholder="Confirm New Password"/>
+					<button style="margin: 0 10px;" onclick="change_password()">Change Password</button>
+				</div>
+				
+				<div class="setting_element">
+					<div class="user_setting clickable" onclick="show_add_address()">Addresses +</div>
+					<div id="addresses" class="setting_content"></div>
+				</div>
+
+				<div class="setting_element">
+					<div class="user_setting clickable" onclick="show_add_payment()">Payment Methods +</div>
+					<div id="payment_methods" class="setting_content"></div>
+				</div>
+				
+				<div class="setting_element">
+					<div class="user_setting">Orders</div>
+					<div id="orders" class="setting_content"></div>
+				</div>
+			</div>
+		</div>
+	</body>
+</html>

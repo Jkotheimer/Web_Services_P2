@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.regex.Pattern;
+import java.util.UUID;
 
 public class BuyerDAL {
 
@@ -25,9 +26,12 @@ public class BuyerDAL {
 		return OrderDB;
 	}
 	
-	public static void insertBuyer(String ID, String username, String password) {
-		Buyer toBeAdded = new Buyer(ID,username,password);
-		BuyerDB.add(toBeAdded);
+	public static Buyer insertBuyer(String username, String password) {
+		for(Buyer b : BuyerDB) if(b.getUsername() == username) return null;
+		String ID = UUID.randomUUID().toString();
+		Buyer b = new Buyer(ID,username,password);
+		BuyerDB.add(b);
+		return b;
 	}
 	
 	public static void insertOrder(String attachedBuyerID, String ID, List<Product> products) {
@@ -38,6 +42,11 @@ public class BuyerDAL {
 				selected.addOrder(newOrder);
 			}
 		}
+	}
+	
+	public static Buyer read(String username, String password) {
+		for(Buyer b : BuyerDB) if(b.AuthenticateCred(username, password)) return b;
+		return null;
 	}
 
 	public static Buyer read(String ID) {
@@ -58,15 +67,25 @@ public class BuyerDAL {
 		return null;
 	}
 
-	public static void update(String ID,String username, String password) {
+	public static int update(String ID, String oldPassword, String newPassword) {
 	//SerialID is the primary key here which you enter as a parameter for the row you wish to change
-		for(int i=0;i<BuyerDB.size();i++) {
-			if(BuyerDB.get(i).getBuyerID() == ID) {
-				Buyer change = BuyerDB.get(i);
-				change.setPassword(password);
-				change.setUsername(username);
+		for(Buyer b : BuyerDB) {
+			if(b.getBuyerID().equals(ID)) {
+				if(b.setPassword(oldPassword, newPassword)) return 200;
+				else return 401;
 			}
 		}
+		return 404;
+	}
+	
+	public static Buyer update(String ID, String newUsername) {
+		for(Buyer b : BuyerDB) {
+			if(b.getBuyerID().equals(ID)) {
+				b.setUsername(newUsername);
+				return b;
+			}
+		}
+		return null;
 	}
 	
 	public static void updateOrder(String ID, String status) {

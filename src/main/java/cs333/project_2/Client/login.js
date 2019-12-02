@@ -18,6 +18,7 @@ function switch_to_create_account() {
 	handle_keypress = event => handle_keypress_facade(event, create_account);
 	
 	document.getElementsByClassName("confirm_password")[0].style.display = "block";
+	document.getElementsByClassName("acc_type")[0].style.display = "block";
 	clear_inputs();
 }
 
@@ -41,6 +42,7 @@ function switch_to_login() {
 	handle_keypress = event => handle_keypress_facade(event, sign_in);
 	
 	document.getElementsByClassName("confirm_password")[0].style.display = "none";
+	document.getElementsByClassName("acc_type")[0].style.display = "none";
 	clear_inputs();
 }
 
@@ -70,27 +72,67 @@ function handle_keypress_facade(event, func) {
  * - Send a get request to the appropriate link with the given fields
  */
 
-    function login() {
-        // Form fields, see IDs above
-   
-       const params = {
-        	buyerId: document.getElementsByName("buyerId")[0].value,
-            username: document.getElementsByName("username")[0].value,
-            password: document.getElementsByName("password")[0].value
-        }
+function sign_in() {
+	// Form fields, see IDs above
+	const username = document.getElementsByName("username")[0].value;
+	const password = document.getElementsByName("password")[0].value;
+	if(username == "") {
+		display_error("Please enter a username", document.getElementById("username_error"));
+		return;
+	} else if(password.length < 8) {
+		display_error("Password too short", document.getElementById("password_error"));
+		return;
+	}
+	
+	const url = "http://localhost:8081/buyers/" + username + "?password=" + password;
+	const xhr = createRequest("GET", url);
+	xhr.send();
+	xhr.onload = function() {
+		if(xhr.status == 401) display_error("Invalid Credentials", document.getElementById("password_error"));
+		else if(xhr.status != 200) display_error("Something went wrong :/", document.getElementById("password_error"));
+		else {
+			localStorage.setItem("user", xhr.response);
+			window.location.href = "/dashboard";
+		}
+	}
+}
 
-        const http = new XMLHttpRequest()
-        http.open('POST', 'http://localhost:8081/buyer')
-        http.setRequestHeader('Content-type', 'application/json')
-        http.send(JSON.stringify(params))
-        window.location.href = 'search/index.html';  // Make sure to stringify
-        http.onload = function() {
-	       // Do whatever with response
-            alert(http.responseText)
-        }
-    }
+/**
+ * When the user wants to create an account:
+ * - Grab the input fields for username and both passwords
+ * - Check for a valid username and password and matching passwords
+ * - Send a post request to the appropriate link with the given fields
+ */
+function create_account() {
+	var username = document.getElementsByName("username")[0].value;
+	var password = document.getElementsByName("password")[0].value;
+	var confirm_password = document.getElementsByName("confirm_password")[0].value;
+	var acc_type = document.getElementsByName("account_type");
+	for(let i = 0; i < acc_type.length; i++) {
+		if(acc_type[i].checked) {
+			acc_type = i;
+			break;
+		}
+	}
+	if(acc_type == 1) acc_type = "sellers";
+	else acc_type = "buyers";
+	
+	if(acct_creation_error(username, password, confirm_password)) return;
+	
+	const uri = "http://localhost:8081/" + acc_type + "?username=" + username + "&password=" + password;
+	const xhr = createRequest("POST", uri);
+	xhr.send();
+	xhr.onload = function() {
+		if(xhr.status == 409) display_error("Username already exists", document.getElementById("username_error"));
+		else if(xhr.status != 201) display_error("Something went wrong :/", document.getElementById("password_error"));
+		else {
+			localStorage.setItem("user", xhr.response);
+			window.location.href = "/dashboard";
+		}
+	}
+}
 
-    function createRequest(method, url) {
+function createRequest(method, url) {
 	var xhr = new XMLHttpRequest();
 	if ("withCredentials" in xhr) {	
 		// Check if the XMLHttpRequest object has a "withCredentials" property.
@@ -105,46 +147,7 @@ function handle_keypress_facade(event, func) {
 		// Otherwise, CORS is not supported by the browser.
 		xhr = null;		
 	}
-	return xhr;
-}
-
-function sign_in() {
-	var username = document.getElementsByName("username")[0].value;
-	var password = document.getElementsByName("password")[0].value;
-	console.log("sign_in\nusername: " + username + '\n' + "password: " + password);    
-	// TODO: make get request to localhost uri
-	var url = "http://localhost:8081/buyer"
-	var xhr = createRequest("GET", url);
-	xhr.onload = function() {
-		var text = xhr.responseText;
-		console.log('Response from CORS request to ' + url + ': ' + text);
-	};
-	
-	xhr.onerror = function() {
-		console.log('Woops, there was an error making the request.');
-	};
-	
-	xhr.send();
-// 	$.get('http://localhost:8080/users/buyers', function (response) {
-// 		console.log(response);
-// 	});
-}
-
-/**
- * When the user wants to create an account:
- * - Grab the input fields for username and both passwords
- * - Check for a valid username and password and matching passwords
- * - Send a post request to the appropriate link with the given fields
- */
-function create_account() {
-	var username = document.getElementsByName("username")[0].value;
-	var password = document.getElementsByName("password")[0].value;
-	var confirm_password = document.getElementsByName("confirm_password")[0].value;
-	
-	if(acct_creation_error(username, password, confirm_password)) return;
-	
-	console.log("create_account\nusername: " + username + '\n' + "password: " + password);
-	// TODO: make post request to localhost uri
+	return xhr
 }
 
 /**

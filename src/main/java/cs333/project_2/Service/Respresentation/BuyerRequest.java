@@ -9,27 +9,24 @@ import javax.xml.bind.annotation.XmlType;
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "")
 public class BuyerRequest {
-	
-private String buyerId;
-private String username;
-private String password;
 
-public String getBuyerId() {
-	return buyerId;
-}
-public void setBuyerId(String buyerId) {
-	this.buyerId = buyerId;
-}
-public String getUsername() {
-	return username;
-}
-public void setUsername(String username) {
-	this.username = username;
-}
-public String getPassword() {
-	return password;
-}
-public void setPassword(String password) {
-	this.password = password;
-}
+	private String ID;
+	private String username;
+	private String password;
+
+	public String getID() {
+		return ID;
+	}
+	public String getUsername() {
+		return username;
+	}
+	public void setUsername(String username) {
+		this.username = username;
+	}
+	public String getPassword() {
+		return password;
+	}
+	public void setPassword(String password) {
+		this.password = password;
+	}
 }
