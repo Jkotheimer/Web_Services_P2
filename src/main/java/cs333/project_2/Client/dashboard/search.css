@@ -10,7 +10,7 @@
 	border: 1px solid lightgrey;
 }
 .header_panel {
-	position: fixed;
+	position: absolute;
 	width: calc(100% - 2px);
 	height: 75px;
 	top: 0;
@@ -133,6 +133,9 @@ input, textarea {
 	border: 1px solid #393939;
 	cursor: pointer;
 }
+.setting_form {
+	display: none;
+}
 .change_input {
 	display: block;
 	padding: 5px;
@@ -149,4 +152,11 @@ input, textarea {
 }
 .setting_content {
 	margin: 0 10px;
+}
+.setting {
+	margin: 20px 0;
+	padding: 10px;
+	width: max-content;
+	border-radius: 5px;
+	box-shadow: 0 0 10px #CCC;
 }

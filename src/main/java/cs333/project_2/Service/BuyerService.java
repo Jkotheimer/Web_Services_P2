@@ -10,5 +10,5 @@ public interface BuyerService {
 	public Response getBuyers();
 	public Response login(String username, String password);
 	public Response createBuyer(String username, String password);
-	public Response changePassword(String ID, String oldPassword, String newPassword);
+	public Response update(String ID, String Action, String req);
 }

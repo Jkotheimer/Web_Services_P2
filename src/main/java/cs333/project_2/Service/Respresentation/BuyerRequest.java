@@ -1,32 +1,50 @@
 package cs333.project_2.Service.Respresentation;
 
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlType;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
-@XmlRootElement
-@XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "")
-public class BuyerRequest {
+import cs333.project_2.DOM.General.Address;
+import cs333.project_2.DOM.General.PaymentInfo;
 
-	private String ID;
-	private String username;
-	private String password;
+@JsonIgnoreProperties(ignoreUnknown=true)
+public class BuyerRequest extends BuyerRepresentation {
 
-	public String getID() {
-		return ID;
+	private String currentPassword;
+	private String newPassword;
+	private String action;
+	private Address newAddress;
+	private PaymentInfo newPayInfo;
+	
+	public BuyerRequest() {}
+
+	public String getCurrentPassword() {
+		return currentPassword;
 	}
-	public String getUsername() {
-		return username;
+	public String getNewPassword() {
+		return newPassword;
 	}
-	public void setUsername(String username) {
-		this.username = username;
+	public String getAction() {
+		return action;
 	}
-	public String getPassword() {
-		return password;
+	public Address getNewAddress() {
+		return newAddress;
 	}
-	public void setPassword(String password) {
-		this.password = password;
+	public PaymentInfo getNewPayInfo() {
+		return newPayInfo;
+	}
+	
+	public void setCurrentPassword(String password) {
+		this.currentPassword = password;
+	}
+	public void setNewPassword(String password) {
+		this.newPassword = password;
+	}
+	public void setAction(String action) {
+		this.action = action;
+	}
+	public void setNewAddress(Address newAddress) {
+		this.newAddress = newAddress;
+	}
+	public void setNewPayInfo(PaymentInfo newPayInfo) {
+		this.newPayInfo = newPayInfo;
 	}
 }

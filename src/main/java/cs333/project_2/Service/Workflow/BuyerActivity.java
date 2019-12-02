@@ -26,7 +26,7 @@ public class BuyerActivity {
           Buyer b = (Buyer)it.next();
           BuyerRepresentation buyerRepresentation = new BuyerRepresentation(b.getBuyerID(),b.getUsername());
           buyerRepresentation.setOrderIDs(b.getOrders());
-          buyerRepresentation.setAdresses(b.getAddress());
+          buyerRepresentation.setAddresses(b.getAddressList());
           buyerRepresentation.setPaymentInfos(b.getPayInfos());
           //now add this representation in the list
           buyerRepresentations.add(buyerRepresentation);
@@ -40,7 +40,7 @@ public class BuyerActivity {
 		
 		BuyerRepresentation buyerRep = new BuyerRepresentation(b.getBuyerID(), b.getUsername());
 		buyerRep.setOrderIDs(b.getOrders());
-		buyerRep.setAdresses(b.getAddress());
+		buyerRep.setAddresses(b.getAddressList());
 		buyerRep.setPaymentInfos(b.getPayInfos());
 		setLinks(buyerRep);
 		
@@ -53,7 +53,7 @@ public class BuyerActivity {
 		
 		BuyerRepresentation buyerRepresentation = new BuyerRepresentation(b.getBuyerID(),b.getUsername());
         buyerRepresentation.setOrderIDs(b.getOrders());
-        buyerRepresentation.setAdresses(b.getAddress());
+        buyerRepresentation.setAddresses(b.getAddressList());
         buyerRepresentation.setPaymentInfos(b.getPayInfos());
 		setLinks(buyerRepresentation);
         
@@ -81,7 +81,7 @@ public class BuyerActivity {
 
 		BuyerRepresentation buyerRepresentation = new BuyerRepresentation(b.getBuyerID(),b.getUsername());
         buyerRepresentation.setOrderIDs(b.getOrders());
-        buyerRepresentation.setAdresses(b.getAddress());
+        buyerRepresentation.setAddresses(b.getAddressList());
         buyerRepresentation.setPaymentInfos(b.getPayInfos());
 		setLinks(buyerRepresentation);
         
@@ -104,12 +104,32 @@ public class BuyerActivity {
 		BuyerManager.addOrder(ID, ord);
 	}
 
-	public static void addAddress(String ID, Address addr) {
-		BuyerManager.addAddress(ID, addr);
+	public BuyerRepresentation addAddress(String ID, Address addr) {
+		Buyer b = BuyerManager.addAddress(ID, addr);
+		
+		if(b == null) return null;
+
+		BuyerRepresentation buyerRepresentation = new BuyerRepresentation(b.getBuyerID(),b.getUsername());
+        buyerRepresentation.setOrderIDs(b.getOrders());
+        buyerRepresentation.setAddresses(b.getAddressList());
+        buyerRepresentation.setPaymentInfos(b.getPayInfos());
+		setLinks(buyerRepresentation);
+        
+		return buyerRepresentation;
 	}
 	
-	public static void addPaymentInfo(String ID, PaymentInfo payinf) {
-		BuyerManager.addPaymentInfo(ID, payinf);
+	public BuyerRepresentation addPaymentInfo(String ID, PaymentInfo payinf) {
+		Buyer b = BuyerManager.addPaymentInfo(ID, payinf);
+		
+		if(b == null) return null;
+
+		BuyerRepresentation buyerRepresentation = new BuyerRepresentation(b.getBuyerID(),b.getUsername());
+        buyerRepresentation.setOrderIDs(b.getOrders());
+        buyerRepresentation.setAddresses(b.getAddressList());
+        buyerRepresentation.setPaymentInfos(b.getPayInfos());
+		setLinks(buyerRepresentation);
+        
+		return buyerRepresentation;
 	}
 	
 	private void setLinks(BuyerRepresentation buyer) {

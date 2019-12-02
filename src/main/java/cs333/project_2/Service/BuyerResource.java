@@ -11,11 +11,20 @@ import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.QueryParam;
 import javax.ws.rs.Produces;
+import javax.ws.rs.Consumes;
+import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.Status;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.DeserializationFeature;
+import com.fasterxml.jackson.databind.JsonMappingException;
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
+
 import cs333.project_2.DOM.Buyer.BuyerManager;
 import cs333.project_2.DOM.General.Address;
+import cs333.project_2.DOM.General.PaymentInfo;
 import cs333.project_2.DOM.Order.Order;
 import cs333.project_2.Service.Respresentation.AddressRequest;
 import cs333.project_2.Service.Respresentation.BuyerRepresentation;
@@ -27,6 +36,7 @@ import cs333.project_2.Service.Workflow.BuyerActivity;
 public class BuyerResource implements BuyerService {
 	
 	final CORSFilter filter = new CORSFilter();
+	final ObjectMapper mapper = new ObjectMapper();
 	
 	@GET
 	@Produces("application/json")
@@ -60,22 +70,51 @@ public class BuyerResource implements BuyerService {
 	
 	@POST
 	@Produces("application/json")
+	@Consumes("text/plain")
 	@Path("/{buyerID}")
-	public Response changePassword(@PathParam("buyerID") String ID, @QueryParam("current_password") String oldPassword, @QueryParam("new_password") String newPassword) {
-		System.out.println("PUT METHOD Request from Client with ............." + ID + "  " + oldPassword + " " + newPassword);
+	public Response update(@PathParam("buyerID") String ID, @QueryParam("action") String action, String req) {
+		System.out.println("PUT METHOD Request from Client with ............." + ID);
 		BuyerActivity buyerActivity = new BuyerActivity();
-		return filter.addCORS(Response.status(buyerActivity.changePassword(ID, oldPassword, newPassword)));
-	}
-	
-	@POST
-	@Produces("application/json")
-	@Path("/{buyerID}")
-	public Response changeUsername(@PathParam("buyerID") String ID, @QueryParam("new_username") String newUsername) {
-		System.out.println("PUT METHOD Request from Client with .............." + newUsername);
-		BuyerActivity buyerActivity = new BuyerActivity();
-		BuyerRepresentation b = buyerActivity.changeUsername(ID, newUsername);
-		if(b == null) return filter.addCORS(Response.status(404));
-		return filter.addCORS(Response.ok(b));
+		if(action.equals("password")) {
+			JsonNode request;
+			try {
+				request = mapper.readTree(req);
+			} catch (JsonProcessingException e) {
+				e.printStackTrace();
+				return filter.addCORS(Response.status(400));
+			}
+			return filter.addCORS(Response.status(buyerActivity.changePassword(ID, request.get("current_password").textValue(), request.get("new_password").textValue())));
+		}
+		else if(action.equals("username")) {
+			BuyerRepresentation b = buyerActivity.changeUsername(ID, req);
+			if(b == null) return filter.addCORS(Response.status(404));
+			else return filter.addCORS(Response.ok(b));
+		}
+		else if(action.equals("address")) {
+			Address address;
+			try {
+				address = mapper.readValue(req, Address.class);
+			} catch (JsonProcessingException e) {
+				e.printStackTrace();
+				return filter.addCORS(Response.status(400));
+			}
+			BuyerRepresentation b = buyerActivity.addAddress(ID, address);
+			if(b == null) return filter.addCORS(Response.status(404));
+			else return filter.addCORS(Response.ok(b));
+		}
+		else if(action.equals("payment")) {
+			PaymentInfo payinfo;
+			try {
+				payinfo = mapper.readValue(req,  PaymentInfo.class);
+			} catch (JsonProcessingException e) {
+				e.printStackTrace();
+				return filter.addCORS(Response.status(400));
+			}
+			BuyerRepresentation b = buyerActivity.addPaymentInfo(ID, payinfo);
+			if(b == null) return filter.addCORS(Response.status(400));
+			else return filter.addCORS(Response.ok(b));
+		}
+		return filter.addCORS(Response.status(400));
 	}
 	
 	/*

@@ -13,8 +13,8 @@ public class Buyer  {
 	private String password;
 	private String buyerID;
 	private List<Order> orders = new ArrayList<>();
-	private List<Address> addresslist = new ArrayList<>();
-	private List<PaymentInfo> payinfo = new ArrayList<>();; // Allow buyers to have multiple payment options
+	private List<Address> addressList = new ArrayList<>();
+	private List<PaymentInfo> payInfos = new ArrayList<>();; // Allow buyers to have multiple payment options
 
 	public Buyer(String ID,String username, String password) {
 		this.username = username;
@@ -38,8 +38,8 @@ public class Buyer  {
 		return this.buyerID;		
 	}
 	
-	public List<Address> getAddress() {
-		return this.addresslist;
+	public List<Address> getAddressList() {
+		return this.addressList;
 	}
 	
 	public List<Order> getOrders() { 		
@@ -47,7 +47,7 @@ public class Buyer  {
 	}
 	
 	public List<PaymentInfo> getPayInfos()	{ 
-		return this.payinfo;  
+		return this.payInfos;  
 	}
 
 
@@ -64,19 +64,19 @@ public class Buyer  {
 	
 	public boolean addAddress(Address addr) {
 		// Add the new order in the correct position
-		this.addresslist.add(addr);
+		this.addressList.add(addr);
 		return true;
 	}
 
 	public boolean addPayInfo(PaymentInfo newPayInfo) {//		// If this method of payment already exists, return false
-		for(PaymentInfo i : this.payinfo) {
+		for(PaymentInfo i : this.payInfos) {
 			if(i == newPayInfo) return false;
 		}
-		return this.payinfo.add(newPayInfo);
+		return this.payInfos.add(newPayInfo);
 	}
 	
 	public boolean deletePayInfo(PaymentInfo payinfo) {
-		return this.payinfo.remove(payinfo);
+		return this.payInfos.remove(payinfo);
 	}
 
 	public boolean setUsername(String username) {
@@ -94,11 +94,11 @@ public class Buyer  {
 	}
 	
 	public void setAdresses(List<Address> addresses) {
-		this.addresslist = addresses;
+		this.addressList = addresses;
 	}
 	
 	public void setPaymentInfos(List<PaymentInfo> payInfos) {
-		this.payinfo = payInfos;
+		this.payInfos = payInfos;
 	}
 
 	public boolean setPassword(String oldPassword, String newPassword) {

@@ -27,7 +27,7 @@ public class BuyerDAL {
 	}
 	
 	public static Buyer insertBuyer(String username, String password) {
-		for(Buyer b : BuyerDB) if(b.getUsername() == username) return null;
+		for(Buyer b : BuyerDB) if(b.getUsername().equals(username)) return null;
 		String ID = UUID.randomUUID().toString();
 		Buyer b = new Buyer(ID,username,password);
 		BuyerDB.add(b);
@@ -36,7 +36,7 @@ public class BuyerDAL {
 	
 	public static void insertOrder(String attachedBuyerID, String ID, List<Product> products) {
 		for(int i=0;i<BuyerDB.size();i++) {
-			if(BuyerDB.get(i).getBuyerID() == attachedBuyerID) {
+			if(BuyerDB.get(i).getBuyerID().equals(attachedBuyerID)) {
 				Buyer selected = BuyerDB.get(i);
 				Order newOrder = new Order(ID,selected,products);
 				selected.addOrder(newOrder);
@@ -60,7 +60,7 @@ public class BuyerDAL {
 	
 	public static Order readOrder(String ID) {
 		for(int i=0;i<OrderDB.size();i++) {
-			if(OrderDB.get(i).getID() == ID) {
+			if(OrderDB.get(i).getID().equals(ID)) {
 				return OrderDB.get(i);
 			}
 		}
@@ -91,7 +91,7 @@ public class BuyerDAL {
 	public static void updateOrder(String ID, String status) {
 		//SerialID is the primary key here which you enter as a parameter for the row you wish to change
 			for(int i=0;i<OrderDB.size();i++) {
-				if(OrderDB.get(i).getID() == ID) {
+				if(OrderDB.get(i).getID().equals(ID)) {
 					Order change = OrderDB.get(i);
 					change.updateStatus(status);
 				}
@@ -100,29 +100,33 @@ public class BuyerDAL {
 	
 	public static void addOrder(String ID, Order ord) {
 		for(int i=0;i<BuyerDB.size();i++) {
-			if(BuyerDB.get(i).getBuyerID() == ID) {
+			if(BuyerDB.get(i).getBuyerID().equals(ID)) {
 				Buyer change = BuyerDB.get(i);
 				change.addOrder(ord);
 			}
 		}
 	}
 
-	public static void addAddress(String ID, Address addr) {
+	public static Buyer addAddress(String ID, Address addr) {
 		for(int i=0;i<BuyerDB.size();i++) {
-			if(BuyerDB.get(i).getBuyerID() == ID) {
+			if(BuyerDB.get(i).getBuyerID().equals(ID)) {
 				Buyer change = BuyerDB.get(i);
 				change.addAddress(addr);
+				return change;
 			}
 		}
+		return null;
 	}
 	
-	public static void addPaymentInfo(String ID, PaymentInfo payinf) {
+	public static Buyer addPaymentInfo(String ID, PaymentInfo payinf) {
 		for(int i=0;i<BuyerDB.size();i++) {
-			if(BuyerDB.get(i).getBuyerID() == ID) {
+			if(BuyerDB.get(i).getBuyerID().equals(ID)) {
 				Buyer change = BuyerDB.get(i);
 				change.addPayInfo(payinf);
+				return BuyerDB.get(i);
 			}
 		}
+		return null;
 	}
 	
 	public static void deleteBuyer(String ID) {

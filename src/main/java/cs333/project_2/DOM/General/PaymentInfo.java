@@ -1,20 +1,23 @@
 package cs333.project_2.DOM.General;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
+@JsonIgnoreProperties(ignoreUnknown=true)
 public class PaymentInfo {    
 
     private String CreditCardNum;
     private String CreditCardHolder;
     private String ExpDate;
     private int CCV;
-    private int billingAddressID;
 
-    public PaymentInfo(String creditcardnum, String creditcardholder, String expdate, int ccv, int billingAddressID) {
-        this.CreditCardNum = creditcardnum;
+    public PaymentInfo(String creditcardnum, String creditcardholder, String expdate, int ccv) {
+    	this.CreditCardNum = creditcardnum;
         this.CreditCardHolder = creditcardholder;
         this.ExpDate = expdate;
         this.CCV = ccv;
-        this.billingAddressID = billingAddressID;
     }
+    
+    public PaymentInfo() {}
 
 	/**
 	 * GETTERS
@@ -36,10 +39,6 @@ public class PaymentInfo {
     public int getCCV() {
         return this.CCV;
     }
- 
-    public int getBillingAddressID() {
-        return this.billingAddressID;
-    }
 
 	/**
 	 * SETTERS
@@ -60,9 +59,5 @@ public class PaymentInfo {
 
     public void setCCV(int ccv) {
         this.CCV = ccv;
-    }
-
-    public void setBillingAddress(int billingaddress) {
-        this.billingAddressID = billingaddress;
     }
 }

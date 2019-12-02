@@ -13,9 +13,7 @@ import cs333.project_2.DOM.General.PaymentInfo;
 import cs333.project_2.DOM.Order.Order;
 import cs333.project_2.Service.AbstractRepresentation;
 
-@XmlRootElement(name = "Buyer")
-@XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "")
+@XmlRootElement
 public class BuyerRepresentation extends AbstractRepresentation {
 	
 	private final String accountType = "buyer";
@@ -104,7 +102,7 @@ public class BuyerRepresentation extends AbstractRepresentation {
 		this.orders = orderIDs;
 	}
 	
-	public void setAdresses(List<Address> addresses) {
+	public void setAddresses(List<Address> addresses) {
 		this.addresslist = addresses;
 	}
 	

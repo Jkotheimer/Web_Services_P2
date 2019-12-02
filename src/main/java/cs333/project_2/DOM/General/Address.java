@@ -1,8 +1,10 @@
 package cs333.project_2.DOM.General;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
+@JsonIgnoreProperties(ignoreUnknown=true)
 public class Address {
 
-	private int Id;
 	private String Street;
     private	String City;
 	private String State;
@@ -16,6 +18,8 @@ public class Address {
 		this.Zipcode = zipcode;
 
 	}
+	
+	public Address() {}
 
 
 	/**
@@ -30,8 +34,6 @@ public class Address {
 	public String getState()	{ return this.State;	}
 	
 	public int getZipcode()		{ return this.Zipcode;	}
-	
-	public int getID()			{ return this.Id;		}
 
 	/**
 	 * SETTERS

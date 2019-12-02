@@ -4,6 +4,7 @@
 		<meta charset="utf-8"/>
 		<meta name="viewport" content="width=device-width"/>
 		<link href="./search.css" rel="stylesheet"/>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 		<script type="text/javascript" src="/request.js"></script>
 		<script type="text/javascript" src="./search.js"></script>
 		<script type="text/javascript" src="/request.js"></script>
@@ -59,12 +60,26 @@
 				</div>
 				
 				<div class="setting_element">
-					<div class="user_setting clickable" onclick="show_add_address()">Addresses +</div>
+					<div class="user_setting clickable" onclick="toggle_add_address()">Addresses +</div>
+					<div class="setting_form" id="address_form">
+						<input class="change_input" name="street_address" placeholder="Street address"/>
+						<input class="change_input" name="city" placeholder="City"/>
+						<input class="change_input" name="state" placeholder="State"/>
+						<input class="change_input" type="number" name="zip" placeholder="Zip"/>
+						<button onclick="add_address()">Add Address</button>
+					</div>
 					<div id="addresses" class="setting_content"></div>
 				</div>
 
 				<div class="setting_element">
-					<div class="user_setting clickable" onclick="show_add_payment()">Payment Methods +</div>
+					<div class="user_setting clickable" onclick="toggle_add_payment()">Payment Methods +</div>
+					<div class="setting_form" id="payment_form">
+						<input class="change_input" name="card_holder" placeholder="Full name on card"/>
+						<input class="change_input" type="number" name="card_number" placeholder="Card Number"/>
+						<input class="change_input" name="exp_date" placeholder="Exp. Date"/>
+						<input class="change_input" type="number" name="ccv" placeholder="CCV"/>
+						<button onclick="add_payment()">Add Payment Method</button>
+					</div>
 					<div id="payment_methods" class="setting_content"></div>
 				</div>
 				

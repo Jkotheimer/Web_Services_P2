@@ -47,12 +47,12 @@ public class BuyerManager {
 		BuyerDAL.addOrder(ID, ord);
 	}
 
-	public static void addAddress(String ID, Address addr) {
-		BuyerDAL.addAddress(ID, addr);
+	public static Buyer addAddress(String ID, Address addr) {
+		return BuyerDAL.addAddress(ID, addr);
 	}
 	
-	public static void addPaymentInfo(String ID, PaymentInfo payinf) {
-		BuyerDAL.addPaymentInfo(ID, payinf);
+	public static Buyer addPaymentInfo(String ID, PaymentInfo payinf) {
+		return BuyerDAL.addPaymentInfo(ID, payinf);
 	}
 	
 }
