@@ -2,6 +2,7 @@
 	--blue: #88BBFF;
 	--yellow: #FFFFA0;
 }
+
 .panel {
 	height: auto;
 	box-shadow: 0 0 10px #999999;
@@ -14,7 +15,7 @@
 	height: 75px;
 	top: 0;
 	left: 0;
-	background-color: var(--blue);
+	background-color: #2196f3;
 }
 h {
 	position: absolute;
@@ -22,7 +23,7 @@ h {
 	top: 50%;
 	transform: translate(-50%, -50%);
 	font-size: 32px;
-	color: var(--yellow);
+	color: #ffeb3b;
 }
 button {
 	width: auto;
@@ -47,7 +48,7 @@ input, textarea {
 	left: 75%;
 	top: 50%;
 	transform: translate(-50%, -50%);
-	background-color: var(--yellow);
+	background-color: #ffeb3b;
 }
 .body_panel {
 	position: relative;
