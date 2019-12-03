@@ -23,7 +23,7 @@ public class SellerActivity {
           SellerRepresentation sellerRepresentation = new SellerRepresentation();
           sellerRepresentation.setUsername(s.getUsername());
           sellerRepresentation.setProducts(s.getProducts());;
-          
+          setLinks(sellerRepresentation);
           //now add this representation in the list
           sellerRepresentations.add(sellerRepresentation);
         }

@@ -28,6 +28,7 @@ public class BuyerActivity {
           buyerRepresentation.setOrderIDs(b.getOrders());
           buyerRepresentation.setAddresses(b.getAddressList());
           buyerRepresentation.setPaymentInfos(b.getPayInfos());
+          setLinks(buyerRepresentation);
           //now add this representation in the list
           buyerRepresentations.add(buyerRepresentation);
         }

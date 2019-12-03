@@ -33,7 +33,7 @@ public class ProductActivity {
           productRepresentation.setItemDescrip(p.getItemDescrip());
           productRepresentation.setPrice(p.getPrice());
           productRepresentation.setRating(p.getRating());
-          
+          setLinks(productRepresentation);
           //now add this representation in the list
           productRepresentations.add(productRepresentation);
         }
@@ -53,7 +53,7 @@ public class ProductActivity {
           productRepresentation.setproductID(p.getProductID());
           productRepresentation.setPrice(p.getPrice());
           productRepresentation.setRating(p.getRating());
-          
+          setLinks(productRepresentation);
           //now add this representation in the list
           productRepresentations.add(productRepresentation);
         }

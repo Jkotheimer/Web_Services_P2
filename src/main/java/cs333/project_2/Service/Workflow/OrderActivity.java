@@ -31,7 +31,7 @@ public class OrderActivity {
           orderRepresentation.setOrderID(o.getID());
           orderRepresentation.updateStatus(o.getStatus());
           orderRepresentation.setOrderedProductIDs(o.getOrderedProductIDs());
-          
+          setLinks(orderRepresentation);
           //now add this representation in the list
           orderRepresentations.add(orderRepresentation);
         }

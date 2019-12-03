@@ -2,6 +2,7 @@ package cs333.project_2.DAL.Buyer;
 
 import cs333.project_2.DOM.Order.Order;
 import cs333.project_2.DOM.Product.Product;
+import cs333.project_2.DAL.Seller.SellerDAL;
 import cs333.project_2.DOM.Buyer.Buyer;
 import cs333.project_2.DOM.General.Address;
 import cs333.project_2.DOM.General.PaymentInfo;
@@ -16,7 +17,7 @@ public class BuyerDAL {
 
 	//Orders should not exist without Buyers, these can probably be separate files but for now they are one
 	private static List<Buyer> BuyerDB = new ArrayList<Buyer>(Arrays.asList(new Buyer("acc1","jman","password1"),new Buyer("acc2","jmon","password2"),new Buyer("acc3","jmen","password3")));
-	private static List<Order> OrderDB = new ArrayList<Order>();
+	private static List<Order> OrderDB = new ArrayList<Order>(Arrays.asList(new Order("ord1", BuyerDB.get(0),SellerDAL.getProducts()),new Order("ord2", BuyerDB.get(1),SellerDAL.getProducts()),new Order("ord3",BuyerDB.get(0),SellerDAL.getProducts())));
 	
 	public static List<Buyer> getBuyers(){
 		return BuyerDB;
