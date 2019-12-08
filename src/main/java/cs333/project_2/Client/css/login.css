@@ -61,7 +61,7 @@ body {
 	background-color: rgba(255, 100, 100, .5);
 }
 .confirm_password {
-	display: none;
+	visibility: hidden;
 	margin-bottom: 25px;
 }
 .links {
@@ -88,5 +88,4 @@ button:hover { cursor: pointer; }
 }
 .acc_type {
 	top: 50px;
-	display: none;
 }

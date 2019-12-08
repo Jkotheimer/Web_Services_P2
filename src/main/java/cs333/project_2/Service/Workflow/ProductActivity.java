@@ -2,12 +2,10 @@ package cs333.project_2.Service.Workflow;
 
 import java.util.ArrayList;
 
-import java.util.Iterator;
 import java.util.List;
 
 import cs333.project_2.DOM.Product.Product;
 import cs333.project_2.DOM.Product.ProductManager;
-import cs333.project_2.DOM.Seller.SellerManager;
 import cs333.project_2.Service.Link;
 import cs333.project_2.Service.Respresentation.ProductRepresentation;;
 /**
@@ -21,16 +19,30 @@ public class ProductActivity {
 	
 	public List<ProductRepresentation> getProducts() {
 		
-		List<Product> products = new ArrayList<Product>();
+		List<Product> products = prod.getProducts();
 		List<ProductRepresentation> productRepresentations = new ArrayList<ProductRepresentation>();
-		products = prod.getProducts();
 		
-		Iterator<Product> it = products.iterator();
-		while(it.hasNext()) {
-          Product p = (Product)it.next();
+		for(Product p : products) {
           ProductRepresentation productRepresentation = new ProductRepresentation();
-          productRepresentation.setproductID(p.getProductID());
-          productRepresentation.setItemDescrip(p.getItemDescrip());
+          productRepresentation.setName(p.getName());
+          productRepresentation.setDescription(p.getDescription());
+          productRepresentation.setPrice(p.getPrice());
+          productRepresentation.setRating(p.getRating());
+          
+          //now add this representation in the list
+          productRepresentations.add(productRepresentation);
+        }
+		return productRepresentations;
+	}
+	public List<ProductRepresentation> getProducts(String sellerID) {
+		
+		List<Product> products = prod.getProducts(sellerID);
+		List<ProductRepresentation> productRepresentations = new ArrayList<ProductRepresentation>();
+		
+		for(Product p : products) {
+          ProductRepresentation productRepresentation = new ProductRepresentation();
+          productRepresentation.setName(p.getName());
+          productRepresentation.setDescription(p.getDescription());
           productRepresentation.setPrice(p.getPrice());
           productRepresentation.setRating(p.getRating());
           
@@ -40,63 +52,43 @@ public class ProductActivity {
 		return productRepresentations;
 	}
 	
-	public List<ProductRepresentation> getListProducts() {
+	public ProductRepresentation getProduct(String name) {
 		
-		List<Product> products = new ArrayList<Product>();
-		List<ProductRepresentation> productRepresentations = new ArrayList<ProductRepresentation>();
-		products = prod.getProducts();
-		
-		Iterator<Product> it = products.iterator();
-		while(it.hasNext()) {
-          Product p = (Product)it.next();
-          ProductRepresentation productRepresentation = new ProductRepresentation();
-          productRepresentation.setproductID(p.getProductID());
-          productRepresentation.setPrice(p.getPrice());
-          productRepresentation.setRating(p.getRating());
-          
-          //now add this representation in the list
-          productRepresentations.add(productRepresentation);
-        }
-		return productRepresentations;
-	}
-	
-	public ProductRepresentation getProduct(String id) {
-		
-		Product p = prod.getProduct(id);
+		Product p = prod.getProduct(name);
 		
 		ProductRepresentation pRep = new ProductRepresentation();
 		pRep.setPrice((int)p.getPrice());
-		pRep.setItemDescrip(p.getItemDescrip());
-		pRep.setproductID(p.getProductID());
+		pRep.setDescription(p.getDescription());
+		pRep.setName(p.getName());
 		setLinks(pRep);
 		
 		return pRep;
 	}
 	
-	public ProductRepresentation createProduct(String ID,String SellerId, float price, String itemDescrip) {
+	public ProductRepresentation createProduct(String SellerId, String name, double price, String Description) {
 		
-		prod.addProduct(ID,SellerId,price,itemDescrip);
-		Product p = new Product(ID,price,itemDescrip,SellerManager.readSeller(SellerId));
+		Product p = prod.addProduct(SellerId, name, price, Description);
+		if(p ==  null) return null;
 		
-		ProductRepresentation pRep = new ProductRepresentation();
-		pRep.setproductID(p.getProductID());
-		pRep.setItemDescrip(p.getItemDescrip());
-		pRep.setPrice((int)p.getPrice());
-		
-		return pRep;
+		return new ProductRepresentation(p.getID(), SellerId, name, price, Description);
 	}
 	
-	public String deleteProduct(String id) {
+	public ProductRepresentation updateProduct(String ID, String name, double price, String Description) {
 		
-		prod.deleteProduct(id);
+		Product p = prod.updateProduct(ID, name, price, Description);
+		if(p == null) return null;
 		
-		return "OK";
+		return new ProductRepresentation(ID, p.getSellerID(), name, price, Description);
+	}
+	
+	public int deleteProduct(String id) {
+		return prod.deleteProduct(id);
 	}
 	
 	private void setLinks(ProductRepresentation product) {
 		// Set up the activities that can be performed on orders
 		Link buy = new Link("buy", 
-			"http://localhost:8081/orderservice/order/" + product.getProductID());	
+			"http://localhost:8081/orderservice/order/" + product.getName());	
 		product.setLinks(buy);
 	}
 	

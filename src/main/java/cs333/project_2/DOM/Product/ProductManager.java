@@ -10,20 +10,24 @@ public class ProductManager {
 		return SellerDAL.getProducts();
 	}
 	
-	public Product getProduct(String ID) {
-		return SellerDAL.readProduct(ID);
+	public List<Product> getProducts(String sellerID) {
+		return SellerDAL.getProducts(sellerID);
 	}
 	
-	public void addProduct(String SellerID, String prodName, float price, String prodDesc) {
-		SellerDAL.insertProduct(SellerID, prodName, price, prodDesc);
+	public Product getProduct(String name) {
+		return SellerDAL.readProduct(name);
+	}
+	
+	public Product addProduct(String SellerID, String prodName, double price, String prodDesc) {
+		return SellerDAL.addProduct(SellerID, prodName, price, prodDesc);
 	}
 
-	public void updateProduct(String prodName, float price, String prodDesc) {
-		SellerDAL.updateProduct(prodName, price, prodDesc);
+	public Product updateProduct(String ID, String name, double price, String prodDesc) {
+		return SellerDAL.updateProduct(ID, name, price, prodDesc);
 	}
 
-	public void deleteProduct(String ID) {
-		SellerDAL.deleteProduct(ID);
+	public int deleteProduct(String ID) {
+		return SellerDAL.deleteProduct(ID);
 	}
 
 }

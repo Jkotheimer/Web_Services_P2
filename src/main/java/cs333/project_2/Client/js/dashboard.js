@@ -11,37 +11,57 @@ function setUserItems() {
 	document.getElementById("account_type").innerHTML = user.accountType;
 	document.getElementById("current_username").innerHTML = user.username;
 	back();
-	if(user.address.length == 0) document.getElementById("addresses").innerHTML = "You have no addresses on file";
-	else {
-		var container = document.getElementById("addresses");
-		container.innerHTML = "";
-		for(let i = 0; i < user.address.length; i++) {
-			var address = user.address[i];
-			var html = "<div class='setting'>" +
-							address.street + "<br/>" +
-							address.city + ", " + address.state + " " + address.zipcode + 
-						"</div>";
-			container.innerHTML += html;
+	if(user.accountType == "buyer") {
+		if(user.address.length == 0) document.getElementById("addresses").innerHTML = "You have no addresses on file";
+		else {
+			var container = document.getElementById("addresses");
+			container.innerHTML = "";
+			for(let i = 0; i < user.address.length; i++) {
+				var address = user.address[i];
+				var html = "<div class='setting'>" +
+					address.street + "<br/>" +
+					address.city + ", " + address.state + " " + address.zipcode + 
+				"</div>";
+				container.innerHTML += html;
+			}
+		}
+		
+		if(user.payInfos.length == 0) document.getElementById("payment_methods").innerHTML = "You have no payment methods on file";
+		else {
+			var container = document.getElementById("payment_methods");
+			container.innerHTML = "";
+			for(let i = 0; i < user.payInfos.length; i++) {
+				var payinfo = user.payInfos[i];
+				var html = "<div class='setting'>" +
+					payinfo.creditCardHolder + "<br/>" + 
+					payinfo.creditCardNum + "<br/>" +
+					payinfo.expDate + 
+				"</div>";
+				container.innerHTML += html;
+			}
+		} 
+		
+		if(user.orders.length == 0) document.getElementById("user_fulfillments").innerHTML = "You haven't ordered any products yet";
+		else {
+			// TODO: fill order guis
+		}
+	} else if(user.accountType == "seller") {
+		document.getElementById("buyer_elements").style.display = "none";
+		if(user.products.length == 0) document.getElementById("user_fulfillments").innerHTML = "You have not posted any products yet";
+		else {
+			var container = document.getElementById("user_fulfillments");
+			container.innerHTML = "";
+			for(let i = 0; i < user.products.length; i++) {
+				var product = user.products[i];
+				var html = "<div class='setting'>" +
+					product.productID + "<br/>$" +
+					product.price + "<br/>" +
+					product.itemDescrip +
+				"</div>";
+				container.innerHTML += html;
+			}
 		}
 	}
-	
-	if(user.payInfos.length == 0) document.getElementById("payment_methods").innerHTML = "You have no payment methods on file";
-	else {
-		var container = document.getElementById("payment_methods");
-		container.innerHTML = "";
-		for(let i = 0; i < user.address.length; i++) {
-			var payinfo = user.payInfos[i];
-			var html = "<div class='setting'>" +
-							payinfo.creditCardHolder + "<br/>" + 
-							payinfo.creditCardNum + "<br/>" +
-							payinfo.expDate + 
-						"</div>";
-			container.innerHTML += html;
-		}
-	} 
-	
-	if(user.orders.length == 0) document.getElementById("orders").innerHTML = "You haven't ordered any products yet";
-	else {} // TODO fill html with orders
 }
 
 /**
@@ -62,8 +82,29 @@ function post() {
 	var p_price = document.getElementsByName("price")[0].value;
 	var p_description = document.getElementsByName("description")[0].value;
 	var result_area = document.getElementById("post_result");
-	result_area.innerHTML = p_name + "<br>" + p_price + "<br>" + p_description;
-	// TODO: make post request to local host uri
+	
+	const data = JSON.stringify({
+		name: p_name,
+		price: p_price,
+		description: p_description
+	});
+	console.log(data);
+	const uri = getLink("UpdateProduct");
+	var xhr = createRequest("POST", uri);
+	xhr.onload = function() {
+		if(xhr.status == 400) alert("Invalid parameters");
+		else if(xhr.status != 200) alert("Something went wrong :/");
+		else {
+			localStorage.setItem("user", xhr.response);
+			user = JSON.parse(localStorage.getItem("user"));
+			console.log(user);
+			setUserItems();
+			document.getElementById("product")[0].value = "";
+			document.getElementById("price")[0].value = "";
+			document.getElementById("description")[0].value = "";
+		}
+	}
+	xhr.send(data);
 }
 
 function show_user_content() {
@@ -74,15 +115,30 @@ function show_user_content() {
 
 function back() {
 	document.getElementById("user_content").style.display = "none";
-	if(user.accountType == "buyer") document.getElementById("search_content").style.display = "block";
-	else document.getElementById("post_content").style.display = "block";
+	if(user.accountType == "buyer") {
+		document.getElementById("search_content").style.display = "block";
+		document.getElementsByTagName("h")[0].innerHTML = "Search for a Product";
+	}
+	else {
+		document.getElementById("post_content").style.display = "block";
+		document.getElementsByTagName("h")[0].innerHTML = "Post a New Product";
+	}
 }
 
+// HATEOAS IMPLEMENTATION TO GRAB THE HATEOAS LINKS FROM THE USER OBJECT THAT IS RETURNED BY THE SERVER
+function getLink(action) {
+	var links = user.link;
+	for(let link of links) {
+		if(link.action == action) return link.url
+	}
+}
+
+// XMLHTTPREQUEST TO CHANGE USERNAME
 function change_username() {
 	var new_username = document.getElementById("new_username").value;
 	if(new_username == "") alert("New username field is empty");
 	
-	const uri = "http://localhost:8081/" + user.accountType + "s/" + user.id + "?action=username";
+	const uri = getLink("UpdateUsername");
 	var xhr = createRequest("POST", uri);
 	xhr.send(new_username);
 	xhr.onload = function() {
@@ -91,6 +147,7 @@ function change_username() {
 		else {
 			localStorage.setItem("user", xhr.response);
 			user = JSON.parse(localStorage.getItem("user"));
+			console.log(user);
 			setUserItems();
 			show_user_content();
 			document.getElementById("new_username").value = "";
@@ -98,6 +155,7 @@ function change_username() {
 	}
 }
 
+// XMLHTTPREQUEST FOR CHANGING PASSWORD
 function change_password() {
 	var current_password = document.getElementById("current_password").value;
 	var new_password = document.getElementById("new_password").value;
@@ -115,7 +173,7 @@ function change_password() {
 		current_password : current_password,
 		new_password : new_password
 	});
-	var uri = "http://localhost:8081/" + user.accountType + "s/" + user.id + "?action=password";
+	var uri = getLink("UpdatePassword");
 	
 	var xhr = createRequest("POST", uri);
 	xhr.setRequestHeader("Content-Type", "text/plain")
@@ -139,6 +197,7 @@ function toggle_add_address() {
 	else form.style.display = "block";
 }
 
+// XMLHTTPREQUEST FOR ADDING ADDRESS
 function add_address() {
 	var street = document.getElementsByName("street_address")[0].value;
 	var city = document.getElementsByName("city")[0].value;
@@ -154,7 +213,7 @@ function add_address() {
 		state: state,
 		zipcode: zip
 	});
-	var uri = "http://localhost:8081/" + user.accountType + "s/" + user.id + "?action=address";
+	var uri = getLink("UpdateAddress");
 	
 	var xhr = createRequest("POST", uri);
 	xhr.setRequestHeader("Content-Type", "text/plain")
@@ -164,6 +223,7 @@ function add_address() {
 		else {
 			localStorage.setItem("user", xhr.response);
 			user = JSON.parse(localStorage.getItem("user"));
+			console.log(user);
 			document.getElementsByName("street_address")[0].value = "";
 			document.getElementsByName("city")[0].value = "";
 			document.getElementsByName("state")[0].value = "";
@@ -183,6 +243,7 @@ function toggle_add_payment() {
 	else form.style.display = "block";
 }
 
+// XMLHTTPREQUEST FOR ADDING A PAYMENT METHOD
 function add_payment() {
 	var card_number = document.getElementsByName("card_number")[0].value;
 	var card_holder = document.getElementsByName("card_holder")[0].value;
@@ -198,7 +259,7 @@ function add_payment() {
 		expDate: exp_date,
 		ccv: ccv
 	});
-	var uri = "http://localhost:8081/" + user.accountType + "s/" + user.id + "?action=payment";
+	var uri = getLink("UpdatePayment");
 	
 	var xhr = createRequest("POST", uri);
 	xhr.setRequestHeader("Content-Type", "text/plain")
@@ -208,6 +269,7 @@ function add_payment() {
 		else {
 			localStorage.setItem("user", xhr.response);
 			user = JSON.parse(localStorage.getItem("user"));
+			console.log(user);
 			document.getElementsByName("card_holder")[0].value = "";
 			document.getElementsByName("card_number")[0].value = "";
 			document.getElementsByName("exp_date")[0].value = "";
@@ -226,6 +288,7 @@ function log_out() {
 	window.location.href = "/";
 }
 
+// XMLHTTPREQUEST FOR DELETING A USER
 function delete_user() {
 	var uri = "http://localhost:8081/" + user.accountType + "s/" + user.id;
 	var xhr = createRequest("DELETE", uri);

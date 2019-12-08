@@ -5,31 +5,22 @@ import java.util.List;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
-import javax.ws.rs.PUT;
 import javax.ws.rs.OPTIONS;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.QueryParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.Consumes;
-import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
-import javax.ws.rs.core.Response.Status;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.DeserializationFeature;
-import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-import cs333.project_2.DOM.Buyer.BuyerManager;
 import cs333.project_2.DOM.General.Address;
 import cs333.project_2.DOM.General.PaymentInfo;
 import cs333.project_2.DOM.Order.Order;
-import cs333.project_2.Service.Respresentation.AddressRequest;
 import cs333.project_2.Service.Respresentation.BuyerRepresentation;
-import cs333.project_2.Service.Respresentation.BuyerRequest;
-import cs333.project_2.Service.Respresentation.OrderRequest;
 import cs333.project_2.Service.Workflow.BuyerActivity;
 
 @Path("/buyers")
@@ -73,7 +64,7 @@ public class BuyerResource implements BuyerService {
 	@Consumes("text/plain")
 	@Path("/{buyerID}")
 	public Response update(@PathParam("buyerID") String ID, @QueryParam("action") String action, String req) {
-		System.out.println("PUT METHOD Request from Client with ............." + ID);
+		System.out.println("PUT METHOD Request from Client with ............." + action + " " + ID);
 		BuyerActivity buyerActivity = new BuyerActivity();
 		if(action.equals("password")) {
 			JsonNode request;

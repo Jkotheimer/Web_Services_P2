@@ -1,14 +1,12 @@
 package cs333.project_2.Service;
 
-import java.util.List;
-
-import cs333.project_2.Service.Respresentation.SellerRepresentation;
-import cs333.project_2.Service.Respresentation.SellerRequest;
+import javax.ws.rs.core.Response;
 
 public interface SellerService {
 	
-	public List<SellerRepresentation> getSellers();
-	public SellerRepresentation getSeller(String sellerId);
-	public SellerRepresentation createSeller(SellerRequest sellerRequest);
-
+	public Response getSellers();
+	public Response login(String username, String password);
+	public Response createSeller(String username, String password);
+	public Response update(String ID, String action, String req);;
+	public Response delete(String ID);
 }

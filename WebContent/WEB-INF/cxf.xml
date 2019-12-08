@@ -19,7 +19,7 @@
 			<ref bean="productServiceRest" />
 			<ref bean="orderServiceRest" />
 			<ref bean="sellerServiceRest" />
-			<ref bean="buyerServiceRest" />
+			<ref bean="buyerServiceRest" />	
 		</jaxrs:serviceBeans>
 		<jaxrs:providers>
 			<ref bean="jacksonProvider" />

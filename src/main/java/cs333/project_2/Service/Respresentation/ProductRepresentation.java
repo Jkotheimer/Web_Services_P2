@@ -9,7 +9,6 @@ import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
 
 import cs333.project_2.DOM.Rating.Rating;
-import cs333.project_2.DOM.Seller.Seller;
 import cs333.project_2.Service.AbstractRepresentation;
 
 @XmlRootElement(name = "Product")
@@ -17,11 +16,12 @@ import cs333.project_2.Service.AbstractRepresentation;
 @XmlType(name = "")
 public class ProductRepresentation extends AbstractRepresentation{
 	
-	private String productID;
+	private String name;
 	private double Price;
-	private Seller seller;
-	private String ItemDescrip;
-	private float Rating;
+	private String ID;
+	private String sellerID;
+	private String description;
+	private double Rating;
 	private int totalRating = 0;
 	private List<Rating> Ratings = new ArrayList<Rating>();
 
@@ -29,11 +29,12 @@ public class ProductRepresentation extends AbstractRepresentation{
 	
 	}
 	
-	public ProductRepresentation(String ID, float price, String itemDescrip, Seller producer) {
-		this.productID = ID;
+	public ProductRepresentation(String ID, String sellerID, String name, double price, String itemDescrip) {
+		this.ID = ID;
+		this.name = name;
 		this.Price = price;
-		this.ItemDescrip = itemDescrip;
-		this.seller = producer;
+		this.description= itemDescrip;
+		this.sellerID = sellerID;
 		this.Rating = -1; // -1 indicates no ratings yet
 	}
 
@@ -42,23 +43,26 @@ public class ProductRepresentation extends AbstractRepresentation{
 	 * ________________________________________________________________________
 	 */
 	
-	public void setproductID(String productId) {
-		this.productID = productId;
+	public void setID(String ID) {
+		this.ID = ID;
+	}
+	public void setName(String Name) {
+		this.name = Name;
 	}
 
 	public void setPrice(double price) {
 		Price = price;
 	}
-	public void setItemDescrip(String itemdescrip) {
-		this.ItemDescrip = itemdescrip;
+	public void setDescription(String itemdescrip) {
+		this.description = itemdescrip;
 	}
 
-	public void setRating(float rat) {
+	public void setRating(double rat) {
 		this.Rating = rat;
 	}
 	
-	public void setSeller(Seller seller) {
-		this.seller = seller;
+	public void setSellerID(String sellerID) {
+		this.sellerID = sellerID;
 	}
 	
 	public boolean addRating(Rating rating) {
@@ -75,24 +79,28 @@ public class ProductRepresentation extends AbstractRepresentation{
 	 * ________________________________________________________________________
 	 */
 	
-	public String getProductID() {
-		return this.productID;
+	public String getID() {
+		return this.ID;
+	}
+	
+	public String getName() {
+		return this.name;
 	}
 
 	public double getPrice() {
 		return this.Price;
 	}
 
-	public float getRating() {
+	public double getRating() {
 		return this.Rating;
 	}
 
-	public String getItemDescrip() {
-		return this.ItemDescrip;
+	public String getDescription() {
+		return this.description;
 	}
 
-	public Seller getSeller() {
-		return this.seller;
+	public String getSellerID() {
+		return this.sellerID;
 	}
 
 }

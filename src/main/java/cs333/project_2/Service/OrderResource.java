@@ -42,7 +42,7 @@ public class OrderResource implements OrderService{
 	public OrderRepresentation createOrder(OrderRequest  orderRequest) {
 		System.out.println("POST METHOD Request from Client with ............." + orderRequest.getStatus() + "  " + orderRequest.getOrderedProductIDs());
 		OrderActivity OrdActivity = new OrderActivity();
-		return OrdActivity.createOrder(orderRequest.getID(),orderRequest.getBuyer().getBuyerID(),orderRequest.getOrderedProductIDs());
+		return OrdActivity.createOrder(orderRequest.getID(),orderRequest.getBuyer().getID(),orderRequest.getOrderedProductIDs());
 	}
 	
 	@DELETE

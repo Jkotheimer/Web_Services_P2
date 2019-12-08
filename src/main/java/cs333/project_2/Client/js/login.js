@@ -17,8 +17,7 @@ function switch_to_create_account() {
 	
 	handle_keypress = event => handle_keypress_facade(event, create_account);
 	
-	document.getElementsByClassName("confirm_password")[0].style.display = "block";
-	document.getElementsByClassName("acc_type")[0].style.display = "block";
+	document.getElementsByClassName("confirm_password")[0].style.visibility = "visible";
 	clear_inputs();
 }
 
@@ -41,8 +40,7 @@ function switch_to_login() {
 	
 	handle_keypress = event => handle_keypress_facade(event, sign_in);
 	
-	document.getElementsByClassName("confirm_password")[0].style.display = "none";
-	document.getElementsByClassName("acc_type")[0].style.display = "none";
+	document.getElementsByClassName("confirm_password")[0].style.visibility = "hidden";
 	clear_inputs();
 }
 
@@ -76,6 +74,16 @@ function sign_in() {
 	// Form fields, see IDs above
 	const username = document.getElementsByName("username")[0].value;
 	const password = document.getElementsByName("password")[0].value;
+	var acc_type = document.getElementsByName("account_type");
+	for(let i = 0; i < acc_type.length; i++) {
+		if(acc_type[i].checked) {
+			acc_type = i;
+			break;
+		}
+	}
+	if(acc_type == 1) acc_type = "sellers";
+	else acc_type = "buyers";
+	
 	if(username == "") {
 		display_error("Please enter a username", document.getElementById("username_error"));
 		return;
@@ -84,7 +92,8 @@ function sign_in() {
 		return;
 	}
 	
-	const url = "http://localhost:8081/buyers/" + username + "?password=" + password;
+	// THIS URL HAS TO BE HARDCODED BECAUSE THIS IS AN ENTRYPOINT
+	const url = "http://localhost:8081/" + acc_type + "/" + username + "?password=" + password;
 	const xhr = createRequest("GET", url);
 	xhr.send();
 	xhr.onload = function() {
@@ -119,6 +128,7 @@ function create_account() {
 	
 	if(acct_creation_error(username, password, confirm_password)) return;
 	
+	// THIS URL NEEDED TO BE HARDCODED BECAUSE THIS IS AN ENTRY POINT
 	const uri = "http://localhost:8081/" + acc_type + "?username=" + username + "&password=" + password;
 	const xhr = createRequest("POST", uri);
 	xhr.send();

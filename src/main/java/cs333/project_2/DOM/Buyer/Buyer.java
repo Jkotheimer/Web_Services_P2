@@ -16,7 +16,7 @@ public class Buyer  {
 	private List<Address> addressList = new ArrayList<>();
 	private List<PaymentInfo> payInfos = new ArrayList<>();; // Allow buyers to have multiple payment options
 
-	public Buyer(String ID,String username, String password) {
+	public Buyer(String ID, String username, String password) {
 		this.username = username;
 		this.password = password;
 		this.ID = ID;

@@ -89,7 +89,6 @@ public class BuyerRepresentation extends AbstractRepresentation {
 	}
 
 	public boolean setUsername(String username) {
-		// TODO - possibly add a database check for other profiles with the given username
 		this.username = username;
 		return true;
 	}

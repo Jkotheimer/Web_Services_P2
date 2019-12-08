@@ -140,8 +140,14 @@ public class BuyerActivity {
 	
 	private void setLinks(BuyerRepresentation buyer) {
 		// Set up the activities that can be performed on orders
-		Link[] buy = new Link[] {new Link("ViewOrders", 
-			"http://localhost:8081/orderservice/order" + buyer.getID()),new Link("ViewProducts","http://localhost:8081/productservice/product")};	
+		Link[] buy = new Link[] {
+				new Link("UpdateUsername", "http://localhost:8081/buyers/" + buyer.getID() + "?action=username"),
+				new Link("UpdatePassword", "http://localhost:8081/buyers/" + buyer.getID() + "?action=password"),
+				new Link("UpdateAddress", "http://localhost:8081/buyers/" + buyer.getID() + "?action=address"),
+				new Link("UpdatePayment", "http://localhost:8081/buyers/" + buyer.getID() + "?action=payment"),
+				new Link("DeleteAccount", "http://localhost:8081/buyers/" + buyer.getID()),
+				new Link("ViewOrders", "http://localhost:8081/orderservice/order" + buyer.getID())
+				};	
 		buyer.setLinks(buy);
 	}
 	

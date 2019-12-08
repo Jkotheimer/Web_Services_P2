@@ -22,7 +22,6 @@ public class SellerActivity {
           Seller s = (Seller)it.next();
           SellerRepresentation sellerRepresentation = new SellerRepresentation();
           sellerRepresentation.setUsername(s.getUsername());
-          sellerRepresentation.setProducts(s.getProducts());;
           
           //now add this representation in the list
           sellerRepresentations.add(sellerRepresentation);
@@ -30,12 +29,12 @@ public class SellerActivity {
 		return sellerRepresentations;
 	}
 	
-	public SellerRepresentation getSeller(String id) {
+	public SellerRepresentation login(String username, String password) {
 		
-		Seller s = SellerManager.readSeller(id);
+		Seller s = SellerManager.login(username, password);
+		if(s == null) return null;
 		
 		SellerRepresentation sRep = new SellerRepresentation();
-		sRep.setProducts(s.getProducts());
 		sRep.setUsername(s.getUsername());
 		
 		setLinks(sRep);
@@ -43,29 +42,46 @@ public class SellerActivity {
 		return sRep;
 	}
 	
-	public SellerRepresentation createSeller(String ID, String username, String password) {
-		
-		SellerManager.insertSeller(ID, username,password);
-		Seller s = new Seller(username,ID, password);
-		
-		SellerRepresentation sRep = new SellerRepresentation();
-		sRep.setUsername(s.getUsername());
+	public SellerRepresentation createSeller(String username, String password) {
+
+		Seller s = SellerManager.insertSeller(username,password);
+		if(s == null) return null;
+		SellerRepresentation sRep = new SellerRepresentation(s.getID(), s.getUsername());
+		setLinks(sRep);
 		
 		return sRep;
 	}
 	
-	public String deleteSeller(String id) {
+	public int changePassword(String ID, String current_password, String new_password) {
+		return SellerManager.changePassword(ID, current_password, new_password);
+	}
+	
+	public SellerRepresentation changeUsername(String ID, String username) {
+
+		Seller s = SellerManager.changeUsername(ID, username);
+		if(s == null) return null;
 		
-		//dao.deleteSeller(id);
-		SellerManager.deleteSeller(id);
+		SellerRepresentation sRep = new SellerRepresentation(s.getID(), s.getUsername());
+		sRep.setUsername(s.getUsername());
 		
-		return "OK";
+		setLinks(sRep);
+		
+		return sRep;
+	}
+	
+	public int deleteSeller(String id) {
+		return SellerManager.deleteSeller(id);
 	}
 	
 	private void setLinks(SellerRepresentation seller) {
 		// Set up the activities that can be performed on orders
-		Link buy = new Link("buy", 
-			"http://localhost:8081/productservice/product/" + seller.getsellerID());	
+		Link[] buy = new Link[] {
+				new Link("UpdateUsername", "http://localhost:8081/sellers/" + seller.getID() + "?action=username"),
+				new Link("UpdatePassword", "http://localhost:8081/sellers/" + seller.getID() + "?action=password"),
+				new Link("UpdateProduct", "http://localhost:8081/sellers/" + seller.getID() + "?action=product"),
+				new Link("DeleteAccount", "http://localhost:8081/sellers/" + seller.getID()),
+				new Link("ViewProducts", "http://localhost:8081/products?sellerID=" + seller.getID())
+				};	
 		seller.setLinks(buy);
 	}
 	

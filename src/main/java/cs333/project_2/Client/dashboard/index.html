@@ -3,11 +3,11 @@
 	<head>
 		<meta charset="utf-8"/>
 		<meta name="viewport" content="width=device-width"/>
-		<link href="./search.css" rel="stylesheet"/>
+		<link href="/css/dashboard.css" rel="stylesheet"/>
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-		<script type="text/javascript" src="/request.js"></script>
-		<script type="text/javascript" src="./search.js"></script>
-		<script type="text/javascript" src="/request.js"></script>
+		<script type="text/javascript" src="/js/request.js"></script>
+		<script type="text/javascript" src="/js/dashboard.js"></script>
+		<script type="text/javascript" src="/js/request.js"></script>
 		<title>Dashboard</title>
 	</head>
 	<body onload="load()">
@@ -24,7 +24,6 @@
 				<button id="submit_search" onclick="search()">Search</button>
 				<div id="search_results"></div>
 			</div>
-			
 			<div id="post_content">
 				<input type="text" name="product" class="product" placeholder="Name of product here" autocomplete="off" spellcheck="false" autocorrect="off"/>
 				$<input type="number" name="price" class="price" placeholder="Price" autocomplete="off" step="any"/>
@@ -32,7 +31,6 @@
 				<textarea name="description" class="description" rows=5 placeholder="A short description of your product" autocomplete="off" spellcheck="false" autocorrect="off"></textarea>
 				<br/>
 				<button id="submit_post" onclick="post()">Add Product</button>
-				<div id="post_result"></div>
 			</div>
 			
 			<div id="user_content">
@@ -50,7 +48,7 @@
 					<input id="new_username" class="change_input" placeholder="Change Username"/>
 					<button style="margin: 0 10px;" onclick="change_username()">Change Username</button>
 				</div>
-				
+					
 				<div class="setting_element">
 					<span class="user_setting">Change Password</span>
 					<input id="current_password" class="change_input" placeholder="Current Password"/>
@@ -59,37 +57,38 @@
 					<button style="margin: 0 10px;" onclick="change_password()">Change Password</button>
 				</div>
 				
-				<div class="setting_element">
-					<div class="user_setting clickable" onclick="toggle_add_address()">Addresses +</div>
-					<div class="setting_form" id="address_form">
-						<input class="change_input" name="street_address" placeholder="Street address"/>
-						<input class="change_input" name="city" placeholder="City"/>
-						<input class="change_input" name="state" placeholder="State"/>
-						<input class="change_input" type="number" name="zip" placeholder="Zip"/>
-						<button onclick="add_address()">Add Address</button>
+				<div id="buyer_elements">
+					
+					<div class="setting_element">
+						<div class="user_setting clickable" onclick="toggle_add_address()">Addresses +</div>
+						<div class="setting_form" id="address_form">
+							<input class="change_input" name="street_address" placeholder="Street address"/>
+							<input class="change_input" name="city" placeholder="City"/>
+							<input class="change_input" name="state" placeholder="State"/>
+							<input class="change_input" type="number" name="zip" placeholder="Zip"/>
+							<button onclick="add_address()">Add Address</button>
+						</div>
+						<div id="addresses" class="setting_content"></div>
 					</div>
-					<div id="addresses" class="setting_content"></div>
-				</div>
-
-				<div class="setting_element">
-					<div class="user_setting clickable" onclick="toggle_add_payment()">Payment Methods +</div>
-					<div class="setting_form" id="payment_form">
-						<input class="change_input" name="card_holder" placeholder="Full name on card"/>
-						<input class="change_input" type="number" name="card_number" placeholder="Card Number"/>
-						<input class="change_input" name="exp_date" placeholder="Exp. Date"/>
-						<input class="change_input" type="number" name="ccv" placeholder="CCV"/>
-						<button onclick="add_payment()">Add Payment Method</button>
+	
+					<div class="setting_element">
+						<div class="user_setting clickable" onclick="toggle_add_payment()">Payment Methods +</div>
+						<div class="setting_form" id="payment_form">
+							<input class="change_input" name="card_holder" placeholder="Full name on card"/>
+							<input class="change_input" type="number" name="card_number" placeholder="Card Number"/>
+							<input class="change_input" name="exp_date" placeholder="Exp. Date"/>
+							<input class="change_input" type="number" name="ccv" placeholder="CCV"/>
+							<button onclick="add_payment()">Add Payment Method</button>
+						</div>
+						<div id="payment_methods" class="setting_content"></div>
 					</div>
-					<div id="payment_methods" class="setting_content"></div>
-				</div>
-				
-				<div class="setting_element">
-					<div class="user_setting">Orders</div>
-					<div id="orders" class="setting_content"></div>
-				</div>
+				</div>	
 				
 				<button style="position: relative; background-color: red; left: 80%;" onclick="delete_user()">Delete Account</button>
 			</div>
+		</div>
+		<div id="user_fulfillments" class="panel body_panel">
+		
 		</div>
 	</body>
 </html>

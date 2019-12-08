@@ -22,7 +22,7 @@
 	margin: none;
 	left: 50px;
 	line-height: 75px;
-	width: 300px;
+	width: max-content;
 	height: auto;
 	text-align: center;
 	border-radius: 20px;
@@ -159,4 +159,8 @@ input, textarea {
 	width: max-content;
 	border-radius: 5px;
 	box-shadow: 0 0 10px #CCC;
+}
+#user_fulfillments {
+	margin-top: 50px;
+	text-align: center;
 }
