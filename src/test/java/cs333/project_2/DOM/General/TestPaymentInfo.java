@@ -5,7 +5,7 @@ import static org.junit.Assert.*;
 
 /**
  * Unit tests for the Payment Info Class
- */
+ *
 public class TestPaymentInfo {
 
 	private PaymentInfo fixture;
@@ -37,3 +37,4 @@ public class TestPaymentInfo {
 		assertEquals(4096, fixture.getBillingAddressID());
     }
 }
+*/

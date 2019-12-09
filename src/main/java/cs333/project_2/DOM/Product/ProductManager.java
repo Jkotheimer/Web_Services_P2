@@ -6,12 +6,8 @@ import cs333.project_2.DAL.Seller.SellerDAL;
 
 public class ProductManager {
 	
-	public List<Product> getProducts() {
-		return SellerDAL.getProducts();
-	}
-	
-	public List<Product> getProducts(String query, String type) {
-		return SellerDAL.getProducts(query, type);
+	public List<Product> getProducts(String action, String query) {
+		return SellerDAL.getProducts(action, query);
 	}
 	
 	public Product getProductById(String ID) {

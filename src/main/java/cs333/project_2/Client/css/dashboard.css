@@ -177,3 +177,13 @@ input, textarea {
 	resize: vertical;
 	height: 100px;
 }
+.item_result {
+	text-align: left;
+	margin: 10px 5px;
+}
+.product_item {
+	width: 200px;
+}
+.order_item {
+	width: auto;
+}

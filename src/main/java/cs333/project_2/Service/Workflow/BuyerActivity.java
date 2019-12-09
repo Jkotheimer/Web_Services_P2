@@ -7,8 +7,6 @@ import java.util.List;
 import cs333.project_2.DOM.Buyer.BuyerManager;
 import cs333.project_2.DOM.General.Address;
 import cs333.project_2.DOM.General.PaymentInfo;
-import cs333.project_2.DOM.Order.Order;
-import cs333.project_2.DOM.Product.Product;
 import cs333.project_2.DOM.Buyer.Buyer;
 import cs333.project_2.Service.Link;
 import cs333.project_2.Service.Representation.BuyerRepresentation;
@@ -25,7 +23,6 @@ public class BuyerActivity {
 		while(it.hasNext()) {
           Buyer b = (Buyer)it.next();
           BuyerRepresentation buyerRepresentation = new BuyerRepresentation(b.getID(),b.getUsername());
-          buyerRepresentation.setOrderIDs(b.getOrders());
           buyerRepresentation.setAddresses(b.getAddressList());
           buyerRepresentation.setPaymentInfos(b.getPayInfos());
           setLinks(buyerRepresentation);
@@ -40,7 +37,6 @@ public class BuyerActivity {
 		if(b == null) return null;
 		
 		BuyerRepresentation buyerRep = new BuyerRepresentation(b.getID(), b.getUsername());
-		buyerRep.setOrderIDs(b.getOrders());
 		buyerRep.setAddresses(b.getAddressList());
 		buyerRep.setPaymentInfos(b.getPayInfos());
 		setLinks(buyerRep);
@@ -53,7 +49,6 @@ public class BuyerActivity {
 		Buyer b = BuyerManager.getBuyer(id);
 		
 		BuyerRepresentation buyerRepresentation = new BuyerRepresentation(b.getID(),b.getUsername());
-        buyerRepresentation.setOrderIDs(b.getOrders());
         buyerRepresentation.setAddresses(b.getAddressList());
         buyerRepresentation.setPaymentInfos(b.getPayInfos());
 		setLinks(buyerRepresentation);
@@ -81,7 +76,6 @@ public class BuyerActivity {
 		if(b == null) return null;
 
 		BuyerRepresentation buyerRepresentation = new BuyerRepresentation(b.getID(),b.getUsername());
-        buyerRepresentation.setOrderIDs(b.getOrders());
         buyerRepresentation.setAddresses(b.getAddressList());
         buyerRepresentation.setPaymentInfos(b.getPayInfos());
 		setLinks(buyerRepresentation);
@@ -93,31 +87,12 @@ public class BuyerActivity {
 		return BuyerManager.deleteBuyer(id);
 	}
 
-	public static void insertOrder(String attachedBuyerID, String ID, List<Product> products) {
-		BuyerManager.insertOrder(attachedBuyerID, ID, products);
-	}
-	
-	public BuyerRepresentation addOrder(String ID, Order ord) {
-		Buyer b = BuyerManager.addOrder(ID, ord);
-		
-		if(b == null) return null;
-
-		BuyerRepresentation buyerRepresentation = new BuyerRepresentation(b.getID(),b.getUsername());
-        buyerRepresentation.setOrderIDs(b.getOrders());
-        buyerRepresentation.setAddresses(b.getAddressList());
-        buyerRepresentation.setPaymentInfos(b.getPayInfos());
-		setLinks(buyerRepresentation);
-        
-		return buyerRepresentation;
-	}
-
 	public BuyerRepresentation addAddress(String ID, Address addr) {
 		Buyer b = BuyerManager.addAddress(ID, addr);
 		
 		if(b == null) return null;
 
 		BuyerRepresentation buyerRepresentation = new BuyerRepresentation(b.getID(),b.getUsername());
-        buyerRepresentation.setOrderIDs(b.getOrders());
         buyerRepresentation.setAddresses(b.getAddressList());
         buyerRepresentation.setPaymentInfos(b.getPayInfos());
 		setLinks(buyerRepresentation);
@@ -131,7 +106,6 @@ public class BuyerActivity {
 		if(b == null) return null;
 
 		BuyerRepresentation buyerRepresentation = new BuyerRepresentation(b.getID(),b.getUsername());
-        buyerRepresentation.setOrderIDs(b.getOrders());
         buyerRepresentation.setAddresses(b.getAddressList());
         buyerRepresentation.setPaymentInfos(b.getPayInfos());
 		setLinks(buyerRepresentation);
@@ -147,7 +121,9 @@ public class BuyerActivity {
 				new Link("UpdateAddress", "http://localhost:8081/buyers/" + buyer.getID() + "?action=address"),
 				new Link("UpdatePayment", "http://localhost:8081/buyers/" + buyer.getID() + "?action=payment"),
 				new Link("DeleteAccount", "http://localhost:8081/buyers/" + buyer.getID()),
-				new Link("ViewOrders", "http://localhost:8081/orderservice/order" + buyer.getID())
+				new Link("SearchProductByName", "http://localhost:8081/products?action=search_by_name&query="),
+				new Link("SearchProductByPrice", "http://localhost:8081/products?action=search_by_price&query="),
+				new Link("ViewOrders", "http://localhost:8081/orders/" + buyer.getID())
 				};	
 		buyer.setLinks(buy);
 	}

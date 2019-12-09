@@ -1,8 +1,4 @@
 package cs333.project_2.DOM.Seller;
-import cs333.project_2.DOM.Product.Product;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class Seller {
 	

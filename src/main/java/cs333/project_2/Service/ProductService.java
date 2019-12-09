@@ -6,8 +6,7 @@ import javax.ws.rs.core.Response;
 @WebService
 public interface ProductService {
 
-	public Response getProducts();
-	public Response getProduct(String query, String action);
+	public Response getProducts(String action, String query);
 	public Response createProduct(String product);
 	
 }

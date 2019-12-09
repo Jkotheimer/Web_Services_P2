@@ -5,7 +5,7 @@ import static org.junit.Assert.*;
 
 /**
  * Unit tests for the Order Class
- */
+ *
 public class TestOrder {
 
 	private Order fixture;
@@ -23,3 +23,4 @@ public class TestOrder {
 		assertEquals("OrderCANCELLED",fixture.getStatus());
 	}
 }
+*/

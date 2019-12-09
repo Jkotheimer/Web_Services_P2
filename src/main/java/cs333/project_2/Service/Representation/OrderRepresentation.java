@@ -2,50 +2,48 @@ package cs333.project_2.Service.Representation;
 
 import java.util.List;
 
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlType;
 
-import cs333.project_2.DOM.Buyer.Buyer;
-import cs333.project_2.DOM.Product.Product;
 import cs333.project_2.Service.AbstractRepresentation;
 
-@XmlRootElement(name = "Order")
-@XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "")
-public class OrderRepresentation extends AbstractRepresentation{
+@XmlRootElement
+public class OrderRepresentation extends AbstractRepresentation {
 	
 	private String orderID;
-	private List<Product> OrderedProductIDs;
-	private Buyer buyer;
-	private String Status;
+	private List<ProductRepresentation> products;
+	private String buyerID;
+	private String status;
+	private double totalPrice;
 
-	public OrderRepresentation(String ID, Buyer purchaser, List<Product> productIDs) {
+	public OrderRepresentation(String ID, String buyerID, List<ProductRepresentation> products) {
 		this.orderID = ID;
-		this.OrderedProductIDs = productIDs;
-		this.Status = "Order initiated";
-		this.buyer = purchaser;
+		this.products = products;
+		this.status = "Order initiated";
+		this.buyerID = buyerID;
+		this.totalPrice = 0;
+		for(ProductRepresentation p : products) this.totalPrice += p.getPrice();
 	}
 	
-	public OrderRepresentation() {
-		
-	}
+	public OrderRepresentation() {}
 
 	public String getID() {
 		return this.orderID;
 	}
 
-	public List<Product> getOrderedProductIDs() {
-		return this.OrderedProductIDs;
+	public List<ProductRepresentation> getProducts() {
+		return this.products;
 	}
 	
-	public Buyer getBuyer() {
-		return this.buyer;
+	public String getBuyerID() {
+		return this.buyerID;
 	}
 	
 	public String getStatus() {
-		return this.Status;
+		return this.status;
+	}
+	
+	public double getTotalPrice() {
+		return this.totalPrice;
 	}
 
 	/**
@@ -57,17 +55,16 @@ public class OrderRepresentation extends AbstractRepresentation{
 		this.orderID = orderID;
 	}
 
-	public void setOrderedProductIDs(List<Product> orderedProductIDs) {
-		this.OrderedProductIDs = orderedProductIDs;
+	public void setProductIDs(List<ProductRepresentation> products) {
+		this.products = products;
 	}
 
-	public void setBuyer(Buyer buyer) {
-		this.buyer = buyer;
+	public void setBuyerID(String buyerID) {
+		this.buyerID = buyerID;
 	}
 	
-	public boolean updateStatus(String status) {
-		this.Status = status;
-		return true;
+	public void updateStatus(String status) {
+		this.status = status;
 	}
 
 }

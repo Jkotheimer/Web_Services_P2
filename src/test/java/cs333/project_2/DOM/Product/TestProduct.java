@@ -5,7 +5,7 @@ import static org.junit.Assert.*;
 
 /**
  * Unit tests for the Product Class
- */
+ *
 public class TestProduct {
 
 	private Product fixture;
@@ -32,3 +32,4 @@ public class TestProduct {
         assertEquals("An even greater product from Bokos",fixture.getItemDescrip());
     }
 }
+*/

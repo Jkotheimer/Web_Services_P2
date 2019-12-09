@@ -80,7 +80,7 @@ public class SellerActivity {
 				new Link("UpdatePassword", "http://localhost:8081/sellers/" + seller.getID() + "?action=password"),
 				new Link("AddProduct", "http://localhost:8081/products/"),
 				new Link("DeleteAccount", "http://localhost:8081/sellers/" + seller.getID()),
-				new Link("ViewProducts", "http://localhost:8081/products/" + seller.getID() + "?action=sellerID")
+				new Link("ViewProducts", "http://localhost:8081/products?action=sellerID&query=" + seller.getID())
 				};	
 		seller.setLinks(buy);
 	}

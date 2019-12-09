@@ -2,7 +2,6 @@ package cs333.project_2.DOM.Buyer;
 
 import cs333.project_2.DOM.General.Address;
 import cs333.project_2.DOM.General.PaymentInfo;
-import cs333.project_2.DOM.Order.Order;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -12,7 +11,6 @@ public class Buyer  {
 	private String username;
 	private String password;
 	private String ID;
-	private List<Order> orders = new ArrayList<>();
 	private List<Address> addressList = new ArrayList<>();
 	private List<PaymentInfo> payInfos = new ArrayList<>();; // Allow buyers to have multiple payment options
 
@@ -42,10 +40,6 @@ public class Buyer  {
 		return this.addressList;
 	}
 	
-	public List<Order> getOrders() { 		
-		return this.orders;	
-	}
-	
 	public List<PaymentInfo> getPayInfos()	{ 
 		return this.payInfos;  
 	}
@@ -55,12 +49,6 @@ public class Buyer  {
 	 * SETTERS
 	 * ________________________________________________________________________
 	 */
-
-	public boolean addOrder(Order orderID) {
-		// Add the new order in the correct position
-		this.orders.add(orderID);
-		return true;
-	}
 	
 	public boolean addAddress(Address addr) {
 		// Add the new order in the correct position
@@ -80,17 +68,12 @@ public class Buyer  {
 	}
 
 	public boolean setUsername(String username) {
-		// TODO - possibly add a database check for other profiles with the given username
 		this.username = username;
 		return true;
 	}
 
 	public void setID(String iD) {
 		this.ID = iD;
-	}
-
-	public void setOrderIDs(List<Order> orderIDs) {
-		this.orders = orderIDs;
 	}
 	
 	public void setAdresses(List<Address> addresses) {
@@ -116,7 +99,6 @@ public class Buyer  {
 	 */
 
 	public boolean AuthenticateCred(String username, String password) {
-		// TODO possibly add another hash algorithm here for safety
 		if(this.username.equals(username) && this.password.equals(password)) return true;
 		else return false;
 	}

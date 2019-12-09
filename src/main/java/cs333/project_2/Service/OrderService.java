@@ -1,15 +1,14 @@
 package cs333.project_2.Service;
 
-import java.util.List;
 import javax.jws.WebService;
-
-import cs333.project_2.Service.Representation.OrderRepresentation;
-import cs333.project_2.Service.Representation.OrderRequest;
+import javax.ws.rs.core.Response;
 
 @WebService
 public interface OrderService {
 
-	public List<OrderRepresentation> getOrders();
-	public OrderRepresentation createOrder(OrderRequest productRequest);
-	
+	public Response getOrders();
+	public Response getOrder(String buyerID);
+	public Response createOrder(String order);
+	public Response updateOrder(String ID, String order);
+	public Response deleteOrder(String ID);
 }

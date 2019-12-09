@@ -16,32 +16,17 @@ import cs333.project_2.Service.Representation.ProductRepresentation;;
 public class ProductActivity {
 
 	private static ProductManager prod = new ProductManager();
-	
-	public List<ProductRepresentation> getProducts() {
+
+	public List<ProductRepresentation> getProducts(String action, String query) {
 		
-		List<Product> products = prod.getProducts();
-		List<ProductRepresentation> productRepresentations = new ArrayList<ProductRepresentation>();
-		
-		for(Product p : products) {
-          ProductRepresentation productRepresentation = new ProductRepresentation();
-          productRepresentation.setName(p.getName());
-          productRepresentation.setDescription(p.getDescription());
-          productRepresentation.setPrice(p.getPrice());
-          productRepresentation.setRating(p.getRating());
-          setLinks(productRepresentation);
-          //now add this representation in the list
-          productRepresentations.add(productRepresentation);
-        }
-		return productRepresentations;
-	}
-	public List<ProductRepresentation> getProducts(String query, String type) {
-		
-		List<Product> products = prod.getProducts(query, type);
+		List<Product> products = prod.getProducts(action, query);
+		if(products.size() == 0) return null;
 		List<ProductRepresentation> productRepresentations = new ArrayList<ProductRepresentation>();
 		
 		for(Product p : products) {
           ProductRepresentation productRepresentation = new ProductRepresentation();
           productRepresentation.setID(p.getID());
+          productRepresentation.setSellerID(p.getSellerID());
           productRepresentation.setName(p.getName());
           productRepresentation.setDescription(p.getDescription());
           productRepresentation.setPrice(p.getPrice());
@@ -56,11 +41,9 @@ public class ProductActivity {
 	public ProductRepresentation getProductById(String ID) {
 		
 		Product p = prod.getProductById(ID);
-		
-		ProductRepresentation pRep = new ProductRepresentation();
-		pRep.setPrice((int)p.getPrice());
-		pRep.setDescription(p.getDescription());
-		pRep.setName(p.getName());
+		if(p == null) return null;
+		ProductRepresentation pRep = new ProductRepresentation(p.getID(), p.getSellerID(), p.getName(), p.getPrice(), p.getDescription());
+		pRep.setRating(p.getRating());
 		setLinks(pRep);
 		
 		return pRep;
@@ -96,7 +79,8 @@ public class ProductActivity {
 		// Set up the activities that can be performed on orders
 		Link[] buy = new Link[] {
 				new Link("Update", "http://localhost:8081/products/" + product.getID()),
-				new Link("Delete", "http://localhost:8081/products/" + product.getID())
+				new Link("Delete", "http://localhost:8081/products/" + product.getID()),
+				new Link("Purchase", "http://localhost:8081/orders/")
 		};
 		product.setLinks(buy);
 	}

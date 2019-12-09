@@ -19,7 +19,6 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 import cs333.project_2.DOM.General.Address;
 import cs333.project_2.DOM.General.PaymentInfo;
-import cs333.project_2.DOM.Order.Order;
 import cs333.project_2.Service.Representation.BuyerRepresentation;
 import cs333.project_2.Service.Workflow.BuyerActivity;
 
@@ -102,18 +101,6 @@ public class BuyerResource implements BuyerService {
 				return filter.addCORS(Response.status(400));
 			}
 			BuyerRepresentation b = buyerActivity.addPaymentInfo(ID, payinfo);
-			if(b == null) return filter.addCORS(Response.status(400));
-			else return filter.addCORS(Response.ok(b));
-		}
-		else if(action.equals("order")) {
-			Order order;
-			try {
-				order = mapper.readValue(req, Order.class);
-			} catch (JsonProcessingException e) {
-				e.printStackTrace();
-				return filter.addCORS(Response.status(400));
-			}
-			BuyerRepresentation b = buyerActivity.addOrder(ID, order);
 			if(b == null) return filter.addCORS(Response.status(400));
 			else return filter.addCORS(Response.ok(b));
 		}

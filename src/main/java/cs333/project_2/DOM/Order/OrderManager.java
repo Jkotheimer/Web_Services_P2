@@ -13,25 +13,24 @@ public class OrderManager {
 		return BuyerDAL.getOrders();
 	}
 	
-	public static void addOrder(String attachedBuyerID, String ID, List<Product> products) {
-		BuyerDAL.insertOrder(attachedBuyerID, ID, products);
+	public static List<Order> getOrders(String buyerId) {
+		return BuyerDAL.getOrders(buyerId);
 	}
 	
-	public static Order readOrder(String ID) {
-		return BuyerDAL.readOrder(ID);
+	public static Order getOrder(String ID) {
+		return BuyerDAL.getOrder(ID);
 	}
 	
-	public static List<Order> getBuyersOrders(String Id){
-		Buyer currentBuy = BuyerDAL.read(Id);
-		return currentBuy.getOrders();
+	public static Order createOrder(String buyerID, List<String> products) {
+		return BuyerDAL.createOrder(buyerID, products);
 	}
 	
-	public static void updateOrder(String ID, String newStatus) {
-		BuyerDAL.updateOrder(ID, newStatus);
+	public static Order updateOrder(String ID, String newStatus) {
+		return BuyerDAL.updateOrder(ID, newStatus);
 	}
 	
-	public static void deleteOrder(String ID) {
-		BuyerDAL.deleteOrder(ID);
+	public static int deleteOrder(String ID) {
+		return BuyerDAL.deleteOrder(ID);
 	}
 
 }

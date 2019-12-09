@@ -1,5 +1,8 @@
 package cs333.project_2.Service;
 
+import java.util.List;
+
+import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
 import javax.ws.rs.OPTIONS;
@@ -24,19 +27,13 @@ public class ProductResource implements ProductService {
 	
 	@GET
 	@Produces("application/json")
-	public Response getProducts() {
-		System.out.println("GET METHOD Request for all products .............");
-		ProductActivity empActivity = new ProductActivity();
-		return filter.addCORS(Response.ok(empActivity.getProducts()));	
-	}
-	
-	@GET
-	@Produces("application/json")
-	@Path("/{searchQuery}")
-	public Response getProduct(@PathParam("searchQuery") String query, @QueryParam("action") String type) {
-		System.out.println("GET METHOD Request from Client with productRequest String ............." + query + " " + type);
+	@Consumes("text/plain")
+	public Response getProducts(@QueryParam("action") String action, @QueryParam("query") String query) {
+		System.out.println("GET METHOD Request from Client with productRequest String ............. action=" + action + " query=" + query);
 		ProductActivity pActivity = new ProductActivity();
-		return filter.addCORS(Response.ok(pActivity.getProducts(query, type)));
+		List<ProductRepresentation> products = pActivity.getProducts(action, query);
+		if(products == null) return filter.addCORS(Response.status(404));
+		return filter.addCORS(Response.ok(products));
 	}
 	
 	@POST

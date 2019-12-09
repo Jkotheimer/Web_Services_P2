@@ -16,11 +16,11 @@ public class BuyerManager {
 	}
 	
 	public static Buyer login(String username, String password) {
-		return BuyerDAL.read(username, password);
+		return BuyerDAL.login(username, password);
 	}
 	
     public static Buyer getBuyer(String ID) {
-    	return BuyerDAL.read(ID);
+    	return BuyerDAL.getBuyer(ID);
 	}
     
 	public static Buyer addBuyer(String username,String password) {
@@ -32,19 +32,11 @@ public class BuyerManager {
 	}
 	
 	public static int changePassword(String ID, String oldPassword, String newPassword) {
-		return BuyerDAL.update(ID, oldPassword, newPassword);
+		return BuyerDAL.updateBuyer(ID, oldPassword, newPassword);
 	}
 	
 	public static Buyer changeUsername(String ID, String newUsername) {
-		return BuyerDAL.update(ID, newUsername);
-	}
-
-	public static void insertOrder(String attachedBuyerID, String ID, List<Product> products) {
-		BuyerDAL.insertOrder(attachedBuyerID, ID, products);
-	}
-	
-	public static Buyer addOrder(String ID, Order ord) {
-		return BuyerDAL.addOrder(ID, ord);
+		return BuyerDAL.updateBuyer(ID, newUsername);
 	}
 
 	public static Buyer addAddress(String ID, Address addr) {

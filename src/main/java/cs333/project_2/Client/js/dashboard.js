@@ -1,10 +1,16 @@
 var user;
-var items;
+var orders = [];
+var products = [];
 function load() {
 	user = JSON.parse(localStorage.getItem("user"));
 	if(user == undefined) window.location.href = "/";
 	getItems();
 	console.log(user);
+	
+	document.getElementsByName("search")[0].addEventListener("keyup", e => {if(e.keyCode == 13) search(); });
+	document.getElementsByName("description")[0].addEventListener("keyup", e => {if(e.keyCode == 13) post(); });
+	document.getElementsByName("product")[0].addEventListener("keyup", e => {if(e.keyCode == 13) post(); });
+	document.getElementsByName("price")[0].addEventListener("keyup", e => {if(e.keyCode == 13) post(); });
 }
 
 function getItems() {
@@ -14,12 +20,16 @@ function getItems() {
 	
 	var xhr = createRequest("GET", uri);
 	xhr.onload = function() {
-		if(xhr.status == 400) alert("Invalid parameters");
-		else if(xhr.status != 200) alert("Something went wrong :/");
-		else {
-			items = JSON.parse(xhr.response);
-			console.log(items);
-			localStorage.setItem("items", xhr.response);
+		if(xhr.status == 200) {
+			if(user.accountType == "buyer") {
+				orders = JSON.parse(xhr.response);
+				localStorage.setItem("orders", xhr.response);
+				console.log(orders);
+			} else if(user.accountType == "seller") {
+				products = JSON.parse(xhr.response);
+				localStorage.setItem("products", xhr.response);
+				console.log(products);
+			}
 		}
 		setUserItems();
 	}
@@ -61,18 +71,55 @@ function setUserItems() {
 			}
 		} 
 		
-		if(items == undefined || items.length == 0) document.getElementById("user_fulfillments").innerHTML = "You haven't ordered any products yet";
+		if(orders == undefined || orders.length == 0) document.getElementById("user_fulfillments").innerHTML = "You haven't ordered any products yet";
 		else {
-			// TODO: fill order guis
+			var content = document.getElementById("user_fulfillments");
+			content.innerHTML = "";
+			for(let i = 0; i < orders.length; i++) {
+				var order = orders[i];
+				var prods = order.products;
+				var productHTML = "";
+				for(let j = 0; j < prods.length; j++) {
+					var prod = prods[j];
+					var productHTML = "<div class='setting user_fulfillment_item product_item'>" +
+						"<div class='item_result' >" + prod.name + "</div>" +
+						"<div class='item_result' >$" + prod.price + "</div>" +
+						"<div class='item_result' >" + prod.description + "</div>" +
+					"</div>";
+				}
+				var html = "<div class='setting user_fulfillment_item order_item'>" +
+					"<div class='item_result' >Order ID: " + order.id + "</div>" +
+					"<div class='item_result' >Products:</div>" + productHTML +
+					"<div class='item_result' >Total Price: $" + order.totalPrice + "</div>" +
+					"<button onclick=\"deleteOrder('" + order.id + "')\">Cancel Order</button>" +
+				"</div>";
+				content.innerHTML += html;
+			}
+		}
+		
+		if(products == undefined || products.length == 0) document.getElementById("search_results").innerHTML = "";
+		else {
+			var result_area = document.getElementById("search_results");
+			result_area.innerHTML = "";
+			for(let i = 0; i < products.length; i++) {
+				var product = products[i];
+				var html = "<div class='setting user_fulfillment_item'>" +
+					"<button onclick=\"purchase('" + product.id + "')\">purchase</button>" +
+					"<div class='item_result' >" + product.name + "</div>" +
+					"<div class='item_result' >$" + product.price + "</div>" +
+					"<div class='item_result' >" + product.description + "</div>" +
+				"</div>";
+				result_area.innerHTML += html;
+			}
 		}
 	} else if(user.accountType == "seller") {
 		document.getElementById("buyer_elements").style.display = "none";
-		if(items == undefined || items.length == 0) document.getElementById("user_fulfillments").innerHTML = "You have not posted any products yet";
+		if(products == undefined || products.length == 0) document.getElementById("user_fulfillments").innerHTML = "You have not posted any products yet";
 		else {
 			var container = document.getElementById("user_fulfillments");
 			container.innerHTML = "";
-			for(let i = 0; i < items.length; i++) {
-				var product = items[i];
+			for(let i = 0; i < products.length; i++) {
+				var product = products[i];
 				var html = "<div class='setting user_fulfillment_item'>" +
 					"<button onclick=\"updateProduct('" + product.id + "')\">update</button>" +
 					"<button style='background-color:var(--yellow)' onclick=\"deleteProduct('" + product.id + "')\">delete</button><br/>" +
@@ -92,8 +139,56 @@ function setUserItems() {
 function search() {
 	var search_key = document.getElementsByName("search")[0].value;
 	var result_area = document.getElementById("search_results");
-	result_area.innerHTML = search_key;
-	// TODO: make get request to local host uri
+	// TODO add function to search by price
+	
+	const uri = getLink("SearchProductByName") + search_key;
+	var xhr = createRequest("GET", uri);
+	xhr.onload = function() {
+		if(xhr.status == 404) result_area.innerHTML = "Sorry, we couldn't find any items matching " + search_key;
+		else if(xhr.status != 200) alert("Something went wrong on the server :/");
+		else {
+			localStorage.setItem("products", xhr.response);
+			products = JSON.parse(xhr.response);
+			console.log(products);
+			setUserItems();
+			document.getElementsByName("search")[0].value = "";
+		}
+	}
+	xhr.send();
+}
+
+function purchase(ID) {
+	const uri = getItemLink("Purchase", ID, products);
+	var xhr = createRequest("POST", uri);
+	const data = JSON.stringify({
+		buyerID: user.id,
+		products: [ID]
+	})
+	xhr.setRequestHeader("Content-Type", "text/plain")
+	xhr.onload = function() {
+		if(xhr.status != 200) alert("Something went wrong on the server :/");
+		else {
+			orders.push(JSON.parse(xhr.response));
+			console.log(orders);
+			getItems();
+			setUserItems();
+		}
+	}
+	xhr.send(data);
+}
+
+function deleteOrder(ID) {
+	const uri = getItemLink("Delete", ID, orders);
+	var xhr = createRequest("DELETE", uri);
+	xhr.send();
+	xhr.onload = function() {
+		if(xhr.status != 200) alert("Something went wrong on the server :/");
+		else {
+			getItems();
+			setUserItems();
+		}
+	}
+	
 }
 
 /**
@@ -104,6 +199,10 @@ function post() {
 	var p_price = document.getElementsByName("price")[0].value;
 	var p_description = document.getElementsByName("description")[0].value;
 	var result_area = document.getElementById("post_result");
+	if(p_name == "" || p_price == null || p_description == "") {
+		alert("Fields missing");
+		return;
+	}
 	
 	const data = JSON.stringify({
 		name: p_name,
@@ -115,10 +214,10 @@ function post() {
 	var xhr = createRequest("POST", uri);
 	xhr.onload = function() {
 		if(xhr.status == 400) alert("Invalid parameters");
-		else if(xhr.status != 200) alert("Something went wrong :/");
+		else if(xhr.status != 200) alert("Something went wrong on the server :/");
 		else {
-			localStorage.setItem("items", xhr.response);
-			items.push(JSON.parse(xhr.response));
+			localStorage.setItem("products", xhr.response);
+			products.push(JSON.parse(xhr.response));
 			setUserItems();
 			document.getElementsByName("product")[0].value = "";
 			document.getElementsByName("price")[0].value = "";
@@ -136,11 +235,11 @@ function updateProduct(ID) {
 		description: fields[2].value,
 		sellerID: user.id
 	});
-	const uri = getItemLink("Update", ID);
+	const uri = getItemLink("Update", ID, products);
 	var xhr = createRequest("POST", uri);
 	xhr.send(data);
 	xhr.onload = function() {
-		if(xhr.status != 200) alert("Something went wrong :/");
+		if(xhr.status != 200) alert("Something went wrong on the server :/");
 		else {
 			getItems();
 			setUserItems();
@@ -149,11 +248,11 @@ function updateProduct(ID) {
 }
 
 function deleteProduct(ID) {
-	const uri = getItemLink("Delete", ID);
+	const uri = getItemLink("Delete", ID, products);
 	var xhr = createRequest("DELETE", uri);
 	xhr.send();
 	xhr.onload = function() {
-		if(xhr.status != 200) alert("Something went wrong :/");
+		if(xhr.status != 200) alert("Something went wrong on the server :/");
 		else {
 			getItems();
 			setUserItems();
@@ -185,7 +284,7 @@ function getLink(action) {
 	for(let link of links) if(link.action == action) return link.url;
 }
 // HATEOAS IMPLEMENTATION TO GRAB THE HATEOAS LINK FROM AN ITEM OBJECT (ETHER PRODUCT OR ORDER)
-function getItemLink(action, ID) {
+function getItemLink(action, ID, items) {
 	for(let i = 0; i < items.length; i++) {
 		if(items[i].id == ID) {
 			for(let link of items[i].link) {
@@ -206,7 +305,7 @@ function change_username() {
 	xhr.send(new_username);
 	xhr.onload = function() {
 		if(xhr.status == 409) alert("Username already exists");
-		else if(xhr.status != 200) alert("Something went wrong :/");
+		else if(xhr.status != 200) alert("Something went wrong on the server :/");
 		else {
 			localStorage.setItem("user", xhr.response);
 			user = JSON.parse(localStorage.getItem("user"));
@@ -242,7 +341,7 @@ function change_password() {
 	xhr.setRequestHeader("Content-Type", "text/plain")
 	xhr.onload = function() {
 		if(xhr.status == 401) alert("Current password incorrect");
-		else if(xhr.status != 200) alert("Something went wrong :/");
+		else if(xhr.status != 200) alert("Something went wrong on the server :/");
 		else {
 			document.getElementById("current_password").value = "";
 			document.getElementById("new_password").value = "";
