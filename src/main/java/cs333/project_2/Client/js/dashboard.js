@@ -1,7 +1,24 @@
 var user;
+var items;
 function load() {
 	user = JSON.parse(localStorage.getItem("user"));
 	if(user == undefined) window.location.href = "/";
+	// TODO: make an xhr request for the products if the user is a seller and orders if the user is a buyer
+	var uri;
+	if(user.accountType == "buyer") uri = getLink("ViewOrders");
+	else if(user.accountType == "seller") uri = getLink("ViewProducts");
+		
+	var xhr = createRequest("GET", uri);
+	xhr.onload = function() {
+		if(xhr.status == 400) alert("Invalid parameters");
+		else if(xhr.status != 200) alert("Something went wrong :/");
+		else {
+			items = JSON.parse(xhr.response);
+			console.log(items);
+			localStorage.setItem("items", xhr.response);
+		}
+	}
+	xhr.send();
 	console.log(user);
 	setUserItems();
 }
@@ -41,18 +58,18 @@ function setUserItems() {
 			}
 		} 
 		
-		if(user.orders.length == 0) document.getElementById("user_fulfillments").innerHTML = "You haven't ordered any products yet";
+		if(items == undefined || items.length == 0) document.getElementById("user_fulfillments").innerHTML = "You haven't ordered any products yet";
 		else {
 			// TODO: fill order guis
 		}
 	} else if(user.accountType == "seller") {
 		document.getElementById("buyer_elements").style.display = "none";
-		if(user.products.length == 0) document.getElementById("user_fulfillments").innerHTML = "You have not posted any products yet";
+		if(items == undefined || items.length == 0) document.getElementById("user_fulfillments").innerHTML = "You have not posted any products yet";
 		else {
 			var container = document.getElementById("user_fulfillments");
 			container.innerHTML = "";
-			for(let i = 0; i < user.products.length; i++) {
-				var product = user.products[i];
+			for(let i = 0; i < items.length; i++) {
+				var product = items[i];
 				var html = "<div class='setting'>" +
 					product.productID + "<br/>$" +
 					product.price + "<br/>" +
@@ -86,22 +103,22 @@ function post() {
 	const data = JSON.stringify({
 		name: p_name,
 		price: p_price,
-		description: p_description
+		description: p_description,
+		sellerID: user.id
 	});
-	console.log(data);
-	const uri = getLink("UpdateProduct");
+	const uri = getLink("AddProduct");
 	var xhr = createRequest("POST", uri);
 	xhr.onload = function() {
 		if(xhr.status == 400) alert("Invalid parameters");
 		else if(xhr.status != 200) alert("Something went wrong :/");
 		else {
-			localStorage.setItem("user", xhr.response);
-			user = JSON.parse(localStorage.getItem("user"));
-			console.log(user);
+			localStorage.setItem("items", xhr.response);
+			items = JSON.parse(xhr.response);
+			console.log(items);
 			setUserItems();
-			document.getElementById("product")[0].value = "";
-			document.getElementById("price")[0].value = "";
-			document.getElementById("description")[0].value = "";
+			document.getElementsByName("product")[0].value = "";
+			document.getElementsByName("price")[0].value = "";
+			document.getElementsByName("description")[0].value = "";
 		}
 	}
 	xhr.send(data);

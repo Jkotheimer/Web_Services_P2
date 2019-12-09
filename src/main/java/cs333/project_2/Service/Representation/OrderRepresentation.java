@@ -1,4 +1,4 @@
-package cs333.project_2.Service.Respresentation;
+package cs333.project_2.Service.Representation;
 
 import java.util.List;
 
@@ -9,25 +9,26 @@ import javax.xml.bind.annotation.XmlType;
 
 import cs333.project_2.DOM.Buyer.Buyer;
 import cs333.project_2.DOM.Product.Product;
+import cs333.project_2.Service.AbstractRepresentation;
 
-@XmlRootElement
+@XmlRootElement(name = "Order")
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "")
-public class OrderRequest {
+public class OrderRepresentation extends AbstractRepresentation{
 	
 	private String orderID;
 	private List<Product> OrderedProductIDs;
 	private Buyer buyer;
 	private String Status;
 
-	public OrderRequest(String ID, Buyer purchaser, List<Product> productIDs) {
+	public OrderRepresentation(String ID, Buyer purchaser, List<Product> productIDs) {
 		this.orderID = ID;
 		this.OrderedProductIDs = productIDs;
 		this.Status = "Order initiated";
 		this.buyer = purchaser;
 	}
 	
-	public OrderRequest() {
+	public OrderRepresentation() {
 		
 	}
 
@@ -70,4 +71,3 @@ public class OrderRequest {
 	}
 
 }
-

@@ -11,8 +11,8 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.Status;
 
-import cs333.project_2.Service.Respresentation.OrderRepresentation;
-import cs333.project_2.Service.Respresentation.OrderRequest;
+import cs333.project_2.Service.Representation.OrderRepresentation;
+import cs333.project_2.Service.Representation.OrderRequest;
 import cs333.project_2.Service.Workflow.OrderActivity;
 
 @Path("/orderservice/")

@@ -1,4 +1,4 @@
-package cs333.project_2.Service.Respresentation;
+package cs333.project_2.Service.Representation;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -73,21 +73,25 @@ public class SellerDAL {
 		return ProductDB;
 	}
 	
-	public static List<Product> getProducts(String sellerID) {
+	public static List<Product> getProducts(String query, String type) {
 		List<Product> products = new ArrayList<Product>();
-		for(Product p : ProductDB) if(p.getSellerID().equals(sellerID)) products.add(p);
+		for(Product p : ProductDB) {
+			if(type.equals("name") && p.getName().contains(query)) products.add(p);
+			else if(type.equals("sellerID") && p.getSellerID().equals(query)) products.add(p);
+			else if(type.equals("price") && p.getPrice() < Double.parseDouble(type)) products.add(p);
+		}
 		return products;
+	}
+	
+	public static Product getProductById(String name) {
+		for(Product p : ProductDB) if(p.getName().contains(name)) return p;
+		return null;
 	}
 
 	public static Product addProduct(String sellerID, String name, double price, String prodDesc) {
 		Product p = new Product(UUID.randomUUID().toString(), sellerID, name, price,prodDesc);
 		ProductDB.add(p);
 		return p;
-	}
-	
-	public static Product readProduct(String name) {
-		for(Product p : ProductDB) if(p.getName().contains(name)) return p;
-		return null;
 	}
 	
 	public static Product updateProduct(String ID, String name, double price, String prodDesc) {

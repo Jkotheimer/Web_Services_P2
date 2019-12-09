@@ -10,12 +10,12 @@ public class ProductManager {
 		return SellerDAL.getProducts();
 	}
 	
-	public List<Product> getProducts(String sellerID) {
-		return SellerDAL.getProducts(sellerID);
+	public List<Product> getProducts(String query, String type) {
+		return SellerDAL.getProducts(query, type);
 	}
 	
-	public Product getProduct(String name) {
-		return SellerDAL.readProduct(name);
+	public Product getProductById(String ID) {
+		return SellerDAL.getProductById(ID);
 	}
 	
 	public Product addProduct(String SellerID, String prodName, double price, String prodDesc) {

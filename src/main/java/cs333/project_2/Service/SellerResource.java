@@ -17,7 +17,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-import cs333.project_2.Service.Respresentation.SellerRepresentation;
+import cs333.project_2.Service.Representation.SellerRepresentation;
 import cs333.project_2.Service.Workflow.SellerActivity;
 
 @Path("/sellers")

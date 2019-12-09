@@ -7,7 +7,7 @@ import java.util.List;
 import cs333.project_2.DOM.Product.Product;
 import cs333.project_2.DOM.Product.ProductManager;
 import cs333.project_2.Service.Link;
-import cs333.project_2.Service.Respresentation.ProductRepresentation;;
+import cs333.project_2.Service.Representation.ProductRepresentation;;
 /**
  * This class' responsibility is to manage the workflow of accessing/creating/updating/deleting resources
  * using the ProductDAL object.  
@@ -28,15 +28,16 @@ public class ProductActivity {
           productRepresentation.setDescription(p.getDescription());
           productRepresentation.setPrice(p.getPrice());
           productRepresentation.setRating(p.getRating());
+          setLinks(productRepresentation);
           
           //now add this representation in the list
           productRepresentations.add(productRepresentation);
         }
 		return productRepresentations;
 	}
-	public List<ProductRepresentation> getProducts(String sellerID) {
+	public List<ProductRepresentation> getProducts(String query, String type) {
 		
-		List<Product> products = prod.getProducts(sellerID);
+		List<Product> products = prod.getProducts(query, type);
 		List<ProductRepresentation> productRepresentations = new ArrayList<ProductRepresentation>();
 		
 		for(Product p : products) {
@@ -45,6 +46,7 @@ public class ProductActivity {
           productRepresentation.setDescription(p.getDescription());
           productRepresentation.setPrice(p.getPrice());
           productRepresentation.setRating(p.getRating());
+          setLinks(productRepresentation);
           
           //now add this representation in the list
           productRepresentations.add(productRepresentation);
@@ -52,9 +54,9 @@ public class ProductActivity {
 		return productRepresentations;
 	}
 	
-	public ProductRepresentation getProduct(String name) {
+	public ProductRepresentation getProductById(String ID) {
 		
-		Product p = prod.getProduct(name);
+		Product p = prod.getProductById(ID);
 		
 		ProductRepresentation pRep = new ProductRepresentation();
 		pRep.setPrice((int)p.getPrice());
@@ -70,7 +72,10 @@ public class ProductActivity {
 		Product p = prod.addProduct(SellerId, name, price, Description);
 		if(p ==  null) return null;
 		
-		return new ProductRepresentation(p.getID(), SellerId, name, price, Description);
+		ProductRepresentation pr = new ProductRepresentation(p.getID(), SellerId, name, price, Description);
+		setLinks(pr);
+		
+		return pr;
 	}
 	
 	public ProductRepresentation updateProduct(String ID, String name, double price, String Description) {
@@ -78,7 +83,10 @@ public class ProductActivity {
 		Product p = prod.updateProduct(ID, name, price, Description);
 		if(p == null) return null;
 		
-		return new ProductRepresentation(ID, p.getSellerID(), name, price, Description);
+		ProductRepresentation pr = new ProductRepresentation(ID, p.getSellerID(), name, price, Description);
+		setLinks(pr);
+		
+		return pr;
 	}
 	
 	public int deleteProduct(String id) {
@@ -87,8 +95,10 @@ public class ProductActivity {
 	
 	private void setLinks(ProductRepresentation product) {
 		// Set up the activities that can be performed on orders
-		Link buy = new Link("buy", 
-			"http://localhost:8081/orderservice/order/" + product.getName());	
+		Link[] buy = new Link[] {
+				new Link("Update", "http://localhost:8081/products/" + product.getID()),
+				new Link("Delete", "http://localhost:8081/products/" + product.getID())
+		};
 		product.setLinks(buy);
 	}
 	

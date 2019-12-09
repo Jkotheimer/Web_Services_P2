@@ -11,7 +11,7 @@ import cs333.project_2.DOM.Order.Order;
 import cs333.project_2.DOM.Product.Product;
 import cs333.project_2.DOM.Buyer.Buyer;
 import cs333.project_2.Service.Link;
-import cs333.project_2.Service.Respresentation.BuyerRepresentation;
+import cs333.project_2.Service.Representation.BuyerRepresentation;
 
 public class BuyerActivity {
 	

@@ -1,4 +1,4 @@
-package cs333.project_2.Service.Respresentation;
+package cs333.project_2.Service.Representation;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;

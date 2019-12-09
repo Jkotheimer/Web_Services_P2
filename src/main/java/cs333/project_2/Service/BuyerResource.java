@@ -20,7 +20,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import cs333.project_2.DOM.General.Address;
 import cs333.project_2.DOM.General.PaymentInfo;
 import cs333.project_2.DOM.Order.Order;
-import cs333.project_2.Service.Respresentation.BuyerRepresentation;
+import cs333.project_2.Service.Representation.BuyerRepresentation;
 import cs333.project_2.Service.Workflow.BuyerActivity;
 
 @Path("/buyers")

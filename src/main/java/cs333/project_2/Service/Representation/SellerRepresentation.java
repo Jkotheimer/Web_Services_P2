@@ -1,11 +1,7 @@
-package cs333.project_2.Service.Respresentation;
-
-import java.util.ArrayList;
-import java.util.List;
+package cs333.project_2.Service.Representation;
 
 import javax.xml.bind.annotation.XmlRootElement;
 
-import cs333.project_2.DOM.Product.Product;
 import cs333.project_2.Service.AbstractRepresentation;
 
 @XmlRootElement

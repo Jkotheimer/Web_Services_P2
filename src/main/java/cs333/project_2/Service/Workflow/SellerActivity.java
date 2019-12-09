@@ -7,7 +7,7 @@ import java.util.List;
 import cs333.project_2.DOM.Seller.Seller;
 import cs333.project_2.DOM.Seller.SellerManager;
 import cs333.project_2.Service.Link;
-import cs333.project_2.Service.Respresentation.SellerRepresentation;
+import cs333.project_2.Service.Representation.SellerRepresentation;
 
 public class SellerActivity {
 	
@@ -78,9 +78,9 @@ public class SellerActivity {
 		Link[] buy = new Link[] {
 				new Link("UpdateUsername", "http://localhost:8081/sellers/" + seller.getID() + "?action=username"),
 				new Link("UpdatePassword", "http://localhost:8081/sellers/" + seller.getID() + "?action=password"),
-				new Link("UpdateProduct", "http://localhost:8081/sellers/" + seller.getID() + "?action=product"),
+				new Link("AddProduct", "http://localhost:8081/products/"),
 				new Link("DeleteAccount", "http://localhost:8081/sellers/" + seller.getID()),
-				new Link("ViewProducts", "http://localhost:8081/products?sellerID=" + seller.getID())
+				new Link("ViewProducts", "http://localhost:8081/products/" + seller.getID() + "?action=sellerID")
 				};	
 		seller.setLinks(buy);
 	}
