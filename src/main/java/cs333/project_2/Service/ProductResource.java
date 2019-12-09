@@ -1,70 +1,92 @@
 package cs333.project_2.Service;
 
-import java.util.List;
-
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
+import javax.ws.rs.OPTIONS;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
-import javax.ws.rs.Produces;
 import javax.ws.rs.PathParam;
+import javax.ws.rs.Produces;
+import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.Response;
-import javax.ws.rs.core.Response.Status;
 
-import cs333.project_2.Service.Respresentation.ProductRepresentation;
-import cs333.project_2.Service.Respresentation.ProductRequest;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+
+import cs333.project_2.Service.Representation.ProductRepresentation;
 import cs333.project_2.Service.Workflow.ProductActivity;
 
-@Path("/productservice/")
+@Path("/products")
 public class ProductResource implements ProductService {
+
+	final CORSFilter filter = new CORSFilter();
+	final ObjectMapper mapper = new ObjectMapper();
 	
 	@GET
-	@Produces({"application/xml" , "application/json"})
-	@Path("/product")
-	public List<ProductRepresentation> getProducts() {
+	@Produces("application/json")
+	public Response getProducts() {
 		System.out.println("GET METHOD Request for all products .............");
 		ProductActivity empActivity = new ProductActivity();
-		return empActivity.getProducts();	
+		return filter.addCORS(Response.ok(empActivity.getProducts()));	
 	}
 	
 	@GET
-	@Produces({"application/xml" , "application/json"})
-	@Path("/product/list")
-	public List<ProductRepresentation> getListProducts() {
-		System.out.println("GET METHOD Request for all products .............");
+	@Produces("application/json")
+	@Path("/{searchQuery}")
+	public Response getProduct(@PathParam("searchQuery") String query, @QueryParam("action") String type) {
+		System.out.println("GET METHOD Request from Client with productRequest String ............." + query + " " + type);
 		ProductActivity pActivity = new ProductActivity();
-		return pActivity.getListProducts();	
-	}
-	
-	@GET
-	@Produces({"application/xml" , "application/json"})
-	@Path("/product/{productId}")
-	public ProductRepresentation getProduct(@PathParam("productId") String id) {
-		System.out.println("GET METHOD Request from Client with productRequest String ............." + id);
-		ProductActivity pActivity = new ProductActivity();
-		return pActivity.getProduct(id);
+		return filter.addCORS(Response.ok(pActivity.getProducts(query, type)));
 	}
 	
 	@POST
-	@Produces({"application/xml" , "application/json"})
-	@Path("/product")
-	public ProductRepresentation createProduct(ProductRequest  productRequest) {
-		System.out.println("POST METHOD Request from Client with ............." + productRequest.getItemDescrip() + "  " + productRequest.getPrice());
-		ProductActivity pActivity = new ProductActivity();
-		return pActivity.createProduct(productRequest.getItemDescrip(),productRequest.getSeller().getsellerID(),(float)productRequest.getPrice(),productRequest.getItemDescrip());
+	@Produces("application/json")
+	public Response createProduct(String product) {
+		System.out.println("POST METHOD Request from Client with ............." + product);
+		ProductRepresentation p;
+		try {
+			p = mapper.readValue(product, ProductRepresentation.class);
+		} catch (JsonProcessingException e) {
+			e.printStackTrace();
+			return filter.addCORS(Response.status(400));
+		}
+		ProductActivity activity = new ProductActivity();
+		p = activity.createProduct(p.getSellerID(), p.getName(), p.getPrice(), p.getDescription());
+		return filter.addCORS(Response.ok(p));
+	}
+	
+	@POST
+	@Produces("application/json")
+	@Path("/{productID}")
+	public Response updateProduct(@PathParam("productID") String ID, String product) {
+		System.out.println("PUT METHOD Request from Client with ............." + ID + " " + product);
+		ProductRepresentation p;
+		try {
+			p = mapper.readValue(product, ProductRepresentation.class);
+		} catch (JsonProcessingException e) {
+			e.printStackTrace();
+			return filter.addCORS(Response.status(400));
+		}
+		ProductActivity activity = new ProductActivity();
+		p = activity.updateProduct(ID, p.getName(), p.getPrice(), p.getDescription());
+		return filter.addCORS(Response.ok(p));
+	}
+	
+	@OPTIONS
+	@Produces("application/json")
+	@Path("/{productId}")
+	public Response options(@PathParam("productId") String id) {
+		System.out.println("OPTIONS METHOD Request from Client with productRequest String ............." + id);
+		return filter.addCORS(Response.ok());
 	}
 	
 	@DELETE
-	@Produces({"application/xml" , "application/json"})
-	@Path("/product/{productId}")
+	@Produces("application/json")
+	@Path("/{productId}")
 	public Response deleteProduct(@PathParam("productId") String id) {
-		System.out.println("Delete METHOD Request from Client with productRequest String ............." + id);
+		System.out.println("DELETE METHOD Request from Client with productRequest String ............." + id);
 		ProductActivity pActivity = new ProductActivity();
-		String res = pActivity.deleteProduct(id);
-		if (res.equals("OK")) {
-			return Response.status(Status.OK).build();
-		}
-		return null;
+		return filter.addCORS(Response.status(pActivity.deleteProduct(id)));
 	}
 	
 }

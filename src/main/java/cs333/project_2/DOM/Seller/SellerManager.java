@@ -11,19 +11,23 @@ public class SellerManager {
 		return SellerDAL.getSellers();
 	}
 	
-	public static void insertSeller(String Id, String username, String password) {
-		SellerDAL.insertSeller(Id, username, password);
+	public static Seller insertSeller(String username, String password) {
+		return SellerDAL.addSeller(username, password);
 	}
 
-	public static Seller readSeller(String ID) {
-		return SellerDAL.readSeller(ID);
+	public static Seller login(String username, String password) {
+		return SellerDAL.readSeller(username, password);
 	}
 	
-	public static void updateSeller(String ID,String newusername, String newpassword) {
-		SellerDAL.updateSeller(ID, newusername, newpassword);
+	public static int changePassword(String ID, String current_password, String new_password) {
+		return SellerDAL.updateSeller(ID, current_password, new_password);
 	}
 	
-	public static void deleteSeller(String ID) {
-		SellerDAL.deleteSeller(ID);
+	public static Seller changeUsername(String ID, String username) {
+		return SellerDAL.updateSeller(ID, username);
+	}
+	
+	public static int deleteSeller(String ID) {
+		return SellerDAL.deleteSeller(ID);
 	}
 }

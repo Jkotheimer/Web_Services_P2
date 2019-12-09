@@ -10,7 +10,7 @@ import cs333.project_2.DOM.Order.Order;
 import cs333.project_2.DOM.Order.OrderManager;
 import cs333.project_2.DOM.Product.Product;
 import cs333.project_2.Service.Link;
-import cs333.project_2.Service.Respresentation.OrderRepresentation;
+import cs333.project_2.Service.Representation.OrderRepresentation;
 /**
  * This class' responsibility is to manage the workflow of accessing/creating/updating/deleting resources
  * using the OrderDAL object.  

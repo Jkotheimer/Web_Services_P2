@@ -8,8 +8,7 @@ public class Seller {
 	
 	private String username;
 	private String password;
-	private String sellerID;
-	private List<Product> products = new ArrayList<Product>();
+	private String ID;
 	
 	public Seller() {
 		
@@ -18,7 +17,7 @@ public class Seller {
 	public Seller(String ID, String username, String password) {
 		this.username = username;
 		this.password = password;	
-		this.sellerID = ID;
+		this.ID = ID;
 	}
 
 	/**
@@ -28,9 +27,7 @@ public class Seller {
 
 	public String getUsername()				{ return this.username;	}
 
-	public String getsellerID()						{ return this.sellerID;		}
-
-	public List<Product> getProducts()			{ return this.products;	}
+	public String getID()						{ return this.ID;		}
 
 	/**
 	 * SETTERS
@@ -42,19 +39,14 @@ public class Seller {
 		this.username = username;
 		return true;
 	}
-	public boolean setPassword(String password) {
+	
+	public boolean setPassword(String oldPassword, String newPassword) {
 		// If the password has been used before, inform the user and have them change it to something else
-		if(this.password == password) return false;
-		this.password = password;
-		return true;
-	}
-	
-	public void setProducts(List<Product> products) {
-		this.products = products;
-	}
-	
-	public void addProduct(Product productID) {
-		this.products.add(productID);	
+		if(this.password.equals(oldPassword)) {
+			this.password = newPassword;
+			return true;
+		}
+		return false;
 	}
 
 	/**
@@ -62,12 +54,9 @@ public class Seller {
 	 * ________________________________________________________________________
 	 */
 	
-	public boolean removeProduct(Product ID) {
-		return this.products.remove(ID);
-	}
 	public boolean AuthenticateCred(String username, String password) {
 		// TODO possibly add another hash algorithm here for safety
-		if(this.username == username && this.password == password) return true;
+		if(this.username.equals(username) && this.password.equals(password)) return true;
 		else return false;
 	}
 }

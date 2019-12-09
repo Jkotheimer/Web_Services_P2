@@ -1,30 +1,36 @@
-package cs333.project_2.DOM.Product;
+package cs333.project_2.Service.Representation;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.xml.bind.annotation.XmlRootElement;
+
 import cs333.project_2.DOM.Rating.Rating;
+import cs333.project_2.Service.AbstractRepresentation;
 
-public class Product {
-
+@XmlRootElement
+public class ProductRepresentation extends AbstractRepresentation{
+	
+	private String name;
+	private double Price;
 	private String ID;
 	private String sellerID;
-	private String name;
-	private double price;
 	private String description;
-	private double rating;
+	private double Rating;
 	private int totalRating = 0;
 	private List<Rating> Ratings = new ArrayList<Rating>();
 
-	public Product() {}
+	public ProductRepresentation() {
 	
-	public Product(String ID, String sellerID, String name, double price, String Description) {
+	}
+	
+	public ProductRepresentation(String ID, String sellerID, String name, double price, String itemDescrip) {
 		this.ID = ID;
-		this.sellerID = sellerID;
 		this.name = name;
-		this.price = price;
-		this.description = Description;
-		this.rating = -1; // -1 indicates no ratings yet
+		this.Price = price;
+		this.description= itemDescrip;
+		this.sellerID = sellerID;
+		this.Rating = -1; // -1 indicates no ratings yet
 	}
 
 	/**
@@ -35,22 +41,23 @@ public class Product {
 	public void setID(String ID) {
 		this.ID = ID;
 	}
-	public void setName(String name) {
-		this.name = name;
-	}
-	public void setSellerID(String ID) {
-		this.sellerID = ID;
+	public void setName(String Name) {
+		this.name = Name;
 	}
 
 	public void setPrice(double price) {
-		this.price = price;
+		Price = price;
 	}
-	public void setDescription(String Description) {
-		this.description = Description;
+	public void setDescription(String itemdescrip) {
+		this.description = itemdescrip;
 	}
 
 	public void setRating(double rat) {
-		this.rating = rat;
+		this.Rating = rat;
+	}
+	
+	public void setSellerID(String sellerID) {
+		this.sellerID = sellerID;
 	}
 	
 	public boolean addRating(Rating rating) {
@@ -58,7 +65,7 @@ public class Product {
 		// Update the current average rating of the product
 		this.totalRating += rating.getRateval();
 		this.Ratings.add(rating);
-		this.rating = this.totalRating / this.Ratings.size();
+		this.Rating = this.totalRating / this.Ratings.size();
 		return true;
 	}
 
@@ -70,22 +77,25 @@ public class Product {
 	public String getID() {
 		return this.ID;
 	}
+	
 	public String getName() {
 		return this.name;
 	}
-	public String getSellerID() {
-		return this.sellerID;
-	}
 
 	public double getPrice() {
-		return this.price;
+		return this.Price;
 	}
 
 	public double getRating() {
-		return this.rating;
+		return this.Rating;
 	}
 
 	public String getDescription() {
 		return this.description;
 	}
+
+	public String getSellerID() {
+		return this.sellerID;
+	}
+
 }
