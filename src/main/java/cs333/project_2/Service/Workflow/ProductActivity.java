@@ -42,6 +42,7 @@ public class ProductActivity {
 		
 		for(Product p : products) {
           ProductRepresentation productRepresentation = new ProductRepresentation();
+          productRepresentation.setID(p.getID());
           productRepresentation.setName(p.getName());
           productRepresentation.setDescription(p.getDescription());
           productRepresentation.setPrice(p.getPrice());

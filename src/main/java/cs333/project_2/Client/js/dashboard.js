@@ -3,11 +3,15 @@ var items;
 function load() {
 	user = JSON.parse(localStorage.getItem("user"));
 	if(user == undefined) window.location.href = "/";
-	// TODO: make an xhr request for the products if the user is a seller and orders if the user is a buyer
+	getItems();
+	console.log(user);
+}
+
+function getItems() {
 	var uri;
 	if(user.accountType == "buyer") uri = getLink("ViewOrders");
 	else if(user.accountType == "seller") uri = getLink("ViewProducts");
-		
+	
 	var xhr = createRequest("GET", uri);
 	xhr.onload = function() {
 		if(xhr.status == 400) alert("Invalid parameters");
@@ -17,10 +21,9 @@ function load() {
 			console.log(items);
 			localStorage.setItem("items", xhr.response);
 		}
+		setUserItems();
 	}
 	xhr.send();
-	console.log(user);
-	setUserItems();
 }
 
 function setUserItems() {
@@ -70,10 +73,12 @@ function setUserItems() {
 			container.innerHTML = "";
 			for(let i = 0; i < items.length; i++) {
 				var product = items[i];
-				var html = "<div class='setting'>" +
-					product.productID + "<br/>$" +
-					product.price + "<br/>" +
-					product.itemDescrip +
+				var html = "<div class='setting user_fulfillment_item'>" +
+					"<button onclick=\"updateProduct('" + product.id + "')\">update</button>" +
+					"<button style='background-color:var(--yellow)' onclick=\"deleteProduct('" + product.id + "')\">delete</button><br/>" +
+					"<input class='item_input' name='" + product.id + "' value='" + product.name + "'/><br/>$" +
+					"<input class='item_input' name='" + product.id + "' value='" + product.price + "'/><br/>" +
+					"<textarea class='item_input item_textarea' name='" + product.id + "'>" + product.description + "</textarea>" +
 				"</div>";
 				container.innerHTML += html;
 			}
@@ -113,8 +118,7 @@ function post() {
 		else if(xhr.status != 200) alert("Something went wrong :/");
 		else {
 			localStorage.setItem("items", xhr.response);
-			items = JSON.parse(xhr.response);
-			console.log(items);
+			items.push(JSON.parse(xhr.response));
 			setUserItems();
 			document.getElementsByName("product")[0].value = "";
 			document.getElementsByName("price")[0].value = "";
@@ -122,6 +126,39 @@ function post() {
 		}
 	}
 	xhr.send(data);
+}
+
+function updateProduct(ID) {
+	var fields = document.getElementsByName(ID);
+	const data = JSON.stringify({
+		name: fields[0].value,
+		price: fields[1].value,
+		description: fields[2].value,
+		sellerID: user.id
+	});
+	const uri = getItemLink("Update", ID);
+	var xhr = createRequest("POST", uri);
+	xhr.send(data);
+	xhr.onload = function() {
+		if(xhr.status != 200) alert("Something went wrong :/");
+		else {
+			getItems();
+			setUserItems();
+		}
+	}
+}
+
+function deleteProduct(ID) {
+	const uri = getItemLink("Delete", ID);
+	var xhr = createRequest("DELETE", uri);
+	xhr.send();
+	xhr.onload = function() {
+		if(xhr.status != 200) alert("Something went wrong :/");
+		else {
+			getItems();
+			setUserItems();
+		}
+	}
 }
 
 function show_user_content() {
@@ -145,10 +182,19 @@ function back() {
 // HATEOAS IMPLEMENTATION TO GRAB THE HATEOAS LINKS FROM THE USER OBJECT THAT IS RETURNED BY THE SERVER
 function getLink(action) {
 	var links = user.link;
-	for(let link of links) {
-		if(link.action == action) return link.url
+	for(let link of links) if(link.action == action) return link.url;
+}
+// HATEOAS IMPLEMENTATION TO GRAB THE HATEOAS LINK FROM AN ITEM OBJECT (ETHER PRODUCT OR ORDER)
+function getItemLink(action, ID) {
+	for(let i = 0; i < items.length; i++) {
+		if(items[i].id == ID) {
+			for(let link of items[i].link) {
+				if(link.action == action) return link.url;
+			}
+		}
 	}
 }
+
 
 // XMLHTTPREQUEST TO CHANGE USERNAME
 function change_username() {

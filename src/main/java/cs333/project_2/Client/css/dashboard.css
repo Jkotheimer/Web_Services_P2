@@ -164,3 +164,16 @@ input, textarea {
 	margin-top: 50px;
 	text-align: center;
 }
+.user_fulfillment_item {
+	display: inline-block;
+	margin: 5px;
+	width: 25%;
+}
+.item_input {
+	border: none;
+	background: none;
+}
+.item_textarea {
+	resize: vertical;
+	height: 100px;
+}
