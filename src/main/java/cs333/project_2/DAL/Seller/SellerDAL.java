@@ -13,7 +13,7 @@ public class SellerDAL {
 	
 	// ProductDAL is here because they wont exist without a Seller attached, but separate DB allows for easier searching
 	private static List<Seller> SellerDB = new ArrayList<Seller>(Arrays.asList(new Seller("acc1","gman","password1"),new Seller("acc2","gmon","password2"),new Seller("acc3","gmen","password3")));
-	private static List<Product> ProductDB = new ArrayList<Product>(Arrays.asList(new Product("Smencil", 2,"A smelly pencil",SellerDB.get(1)),new Product("Smen", 4,"A smelly pen",SellerDB.get(1)),new Product("Keyring", 10,"A Keyring of exceptional quality",SellerDB.get(2))));
+	private static List<Product> ProductDB = new ArrayList<Product>();
 	
 	public static List<Seller> getSellers(){
 		return SellerDB;
